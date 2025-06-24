@@ -1,5 +1,4 @@
 from itertools import combinations
-from time import time
 
 import torch
 import torch.nn as nn
@@ -96,8 +95,9 @@ if __name__ == "__main__":
     embeddings = data.x
     old_selected = torch.zeros_like(CLASSES, device=device)
     i = 0
-    for _ in range(2):
-        print("asdfgykgjnkasdjnkasgghjnkasjksdcfakmghjasdgjkmasdfk")
+    for _ in range(4):
+        embeddings = data.x
+        print("--------------------------")
         for _ in range(8):
             j = 0
             while not valid and j < 1000:
@@ -131,6 +131,6 @@ if __name__ == "__main__":
                     torch.logical_and(CLASSES == c, selected.to("cpu"))
                 ][:, 2]:
                     lesson_name = "/".join([lesson_name, SUBJECTS_LOOKUP_DICT[s.item()]])
-                print(f"{lesson_name[1:]:^30}", end=" | ")
+                print(f"{lesson_name[1:]:^28}", end=" | ")
             print()
             valid = False

@@ -53,11 +53,11 @@ tmp = {}
 for ind, (_, name) in enumerate(subjects):
     print(ind, name)
     tmp[ind] = name
-print(tmp)
+# print(tmp)
 
-# print("---------")
-# for ind, (_, t) in enumerate(teachers):
-#     print(ind, t)
+print("---------")
+for ind, (_, t) in enumerate(teachers):
+    print(ind, t)
 
 global_complementary_subjects = [
     (11, 12, 14),  # Języki
@@ -82,7 +82,6 @@ per_class_complementary_subjects = {
         (6, 15) # Chem + biol
     )
 }
-
 # np.save("data/constraints.npy", constraint_matrix)
 # print(constraint_matrix)
 # print(constraint_matrix[:, :, 0])

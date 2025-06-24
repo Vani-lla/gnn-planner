@@ -47,12 +47,6 @@ def get_initial_lesson_ebeddings() -> torch.Tensor:
     # 6 No of the same lessons in that day
 
     embeddings[:, 0] = CONSTRAINTS[*REQUIRED_LESSONS.T]
-    # embeddings[:, 1] = 0
-    # embeddings[:, 2] = 0
-    # embeddings[:, 3] = 0
-    # embeddings[:, 4] = 0
-    # embeddings[:, 5] = 0
-    # embeddings[:, 6] = 0
 
     return embeddings
 

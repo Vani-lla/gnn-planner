@@ -89,3 +89,10 @@ SUBJECTS_LOOKUP_DICT = {
 if __name__ == "__main__":
     print(CLASSES.unique().shape[0])
     print(REQUIRED_LESSONS)
+    print(REQUIRED_LESSONS.shape)
+    
+    print(TEACHERS.unique().shape[0])
+    print(SUBJECTS.unique().shape[0])
+    print(CLASSES.unique().shape[0])
+    
+    print(CONSTRAINTS.sum())
