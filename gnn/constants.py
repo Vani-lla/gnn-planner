@@ -1,10 +1,13 @@
 import numpy as np
 import torch
 
-FEATURE_DIM = 10
+FEATURE_DIM = 7
 THRESHOLD = 0.5
 REQUIRED_LESSONS = torch.tensor(list(zip(*np.nonzero(np.load("data/constraints.npy")))))
+REQUIRED_LESSONS = REQUIRED_LESSONS[REQUIRED_LESSONS[:, 1] < 6]
+TEACHERS = REQUIRED_LESSONS[:, 0]
 CLASSES = REQUIRED_LESSONS[:, 1]
+SUBJECTS = REQUIRED_LESSONS[:, 2]
 CONSTRAINTS = torch.from_numpy(np.load("data/constraints.npy"))
 T, C, S = CONSTRAINTS.shape
 
@@ -54,3 +57,35 @@ GLOBAL_GROUP_SUBJECTS = {
 }
 
 START_END_SUBJECTS = set((4, 10, 24, 23, 22, 21, 20, 14, 12, 11))
+
+SUBJECTS_LOOKUP_DICT = {
+    0: "J.Polski",
+    1: "J.Angielski",
+    2: "Historia",
+    3: "WOS",
+    4: "Etyka",
+    5: "Filozofia",
+    6: "Chemia",
+    7: "Fizyka",
+    8: "Informatyka",
+    9: "Biznes i zarządzanie",
+    10: "Religia",
+    11: "J.Niemiecki",
+    12: "J.Francuski",
+    13: "J.Rosyjski z elem. Kult.",
+    14: "J.Rosyjski ",
+    15: "Biologia",
+    16: "Wych.Fiz.",
+    17: "EdB",
+    18: "Matematyka",
+    19: "Geografia",
+    20: "WDŻ",
+    21: "Zajęcia kreatywne",
+    22: "Doradztwo zawodowe",
+    23: "Civil Society",
+    24: "Creative Writing",
+}
+
+if __name__ == "__main__":
+    print(CLASSES.unique().shape[0])
+    print(REQUIRED_LESSONS)

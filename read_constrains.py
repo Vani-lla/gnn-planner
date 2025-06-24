@@ -45,13 +45,16 @@ for t_i, (t, teacher) in enumerate(teachers):
                 int(rows[t][c])
             )
 
-# for ind, (_, c, c2) in enumerate(classes):
-#     print(ind, c, c2)
+for ind, (_, c, c2) in enumerate(classes):
+    print(ind, c, c2)
 
 print("---------")
+tmp = {}
 for ind, (_, name) in enumerate(subjects):
     print(ind, name)
-    
+    tmp[ind] = name
+print(tmp)
+
 # print("---------")
 # for ind, (_, t) in enumerate(teachers):
 #     print(ind, t)

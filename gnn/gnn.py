@@ -33,7 +33,7 @@ def get_data() -> Data:
     edge_type = torch.tensor(types) - 1
 
     return Data(
-        x=torch.randn(REQUIRED_LESSONS.shape[0], FEATURE_DIM),
+        x=get_initial_lesson_ebeddings(),
         edge_index=edge_index,
         edge_type=edge_type,
     )
@@ -70,10 +70,7 @@ class RGCNModel(nn.Module):
             nn.Tanh(),
             nn.Linear(out_channels * num_of_lessons, out_channels * num_of_lessons),
             nn.Tanh(),
-            nn.Linear(
-                out_channels * num_of_lessons,
-                num_of_lessons + self.unique_classes.shape[0],
-            ),
+            nn.Linear(out_channels * num_of_lessons, num_of_lessons),
             nn.Sigmoid(),
         )
 
@@ -83,35 +80,57 @@ class RGCNModel(nn.Module):
             x = F.relu(x)
         x = self.post_graph_layer(x.view(-1))
 
-        class_ids = torch.bucketize(self.classes_dic, self.unique_classes)
-        probs = torch.zeros(
-            self.unique_classes.shape[0], self.classes_dic.shape[0], device=x.device
-        )
-        probs[class_ids, torch.arange(self.classes_dic.shape[0])] = x
-
-        return probs
+        return x
 
 
 if __name__ == "__main__":
     data = get_data()
     device = torch.device("cuda:0")
 
-    model = RGCNModel(10, 10)
+    model = RGCNModel(FEATURE_DIM, 10)
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
     model.to(device)
     data.to(device)
 
-    start = time()
-    for _ in range(1000):
-        result = model(data.x, data.edge_index, data.edge_type)
-        selected = result > THRESHOLD
+    valid = False
+    embeddings = data.x
+    old_selected = torch.zeros_like(CLASSES, device=device)
+    i = 0
+    for _ in range(2):
+        print("asdfgykgjnkasdjnkasgghjnkasjksdcfakmghjasdgjkmasdfk")
+        for _ in range(8):
+            j = 0
+            while not valid and j < 1000:
+                optimizer.zero_grad()
+                result = model(
+                    embeddings + torch.rand_like(embeddings) * 0.01,
+                    data.edge_index,
+                    data.edge_type,
+                )
+                selected = result > THRESHOLD
 
-        f_o: torch.Tensor = result * get_score(selected).detach()
-        loss = -f_o.sum()
+                score, valid = get_score(selected, embeddings.to("cpu"))
 
-        loss.backward()
-        optimizer.step()
+                f_o: torch.Tensor = result * score
+                loss = -f_o.sum()
 
-        print(loss.item())
+                loss.backward()
+                optimizer.step()
 
-    print(time() - start)
+                j += 1
+            i += 1
+            
+            embeddings = step_on_selected(embeddings, selected, old_selected)
+
+            # print(-loss.item())
+            # print(selected.sum().item(), valid)
+            # print(valid)
+            for c in range(6):
+                lesson_name = ""
+                for s in REQUIRED_LESSONS[
+                    torch.logical_and(CLASSES == c, selected.to("cpu"))
+                ][:, 2]:
+                    lesson_name = "/".join([lesson_name, SUBJECTS_LOOKUP_DICT[s.item()]])
+                print(f"{lesson_name[1:]:^30}", end=" | ")
+            print()
+            valid = False

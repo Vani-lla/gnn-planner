@@ -1,0 +1,49 @@
+--------------------------- True
+0 | 
+1 | Wych.Fiz. | 
+2 | EdB | 
+3 | 
+4 | J.Angielski | 
+5 | 
+--------------------------- True
+0 | Wych.Fiz. | 
+1 | J.Polski | 
+2 | Wych.Fiz. | 
+3 | Zajęcia kreatywne | 
+4 | J.Angielski | J.Angielski | 
+5 | J.Francuski | 
+--------------------------- True
+0 | Wych.Fiz. | Wych.Fiz. | 
+1 | J.Polski | 
+2 | Wych.Fiz. | 
+3 | EdB | 
+4 | J.Angielski | 
+5 | J.Francuski | 
+--------------------------- True
+0 | Wych.Fiz. | 
+1 | Historia | 
+2 | Matematyka | 
+3 | J.Francuski | 
+4 | Filozofia | 
+5 | J.Polski | 
+--------------------------- True
+0 | Religia | 
+1 | Historia | 
+2 | Matematyka | 
+3 | J.Francuski | 
+4 | Religia | 
+5 | J.Polski | 
+--------------------------- True
+0 | J.Rosyjski  | 
+1 | Wych.Fiz. | 
+2 | WOS | 
+3 | Wych.Fiz. | 
+4 | Biologia | 
+5 | J.Angielski | 
+--------------------------- True
+0 | J.Rosyjski  | 
+1 | J.Angielski | 
+2 | Filozofia | 
+3 | Wych.Fiz. | 
+4 | Biologia | 
+5 | J.Angielski | J.Angielski 
