@@ -1,0 +1,82 @@
+Table teacher {
+  teacher_id int [primary key]
+  set_id int [ref: > teacher_set.set_id]
+  name varchar
+  surname varchar
+}
+
+Table teacher_set {
+    set_id int [primary key]
+    name varchar
+}
+
+
+Table student_group {
+    group_id int [primary key]
+    set_id int [ref: > student_group_set.set_id]
+    name varchar
+    desc varchar
+}
+
+Table student_group_set {
+    set_id int [primary key]
+    name varchar
+}
+
+
+Table room {
+    room_id int [primary key]
+    set_id int [ref: > room_set.set_id]
+    name varchar
+    preferences json [ref: <> subject.subject_id]
+}
+
+Table room_set {
+    set_id int [pk]
+    name varchar
+}
+
+
+Table subject {
+    subject_id int [pk]
+    set_id int [ref: > subject_set.set_id]
+    name varchar
+}
+
+Table subject_set {
+    set_id int [pk]
+    name varchar
+}
+
+
+Table requirement {
+    req_id int [pk]
+    req_set_id int [ref: > requirement_set.req_set_id]
+    teacher_id int [ref: > teacher.teacher_id]
+    group_id int [ref: > student_group.group_id]
+    hours int
+}
+
+Table requirement_set {
+    req_set_id int [primary key]
+    teacher_set_id int [ref: > teacher_set.set_id]
+    room_set_id int [ref: > room_set.set_id]
+    group_set_id int [ref: > student_group_set.set_id]
+    subject_set_id int [ref: > subject_set.set_id]
+}
+
+Table plan {
+    plan_id int [pk]
+    req_set_id int [ref: < requirement_set.req_set_id]
+    name varchar
+}
+
+Table lesson {
+    lesson_id int [pk]
+    plan_id int [ref: > plan.plan_id]
+    teacher_id int [ref: > teacher.teacher_id]
+    subject_id int [ref: > subject.subject_id]
+    room_id int [ref: > room.room_id]
+    day int
+    hour int
+}
