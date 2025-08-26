@@ -1,6 +1,6 @@
 Table teacher {
   teacher_id int [primary key]
-  set_id int [ref: > teacher_set.set_id]
+  set_id int [ref: <> teacher_set.set_id]
   name varchar
   surname varchar
 }
@@ -49,11 +49,19 @@ Table subject_set {
 }
 
 
+Table teacher_availability {
+    ava_id int [pk]
+    teacher_id int [ref: > teacher.teacher_id]
+    req_set_id int [ref: > requirement_set.req_set_id]
+    availability json
+}
+
 Table requirement {
     req_id int [pk]
     req_set_id int [ref: > requirement_set.req_set_id]
     teacher_id int [ref: > teacher.teacher_id]
     group_id int [ref: > student_group.group_id]
+    subject_id int [ref: > subject.subject_id]
     hours int
 }
 
@@ -64,6 +72,7 @@ Table requirement_set {
     group_set_id int [ref: > student_group_set.set_id]
     subject_set_id int [ref: > subject_set.set_id]
 }
+
 
 Table plan {
     plan_id int [pk]
