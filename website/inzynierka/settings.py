@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from datetime import timedelta
 from pathlib import Path
+from os import path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,9 +44,7 @@ SIMPLE_JWT = {
 }
 
 # Application definition
-SHARED_APPS = [
-    "django_tenants",
-    "schools",
+INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -54,22 +53,12 @@ SHARED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "corsheaders",
-]
-
-TENANT_APPS = [
     "backend",
 ]
 
-INSTALLED_APPS = SHARED_APPS + TENANT_APPS
-
-TENANT_MODEL = "schools.School"
-TENANT_DOMAIN_MODEL = "schools.SchoolDomain"
-
-PUBLIC_SCHEMA_URLCONF = "inzynierka.public_urls"
-ROOT_URLCONF = "inzynierka.urls_tenant"
+ROOT_URLCONF = "inzynierka.urls"
 
 MIDDLEWARE = [
-    "django_tenants.middleware.main.TenantMainMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -83,7 +72,7 @@ MIDDLEWARE = [
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [path.join(BASE_DIR, "inzynierka/templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -104,7 +93,7 @@ WSGI_APPLICATION = "inzynierka.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django_tenants.postgresql_backend",
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": "inzynierka",
         "USER": "inzynierka_user",
         "PASSWORD": "koper123",
@@ -112,8 +101,6 @@ DATABASES = {
         "PORT": "",
     }
 }
-
-DATABASE_ROUTERS = ("django_tenants.routers.TenantSyncRouter",)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -150,6 +137,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [
+    path.join(BASE_DIR, "static"),
+]
+
+STATIC_ROOT = path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

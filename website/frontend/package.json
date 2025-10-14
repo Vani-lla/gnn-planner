@@ -3,18 +3,19 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "/static/",
   "scripts": {
-    "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "dev": "chokidar \"src/**/*\" \"public/**/*\" -c \"npm run sync-build\"",
+    "sync-build": "vite build && rm -rf ../static/* ../backend/templates/* && cp -r dist/assets ../static/ && cp dist/index.html ../inzynierka/templates/"
   },
   "dependencies": {
     "axios": "^1.12.2",
+    "chokidar-cli": "^3.0.0",
     "jwt-decode": "^4.0.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-router-dom": "^7.9.1"
+    "react-router-dom": "^7.9.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",

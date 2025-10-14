@@ -12,10 +12,9 @@ class TeacherPool(models.Model):
 class Teacher(models.Model):
     pool = models.ManyToManyField(TeacherPool)
     name = models.CharField(max_length=255)
-    surname = models.CharField(max_length=255)
 
     def __str__(self):
-        return f"{self.name} {self.surname}"
+        return f"{self.name}"
 
 
 class StudentGroupPool(models.Model):

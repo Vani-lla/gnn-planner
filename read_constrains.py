@@ -4,7 +4,8 @@ import numpy as np
 
 
 wb = load_workbook("data/Arkusz_25_26.xlsx")
-ws = wb["Arkusz org 2023-2024"]
+# ws = wb["Arkusz org 2023-2024"]
+ws = wb["Arkusz org 2008-2009 1.09.08"]
 
 classes = [
     (ind, c[0], c[1] + "_" + c[2])
@@ -19,13 +20,15 @@ subjects = [
 ]
 
 teachers = [
-    (ind, t)
+    (ind, t.value)
     for ind, t in enumerate(
-        *ws.iter_cols(values_only=True, max_col=1, min_row=2), start=1
+        *ws.iter_cols(min_col=2, max_col=2, min_row=4), start=1
     )
-    if t and t[-1].isnumeric()
+    if t.value and "." in t.value and not t.font.bold
 ]
 
+with open("teachers.txt", "w") as file:
+    file.writelines(map(lambda t: t[1]+"\n", teachers))
 
 def get_teacher_subject_ind(teacher_row: int, return_name: bool = False) -> int:
     for ind, (s, name) in reversed(list(enumerate(subjects))):
@@ -33,26 +36,26 @@ def get_teacher_subject_ind(teacher_row: int, return_name: bool = False) -> int:
             return ind if not return_name else name
 
 
-constraint_matrix = np.zeros(
-    shape=(len(teachers), len(classes), len(subjects)), dtype=np.uint8
-)
+# constraint_matrix = np.zeros(
+#     shape=(len(teachers), len(classes), len(subjects)), dtype=np.uint8
+# )
 
-rows = list(ws.iter_rows(values_only=True, max_col=28))
-for t_i, (t, teacher) in enumerate(teachers):
-    for c_i, (c, _, class_name) in enumerate(classes):
-        if rows[t][c]:
-            constraint_matrix[t_i, c_i, get_teacher_subject_ind(t)] = np.uint8(
-                int(rows[t][c])
-            )
+# rows = list(ws.iter_rows(values_only=True, max_col=28))
+# for t_i, (t, teacher) in enumerate(teachers):
+#     for c_i, (c, _, class_name) in enumerate(classes):
+#         if rows[t][c]:
+#             constraint_matrix[t_i, c_i, get_teacher_subject_ind(t)] = np.uint8(
+#                 int(rows[t][c])
+#             )
 
-for ind, (_, c, c2) in enumerate(classes):
-    print(ind, c, c2)
+# for ind, (_, c, c2) in enumerate(classes):
+#     print(ind, c, c2)
 
-print("---------")
-tmp = {}
-for ind, (_, name) in enumerate(subjects):
-    print(ind, name)
-    tmp[ind] = name
+# print("---------")
+# tmp = {}
+# for ind, (_, name) in enumerate(subjects):
+#     print(ind, name)
+#     tmp[ind] = name
 # print(tmp)
 
 print("---------")
@@ -82,6 +85,7 @@ per_class_complementary_subjects = {
         (6, 15) # Chem + biol
     )
 }
+    
 # np.save("data/constraints.npy", constraint_matrix)
 # print(constraint_matrix)
 # print(constraint_matrix[:, :, 0])
