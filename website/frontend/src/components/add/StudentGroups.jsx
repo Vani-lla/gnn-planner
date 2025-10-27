@@ -1,31 +1,31 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-export default function Teachers() {
+export default function StudentGroups() {
     const [lines, setLines] = useState([]);
     const [isDragging, setIsDragging] = useState(false);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
-    const [teacherPools, setTeacherPools] = useState([]);
+    const [groupPools, setGroupPools] = useState([]);
     const [selectedPool, setSelectedPool] = useState("");
     const [newPoolName, setNewPoolName] = useState("");
 
-    // Fetch TeacherPools from the backend
+    // Fetch StudentGroupPools from the backend
     useEffect(() => {
-        const fetchTeacherPools = async () => {
+        const fetchGroupPools = async () => {
             try {
-                const res = await fetch("/api/teacher-pools/");
+                const res = await fetch("/api/student-group-pools/");
                 const data = await res.json();
                 if (res.ok) {
-                    setTeacherPools(data);
+                    setGroupPools(data);
                 } else {
-                    console.error("Failed to fetch teacher pools:", data.error);
+                    console.error("Failed to fetch student group pools:", data.error);
                 }
             } catch (error) {
-                console.error("Error fetching teacher pools:", error);
+                console.error("Error fetching student group pools:", error);
             }
         };
 
-        fetchTeacherPools();
+        fetchGroupPools();
     }, []);
 
     const handleFile = (file) => {
@@ -52,7 +52,7 @@ export default function Teachers() {
     }, []);
 
     const handleUpload = async () => {
-        if (!selectedPool) return alert("Please select a teacher pool!");
+        if (!selectedPool) return alert("Please select a student group pool!");
         if (lines.length === 0) return alert("No lines to send!");
 
         try {
@@ -64,16 +64,16 @@ export default function Teachers() {
                 .find((row) => row.startsWith("csrftoken="))
                 ?.split("=")[1];
 
-            const res = await fetch("/api/teachers/", {
+            const res = await fetch("/api/student-groups/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "X-CSRFToken": csrftoken },
-                body: JSON.stringify({ teachers: lines, pool_id: selectedPool }),
+                body: JSON.stringify({ student_groups: lines, pool_id: selectedPool }),
             });
 
             const data = await res.json();
 
             if (res.ok) {
-                setMessage(`✅ Uploaded ${data.length} teachers successfully!`);
+                setMessage(`✅ Uploaded ${data.length} student groups successfully!`);
                 setLines([]); // Clear the lines after successful upload
             } else {
                 setMessage(`❌ Error: ${data.error || "Unknown error"}`);
@@ -87,7 +87,7 @@ export default function Teachers() {
     };
 
     const handleAddPool = async () => {
-        if (!newPoolName.trim()) return alert("Please enter a name for the new teacher pool!");
+        if (!newPoolName.trim()) return alert("Please enter a name for the new student group pool!");
 
         try {
             setLoading(true);
@@ -98,7 +98,7 @@ export default function Teachers() {
                 .find((row) => row.startsWith("csrftoken="))
                 ?.split("=")[1];
 
-            const res = await fetch("/api/teacher-pools/", {
+            const res = await fetch("/api/student-group-pools/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "X-CSRFToken": csrftoken },
                 body: JSON.stringify({ name: newPoolName }),
@@ -107,8 +107,8 @@ export default function Teachers() {
             const data = await res.json();
 
             if (res.ok) {
-                setMessage(`✅ Created new teacher pool: ${data.name}`);
-                setTeacherPools((prev) => [...prev, data]); // Add the new pool to the list
+                setMessage(`✅ Created new student group pool: ${data.name}`);
+                setGroupPools((prev) => [...prev, data]); // Add the new pool to the list
                 setNewPoolName(""); // Clear the input field
             } else {
                 setMessage(`❌ Error: ${data.error || "Unknown error"}`);
@@ -123,19 +123,19 @@ export default function Teachers() {
 
     return (
         <div className="flex flex-col items-center gap-6 p-6">
-            {/* Teacher Pool Selection */}
+            {/* Student Group Pool Selection */}
             <div className="w-full max-w-xl">
-                <label htmlFor="teacher-pool" className="block text-gray-700 font-medium mb-2">
-                    Select a Teacher Pool:
+                <label htmlFor="group-pool" className="block text-gray-700 font-medium mb-2">
+                    Select a Student Group Pool:
                 </label>
                 <select
-                    id="teacher-pool"
+                    id="group-pool"
                     value={selectedPool}
                     onChange={(e) => setSelectedPool(e.target.value)}
                     className="w-full border border-gray-300 rounded-lg p-2"
                 >
                     <option value="">-- Select a Pool --</option>
-                    {teacherPools.map((pool) => (
+                    {groupPools.map((pool) => (
                         <option key={pool.id} value={pool.id}>
                             {pool.name}
                         </option>
@@ -143,10 +143,10 @@ export default function Teachers() {
                 </select>
             </div>
 
-            {/* Add New Teacher Pool */}
+            {/* Add New Student Group Pool */}
             <div className="w-full max-w-xl">
                 <label htmlFor="new-pool" className="block text-gray-700 font-medium mb-2">
-                    Add a New Teacher Pool:
+                    Add a New Student Group Pool:
                 </label>
                 <div className="flex gap-2">
                     <input

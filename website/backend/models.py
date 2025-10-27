@@ -1,20 +1,4 @@
-# backend/models.py
 from django.db import models
-
-
-class TeacherPool(models.Model):
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
-
-
-class Teacher(models.Model):
-    pool = models.ManyToManyField(TeacherPool)
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return f"{self.name}"
 
 
 class StudentGroupPool(models.Model):
@@ -62,6 +46,22 @@ class Subject(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class TeacherPool(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
+class Teacher(models.Model):
+    pool = models.ManyToManyField(TeacherPool)
+    name = models.CharField(max_length=255)
+    teached_subjects = models.ManyToManyField(Subject)
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 class RequirementSet(models.Model):

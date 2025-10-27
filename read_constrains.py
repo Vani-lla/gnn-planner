@@ -12,23 +12,26 @@ classes = [
     for ind, c in enumerate(zip(*ws.iter_rows(values_only=True, max_row=3)))
     if all(c[i] for i in range(3))
 ]
+print(classes)
 
 subjects = [
     (ind, s.value)
-    for ind, s in enumerate(*ws.iter_cols(max_col=1, min_row=2), start=1)
+    for ind, s in enumerate(*ws.iter_cols(min_col=2, max_col=2, min_row=2), start=1)
     if s and s.font and s.font.bold
 ]
 
 teachers = [
     (ind, t.value)
-    for ind, t in enumerate(
-        *ws.iter_cols(min_col=2, max_col=2, min_row=4), start=1
-    )
+    for ind, t in enumerate(*ws.iter_cols(min_col=2, max_col=2, min_row=4), start=1)
     if t.value and "." in t.value and not t.font.bold
 ]
 
-with open("teachers.txt", "w") as file:
-    file.writelines(map(lambda t: t[1]+"\n", teachers))
+# with open("teachers.txt", "w") as file:
+#     file.writelines(map(lambda t: t[1] + "\n", teachers))
+
+with open("student_groups.txt", "w") as file:
+    file.writelines(map(lambda t: t[2] + "," + t[1] + "\n", classes))
+
 
 def get_teacher_subject_ind(teacher_row: int, return_name: bool = False) -> int:
     for ind, (s, name) in reversed(list(enumerate(subjects))):
@@ -54,38 +57,29 @@ def get_teacher_subject_ind(teacher_row: int, return_name: bool = False) -> int:
 # print("---------")
 # tmp = {}
 # for ind, (_, name) in enumerate(subjects):
-#     print(ind, name)
+#     print(name)
 #     tmp[ind] = name
 # print(tmp)
 
-print("---------")
-for ind, (_, t) in enumerate(teachers):
-    print(ind, t)
+# print("---------")
+# for ind, (_, t) in enumerate(teachers):
+#     print(ind, t)
 
 global_complementary_subjects = [
     (11, 12, 14),  # Języki
-    (1, 8), # Angielski + inf
-    (1, 1), # Ang + Ang
-    (10, 10, 4), # Religia + etyka
-    (16, 16), # WF
+    (1, 8),  # Angielski + inf
+    (1, 1),  # Ang + Ang
+    (10, 10, 4),  # Religia + etyka
+    (16, 16),  # WF
 ]
 
 per_class_complementary_subjects = {
-    6: ( # Psych-prawna
-        (15, 3), # Biol + WOS
-    ),
-    7: (
-        (11, 18), # Niem + mat
-    ),
-    8: (
-        (6, 8), # Chem + inf
-        (15, 7) # Biol + fiz
-    ),
-    9: ( # >30 osób
-        (6, 15) # Chem + biol
-    )
+    6: ((15, 3),),  # Psych-prawna  # Biol + WOS
+    7: ((11, 18),),  # Niem + mat
+    8: ((6, 8), (15, 7)),  # Chem + inf  # Biol + fiz
+    9: ((6, 15)),  # >30 osób  # Chem + biol
 }
-    
+
 # np.save("data/constraints.npy", constraint_matrix)
 # print(constraint_matrix)
 # print(constraint_matrix[:, :, 0])

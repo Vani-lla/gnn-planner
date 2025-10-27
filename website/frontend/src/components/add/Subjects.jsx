@@ -1,31 +1,30 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-export default function Teachers() {
+export default function Subjects() {
     const [lines, setLines] = useState([]);
     const [isDragging, setIsDragging] = useState(false);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
-    const [teacherPools, setTeacherPools] = useState([]);
+    const [subjectPools, setSubjectPools] = useState([]);
     const [selectedPool, setSelectedPool] = useState("");
     const [newPoolName, setNewPoolName] = useState("");
 
-    // Fetch TeacherPools from the backend
     useEffect(() => {
-        const fetchTeacherPools = async () => {
+        const fetchSubjectPools = async () => {
             try {
-                const res = await fetch("/api/teacher-pools/");
+                const res = await fetch("/api/subject-pools/");
                 const data = await res.json();
                 if (res.ok) {
-                    setTeacherPools(data);
+                    setSubjectPools(data);
                 } else {
-                    console.error("Failed to fetch teacher pools:", data.error);
+                    console.error("Failed to fetch subject pools:", data.error);
                 }
             } catch (error) {
-                console.error("Error fetching teacher pools:", error);
+                console.error("Error fetching subject pools:", error);
             }
         };
 
-        fetchTeacherPools();
+        fetchSubjectPools();
     }, []);
 
     const handleFile = (file) => {
@@ -38,8 +37,7 @@ export default function Teachers() {
         reader.onload = (e) => {
             const text = e.target.result;
             const linesArray = text.split(/\r?\n/).filter((line) => line.trim() !== "");
-            const parsedLines = linesArray.map((line) => line.split(","));
-            setLines(parsedLines);
+            setLines(linesArray);
         };
         reader.readAsText(file);
     };
@@ -52,29 +50,30 @@ export default function Teachers() {
     }, []);
 
     const handleUpload = async () => {
-        if (!selectedPool) return alert("Please select a teacher pool!");
+        if (!selectedPool) return alert("Please select a subject pool!");
         if (lines.length === 0) return alert("No lines to send!");
 
         try {
             setLoading(true);
             setMessage("");
+            console.log(JSON.stringify({ subjects: lines, pool_id: selectedPool }));
 
             const csrftoken = document.cookie
                 .split("; ")
                 .find((row) => row.startsWith("csrftoken="))
                 ?.split("=")[1];
 
-            const res = await fetch("/api/teachers/", {
+            const res = await fetch("/api/subjects/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "X-CSRFToken": csrftoken },
-                body: JSON.stringify({ teachers: lines, pool_id: selectedPool }),
+                body: JSON.stringify({ subjects: lines, pool_id: selectedPool }),
             });
 
             const data = await res.json();
 
             if (res.ok) {
-                setMessage(`✅ Uploaded ${data.length} teachers successfully!`);
-                setLines([]); // Clear the lines after successful upload
+                setMessage(`✅ Uploaded ${data.length} subjects successfully!`);
+                setLines([]);
             } else {
                 setMessage(`❌ Error: ${data.error || "Unknown error"}`);
             }
@@ -87,7 +86,7 @@ export default function Teachers() {
     };
 
     const handleAddPool = async () => {
-        if (!newPoolName.trim()) return alert("Please enter a name for the new teacher pool!");
+        if (!newPoolName.trim()) return alert("Please enter a name for the new subject pool!");
 
         try {
             setLoading(true);
@@ -98,7 +97,7 @@ export default function Teachers() {
                 .find((row) => row.startsWith("csrftoken="))
                 ?.split("=")[1];
 
-            const res = await fetch("/api/teacher-pools/", {
+            const res = await fetch("/api/subject-pools/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "X-CSRFToken": csrftoken },
                 body: JSON.stringify({ name: newPoolName }),
@@ -107,9 +106,9 @@ export default function Teachers() {
             const data = await res.json();
 
             if (res.ok) {
-                setMessage(`✅ Created new teacher pool: ${data.name}`);
-                setTeacherPools((prev) => [...prev, data]); // Add the new pool to the list
-                setNewPoolName(""); // Clear the input field
+                setMessage(`✅ Created new subject pool: ${data.name}`);
+                setSubjectPools((prev) => [...prev, data]);
+                setNewPoolName("");
             } else {
                 setMessage(`❌ Error: ${data.error || "Unknown error"}`);
             }
@@ -123,19 +122,19 @@ export default function Teachers() {
 
     return (
         <div className="flex flex-col items-center gap-6 p-6">
-            {/* Teacher Pool Selection */}
+            {/* Subject Pool Selection */}
             <div className="w-full max-w-xl">
-                <label htmlFor="teacher-pool" className="block text-gray-700 font-medium mb-2">
-                    Select a Teacher Pool:
+                <label htmlFor="subject-pool" className="block text-gray-700 font-medium mb-2">
+                    Select a Subject Pool:
                 </label>
                 <select
-                    id="teacher-pool"
+                    id="subject-pool"
                     value={selectedPool}
                     onChange={(e) => setSelectedPool(e.target.value)}
                     className="w-full border border-gray-300 rounded-lg p-2"
                 >
                     <option value="">-- Select a Pool --</option>
-                    {teacherPools.map((pool) => (
+                    {subjectPools.map((pool) => (
                         <option key={pool.id} value={pool.id}>
                             {pool.name}
                         </option>
@@ -143,10 +142,10 @@ export default function Teachers() {
                 </select>
             </div>
 
-            {/* Add New Teacher Pool */}
+            {/* Add New Subject Pool */}
             <div className="w-full max-w-xl">
                 <label htmlFor="new-pool" className="block text-gray-700 font-medium mb-2">
-                    Add a New Teacher Pool:
+                    Add a New Subject Pool:
                 </label>
                 <div className="flex gap-2">
                     <input
@@ -198,7 +197,7 @@ export default function Teachers() {
                                 key={index}
                                 className="p-3 hover:bg-gray-50 text-gray-800 font-mono text-sm"
                             >
-                                {line.join(", ")}
+                                {line}
                             </div>
                         ))}
                     </div>

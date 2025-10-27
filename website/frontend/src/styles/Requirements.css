@@ -1,0 +1,49 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.requirements-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.requirements-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.requirements-grid {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.requirements-grid th,
+.requirements-grid td {
+    border: 1px solid #444;
+    padding: 8px;
+    text-align: center;
+}
+
+.requirements-grid th {
+    background-color: #333;
+    color: #fff;
+}
+
+.requirements-grid input {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+    text-align: center;
+    width: 100%;
+}
+
+.subject-row td {
+    background-color: #222;
+    font-weight: bold;
+    text-align: left;
+    color: #fff;
+}
