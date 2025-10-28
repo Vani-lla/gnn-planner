@@ -1,18 +1,24 @@
 J.Polski
 J.Angielski
-WOK
 Historia
 WOS
+Etyka
+Filozofia
 Chemia
-PO
 Fizyka
-Matematyka
-Biologia
-Geografia
-Podst.przeds.
-Religia
 Informatyka
+Biznes i zarządzanie
+Religia
 J.Niemiecki
 J.Francuski
+J.Rosyjski z elem. Kult.
 J.Rosyjski
+Biologia
 Wych.Fiz.
+EdB
+Matematyka
+Geografia
+WDŻ
+Zajęcia kreatywne
+Civil Society
+Creative Writing

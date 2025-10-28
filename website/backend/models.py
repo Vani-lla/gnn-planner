@@ -43,6 +43,8 @@ class SubjectPool(models.Model):
 class Subject(models.Model):
     pool = models.ManyToManyField(SubjectPool)
     name = models.CharField(max_length=255)
+    border = models.BooleanField(default=False)
+    pairable = models.ManyToManyField("Subject", blank=True, null=True)
 
     def __str__(self):
         return self.name
