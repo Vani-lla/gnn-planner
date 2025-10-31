@@ -15,9 +15,19 @@ router.register(
 )
 router.register(r"student-groups", StudentGroupViewSet, basename="student-group")
 router.register(r"requirements", RequirementViewSet, basename="requirement")
+router.register(r"requirement-sets", RequirementSetViewSet, basename="requirement-set")
+router.register(r"plans", PlanViewSet, basename="plan")
 
 urlpatterns = [
+    path("upload-requirements/", upload_requirements_csv, name="upload-requirements"),
     path(
-        "upload-requirements/", upload_requirements_csv, name="upload-requirements"
-    )
+        "run-evolutionary-process/",
+        run_evolutionary_process_endpoint,
+        name="run evolutionary process",
+    ),
+    path(
+        "plans/<int:plan_id>/lessons/",
+        get_lessons_for_plan,
+        name="get-lessons-for-plan",
+    ),
 ] + router.urls

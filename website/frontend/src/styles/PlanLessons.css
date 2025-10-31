@@ -1,0 +1,93 @@
+.plan-lessons-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.lessons-display {
+    margin-top: 20px;
+}
+
+.lesson-group {
+    margin-bottom: 20px;
+}
+
+.lesson-group h2 {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.lesson-group ul {
+    list-style: none;
+    padding: 0;
+}
+
+.lesson-group li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.lesson-group li:last-child {
+    border-bottom: none;
+}
+
+.lessons-grid {
+    margin-top: 20px;
+    overflow-x: auto;
+    color: black;
+}
+
+.lessons-grid table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.lessons-grid th,
+.lessons-grid td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.lessons-grid th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.lesson-cell {
+    background-color: #e8f5e9;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 0.9em;
+}
+
+.lesson-item {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}

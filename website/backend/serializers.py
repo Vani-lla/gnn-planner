@@ -10,7 +10,21 @@ from .models import (
     Teacher,
     TeacherPool,
     Requirement,
+    RequirementSet,
+    Plan
 )
+
+
+class PlanSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Plan
+        fields = ["id", "name"]
+
+
+class RequirementSetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RequirementSet
+        fields = ["id", "name"]
 
 
 class StudentGroupSerializer(serializers.ModelSerializer):

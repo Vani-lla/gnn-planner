@@ -115,6 +115,7 @@ class Lesson(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    student_group = models.ForeignKey(StudentGroup, on_delete=models.CASCADE)
     day = models.PositiveSmallIntegerField()
     hour = models.PositiveSmallIntegerField()
 

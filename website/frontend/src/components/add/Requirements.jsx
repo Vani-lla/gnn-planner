@@ -41,10 +41,15 @@ export default function Requirements() {
     };
 
     const handleSave = async () => {
+        const csrftoken = document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("csrftoken="))
+            ?.split("=")[1];
+
         try {
             const res = await fetch("/api/requirements/", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", "X-CSRFToken": csrftoken },
                 body: JSON.stringify(updatedRequirements),
             });
 
