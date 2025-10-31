@@ -1,7 +1,6 @@
 Jp1,J.Polski
 Jp2,J.Polski
 Jp3,J.Polski
-Jp3,J.Polski
 Jp4,J.Polski
 Jp5,J.Polski
 Ja1,J.Angielski

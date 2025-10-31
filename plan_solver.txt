@@ -1,0 +1,43 @@
+Day 1:
+  Student Group 0:
+    Interval: ('J.Angielski 6h - Ja3 / I_A', 'J.Angielski 6h - Ja5 / I_A')_interval | Start: 0, End: 2
+    Interval: ('J.Niemiecki 2h - Jn2 / I_A', 'J.Francuski 2h - Jf3 / I_A', 'J.Rosyjski 2h - Jr1 / I_A')_interval | Start: 2, End: 3
+    Interval: ('Biznes i zarządzanie 2h - BZ1 / I_A',)_interval | Start: 3, End: 4
+    Interval: ('Wych.Fiz. 3h - Wf2 / I_A', 'Wych.Fiz. 3h - Wf6 / I_A')_interval | Start: 4, End: 5
+    Interval: ('Historia 2h - Hist3 / I_A',)_interval | Start: 5, End: 6
+
+Day 2:
+  Student Group 0:
+    Interval: ('J.Polski 6h - Jp5 / I_A',)_interval | Start: 0, End: 2
+    Interval: ('Chemia 1h - Chem3 / I_A',)_interval | Start: 2, End: 3
+    Interval: ('J.Angielski 6h - Ja3 / I_A', 'J.Angielski 6h - Ja5 / I_A')_interval | Start: 3, End: 4
+    Interval: ('J.Niemiecki 2h - Jn2 / I_A', 'J.Francuski 2h - Jf3 / I_A', 'J.Rosyjski 2h - Jr1 / I_A')_interval | Start: 4, End: 5
+    Interval: ('Biologia 3h - Biol1 / I_A',)_interval | Start: 5, End: 6
+
+Day 3:
+  Student Group 0:
+    Interval: ('Matematyka 3h - Mat4 / I_A',)_interval | Start: 0, End: 2
+    Interval: ('J.Polski 6h - Jp5 / I_A',)_interval | Start: 2, End: 3
+    Interval: ('Biologia 3h - Biol1 / I_A',)_interval | Start: 3, End: 4
+    Interval: ('J.Angielski 6h - Ja3 / I_A', 'Informatyka 2h - Inf2 / I_A')_interval | Start: 4, End: 5
+    Interval: ('Biznes i zarządzanie 2h - BZ1 / I_A',)_interval | Start: 5, End: 6
+    Interval: ('Filozofia 1h - Fil1 / I_A',)_interval | Start: 6, End: 7
+
+Day 4:
+  Student Group 0:
+    Interval: ('Religia 1h - Rel1 / I_A', 'Religia 1h - Rel3 / I_A')_interval | Start: 0, End: 1
+    Interval: ('Wych.Fiz. 3h - Wf2 / I_A', 'Wych.Fiz. 3h - Wf6 / I_A')_interval | Start: 1, End: 2
+    Interval: ('Matematyka 3h - Mat4 / I_A',)_interval | Start: 3, End: 4
+    Interval: ('Zajęcia kreatywne 1h - Zk2 / I_A',)_interval | Start: 4, End: 5
+    Interval: ('J.Angielski 6h - Ja5 / I_A', 'Informatyka 2h - Inf2 / I_A')_interval | Start: 5, End: 6
+    Interval: ('J.Polski 6h - Jp5 / I_A',)_interval | Start: 6, End: 7
+    Interval: ('J.Angielski 6h - Ja3 / I_A', 'J.Angielski 6h - Ja5 / I_A')_interval | Start: 7, End: 8
+
+Day 5:
+  Student Group 0:
+    Interval: ('J.Polski 6h - Jp5 / I_A',)_interval | Start: 0, End: 2
+    Interval: ('Geografia 1h - Geo3 / I_A',)_interval | Start: 2, End: 3
+    Interval: ('Biologia 3h - Biol1 / I_A',)_interval | Start: 3, End: 4
+    Interval: ('J.Angielski 6h - Ja3 / I_A', 'J.Angielski 6h - Ja5 / I_A')_interval | Start: 4, End: 5
+    Interval: ('Historia 2h - Hist3 / I_A',)_interval | Start: 5, End: 6
+    Interval: ('Wych.Fiz. 3h - Wf2 / I_A', 'Wych.Fiz. 3h - Wf6 / I_A')_interval | Start: 6, End: 7

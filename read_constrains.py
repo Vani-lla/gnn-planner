@@ -12,7 +12,7 @@ classes = [
     for ind, c in enumerate(zip(*ws.iter_rows(values_only=True, max_row=3)))
     if all(c[i] for i in range(3))
 ]
-# print(classes)
+
 with open("student_groups.txt", "w") as file:
     file.writelines(map(lambda t: t[2] + "," + t[1] + "\n", classes))
 

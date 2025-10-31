@@ -1,16 +1,17 @@
-import datetime
 import csv
+import datetime
 from io import StringIO
-from rest_framework.decorators import api_view, parser_classes
+
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework import status
+from rest_framework.decorators import action, api_view, parser_classes
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.decorators import action
 
 from .models import *
+from .models import Requirement, RequirementSet, StudentGroup, Subject, Teacher
 from .serializers import *
-from .models import Requirement, RequirementSet, Teacher, StudentGroup, Subject
 from .serializers import RequirementSerializer
 
 
@@ -22,7 +23,9 @@ def upload_requirements_csv(request):
     """
     file = request.FILES.get("file")
     if not file:
-        return Response({"error": "No file provided"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {"error": "No file provided"}, status=status.HTTP_400_BAD_REQUEST
+        )
 
     try:
         # Parse the CSV file
@@ -250,10 +253,14 @@ class RequirementViewSet(ModelViewSet):
                         {
                             "id": teacher.id,
                             "name": teacher.name,
-                            "subjects": [
-                                {"id": subject.id, "name": subject.name}
-                                for subject in teacher.teached_subjects.all()
-                            ] if teacher.teached_subjects.exists() else [],  # Ensure subjects is always a list
+                            "subjects": (
+                                [
+                                    {"id": subject.id, "name": subject.name}
+                                    for subject in teacher.teached_subjects.all()
+                                ]
+                                if teacher.teached_subjects.exists()
+                                else []
+                            ),  # Ensure subjects is always a list
                         }
                         for teacher in teachers
                     ],
@@ -269,6 +276,7 @@ class RequirementViewSet(ModelViewSet):
 
         return Response(grid_data)
 
+    @csrf_exempt
     def create(self, request, *args, **kwargs):
         data = request.data
         serializer = self.get_serializer(data=data, many=True)
