@@ -11,8 +11,15 @@ from .models import (
     TeacherPool,
     Requirement,
     RequirementSet,
-    Plan
+    Plan,
+    TeacherAvailability,
 )
+
+
+class TeacherAvailabilitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TeacherAvailability
+        fields = ["id", "teacher", "req_set", "availability"]
 
 
 class PlanSerializer(serializers.ModelSerializer):

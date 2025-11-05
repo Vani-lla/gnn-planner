@@ -165,8 +165,6 @@ export default function PlanLessons() {
                                                             <strong>{lesson.subject.name}</strong>
                                                             <br />
                                                             {lesson.teacher.name}
-                                                            <br />
-                                                            {lesson.room.name}
                                                         </div>
                                                     ))}
                                                 </div>

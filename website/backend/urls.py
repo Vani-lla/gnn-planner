@@ -17,6 +17,7 @@ router.register(r"student-groups", StudentGroupViewSet, basename="student-group"
 router.register(r"requirements", RequirementViewSet, basename="requirement")
 router.register(r"requirement-sets", RequirementSetViewSet, basename="requirement-set")
 router.register(r"plans", PlanViewSet, basename="plan")
+router.register(r"teacher-availability", TeacherAvailabilityViewSet, basename="teacher-availability")
 
 urlpatterns = [
     path("upload-requirements/", upload_requirements_csv, name="upload-requirements"),

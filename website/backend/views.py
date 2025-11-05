@@ -174,6 +174,54 @@ def run_evolutionary_process_endpoint(request):
     )
 
 
+class TeacherAvailabilityViewSet(ModelViewSet):
+    queryset = TeacherAvailability.objects.all()
+    serializer_class = TeacherAvailabilitySerializer
+
+    def create(self, request, *args, **kwargs):
+        print(request)
+        """
+        Handle bulk creation or update of teacher availability.
+        """
+        req_set_id = request.data.get("req_set_id")
+        availability_data = request.data.get("availability")
+
+        if not req_set_id or not availability_data:
+            return Response(
+                {"error": "Both 'req_set_id' and 'availability' are required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        try:
+            req_set = RequirementSet.objects.get(id=req_set_id)
+            bulk_data = []
+
+            for teacher_id, availability in availability_data.items():
+                teacher = Teacher.objects.get(id=teacher_id)
+                bulk_data.append(
+                    TeacherAvailability(
+                        teacher=teacher,
+                        req_set=req_set,
+                        availability=availability,
+                    )
+                )
+
+            # Bulk create or update teacher availability
+            TeacherAvailability.objects.filter(req_set=req_set).delete()
+            TeacherAvailability.objects.bulk_create(bulk_data)
+
+            return Response(
+                {"message": "Teacher availability saved successfully."},
+                status=status.HTTP_201_CREATED,
+            )
+        except RequirementSet.DoesNotExist:
+            return Response({"error": "RequirementSet not found."}, status=404)
+        except Teacher.DoesNotExist:
+            return Response({"error": "Teacher not found."}, status=404)
+        except Exception as e:
+            return Response({"error": str(e)}, status=500)
+
+
 class PlanViewSet(ModelViewSet):
     queryset = Plan.objects.all()
     serializer_class = PlanSerializer

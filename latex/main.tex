@@ -1,0 +1,48 @@
+\documentclass[12pt, twoside]{book}
+\input{latex-settings.tex}
+
+\frontmatter
+%check the current front page here:
+%https://wiz.pwr.edu.pl/en/students/thesis
+%and generate pdfs, and save in title_page folder.
+\begin{document}
+
+\includepdf[pages={1}]{title_page/pd_inz_pl.pdf}
+\doublepage
+% Add table of contents
+\pagestyle{tableOfContentStyle}
+% Add abstract
+\pagenumbering{Roman}
+\input{chapters/abstract.tex}
+\doublepage
+\tableofcontents 
+\doublepage
+% Set page style 
+\pagestyle{custom}
+\mainmatter
+ 
+% Create chapters:
+\input{chapters/introduction.tex}
+\input{chapters/related-work.tex}
+\input{chapters/algorytm.tex}
+\input{chapters/website.tex}
+\input{chapters/testy.tex}
+\input{chapters/conclusions.tex}
+
+% Redefine plain for 1st bibliography page style
+\resetformatting
+% Please read :
+%https://www.overleaf.com/learn/latex/Bibliography_management_with_bibtex
+\pagestyle{bibliographyStyle}
+\bibliographystyle{abbrv}
+\bibliography{bibliography}
+
+% Add list of figures and tables
+\pagestyle{custom}
+\newpage
+\pagestyle{ListofFiguresStyle}
+\listoffigures
+\newpage
+\pagestyle{ListofTablesStyle}
+\listoftables
+\end{document}

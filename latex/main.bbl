@@ -1,0 +1,23 @@
+\begin{thebibliography}{1}
+
+\bibitem{babington2008}
+P.~Babington.
+\newblock {\em The title of the book}, chapter ,,The title of the chapter''.
+\newblock Wydawca, Wrocław, 2 edition, (2008).
+
+\bibitem{nowak2018}
+J.~Nowak.
+\newblock {\em The title of the book}.
+\newblock Wydawca, Wrocław, 2 edition, (2008).
+
+\bibitem{nowak2016}
+J.~Nowak and P.~Kowalczyk.
+\newblock The title of the article.
+\newblock {\em Journal Name}, 12234, (2016).
+
+\bibitem{w4n2017}
+W4n.
+\newblock Nazwa strony, (2017).
+\newblock Last accessed 16 September 2017.
+
+\end{thebibliography}

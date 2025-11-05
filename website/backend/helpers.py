@@ -32,24 +32,25 @@ def get_group_block_indexes(
     return l
 
 
-def initialize_population(n: int, validation_hours) -> np.ndarray:
+def initialize_population(n: int, validation_hours, availability) -> np.ndarray:
     population = []
     for _ in range(n):
         specimen = []
-        for h in validation_hours:
-            if h == 3:
-                day_distribution = np.random.permutation([1, 2, 0, 0, 0])
-            else:
-                day_distribution = np.random.multinomial(h, [1 / 5] * 5)
+        for h, aval in zip(validation_hours, availability):
+            day_distribution = np.zeros(5, dtype=int)
+            if h > 0 and any(aval):
+                valid_days = np.array(aval, dtype=bool)
+                probabilities = valid_days / valid_days.sum()
+                day_distribution = np.random.multinomial(h, probabilities)
+
                 while any(day_distribution > 2):
                     excess_indices = np.where(day_distribution > 2)[0]
                     for idx in excess_indices:
                         excess = day_distribution[idx] - 2
                         day_distribution[idx] = 2
-                        redistribution = np.random.multinomial(excess, [1 / 4] * 4)
-                        mask = np.ones(5, dtype=bool)
-                        mask[idx] = False
-                        day_distribution[mask] += redistribution
+                        redistribution = np.random.multinomial(excess, probabilities)
+                        day_distribution += redistribution * valid_days
+
             specimen.append(day_distribution)
         population.append(np.array(specimen).T)
     return np.array(population)
@@ -494,46 +495,47 @@ def cross_breed(
 
 
 def mutate_population(
-    population: np.ndarray, block_val: np.ndarray, mutation_rate: float = 0.1
+    population: np.ndarray,
+    block_val: np.ndarray,
+    availability: np.ndarray,
+    mutation_rate: float = 0.1,
 ) -> np.ndarray:
     """
-    Mutate a percentage of the population by redistributing values within columns (blocks).
+    Mutate a percentage of the population by redistributing values within columns (blocks),
+    respecting availability constraints.
 
     Args:
         population (np.ndarray): The population to mutate (shape: [n_population, 5, n_blocks]).
         block_val (np.ndarray): The target column sums for each block.
+        availability (np.ndarray): Availability matrix (shape: [n_blocks, 5]).
         mutation_rate (float): The percentage of the population to mutate (0.0 to 1.0).
 
     Returns:
         np.ndarray: The mutated population.
     """
     n_population, n_days, n_blocks = population.shape
-
-    # Determine the number of specimens to mutate
     n_to_mutate = int(n_population * mutation_rate)
     if n_to_mutate == 0:
         return population
 
-    # Randomly select specimens to mutate
     mutate_indices = np.random.choice(n_population, n_to_mutate, replace=False)
-
-    # Create a copy of the population to mutate
     mutated_population = population.copy()
 
-    # Generate random distributions for the selected specimens and blocks
     for specimen_idx in mutate_indices:
-        # Redistribute values for each block
         for block_idx in range(n_blocks):
             total = block_val[block_idx]
-            if total == 3:
-                new_distribution = np.random.permutation([1, 2, 0, 0, 0])
-            else:
-                new_distribution = np.random.multinomial(total, [1 / n_days] * n_days)
+            valid_days = availability[block_idx]
+            if total > 0 and valid_days.any():
+                probabilities = valid_days / valid_days.sum()
+                new_distribution = np.random.multinomial(total, probabilities)
                 while np.any(new_distribution > 2):
-                    new_distribution = np.random.multinomial(
-                        total, [1 / n_days] * n_days
-                    )
-            mutated_population[specimen_idx, :, block_idx] = new_distribution
+                    excess = new_distribution - np.clip(new_distribution, 0, 2)
+                    new_distribution = np.clip(new_distribution, 0, 2)
+                    redistribution = np.random.multinomial(excess.sum(), probabilities)
+                    new_distribution += redistribution * valid_days
+                mutated_population[specimen_idx, :, block_idx] = new_distribution
+            else:
+                mutated_population[specimen_idx, :, block_idx] = 0
 
     return mutated_population
 
@@ -545,6 +547,7 @@ def evolutionary_loop(
     teachers: list[Teacher],
     student_groups: list[StudentGroup],
     block_val: np.ndarray,
+    availability: np.ndarray,
     generations: int = 100,
     alphas=np.ones(3, dtype=np.float64),
 ):
@@ -627,7 +630,7 @@ def evolutionary_loop(
 
         # Convert the new population back to a NumPy array
         population = np.array(new_population)
-        population = mutate_population(population, block_val, 0.2)
+        population = mutate_population(population, block_val, availability, 0.2)
         # population = add_integer_noise_batch(population)
 
         population = np.concatenate(

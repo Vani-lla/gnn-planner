@@ -1,50 +1,28 @@
-1,J.Polski
-2,J.Polski
-3,J.Polski
-4,J.Polski
-5,J.Angielski
-6,J.Angielski
-7,J.Angielski
-8,J.Angielski
-9,J.Angielski
-10,Historia,WOK
-11,Historia,WOK
-12,Chemia
-13,Fizyka
-14,Fizyka
-15,Matematyka
-16,Matematyka
-17,Matematyka
-18,Geografia
-19,Religia
-20,Religia
-21,Religia
-22,Religia
-23,Informatyka
-24,Informatyka
-25,Wych.Fiz.
-26,Wych.Fiz.
-27,Wych.Fiz.
-28,Wych.Fiz.
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
+1,J.Polski,WOS,Filozofia
+2,J.Polski,WOS,Filozofia
+3,J.Polski,WOS,Filozofia
+4,J.Polski,WOS,Filozofia
+5,Religia
+6,Religia
+7,Etyka
+8
+9
+10
+11,Matematyka
+12,Matematyka
+13,Matematyka
+14,Matematyka
+15,Geografia
+16,Geografia
+17,Biologia
+18,Biologia
+19,J.Niemiecki,J.Francuski,J.Rosyjski,J.Rosyjski z elem. Kult.
+20,J.Niemiecki,J.Francuski,J.Rosyjski,J.Rosyjski z elem. Kult.
+21,Fizyka
+Sala do Chemii 1,Chemia
+Sala Informatyczna 1,Informatyka
+Sala Informatyczna 2,Informatyka
+Sala Gimnastyczna 1,Wych.Fiz.
+Sala Gimnastyczna 2,Wych.Fiz.
+Siłownia 1,Wych.Fiz.
+Siłownia 2,Wych.Fiz.
