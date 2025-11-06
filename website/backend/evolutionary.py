@@ -31,8 +31,8 @@ def run_evolutionary_process(generations: int, req_set_id: int):
     population = initialize_population(1000, BLOCK_VAL, TEACHER_AVAILABILITY)
 
     best_specimen = np.load("specimen.npy")
-    print("Loaded best specimen")
-    print(best_specimen)
+    # print("Loaded best specimen")
+    # print(best_specimen)
     
     # best_specimen = evolutionary_loop(
     #     block_list=BLOCK_LIST,

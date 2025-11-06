@@ -1,19 +1,33 @@
 from rest_framework import serializers
 
 from .models import (
+    Plan,
+    Requirement,
+    RequirementSet,
     Room,
     RoomPool,
     StudentGroup,
     StudentGroupPool,
     Subject,
+    SubjectBlock,
     SubjectPool,
     Teacher,
-    TeacherPool,
-    Requirement,
-    RequirementSet,
-    Plan,
     TeacherAvailability,
+    TeacherPool,
 )
+
+
+class SubjectBlockSerializer(serializers.ModelSerializer):
+    subjects = serializers.PrimaryKeyRelatedField(
+        queryset=Subject.objects.all(), many=True
+    )
+    groups = serializers.PrimaryKeyRelatedField(
+        queryset=StudentGroup.objects.all(), many=True
+    )
+
+    class Meta:
+        model = SubjectBlock
+        fields = ["id", "req_set", "subjects", "groups", "numbers"]
 
 
 class TeacherAvailabilitySerializer(serializers.ModelSerializer):

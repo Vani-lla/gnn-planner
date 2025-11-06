@@ -1,5 +1,9 @@
+from collections import defaultdict
+from itertools import combinations
 import numpy as np
+from django.db.models.query import QuerySet
 from backend.models import *
+from django.db.models import Count, Q
 
 
 def is_array_valid(array: np.ndarray, validation_hours: np.ndarray):
@@ -56,7 +60,9 @@ def initialize_population(n: int, validation_hours, availability) -> np.ndarray:
     return np.array(population)
 
 
-def generate_blocks(requirements_querry, req_set, validation_hours):
+def generate_blocks(
+    requirements_querry, req_set: RequirementSet, validation_hours: list[int]
+):
     return_blocks = {}
     requirement_corrections = {}
 
@@ -132,6 +138,162 @@ def generate_blocks(requirements_querry, req_set, validation_hours):
     #     print(f"{hours} | {tuple(str(req) for req in block)}")
 
     return BLOCK_LIST, np.array(BLOCK_VAL)
+
+
+def is_block_valid(reqs, block) -> bool:
+    for subject in Subject.objects.filter(id__in=block.numbers.keys()):
+        if len(reqs.filter(subject=subject)) != block.numbers[str(subject.id)]:
+            return False
+    return True
+
+
+def generate_blocks(
+    requirements_querry: QuerySet[Requirement],
+    req_set: RequirementSet,
+    validation_hours: list[int],
+):
+    return_blocks = defaultdict(lambda: 0)
+    requirement_corrections = defaultdict(lambda: 0)
+
+    block_reqset: dict[QuerySet[Requirement], SubjectBlock] = {}
+
+    subject_blocks = SubjectBlock.objects.filter(req_set=req_set)
+    student_groups = StudentGroup.objects.filter(pool=req_set.group_pool)
+    singular_blocks = [
+        block
+        for block in subject_blocks
+        if block.groups.count() == 1 or block.groups.count() > 14
+    ]
+    multi_blocks = [
+        block
+        for block in subject_blocks
+        if block.groups.count() != 1
+        and block.groups.count() <= 14
+        and len([k for k, v in block.numbers.items() if v]) == 1
+    ]
+    combinatory_blocks = [
+        block
+        for block in subject_blocks
+        if block not in singular_blocks and block not in multi_blocks
+    ]
+
+    multi_req_groups = []
+    for block in multi_blocks:
+        reqs = requirements_querry.filter(
+            subject__in=[k for k, v in block.numbers.items() if v],
+            group__in=block.groups.all(),
+        )
+        multi_req_groups.append(reqs)
+        block_reqset[tuple(reqs)] = block
+
+    power_blocks = []
+    for block in combinatory_blocks:
+        tmp = []
+        used_teachers = set()
+        subject_ids = set(map(int, block.numbers.keys()))
+        for multi_block in multi_req_groups:
+            if (
+                len(multi_block)
+                == len(multi_block.filter(group__in=block.groups.all()))
+                and len(multi_block.filter(subject__in=subject_ids)) == len(multi_block)
+                and multi_block[0].teacher not in used_teachers
+                and all(req not in requirement_corrections for req in multi_block)
+            ):
+                tmp.extend(multi_block)
+                used_teachers.add(multi_block[0].teacher)
+
+        for req in requirements_querry.filter(
+            ~Q(teacher__in=used_teachers),
+            group__in=block.groups.all(),
+            subject__id__in=subject_ids,
+        ):
+            if req.teacher not in used_teachers and req not in requirement_corrections:
+                tmp.append(req)
+                used_teachers.add(req.teacher)
+
+        tmp = tuple(tmp)
+        power_blocks.append(tmp)
+        correction = min(req.hours for req in tmp)
+        for req in tmp:
+            requirement_corrections[req] = correction
+            return_blocks[tmp] = correction
+            block_reqset[tmp] = block
+
+    for block in multi_req_groups:
+        if all(req not in requirement_corrections for req in block):
+            correction = min(req.hours for req in block)
+            return_blocks[tuple(block)] = correction
+
+            for req in block:
+                requirement_corrections[req] = correction
+
+    singular_req_groups = []
+    for block in singular_blocks:
+        for student_group in student_groups:
+            if student_group in block.groups.all():
+                reqs = requirements_querry.filter(
+                    subject__in=[k for k, v in block.numbers.items() if v],
+                    group=student_group,
+                )
+                if all(requirement_corrections[req] < req.hours for req in reqs):
+                    if is_block_valid(reqs, block):
+                        singular_req_groups.append(tuple(reqs))
+                        block_reqset[tuple(reqs)] = block
+                    else:
+                        for combination in combinations(
+                            reqs, sum(block.numbers.values())
+                        ):
+                            combination_querry = Requirement.objects.filter(
+                                id__in=[req.id for req in combination]
+                            )
+                            if is_block_valid(combination_querry, block):
+                                singular_req_groups.append(tuple(combination_querry))
+                                block_reqset[tuple(combination_querry)] = block
+
+    while any(
+        all(req.hours - requirement_corrections[req] > 0 for req in requirements)
+        or (
+            block_reqset[requirements].max_number > 0
+            and return_blocks[requirements] < block_reqset[requirements].max_number
+        )
+        for requirements in singular_req_groups
+    ):
+        for requirements in singular_req_groups:
+            if all(
+                req.hours - requirement_corrections[req] > 0 for req in requirements
+            ) or (
+                block_reqset[requirements].max_number > 0
+                and return_blocks[requirements] < block_reqset[requirements].max_number
+            ):
+                # print(block_reqset[requirements].max_number)
+                # print(block_reqset[requirements].max_number - return_blocks[requirements], requirements)
+                # if block_reqset[requirements].max_number:
+                # print(block_reqset[requirements])
+                # print(block_reqset[requirements].max_number - return_blocks[requirements], requirements)
+                for req in requirements:
+                    requirement_corrections[req] += 1
+                return_blocks[requirements] += 1
+
+    # for k, v in return_blocks.items():
+    #     # print(k)
+    #     if k[0].group.name == "II_DF":
+    #         print(v, end=" | ")
+    #         for req in k:
+    #             print(
+    #                 req.subject,
+    #                 req.group,
+    #                 req.teacher,
+    #                 requirement_corrections[req],
+    #                 end=" | ",
+    #             )
+    #         print()
+
+    for req in requirements_querry:
+        diff = req.hours - requirement_corrections[req]
+        if req.hours - requirement_corrections[req] > 0:
+            return_blocks[(req,)] = diff
+
+    return list(return_blocks.keys()), np.array(list(return_blocks.values()))
 
 
 def teacher_day_hours(
@@ -638,4 +800,5 @@ def evolutionary_loop(
         )
 
     # Return the best specimen after all generations
+    np.save("specimen", best_specimen)
     return best_specimen

@@ -44,11 +44,22 @@ class Subject(models.Model):
     pool = models.ManyToManyField(SubjectPool)
     name = models.CharField(max_length=255)
     border = models.BooleanField(default=False)
-    pairable = models.ManyToManyField("Subject", blank=True, null=True)
+    # pairable = models.ManyToManyField("Subject", blank=True, null=True)
 
     def __str__(self):
         return self.name
 
+
+class SubjectBlock(models.Model):
+    req_set = models.ForeignKey("RequirementSet", on_delete=models.CASCADE)
+    subjects = models.ManyToManyField(Subject)
+    groups = models.ManyToManyField(StudentGroup)
+    numbers = models.JSONField(default={})
+    power_block = models.BooleanField(default=False)
+    max_number = models.SmallIntegerField(default=0)
+
+    def __str__(self):
+        return f"{tuple(s.name for s in Subject.objects.filter(id__in=[k for k, v in self.numbers.items() if v]))} for {tuple(g.name for g in self.groups.all())}"
 
 class TeacherPool(models.Model):
     name = models.CharField(max_length=255)

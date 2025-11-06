@@ -174,6 +174,47 @@ def run_evolutionary_process_endpoint(request):
     )
 
 
+class SubjectBlockViewSet(ModelViewSet):
+    queryset = SubjectBlock.objects.all()
+    serializer_class = SubjectBlockSerializer
+
+    def create(self, request, *args, **kwargs):
+        """
+        Create or update SubjectBlocks in bulk.
+        """
+        data = request.data
+        for block in data:
+            block_id = block.get("id")
+            req_set_id = block.get("req_set")
+            groups = block.get("groups", [])
+            numbers = block.get("numbers", {})
+
+            # Infer subjects from the numbers JSON
+            subjects = list(numbers.keys())
+
+            block_data = {
+                "req_set": req_set_id,
+                "subjects": subjects,
+                "groups": groups,
+                "numbers": numbers,
+            }
+
+            if block_id:
+                # Update existing SubjectBlock
+                subject_block = SubjectBlock.objects.get(id=block_id)
+                serializer = self.get_serializer(subject_block, data=block_data)
+            else:
+                # Create new SubjectBlock
+                serializer = self.get_serializer(data=block_data)
+
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+
+        return Response(
+            {"message": "SubjectBlocks saved successfully."}, status=status.HTTP_200_OK
+        )
+
+
 class TeacherAvailabilityViewSet(ModelViewSet):
     queryset = TeacherAvailability.objects.all()
     serializer_class = TeacherAvailabilitySerializer

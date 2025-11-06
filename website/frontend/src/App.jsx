@@ -10,6 +10,7 @@ import UploadRequirements from './components/add/UploadRequirements';
 import RunEvolutionaryProcess from './components/add/RunEvolutionaryProcess';
 import PlanLessons from './components/PlanLessons';
 import TeacherAvailability from './components/add/TeacherAvailability';
+import SubjectBlockPage from './components/add/SubjectBlockPage';
 import { Background } from './components/Background';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/add/rooms" element={<Rooms />} />
                 <Route path="/add/subjects" element={<Subjects />} />
                 <Route path="/add/classes" element={<StudentGroups />} />
+                <Route path="/add/blocks" element={<SubjectBlockPage />} />
                 <Route path="/add/requirements" element={<Requirements />} />
                 <Route path="/add/upload-requirements" element={<UploadRequirements />} />
                 <Route path="/add/generation" element={<RunEvolutionaryProcess />} />

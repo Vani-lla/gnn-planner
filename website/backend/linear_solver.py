@@ -57,14 +57,14 @@ def solve_schedule(req_set: RequirementSet, block_list, specimen):
                 interval_blocks[interval_var] = block
 
                 # Create room variables
-                room_vars = [
-                    model.NewBoolVar(f"{tuple(map(str, block))}_room_{room.name}")
-                    for room in rooms
-                ]
-                task_rooms[interval_var] = room_vars
+                # room_vars = [
+                #     model.NewBoolVar(f"{tuple(map(str, block))}_room_{room.name}")
+                #     for room in rooms
+                # ]
+                # task_rooms[interval_var] = room_vars
 
                 # Ensure the correct number of rooms are assigned
-                model.Add(sum(room_vars) == room_count)
+                # model.Add(sum(room_vars) == room_count)
 
         # Adding no overlaps
         teacher_intervals_dict = defaultdict(list)
@@ -137,27 +137,27 @@ def solve_schedule(req_set: RequirementSet, block_list, specimen):
                     model.AddBoolOr([start_bool, end_bool])
 
         # Add room no-overlap constraints
-        for room_index, room in enumerate(rooms):
-            room_intervals = []
-            for interval, room_vars in task_rooms.items():
-                # Create a conditional interval for the room
-                room_active = room_vars[room_index]
-                room_start = task_starts[interval]
-                room_end = task_ends[interval]
-                room_duration = task_duration[interval]
-                room_interval = model.NewOptionalIntervalVar(
-                    room_start,
-                    room_duration,
-                    room_end,
-                    room_active,
-                    f"{room.name}_interval",
-                )
-                room_intervals.append(room_interval)
+        # for room_index, room in enumerate(rooms):
+        #     room_intervals = []
+        #     for interval, room_vars in task_rooms.items():
+        #         # Create a conditional interval for the room
+        #         room_active = room_vars[room_index]
+        #         room_start = task_starts[interval]
+        #         room_end = task_ends[interval]
+        #         room_duration = task_duration[interval]
+        #         room_interval = model.NewOptionalIntervalVar(
+        #             room_start,
+        #             room_duration,
+        #             room_end,
+        #             room_active,
+        #             f"{room.name}_interval",
+        #         )
+        #         room_intervals.append(room_interval)
 
-            # Add no-overlap constraint for the room
-            model.AddNoOverlap(room_intervals)
+        #     # Add no-overlap constraint for the room
+        #     model.AddNoOverlap(room_intervals)
 
-        model.minimize(sum(minimization_vars))
+        # model.minimize(sum(minimization_vars))
         status = solver.Solve(model)
 
         if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
@@ -552,69 +552,69 @@ def solve_schedule(req_set, block_list, specimen):
                 day_end - day_start == sum([task_duration[i] for i in group_intervals])
             )
             # Handle border subjects
-            for interval in group_intervals:
-                if task_border_vars[interval]:
-                    start_bool = model.NewBoolVar("start_border")
-                    end_bool = model.NewBoolVar("end_border")
-                    model.Add(day_start == task_border_vars[interval][0]).OnlyEnforceIf(
-                        start_bool
-                    )
-                    model.Add(day_start != task_border_vars[interval][0]).OnlyEnforceIf(
-                        start_bool.Not()
-                    )
-                    model.Add(day_end == task_border_vars[interval][1]).OnlyEnforceIf(
-                        end_bool
-                    )
-                    model.Add(day_end != task_border_vars[interval][1]).OnlyEnforceIf(
-                        end_bool.Not()
-                    )
-                    model.AddBoolOr([start_bool, end_bool])
+            # for interval in group_intervals:
+            #     if task_border_vars[interval]:
+            #         start_bool = model.NewBoolVar("start_border")
+            #         end_bool = model.NewBoolVar("end_border")
+            #         model.Add(day_start == task_border_vars[interval][0]).OnlyEnforceIf(
+            #             start_bool
+            #         )
+            #         model.Add(day_start != task_border_vars[interval][0]).OnlyEnforceIf(
+            #             start_bool.Not()
+            #         )
+            #         model.Add(day_end == task_border_vars[interval][1]).OnlyEnforceIf(
+            #             end_bool
+            #         )
+            #         model.Add(day_end != task_border_vars[interval][1]).OnlyEnforceIf(
+            #             end_bool.Not()
+            #         )
+            #         model.AddBoolOr([start_bool, end_bool])
 
         # --- ROOM ASSIGNMENT SECTION ---
-        block_room_vars = []
-        for interval, num_rooms_needed in zip(task_intervals, required_no_of_rooms):
-            if interval:
-                # Assign one or more rooms to each block
-                room_vars = [
-                    model.NewIntVar(0, room_count - 1, f"room_{i}_{interval}")
-                    for i in range(num_rooms_needed)
-                ]
-                # Ensure distinct rooms if multiple required
-                if num_rooms_needed > 1:
-                    model.AddAllDifferent(room_vars)
-                block_room_vars.append(room_vars)
-            else:
-                block_room_vars.append([])
+        # block_room_vars = []
+        # for interval, num_rooms_needed in zip(task_intervals, required_no_of_rooms):
+        #     if interval:
+        #         # Assign one or more rooms to each block
+        #         room_vars = [
+        #             model.NewIntVar(0, room_count - 1, f"room_{i}_{interval}")
+        #             for i in range(num_rooms_needed)
+        #         ]
+        #         # Ensure distinct rooms if multiple required
+        #         if num_rooms_needed > 1:
+        #             model.AddAllDifferent(room_vars)
+        #         block_room_vars.append(room_vars)
+        #     else:
+        #         block_room_vars.append([])
 
         # Room no-overlap constraints
-        for room_index in range(room_count):
-            room_intervals = []
-            for interval, room_vars in zip(task_intervals, block_room_vars):
-                if not interval:
-                    continue
-                for rv in room_vars:
-                    assigned = model.NewBoolVar(f"assigned_{room_index}_{interval}")
-                    model.Add(rv == room_index).OnlyEnforceIf(assigned)
-                    model.Add(rv != room_index).OnlyEnforceIf(assigned.Not())
+        # for room_index in range(room_count):
+        #     room_intervals = []
+        #     for interval, room_vars in zip(task_intervals, block_room_vars):
+        #         if not interval:
+        #             continue
+        #         for rv in room_vars:
+        #             assigned = model.NewBoolVar(f"assigned_{room_index}_{interval}")
+        #             model.Add(rv == room_index).OnlyEnforceIf(assigned)
+        #             model.Add(rv != room_index).OnlyEnforceIf(assigned.Not())
 
-                    room_interval = model.NewOptionalIntervalVar(
-                        task_starts[interval],
-                        task_duration[interval],
-                        task_ends[interval],
-                        assigned,
-                        f"room_interval_{room_index}_{interval}",
-                    )
-                    room_intervals.append(room_interval)
+        #             room_interval = model.NewOptionalIntervalVar(
+        #                 task_starts[interval],
+        #                 task_duration[interval],
+        #                 task_ends[interval],
+        #                 assigned,
+        #                 f"room_interval_{room_index}_{interval}",
+        #             )
+        #             room_intervals.append(room_interval)
 
-            # Ensure no two lessons overlap in the same room
-            model.AddNoOverlap(room_intervals)
+        #     # Ensure no two lessons overlap in the same room
+        #     model.AddNoOverlap(room_intervals)
 
         # --- Optimization target ---
-        model.Minimize(sum(minimization_vars))
+        # model.Minimize(sum(minimization_vars))
 
         # --- Solve ---
         solver = cp_model.CpSolver()
-        solver.parameters.log_search_progress = True
+        # solver.parameters.log_search_progress = True
         solver.parameters.relative_gap_limit = 0.2
         status = solver.Solve(model)
 
@@ -642,24 +642,25 @@ def solve_schedule(req_set, block_list, specimen):
                         (group_index, interval_blocks[interval], start, end)
                     )
 
+    # Print the sorted plan for each day
+    for day_index, intervals in daily_plans.items():
+        print(f"Day {day_index + 1}:")
+        # Group intervals by student group
+        group_plans = defaultdict(list)
+        for group_index, name, start, end in intervals:
+            group_plans[group_index].append((name, start, end))
+
+        # Sort and print intervals for each group
+        for group_index, group_intervals in sorted(group_plans.items()):
+            if group_index == 0:
+                print(f"  Student Group {group_index}:")
+                sorted_intervals = sorted(
+                    group_intervals, key=lambda x: x[1]
+                )  # Sort by start time
+                for name, start, end in sorted_intervals:
+                    print(f"    Interval: {name} | Start: {start}, End: {end}")
+                print()
+                
     return return_plan, daily_plans
 
 
-# # Print the sorted plan for each day
-# for day_index, intervals in daily_plans.items():
-#     print(f"Day {day_index + 1}:")
-#     # Group intervals by student group
-#     group_plans = defaultdict(list)
-#     for group_index, name, start, end in intervals:
-#         group_plans[group_index].append((name, start, end))
-
-#     # Sort and print intervals for each group
-#     for group_index, group_intervals in sorted(group_plans.items()):
-#         if group_index == 0:
-#             print(f"  Student Group {group_index}:")
-#             sorted_intervals = sorted(
-#                 group_intervals, key=lambda x: x[1]
-#             )  # Sort by start time
-#             for name, start, end in sorted_intervals:
-#                 print(f"    Interval: {name} | Start: {start}, End: {end}")
-#             print()
