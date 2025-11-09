@@ -17,7 +17,9 @@ router.register(r"student-groups", StudentGroupViewSet, basename="student-group"
 router.register(r"requirements", RequirementViewSet, basename="requirement")
 router.register(r"requirement-sets", RequirementSetViewSet, basename="requirement-set")
 router.register(r"plans", PlanViewSet, basename="plan")
-router.register(r"teacher-availability", TeacherAvailabilityViewSet, basename="teacher-availability")
+router.register(
+    r"teacher-availability", TeacherAvailabilityViewSet, basename="teacher-availability"
+)
 router.register(r"subject-blocks", SubjectBlockViewSet, basename="subject-block")
 
 urlpatterns = [
@@ -27,6 +29,7 @@ urlpatterns = [
         run_evolutionary_process_endpoint,
         name="run evolutionary process",
     ),
+    path("plans/<int:plan_id>/details/", get_plan_details, name="get-plan-details"),
     path(
         "plans/<int:plan_id>/lessons/",
         get_lessons_for_plan,

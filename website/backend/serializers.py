@@ -63,7 +63,7 @@ class StudentGroupPoolSerializer(serializers.ModelSerializer):
 class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
-        fields = ["id", "name", "pool", "preferences"]
+        fields = ["id", "name", "pool", "compatible_subjects"]
 
 
 class RoomPoolSerializer(serializers.ModelSerializer):

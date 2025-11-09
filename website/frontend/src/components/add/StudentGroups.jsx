@@ -1,223 +1,301 @@
 import React, { useState, useEffect, useCallback } from "react";
+import styles from "../../styles/StudentGroups.module.css";
 
 export default function StudentGroups() {
-    const [lines, setLines] = useState([]);
-    const [isDragging, setIsDragging] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState("");
     const [groupPools, setGroupPools] = useState([]);
     const [selectedPool, setSelectedPool] = useState("");
+    const [groups, setGroups] = useState([]);
     const [newPoolName, setNewPoolName] = useState("");
+    const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
 
-    // Fetch StudentGroupPools from the backend
+    // Fetch pools
     useEffect(() => {
         const fetchGroupPools = async () => {
             try {
                 const res = await fetch("/api/student-group-pools/");
                 const data = await res.json();
-                if (res.ok) {
-                    setGroupPools(data);
-                } else {
-                    console.error("Failed to fetch student group pools:", data.error);
-                }
-            } catch (error) {
-                console.error("Error fetching student group pools:", error);
+                if (res.ok) setGroupPools(data);
+            } catch (e) {
+                console.error(e);
             }
         };
-
         fetchGroupPools();
     }, []);
 
-    const handleFile = (file) => {
-        if (file.type !== "text/plain") {
-            alert("Please upload a .txt file");
-            return;
-        }
-
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const text = e.target.result;
-            const linesArray = text.split(/\r?\n/).filter((line) => line.trim() !== "");
-            const parsedLines = linesArray.map((line) => line.split(","));
-            setLines(parsedLines);
-        };
-        reader.readAsText(file);
-    };
-
-    const handleDrop = useCallback((event) => {
-        event.preventDefault();
-        setIsDragging(false);
-        const file = event.dataTransfer.files[0];
-        if (file) handleFile(file);
-    }, []);
-
-    const handleUpload = async () => {
-        if (!selectedPool) return alert("Please select a student group pool!");
-        if (lines.length === 0) return alert("No lines to send!");
-
-        try {
-            setLoading(true);
-            setMessage("");
-
-            const csrftoken = document.cookie
-                .split("; ")
-                .find((row) => row.startsWith("csrftoken="))
-                ?.split("=")[1];
-
-            const res = await fetch("/api/student-groups/", {
-                method: "POST",
-                headers: { "Content-Type": "application/json", "X-CSRFToken": csrftoken },
-                body: JSON.stringify({ student_groups: lines, pool_id: selectedPool }),
-            });
-
-            const data = await res.json();
-
-            if (res.ok) {
-                setMessage(`✅ Uploaded ${data.length} student groups successfully!`);
-                setLines([]); // Clear the lines after successful upload
-            } else {
-                setMessage(`❌ Error: ${data.error || "Unknown error"}`);
+    // Fetch groups when pool selected
+    useEffect(() => {
+        const fetchGroups = async () => {
+            if (!selectedPool) {
+                setGroups([]);
+                return;
             }
-        } catch (error) {
-            console.error(error);
-            setMessage("❌ Network error");
-        } finally {
-            setLoading(false);
-        }
-    };
+            try {
+                const res = await fetch(`/api/student-groups/?pool_id=${selectedPool}`);
+                const data = await res.json();
+                if (res.ok) {
+                    // Normalize to {id, name, desc}
+                    setGroups(data.map(g => ({ id: g.id, name: g.name, desc: g.desc || "" })));
+                } else {
+                    console.error("Failed to fetch groups");
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        };
+        fetchGroups();
+    }, [selectedPool]);
 
+    const csrftoken = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("csrftoken="))
+        ?.split("=")[1];
+
+    // Add new pool
     const handleAddPool = async () => {
-        if (!newPoolName.trim()) return alert("Please enter a name for the new student group pool!");
-
+        if (!newPoolName.trim()) return alert("Enter pool name");
         try {
             setLoading(true);
             setMessage("");
-
-            const csrftoken = document.cookie
-                .split("; ")
-                .find((row) => row.startsWith("csrftoken="))
-                ?.split("=")[1];
-
             const res = await fetch("/api/student-group-pools/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "X-CSRFToken": csrftoken },
                 body: JSON.stringify({ name: newPoolName }),
             });
-
             const data = await res.json();
-
             if (res.ok) {
-                setMessage(`✅ Created new student group pool: ${data.name}`);
-                setGroupPools((prev) => [...prev, data]); // Add the new pool to the list
-                setNewPoolName(""); // Clear the input field
+                setGroupPools(prev => [...prev, data]);
+                setNewPoolName("");
+                setMessage(`✅ Created pool: ${data.name}`);
             } else {
-                setMessage(`❌ Error: ${data.error || "Unknown error"}`);
+                setMessage(`❌ ${data.error || "Error"}`);
             }
-        } catch (error) {
-            console.error(error);
+        } catch {
             setMessage("❌ Network error");
         } finally {
             setLoading(false);
         }
     };
 
+    // Handle manual edits
+    const handleChange = (index, field, value) => {
+        setGroups(prev => {
+            const next = [...prev];
+            next[index] = { ...next[index], [field]: value };
+            return next;
+        });
+    };
+
+    const handleAddRow = () => {
+        if (!selectedPool) return;
+        setGroups(prev => [...prev, { id: null, name: "", desc: "" }]);
+    };
+
+    const handleDelete = async (index) => {
+        const g = groups[index];
+        if (g.id) {
+            try {
+                const res = await fetch(`/api/student-groups/${g.id}/`, {
+                    method: "DELETE",
+                    headers: { "X-CSRFToken": csrftoken },
+                });
+                if (!res.ok) {
+                    const data = await res.json();
+                    console.error("Delete failed", data);
+                    return;
+                }
+            } catch (e) {
+                console.error(e);
+                return;
+            }
+        }
+        setGroups(prev => prev.filter((_, i) => i !== index));
+    };
+
+    // Save all new (id == null) or edited (only new bulk creation supported)
+    const handleSaveAll = async () => {
+        if (!selectedPool) return alert("Select pool");
+        const toCreate = groups.filter(g => !g.id && g.name.trim() !== "");
+        if (toCreate.length === 0) return alert("No new groups to save");
+        try {
+            setLoading(true);
+            setMessage("");
+            const payload = {
+                pool_id: selectedPool,
+                student_groups: toCreate.map(g => [g.name.trim(), g.desc.trim() || null]),
+            };
+            const res = await fetch("/api/student-groups/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "X-CSRFToken": csrftoken },
+                body: JSON.stringify(payload),
+            });
+            const data = await res.json();
+            if (res.ok) {
+                setMessage(`✅ Saved ${data.length} groups`);
+                // Refresh list
+                const listRes = await fetch(`/api/student-groups/?pool_id=${selectedPool}`);
+                const listData = await listRes.json();
+                if (listRes.ok) {
+                    setGroups(listData.map(g => ({ id: g.id, name: g.name, desc: g.desc || "" })));
+                }
+            } else {
+                setMessage(`❌ ${data.error || "Error"}`);
+            }
+        } catch {
+            setMessage("❌ Network error");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Drag & drop file
+    const handleFile = (file) => {
+        if (!file || file.type !== "text/plain") {
+            alert("Upload a .txt file");
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const text = e.target.result;
+            const lines = text.split(/\r?\n/).filter(l => l.trim() !== "");
+            // Each line: name[,desc]
+            const parsed = lines.map(line => {
+                const parts = line.split(",").map(p => p.trim());
+                return { id: null, name: parts[0] || "", desc: parts[1] || "" };
+            });
+            setGroups(prev => [...prev, ...parsed]);
+        };
+        reader.readAsText(file);
+    };
+
+    const handleDrop = useCallback((e) => {
+        e.preventDefault();
+        setIsDragging(false);
+        const file = e.dataTransfer.files[0];
+        if (file) handleFile(file);
+    }, []);
+
     return (
-        <div className="flex flex-col items-center gap-6 p-6">
-            {/* Student Group Pool Selection */}
-            <div className="w-full max-w-xl">
-                <label htmlFor="group-pool" className="block text-gray-700 font-medium mb-2">
-                    Select a Student Group Pool:
-                </label>
+        <div className={styles.groupsView}>
+            <div className={styles.groupsSelectors}>
                 <select
-                    id="group-pool"
+                    className={styles.groupsSelect}
                     value={selectedPool}
                     onChange={(e) => setSelectedPool(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg p-2"
                 >
-                    <option value="">-- Select a Pool --</option>
-                    {groupPools.map((pool) => (
-                        <option key={pool.id} value={pool.id}>
-                            {pool.name}
-                        </option>
+                    <option value="">Select Group Pool</option>
+                    {groupPools.map(pool => (
+                        <option key={pool.id} value={pool.id}>{pool.name}</option>
                     ))}
                 </select>
-            </div>
-
-            {/* Add New Student Group Pool */}
-            <div className="w-full max-w-xl">
-                <label htmlFor="new-pool" className="block text-gray-700 font-medium mb-2">
-                    Add a New Student Group Pool:
-                </label>
-                <div className="flex gap-2">
+                <div className={styles.inlineFlex}>
                     <input
-                        id="new-pool"
                         type="text"
                         value={newPoolName}
                         onChange={(e) => setNewPoolName(e.target.value)}
-                        placeholder="Enter pool name"
-                        className="flex-1 border border-gray-300 rounded-lg p-2"
+                        placeholder="New group pool name"
+                        className={styles.groupsSelect}
                     />
                     <button
                         onClick={handleAddPool}
                         disabled={loading}
-                        className="px-4 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700"
+                        className={styles.button}
                     >
-                        Add Pool
+                        {loading ? "Creating..." : "Add Pool"}
                     </button>
                 </div>
             </div>
 
-            {/* Drop Zone */}
             <div
                 onDrop={handleDrop}
-                onDragOver={(e) => {
-                    e.preventDefault();
-                    setIsDragging(true);
-                }}
+                onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
                 onDragLeave={() => setIsDragging(false)}
-                className={`w-full max-w-xl h-40 flex items-center justify-center border-4 border-dashed rounded-2xl transition-all ${isDragging ? "border-blue-500 bg-blue-50" : "border-gray-300"
-                    }`}
+                className={`${styles.dropZone} ${isDragging ? styles.dragging : ""}`}
             >
-                <p className="text-gray-600 text-center">
-                    {isDragging ? "Drop your .txt file here" : "Drag & drop a .txt file here"}
-                </p>
+                <p>{isDragging ? "Drop .txt file here" : "Upload / Drag .txt (name[,desc])"}</p>
                 <input
                     type="file"
                     accept=".txt"
                     onChange={(e) => handleFile(e.target.files[0])}
-                    className="absolute opacity-0 w-full h-full cursor-pointer"
+                    className={styles.hiddenFileInput}
                 />
             </div>
 
-            {/* Grid Display */}
-            {lines.length > 0 && (
-                <div className="w-full max-w-xl border border-gray-300 rounded-xl shadow-sm overflow-hidden">
-                    <div className="grid grid-cols-1 divide-y divide-gray-200">
-                        {lines.map((line, index) => (
-                            <div
-                                key={index}
-                                className="p-3 hover:bg-gray-50 text-gray-800 font-mono text-sm"
-                            >
-                                {line.join(", ")}
-                            </div>
-                        ))}
-                    </div>
+            <div className={styles.groupsGrid}>
+                <div className={styles.groupsGridHeader}>
+                    <div className={styles.groupsGridCell}>Group Name</div>
+                    <div className={styles.groupsGridCell}>Description</div>
+                    <div className={styles.groupsGridCell}>Actions</div>
                 </div>
-            )}
+                <div className={styles.groupsGridBody}>
+                    {groups.length === 0 && (
+                        <div className={styles.groupsGridRow}>
+                            <div className={styles.groupsGridCell} style={{ opacity: 0.6 }}>No rows. Add or upload.</div>
+                            <div className={styles.groupsGridCell} />
+                            <div className={styles.groupsGridCell} />
+                        </div>
+                    )}
+                    {groups.map((g, i) => (
+                        <div
+                            className={styles.groupsGridRow}
+                            key={g.id ? `e-${g.id}` : `n-${i}`}
+                        >
+                            <div className={styles.groupsGridCell}>
+                                <input
+                                    type="text"
+                                    value={g.name}
+                                    onChange={(e) => handleChange(i, "name", e.target.value)}
+                                    className={styles.groupsSelect}
+                                    placeholder="Group name"
+                                />
+                            </div>
+                            <div className={styles.groupsGridCell}>
+                                <input
+                                    type="text"
+                                    value={g.desc}
+                                    onChange={(e) => handleChange(i, "desc", e.target.value)}
+                                    className={styles.groupsSelect}
+                                    placeholder="Description (optional)"
+                                />
+                            </div>
+                            <div className={styles.groupsGridCell}>
+                                <button
+                                    onClick={() => handleDelete(i)}
+                                    className={styles.deleteButton}
+                                    title="Delete Group"
+                                >
+                                    ✖
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <div className={styles.actionRow}>
+                    <button
+                        type="button"
+                        onClick={handleAddRow}
+                        className={styles.button}
+                        disabled={!selectedPool}
+                    >
+                        + Add Row
+                    </button>
+                    <button
+                        type="button"
+                        onClick={handleSaveAll}
+                        className={styles.button}
+                        disabled={
+                            loading ||
+                            !selectedPool ||
+                            groups.filter(g => !g.id && g.name.trim() !== "").length === 0
+                        }
+                    >
+                        {loading ? "Saving..." : "Save All"}
+                    </button>
+                </div>
+            </div>
 
-            {/* Upload Button */}
-            {lines.length > 0 && (
-                <button
-                    onClick={handleUpload}
-                    disabled={loading}
-                    className={`px-6 py-2 rounded-lg text-white font-semibold ${loading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
-                        }`}
-                >
-                    {loading ? "Uploading..." : "Send to Backend"}
-                </button>
-            )}
-
-            {message && <p className="text-center text-gray-700">{message}</p>}
+            {message && <p className={styles.message}>{message}</p>}
         </div>
     );
 }

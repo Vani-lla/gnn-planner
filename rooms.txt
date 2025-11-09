@@ -1,25 +1,26 @@
-1,J.Polski,WOS,Filozofia
-2,J.Polski,WOS,Filozofia
-3,J.Polski,WOS,Filozofia
-4,J.Polski,WOS,Filozofia
+1,J.Polski,WOS,Filozofia,Historia,Biznes i zarządzanie,Zajęcia kreatywne,Civil Society,Creative Writing
+2,J.Polski,WOS,Filozofia,Historia,Biznes i zarządzanie,Zajęcia kreatywne,Civil Society,Creative Writing
+3,J.Polski,WOS,Filozofia,Historia,Biznes i zarządzanie,Zajęcia kreatywne,Civil Society,Creative Writing
+4,J.Polski,WOS,Filozofia,Historia,Biznes i zarządzanie,Zajęcia kreatywne,Civil Society,Creative Writing
 5,Religia
 6,Religia
-7,Etyka
-8
-9
-10
-11,Matematyka
-12,Matematyka
+7,Religia
+8,Etyka,WDŻ
+9,J.Angielski
+10,J.Angielski
+11,J.Niemiecki,J.Francuski,J.Rosyjski,J.Rosyjski z elem. Kult.,J.Angielski
+12,J.Niemiecki,J.Francuski,J.Rosyjski,J.Rosyjski z elem. Kult.,J.Angielski
 13,Matematyka
 14,Matematyka
-15,Geografia
+15,Matematyka
 16,Geografia
-17,Biologia
-18,Biologia
-19,J.Niemiecki,J.Francuski,J.Rosyjski,J.Rosyjski z elem. Kult.
-20,J.Niemiecki,J.Francuski,J.Rosyjski,J.Rosyjski z elem. Kult.
-21,Fizyka
-Sala do Chemii 1,Chemia
+17,Biologia,EdB
+18,Biologia,EdB
+19,J.Niemiecki,J.Francuski,J.Rosyjski,J.Rosyjski z elem. Kult.,J.Angielski
+20,J.Niemiecki,J.Francuski,J.Rosyjski,J.Rosyjski z elem. Kult.,J.Angielski
+21,Fizyka,Matematyka
+22,J.Niemiecki,J.Francuski,J.Rosyjski,J.Rosyjski z elem. Kult.,J.Angielski
+Sala do Chemii 1,Chemia,Fizyka
 Sala Informatyczna 1,Informatyka
 Sala Informatyczna 2,Informatyka
 Sala Gimnastyczna 1,Wych.Fiz.

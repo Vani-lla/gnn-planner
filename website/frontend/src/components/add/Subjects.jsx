@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useCallback } from "react";
+import styles from "../../styles/Subjects.module.css";
 
 export default function Subjects() {
-    const [lines, setLines] = useState([]);
-    const [isDragging, setIsDragging] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState("");
     const [subjectPools, setSubjectPools] = useState([]);
     const [selectedPool, setSelectedPool] = useState("");
+    const [subjects, setSubjects] = useState([]);
     const [newPoolName, setNewPoolName] = useState("");
+    const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
 
+    // Fetch subject pools on component mount
     useEffect(() => {
         const fetchSubjectPools = async () => {
             try {
@@ -27,36 +29,85 @@ export default function Subjects() {
         fetchSubjectPools();
     }, []);
 
-    const handleFile = (file) => {
-        if (file.type !== "text/plain") {
-            alert("Please upload a .txt file");
-            return;
-        }
+    // Fetch subjects for the selected pool
+    useEffect(() => {
+        const fetchSubjects = async () => {
+            if (!selectedPool) {
+                setSubjects([]);
+                return;
+            }
 
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const text = e.target.result;
-            const linesArray = text.split(/\r?\n/).filter((line) => line.trim() !== "");
-            setLines(linesArray);
+            try {
+                const res = await fetch(`/api/subjects/?pool_id=${selectedPool}`);
+                const data = await res.json();
+                if (res.ok) {
+                    setSubjects(data); // removed automatic empty row
+                } else {
+                    console.error("Failed to fetch subjects:", data.error);
+                }
+            } catch (error) {
+                console.error("Error fetching subjects:", error);
+            }
         };
-        reader.readAsText(file);
+
+        fetchSubjects();
+    }, [selectedPool]);
+
+    // Handle subject name change
+    const handleSubjectChange = (index, value) => {
+        setSubjects((prev) => {
+            const next = [...prev];
+            next[index] = { ...next[index], name: value };
+            return next;
+        });
     };
 
-    const handleDrop = useCallback((event) => {
-        event.preventDefault();
-        setIsDragging(false);
-        const file = event.dataTransfer.files[0];
-        if (file) handleFile(file);
-    }, []);
+    const handleAddRow = () => {
+        setSubjects((prev) => [...prev, { name: "", id: null }]);
+    };
 
-    const handleUpload = async () => {
+    // Delete a subject
+    const handleDeleteSubject = async (index) => {
+        const subjectToDelete = subjects[index];
+
+        // If the subject has an ID, send a DELETE request to the backend
+        if (subjectToDelete.id) {
+            try {
+                const csrftoken = document.cookie
+                    .split("; ")
+                    .find((row) => row.startsWith("csrftoken="))
+                    ?.split("=")[1];
+
+                const res = await fetch(`/api/subjects/${subjectToDelete.id}/`, {
+                    method: "DELETE",
+                    headers: { "X-CSRFToken": csrftoken },
+                });
+
+                if (!res.ok) {
+                    const data = await res.json();
+                    console.error(`Failed to delete subject: ${data.error || "Unknown error"}`);
+                    return;
+                }
+            } catch (error) {
+                console.error("Error deleting subject:", error);
+                return;
+            }
+        }
+
+        // Remove the subject from the list
+        setSubjects((prev) => prev.filter((_, i) => i !== index));
+    };
+
+    // Save subjects to the backend
+    const handleSaveAll = async () => {
         if (!selectedPool) return alert("Please select a subject pool!");
-        if (lines.length === 0) return alert("No lines to send!");
+
+        const subjectsToSave = subjects.filter((s) => s.name.trim() !== "");
+        if (subjectsToSave.length === 0) return alert("No subjects to save.");
 
         try {
             setLoading(true);
             setMessage("");
-            console.log(JSON.stringify({ subjects: lines, pool_id: selectedPool }));
 
             const csrftoken = document.cookie
                 .split("; ")
@@ -66,14 +117,17 @@ export default function Subjects() {
             const res = await fetch("/api/subjects/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "X-CSRFToken": csrftoken },
-                body: JSON.stringify({ subjects: lines, pool_id: selectedPool }),
+                body: JSON.stringify({
+                    subjects: subjectsToSave.map((s) => s.name),
+                    pool_id: selectedPool,
+                }),
             });
 
             const data = await res.json();
 
             if (res.ok) {
-                setMessage(`✅ Uploaded ${data.length} subjects successfully!`);
-                setLines([]);
+                setMessage("✅ Subjects saved successfully!");
+                setSubjects(data); // refresh (no extra empty row)
             } else {
                 setMessage(`❌ Error: ${data.error || "Unknown error"}`);
             }
@@ -85,7 +139,8 @@ export default function Subjects() {
         }
     };
 
-    const handleAddPool = async () => {
+    // Create a new subject pool
+    const handleCreatePool = async () => {
         if (!newPoolName.trim()) return alert("Please enter a name for the new subject pool!");
 
         try {
@@ -107,8 +162,8 @@ export default function Subjects() {
 
             if (res.ok) {
                 setMessage(`✅ Created new subject pool: ${data.name}`);
-                setSubjectPools((prev) => [...prev, data]);
-                setNewPoolName("");
+                setSubjectPools((prev) => [...prev, data]); // Add the new pool to the list
+                setNewPoolName(""); // Clear the input field
             } else {
                 setMessage(`❌ Error: ${data.error || "Unknown error"}`);
             }
@@ -120,53 +175,65 @@ export default function Subjects() {
         }
     };
 
+    // Handle file upload
+    const handleFile = (file) => {
+        if (file.type !== "text/plain") {
+            alert("Please upload a .txt file");
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const text = e.target.result;
+            const linesArray = text.split(/\r?\n/).filter((line) => line.trim() !== "");
+            const parsedSubjects = linesArray.map((line) => ({ name: line, id: null }));
+            setSubjects((prev) => [...prev, ...parsedSubjects]);
+        };
+        reader.readAsText(file);
+    };
+
+    const handleDrop = useCallback((event) => {
+        event.preventDefault();
+        setIsDragging(false);
+        const file = event.dataTransfer.files[0];
+        if (file) handleFile(file);
+    }, []);
+
     return (
-        <div className="flex flex-col items-center gap-6 p-6">
-            {/* Subject Pool Selection */}
-            <div className="w-full max-w-xl">
-                <label htmlFor="subject-pool" className="block text-gray-700 font-medium mb-2">
-                    Select a Subject Pool:
-                </label>
+        <div className={styles.subjectsView}>
+            {/* Row 1: selectors + create pool */}
+            <div className={styles.subjectsSelectors}>
                 <select
-                    id="subject-pool"
+                    className={styles.subjectsSelect}
                     value={selectedPool}
                     onChange={(e) => setSelectedPool(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg p-2"
                 >
-                    <option value="">-- Select a Pool --</option>
+                    <option value="">Select Subject Pool</option>
                     {subjectPools.map((pool) => (
                         <option key={pool.id} value={pool.id}>
                             {pool.name}
                         </option>
                     ))}
                 </select>
-            </div>
-
-            {/* Add New Subject Pool */}
-            <div className="w-full max-w-xl">
-                <label htmlFor="new-pool" className="block text-gray-700 font-medium mb-2">
-                    Add a New Subject Pool:
-                </label>
-                <div className="flex gap-2">
+                <div className={styles.inlineFlex}>
                     <input
-                        id="new-pool"
                         type="text"
                         value={newPoolName}
                         onChange={(e) => setNewPoolName(e.target.value)}
-                        placeholder="Enter pool name"
-                        className="flex-1 border border-gray-300 rounded-lg p-2"
+                        placeholder="New subject pool name"
+                        className={styles.subjectsSelect}
                     />
                     <button
-                        onClick={handleAddPool}
+                        onClick={handleCreatePool}
                         disabled={loading}
-                        className="px-4 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700"
+                        className={styles.button}
                     >
-                        Add Pool
+                        {loading ? "Creating..." : "Add Pool"}
                     </button>
                 </div>
             </div>
 
-            {/* Drop Zone */}
+            {/* Row 2: drag & drop zone */}
             <div
                 onDrop={handleDrop}
                 onDragOver={(e) => {
@@ -174,49 +241,83 @@ export default function Subjects() {
                     setIsDragging(true);
                 }}
                 onDragLeave={() => setIsDragging(false)}
-                className={`w-full max-w-xl h-40 flex items-center justify-center border-4 border-dashed rounded-2xl transition-all ${isDragging ? "border-blue-500 bg-blue-50" : "border-gray-300"
-                    }`}
+                className={`${styles.dropZone} ${isDragging ? styles.dragging : ""}`}
             >
-                <p className="text-gray-600 text-center">
-                    {isDragging ? "Drop your .txt file here" : "Drag & drop a .txt file here"}
-                </p>
+                <p>{isDragging ? "Drop .txt file here" : "Upload / Drag .txt (one subject per line)"}</p>
                 <input
                     type="file"
                     accept=".txt"
                     onChange={(e) => handleFile(e.target.files[0])}
-                    className="absolute opacity-0 w-full h-full cursor-pointer"
+                    className={styles.hiddenFileInput}
                 />
             </div>
 
-            {/* Grid Display */}
-            {lines.length > 0 && (
-                <div className="w-full max-w-xl border border-gray-300 rounded-xl shadow-sm overflow-hidden">
-                    <div className="grid grid-cols-1 divide-y divide-gray-200">
-                        {lines.map((line, index) => (
-                            <div
-                                key={index}
-                                className="p-3 hover:bg-gray-50 text-gray-800 font-mono text-sm"
-                            >
-                                {line}
-                            </div>
-                        ))}
-                    </div>
+            {/* Grid */}
+            <div className={styles.subjectsGrid}>
+                <div className={styles.subjectsGridHeader}>
+                    <div className={styles.subjectsGridCell}>Subject Name</div>
+                    <div className={styles.subjectsGridCell}>Actions</div>
                 </div>
-            )}
+                <div className={styles.subjectsGridBody}>
+                    {subjects.length === 0 && (
+                        <div className={styles.subjectsGridRow}>
+                            <div className={styles.subjectsGridCell} style={{ opacity: 0.6 }}>
+                                No rows. Add or upload.
+                            </div>
+                            <div className={styles.subjectsGridCell} />
+                        </div>
+                    )}
+                    {subjects.map((subject, index) => (
+                        <div
+                            className={styles.subjectsGridRow}
+                            key={subject.id ? `e-${subject.id}` : `n-${index}`}
+                        >
+                            <div className={styles.subjectsGridCell}>
+                                <input
+                                    type="text"
+                                    value={subject.name}
+                                    onChange={(e) => handleSubjectChange(index, e.target.value)}
+                                    className={styles.subjectsSelect}
+                                    placeholder="Subject name"
+                                />
+                            </div>
+                            <div className={styles.subjectsGridCell}>
+                                <button
+                                    onClick={() => handleDeleteSubject(index)}
+                                    className={styles.deleteButton}
+                                    title="Delete Subject"
+                                >
+                                    ✖
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <div className={styles.actionRow}>
+                    <button
+                        type="button"
+                        onClick={handleAddRow}
+                        className={styles.button}
+                        disabled={!selectedPool}
+                    >
+                        + Add Row
+                    </button>
+                    <button
+                        type="button"
+                        onClick={handleSaveAll}
+                        className={styles.button}
+                        disabled={
+                            loading ||
+                            !selectedPool ||
+                            subjects.filter((s) => s.name.trim() !== "").length === 0
+                        }
+                    >
+                        {loading ? "Saving..." : "Save All"}
+                    </button>
+                </div>
+            </div>
 
-            {/* Upload Button */}
-            {lines.length > 0 && (
-                <button
-                    onClick={handleUpload}
-                    disabled={loading}
-                    className={`px-6 py-2 rounded-lg text-white font-semibold ${loading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
-                        }`}
-                >
-                    {loading ? "Uploading..." : "Send to Backend"}
-                </button>
-            )}
-
-            {message && <p className="text-center text-gray-700">{message}</p>}
+            {message && <p className={styles.message}>{message}</p>}
         </div>
     );
 }

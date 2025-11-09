@@ -23,6 +23,7 @@ def run_evolutionary_process(generations: int, req_set_id: int):
 
     # Generate blocks and evaluate population
     BLOCK_LIST, BLOCK_VAL = generate_blocks(REQUIREMENTS, REQ_SET, VALIDATION_HOURS)
+    print(len(BLOCK_LIST))
     TEACHER_AVAILABILITY = np.array([
         np.all(TEACHER_AVAILABILITY[[TEACHERS.index(b.teacher) for b in block]], axis=0)
         for block in BLOCK_LIST
@@ -30,22 +31,22 @@ def run_evolutionary_process(generations: int, req_set_id: int):
 
     population = initialize_population(1000, BLOCK_VAL, TEACHER_AVAILABILITY)
 
-    best_specimen = np.load("specimen.npy")
+    # best_specimen = np.load("specimen.npy")
     # print("Loaded best specimen")
     # print(best_specimen)
     
-    # best_specimen = evolutionary_loop(
-    #     block_list=BLOCK_LIST,
-    #     req_set=REQ_SET,
-    #     population=population,
-    #     teachers=TEACHERS,
-    #     student_groups=STUDENT_GROUPS,
-    #     block_val=BLOCK_VAL,
-    #     availability=TEACHER_AVAILABILITY,
-    #     generations=generations,
-    #     alphas=np.array([1.0, 1.0, 1.0]),
-    # )
+    best_specimen = evolutionary_loop(
+        block_list=BLOCK_LIST,
+        req_set=REQ_SET,
+        population=population,
+        teachers=TEACHERS,
+        student_groups=STUDENT_GROUPS,
+        block_val=BLOCK_VAL,
+        availability=TEACHER_AVAILABILITY,
+        generations=generations,
+        alphas=np.array([1.0, 1.0, 1.0]),
+    )
 
-    plan, _ = solve_schedule(REQ_SET, BLOCK_LIST, best_specimen)
+    plan = solve_schedule(REQ_SET, BLOCK_LIST, best_specimen)
     
     return plan

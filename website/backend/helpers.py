@@ -174,7 +174,7 @@ def generate_blocks(
     combinatory_blocks = [
         block
         for block in subject_blocks
-        if block not in singular_blocks and block not in multi_blocks
+        if block.power_block
     ]
 
     multi_req_groups = []

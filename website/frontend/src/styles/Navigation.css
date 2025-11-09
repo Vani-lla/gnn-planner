@@ -1,0 +1,94 @@
+/* Navigation Container */
+.navigation-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: rgba(0, 0, 0, 0.3); /* Semi-transparent black background */
+    backdrop-filter: blur(10px); /* Blur effect for glassy look */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Application Title */
+.navigation-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fca311; /* Orange text */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Current Page Title */
+.navigation-current-page {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff; /* White text */
+    text-transform: capitalize;
+}
+
+/* Navigation Links */
+.navigation-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navigation-link {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff; /* White text */
+    text-decoration: none;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.navigation-link:hover {
+    color: #fca311; /* Orange text on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Dropdown Menu */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3); /* Semi-transparent black background */
+    backdrop-filter: blur(5px); /* Blur effect for glassy look */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    list-style: none;
+    padding: 0.5rem 0;
+    z-index: 1000;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block; /* Show dropdown on hover */
+}
+
+.dropdown-item {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    color: #ffffff; /* White text */
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dropdown-item:hover {
+    background-color: #fca311; /* Orange background on hover */
+    color: #000000; /* Black text on hover */
+}

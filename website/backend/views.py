@@ -49,6 +49,39 @@ def get_lessons_for_plan(request, plan_id):
         return JsonResponse({"error": str(e)}, status=500)
 
 
+@api_view(["GET"])
+def get_plan_details(request, plan_id):
+    """
+    Fetch details of a plan, including its RequirementSet, teachers, and student groups.
+    """
+    try:
+        plan = Plan.objects.get(id=plan_id)
+        req_set = plan.req_set
+
+        # Fetch teachers and student groups based on the RequirementSet pools
+        teachers = Teacher.objects.filter(pool=req_set.teacher_pool)
+        student_groups = StudentGroup.objects.filter(pool=req_set.group_pool)
+
+        data = {
+            "id": plan.id,
+            "name": plan.name,
+            "requirement_set": {
+                "id": req_set.id,
+                "name": req_set.name,
+                "teacher_pool": req_set.teacher_pool.id,
+                "group_pool": req_set.group_pool.id,
+            },
+            "teachers": [{"id": t.id, "name": t.name} for t in teachers],
+            "student_groups": [{"id": g.id, "name": g.name} for g in student_groups],
+        }
+
+        return JsonResponse(data, status=200)
+    except Plan.DoesNotExist:
+        return JsonResponse({"error": "Plan not found"}, status=404)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
+
 @api_view(["POST"])
 @parser_classes([MultiPartParser])
 def upload_requirements_csv(request):
@@ -146,13 +179,29 @@ def run_evolutionary_process_endpoint(request):
         name=f"Plan generated using {RequirementSet.objects.get(id=req_set_id).name} on {datetime.now().strftime("%d/%m,%Y, %H:%M")}",
         req_set=RequirementSet.objects.get(id=req_set_id),
     )
-    plan_object.save()
 
     room = Room.objects.first()
     lessons = []
 
-    for block, start, end, day in plan:
+    for block, start, end, day, room_ids in plan:
+        rooms = Room.objects.filter(id__in=room_ids)
+        rooms_for_teachers = {}
         for req in block:
+            if not req.teacher in rooms_for_teachers:
+                room = list(
+                    filter(lambda r: req.subject in r.compatible_subjects.all(), rooms)
+                )[0]
+                if not room:
+                    print(block)
+                    print(room_ids)
+                    print(rooms)
+                    raise ValueError(
+                        f"No compatible room found for subject {req.subject.name}"
+                    )
+                rooms = rooms.exclude(id=room.id)
+                rooms_for_teachers[req.teacher] = room
+            else:
+                room = rooms_for_teachers[req.teacher]
             for duration_offset in range(end - start):
                 lessons.append(
                     Lesson(
@@ -166,6 +215,7 @@ def run_evolutionary_process_endpoint(request):
                     )
                 )
 
+    plan_object.save()
     Lesson.objects.bulk_create(lessons)
 
     return JsonResponse(
@@ -300,33 +350,69 @@ class TeacherViewSet(ModelViewSet):
     queryset = Teacher.objects.all()
     serializer_class = TeacherSerializer
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        pool_id = self.request.query_params.get("pool_id")
+        if pool_id:
+            qs = qs.filter(pool__id=pool_id)
+        return qs
+
     def create(self, request, *args, **kwargs):
-        if isinstance(request.data, dict):
-            teachers = []
-            for teacher_data in request.data["teachers"]:
-                subject_names = teacher_data[1:]  # Extract subject names
-                subject_ids = []
+        """
+        Bulk create teachers.
+        Expected JSON:
+        {
+          "pool_id": <int>,
+          "teachers": [
+            { "name": "Alice", "subjects": [1,2,3] },
+            ...
+          ]
+        }
+        """
+        data = request.data
+        pool_id = data.get("pool_id")
+        teachers = data.get("teachers", [])
+        if not pool_id or not isinstance(teachers, list):
+            return Response({"error": "pool_id and teachers list required"}, status=400)
 
-                for subject_name in subject_names:
-                    subject, _ = Subject.objects.get_or_create(name=subject_name)
-                    subject_ids.append(subject.id)
+        payload = []
+        for t in teachers:
+            name = (t.get("name") or "").strip()
+            subjects = t.get("subjects") or []
+            if not name:
+                continue
+            payload.append(
+                {
+                    "name": name,
+                    "teached_subjects": subjects,  # IDs only
+                    "pool": [int(pool_id)],
+                }
+            )
 
-                teachers.append(
-                    {
-                        "name": teacher_data[0],
-                        "pool": [int(request.data["pool_id"])],
-                        "teached_subjects": subject_ids,
-                    }
-                )
+        serializer = self.get_serializer(data=payload, many=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return Response(serializer.data, status=201)
 
-            # Serialize and validate the data
-            serializer = self.get_serializer(data=teachers, many=True)
-            print(teachers)
-            serializer.is_valid(raise_exception=True)
-            self.perform_create(serializer)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return super().create(request, *args, **kwargs)
+    def update(self, request, *args, **kwargs):
+        """
+        Update single teacher.
+        Accepts: { "name": "...", "subjects": [ids], "pool": [pool_id] }
+        """
+        partial = kwargs.get("partial", False)
+        instance = self.get_object()
+        data = request.data.copy()
+        subs = data.get("subjects")
+        if subs is not None:
+            data["teached_subjects"] = subs
+        serializer = self.get_serializer(instance, data=data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
+
+    def partial_update(self, request, *args, **kwargs):
+        kwargs["partial"] = True
+        return self.update(request, *args, **kwargs)
 
 
 class SubjectPoolViewSet(ModelViewSet):
@@ -338,11 +424,28 @@ class SubjectViewSet(ModelViewSet):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
 
+    def get_queryset(self):
+        """
+        Override the default queryset to allow filtering by pool_id.
+        """
+        queryset = super().get_queryset()
+        pool_id = self.request.query_params.get("pool_id")
+        if pool_id:
+            queryset = queryset.filter(
+                pool__id=pool_id
+            )  # Filter subjects where the pool contains the given pool_id
+        return queryset
+
     def create(self, request, *args, **kwargs):
         if isinstance(request.data, dict):
+            names = set(
+                s.name
+                for s in Subject.objects.filter(pool=int(request.data["pool_id"]))
+            )
             subjects = [
                 {"name": name, "pool": [int(request.data["pool_id"])]}
                 for name in request.data["subjects"]
+                if name not in names
             ]
             serializer = self.get_serializer(data=subjects, many=True)
             serializer.is_valid(raise_exception=True)
@@ -361,22 +464,57 @@ class RoomViewSet(ModelViewSet):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        pool_id = self.request.query_params.get("pool_id")
+        if pool_id:
+            qs = qs.filter(pool__id=pool_id)
+        return qs
+
     def create(self, request, *args, **kwargs):
-        if isinstance(request.data, dict):
-            rooms = [
-                {
-                    "name": room_data[0],
-                    "pool": int(request.data["pool_id"]),
-                    "preferences": room_data[1:] if len(room_data) > 1 else None,
-                }
-                for room_data in request.data["rooms"]
-            ]
-            serializer = self.get_serializer(data=rooms, many=True)
-            serializer.is_valid(raise_exception=True)
-            self.perform_create(serializer)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return super().create(request, *args, **kwargs)
+        room_pool_id = request.data.get("room_pool_id")
+        subject_pool_id = request.data.get("subject_pool_id")
+        rooms_data = request.data.get("rooms")
+
+        if not room_pool_id or not subject_pool_id or not rooms_data:
+            return Response(
+                {"error": "room_pool_id, subject_pool_id, and rooms are required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        try:
+            room_pool = RoomPool.objects.get(id=room_pool_id)
+            subjects = Subject.objects.filter(pool=subject_pool_id)
+
+            created_rooms = []
+            for room_data in rooms_data:
+                room_name = room_data[0]
+                subject_names = room_data[1:]
+
+                # Match subjects by name
+                matched_subjects = subjects.filter(name__in=subject_names)
+
+                # Create or update the room
+                room, _ = Room.objects.update_or_create(
+                    name=room_name,
+                    pool=room_pool,
+                    defaults={"pool": room_pool},
+                )
+
+                # Add subjects to the room
+                room.compatible_subjects.set(matched_subjects)
+                created_rooms.append(room)
+
+            return Response(
+                RoomSerializer(created_rooms, many=True).data,
+                status=status.HTTP_201_CREATED,
+            )
+        except RoomPool.DoesNotExist:
+            return Response({"error": "RoomPool not found."}, status=404)
+        except SubjectPool.DoesNotExist:
+            return Response({"error": "SubjectPool not found."}, status=404)
+        except Exception as e:
+            return Response({"error": str(e)}, status=500)
 
 
 class StudentGroupPoolViewSet(ModelViewSet):
@@ -399,6 +537,13 @@ class StudentGroupPoolViewSet(ModelViewSet):
 class StudentGroupViewSet(ModelViewSet):
     queryset = StudentGroup.objects.all()
     serializer_class = StudentGroupSerializer
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        pool_id = self.request.query_params.get("pool_id")
+        if pool_id:
+            qs = qs.filter(pool__id=pool_id)
+        return qs
 
     def create(self, request, *args, **kwargs):
         if isinstance(request.data, dict):

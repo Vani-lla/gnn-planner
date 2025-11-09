@@ -27,7 +27,7 @@ class RoomPool(models.Model):
 class Room(models.Model):
     pool = models.ForeignKey(RoomPool, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
-    preferences = models.JSONField(blank=True, null=True)
+    compatible_subjects = models.ManyToManyField("Subject")
 
     def __str__(self):
         return self.name
@@ -60,6 +60,7 @@ class SubjectBlock(models.Model):
 
     def __str__(self):
         return f"{tuple(s.name for s in Subject.objects.filter(id__in=[k for k, v in self.numbers.items() if v]))} for {tuple(g.name for g in self.groups.all())}"
+
 
 class TeacherPool(models.Model):
     name = models.CharField(max_length=255)

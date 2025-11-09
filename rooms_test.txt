@@ -1,0 +1,120 @@
+110,J.Polski
+111,J.Polski
+112,J.Polski
+113,J.Polski
+114,J.Polski
+110,J.Angielski
+111,J.Angielski
+112,J.Angielski
+113,J.Angielski
+114,J.Angielski
+110,Historia
+111,Historia
+112,Historia
+113,Historia
+114,Historia
+110,WOS
+111,WOS
+112,WOS
+113,WOS
+114,WOS
+120,Etyka
+121,Etyka
+122,Etyka
+123,Etyka
+124,Etyka
+120,Filozofia
+121,Filozofia
+122,Filozofia
+123,Filozofia
+124,Filozofia
+120,Chemia
+121,Chemia
+122,Chemia
+123,Chemia
+124,Chemia
+120,Fizyka
+121,Fizyka
+122,Fizyka
+123,Fizyka
+124,Fizyka
+120,Informatyka
+121,Informatyka
+122,Informatyka
+123,Informatyka
+124,Informatyka
+120,Biznes i zarządzanie
+121,Biznes i zarządzanie
+122,Biznes i zarządzanie
+123,Biznes i zarządzanie
+124,Biznes i zarządzanie
+120,Religia
+121,Religia
+122,Religia
+123,Religia
+124,Religia
+120,J.Niemiecki
+121,J.Niemiecki
+122,J.Niemiecki
+123,J.Niemiecki
+124,J.Niemiecki
+120,J.Francuski
+121,J.Francuski
+122,J.Francuski
+123,J.Francuski
+124,J.Francuski
+120,J.Rosyjski z elem. Kult.
+121,J.Rosyjski z elem. Kult.
+122,J.Rosyjski z elem. Kult.
+123,J.Rosyjski z elem. Kult.
+124,J.Rosyjski z elem. Kult.
+130,J.Rosyjski
+131,J.Rosyjski
+132,J.Rosyjski
+133,J.Rosyjski
+134,J.Rosyjski
+130,Biologia
+131,Biologia
+132,Biologia
+133,Biologia
+134,Biologia
+130,Wych.Fiz.
+131,Wych.Fiz.
+132,Wych.Fiz.
+133,Wych.Fiz.
+134,Wych.Fiz.
+130,EdB
+131,EdB
+132,EdB
+133,EdB
+134,EdB
+130,Matematyka
+131,Matematyka
+132,Matematyka
+133,Matematyka
+134,Matematyka
+130,Geografia
+131,Geografia
+132,Geografia
+133,Geografia
+134,Geografia
+130,WDŻ
+131,WDŻ
+132,WDŻ
+133,WDŻ
+134,WDŻ
+130,Zajęcia kreatywne
+131,Zajęcia kreatywne
+132,Zajęcia kreatywne
+133,Zajęcia kreatywne
+134,Zajęcia kreatywne
+130,Civil Society
+131,Civil Society
+132,Civil Society
+133,Civil Society
+134,Civil Society
+130,Creative Writing
+131,Creative Writing
+132,Creative Writing
+133,Creative Writing
+134,Creative Writing

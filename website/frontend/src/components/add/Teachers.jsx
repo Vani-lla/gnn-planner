@@ -1,223 +1,401 @@
 import React, { useState, useEffect, useCallback } from "react";
+import styles from "../../styles/Teachers.module.css";
 
 export default function Teachers() {
-    const [lines, setLines] = useState([]);
+    const [rows, setRows] = useState([]); // unified existing + new
     const [isDragging, setIsDragging] = useState(false);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
     const [teacherPools, setTeacherPools] = useState([]);
     const [selectedPool, setSelectedPool] = useState("");
     const [newPoolName, setNewPoolName] = useState("");
+    const [subjectPools, setSubjectPools] = useState([]);
+    const [selectedSubjectPool, setSelectedSubjectPool] = useState("");
+    const [subjectsInPool, setSubjectsInPool] = useState([]);
 
-    // Fetch TeacherPools from the backend
     useEffect(() => {
-        const fetchTeacherPools = async () => {
+        (async () => {
             try {
-                const res = await fetch("/api/teacher-pools/");
-                const data = await res.json();
-                if (res.ok) {
-                    setTeacherPools(data);
-                } else {
-                    console.error("Failed to fetch teacher pools:", data.error);
-                }
-            } catch (error) {
-                console.error("Error fetching teacher pools:", error);
-            }
-        };
-
-        fetchTeacherPools();
+                const r = await fetch("/api/teacher-pools/");
+                const d = await r.json();
+                if (r.ok) setTeacherPools(d);
+            } catch { }
+        })();
     }, []);
 
-    const handleFile = (file) => {
-        if (file.type !== "text/plain") {
-            alert("Please upload a .txt file");
+    useEffect(() => {
+        (async () => {
+            try {
+                const r = await fetch("/api/subject-pools/");
+                const d = await r.json();
+                if (r.ok) setSubjectPools(d);
+            } catch { }
+        })();
+    }, []);
+
+    useEffect(() => {
+        const fetchSubjects = async () => {
+            if (!selectedSubjectPool) {
+                setSubjectsInPool([]);
+                setRows([]);
+                return;
+            }
+            try {
+                const r = await fetch(`/api/subjects/?pool_id=${selectedSubjectPool}`);
+                const d = await r.json();
+                setSubjectsInPool(r.ok ? d : []);
+            } catch {
+                setSubjectsInPool([]);
+            }
+        };
+        fetchSubjects();
+    }, [selectedSubjectPool]);
+
+    useEffect(() => {
+        if (!selectedPool || !selectedSubjectPool) {
+            setRows([]);
             return;
         }
+        const fetchTeachers = async () => {
+            try {
+                const r = await fetch(`/api/teachers/?pool_id=${selectedPool}`);
+                const d = await r.json();
+                if (r.ok) {
+                    const mapped = d.map(t => ({
+                        id: t.id,
+                        name: t.name,
+                        subjectIds: (t.teached_subjects || t.subjects || []).map(s =>
+                            typeof s === "number" ? s : s.id
+                        ),
+                    }));
+                    setRows(mapped);
+                } else {
+                    setRows([]);
+                }
+            } catch {
+                setRows([]);
+            }
+        };
+        fetchTeachers();
+    }, [selectedPool, selectedSubjectPool]);
 
+    const parseSelectedOptions = (e) =>
+        Array.from(e.target.selectedOptions)
+            .map(o => Number(o.value))
+            .filter(v => Number.isFinite(v));
+
+    const handleFile = (file) => {
+        if (!file || file.type !== "text/plain") {
+            alert("Upload a .txt file");
+            return;
+        }
+        if (!selectedSubjectPool) {
+            alert("Select a subject pool first");
+            return;
+        }
+        const byName = new Map(subjectsInPool.map(s => [s.name.trim().toLowerCase(), s.id]));
         const reader = new FileReader();
         reader.onload = (e) => {
-            const text = e.target.result;
-            const linesArray = text.split(/\r?\n/).filter((line) => line.trim() !== "");
-            const parsedLines = linesArray.map((line) => line.split(","));
-            setLines(parsedLines);
+            const lines = e.target.result
+                .split(/\r?\n/)
+                .map(l => l.trim())
+                .filter(Boolean);
+            const parsed = lines.map(line => {
+                const parts = line.split(",").map(p => p.trim()).filter(Boolean);
+                const name = parts[0] || "";
+                const subjectIds = parts.slice(1)
+                    .map(n => byName.get(n.toLowerCase()))
+                    .filter(id => typeof id === "number");
+                return { name, subjectIds };
+            });
+            setRows(prev => {
+                const existing = prev.filter(r => r.id);
+                return [...existing, ...parsed.filter(p => p.name)];
+            });
         };
         reader.readAsText(file);
     };
 
-    const handleDrop = useCallback((event) => {
-        event.preventDefault();
+    const handleDrop = useCallback((e) => {
+        e.preventDefault();
         setIsDragging(false);
-        const file = event.dataTransfer.files[0];
-        if (file) handleFile(file);
+        const f = e.dataTransfer.files[0];
+        if (f) handleFile(f);
     }, []);
 
-    const handleUpload = async () => {
-        if (!selectedPool) return alert("Please select a teacher pool!");
-        if (lines.length === 0) return alert("No lines to send!");
-
+    const handleAddPool = async () => {
+        if (!newPoolName.trim()) return;
         try {
             setLoading(true);
             setMessage("");
-
-            const csrftoken = document.cookie
-                .split("; ")
-                .find((row) => row.startsWith("csrftoken="))
-                ?.split("=")[1];
-
-            const res = await fetch("/api/teachers/", {
+            const csrftoken = document.cookie.split("; ").find(r => r.startsWith("csrftoken="))?.split("=")[1];
+            const r = await fetch("/api/teacher-pools/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "X-CSRFToken": csrftoken },
-                body: JSON.stringify({ teachers: lines, pool_id: selectedPool }),
+                body: JSON.stringify({ name: newPoolName }),
             });
-
-            const data = await res.json();
-
-            if (res.ok) {
-                setMessage(`✅ Uploaded ${data.length} teachers successfully!`);
-                setLines([]); // Clear the lines after successful upload
-            } else {
-                setMessage(`❌ Error: ${data.error || "Unknown error"}`);
-            }
-        } catch (error) {
-            console.error(error);
+            const d = await r.json();
+            if (r.ok) {
+                setTeacherPools(p => [...p, d]);
+                setNewPoolName("");
+                setMessage("✅ Pool created");
+            } else setMessage("❌ Failed to create pool");
+        } catch {
             setMessage("❌ Network error");
         } finally {
             setLoading(false);
         }
     };
 
-    const handleAddPool = async () => {
-        if (!newPoolName.trim()) return alert("Please enter a name for the new teacher pool!");
+    const handleAddRow = () => {
+        setRows(prev => [...prev, { name: "", subjectIds: [] }]);
+    };
+
+    const handleDeleteRow = async (index) => {
+        const row = rows[index];
+        // If it's a persisted teacher -> DELETE from backend
+        if (row?.id) {
+            try {
+                setLoading(true);
+                setMessage("");
+                const csrftoken = document.cookie
+                    .split("; ")
+                    .find((r) => r.startsWith("csrftoken="))
+                    ?.split("=")[1];
+
+                const res = await fetch(`/api/teachers/${row.id}/`, {
+                    method: "DELETE",
+                    headers: { "X-CSRFToken": csrftoken },
+                });
+
+                if (!res.ok) {
+                    const err = await res.json().catch(() => ({}));
+                    throw new Error(err.error || "Failed to delete teacher");
+                }
+
+                setRows((prev) => prev.filter((_, i) => i !== index));
+                setMessage("✅ Deleted teacher");
+            } catch (e) {
+                setMessage("❌ " + e.message);
+            } finally {
+                setLoading(false);
+            }
+        } else {
+            // Local-only row
+            setRows((prev) => prev.filter((_, i) => i !== index));
+        }
+    };
+
+    const handleSaveAll = async () => {
+        if (!selectedPool || !selectedSubjectPool) {
+            alert("Select pools first");
+            return;
+        }
+        const cleaned = rows.filter(r => r.name.trim() !== "");
+        if (cleaned.length === 0) {
+            alert("No data to save");
+            return;
+        }
+        const newOnes = cleaned.filter(r => !r.id);
+        const existing = cleaned.filter(r => r.id);
+
+        setLoading(true);
+        setMessage("");
+        const csrftoken = document.cookie.split("; ").find(r => r.startsWith("csrftoken="))?.split("=")[1];
 
         try {
-            setLoading(true);
-            setMessage("");
-
-            const csrftoken = document.cookie
-                .split("; ")
-                .find((row) => row.startsWith("csrftoken="))
-                ?.split("=")[1];
-
-            const res = await fetch("/api/teacher-pools/", {
-                method: "POST",
-                headers: { "Content-Type": "application/json", "X-CSRFToken": csrftoken },
-                body: JSON.stringify({ name: newPoolName }),
-            });
-
-            const data = await res.json();
-
-            if (res.ok) {
-                setMessage(`✅ Created new teacher pool: ${data.name}`);
-                setTeacherPools((prev) => [...prev, data]); // Add the new pool to the list
-                setNewPoolName(""); // Clear the input field
-            } else {
-                setMessage(`❌ Error: ${data.error || "Unknown error"}`);
+            // Create new teachers (bulk)
+            if (newOnes.length) {
+                const createPayload = {
+                    teachers: newOnes.map(t => ({
+                        name: t.name,
+                        subjects: t.subjectIds,
+                    })),
+                    pool_id: selectedPool,
+                };
+                const cr = await fetch("/api/teachers/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "X-CSRFToken": csrftoken },
+                    body: JSON.stringify(createPayload),
+                });
+                if (!cr.ok) {
+                    const err = await cr.json().catch(() => ({}));
+                    throw new Error("Create failed: " + (err.error || cr.status));
+                }
             }
-        } catch (error) {
-            console.error(error);
-            setMessage("❌ Network error");
+
+            // Update existing
+            for (const t of existing) {
+                const ur = await fetch(`/api/teachers/${t.id}/`, {
+                    method: "PATCH",
+                    headers: { "Content-Type": "application/json", "X-CSRFToken": csrftoken },
+                    body: JSON.stringify({
+                        name: t.name,
+                        subjects: t.subjectIds,
+                        pool: [Number(selectedPool)],
+                    }),
+                });
+                if (!ur.ok) {
+                    const err = await ur.json().catch(() => ({}));
+                    throw new Error(`Update failed (${t.name}): ${err.error || ur.status}`);
+                }
+            }
+
+            // Refresh
+            const ref = await fetch(`/api/teachers/?pool_id=${selectedPool}`);
+            if (ref.ok) {
+                const d = await ref.json();
+                const mapped = d.map(t => ({
+                    id: t.id,
+                    name: t.name,
+                    subjectIds: (t.teached_subjects || t.subjects || []).map(s =>
+                        typeof s === "number" ? s : s.id
+                    ),
+                }));
+                setRows(mapped);
+            }
+            setMessage("✅ Saved");
+        } catch (e) {
+            setMessage("❌ " + e.message);
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="flex flex-col items-center gap-6 p-6">
-            {/* Teacher Pool Selection */}
-            <div className="w-full max-w-xl">
-                <label htmlFor="teacher-pool" className="block text-gray-700 font-medium mb-2">
-                    Select a Teacher Pool:
-                </label>
+        <div className={styles.teachersView}>
+            <div className={styles.teachersSelectors}>
                 <select
-                    id="teacher-pool"
+                    className={styles.teachersSelect}
                     value={selectedPool}
                     onChange={(e) => setSelectedPool(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg p-2"
                 >
-                    <option value="">-- Select a Pool --</option>
-                    {teacherPools.map((pool) => (
-                        <option key={pool.id} value={pool.id}>
-                            {pool.name}
-                        </option>
-                    ))}
+                    <option value="">-- Select Teacher Pool --</option>
+                    {teacherPools.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
                 </select>
-            </div>
-
-            {/* Add New Teacher Pool */}
-            <div className="w-full max-w-xl">
-                <label htmlFor="new-pool" className="block text-gray-700 font-medium mb-2">
-                    Add a New Teacher Pool:
-                </label>
-                <div className="flex gap-2">
+                <select
+                    className={styles.teachersSelect}
+                    value={selectedSubjectPool}
+                    onChange={(e) => setSelectedSubjectPool(e.target.value)}
+                >
+                    <option value="">-- Select Subject Pool --</option>
+                    {subjectPools.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+                </select>
+                <div className={styles.inlineFlex}>
                     <input
-                        id="new-pool"
                         type="text"
                         value={newPoolName}
                         onChange={(e) => setNewPoolName(e.target.value)}
-                        placeholder="Enter pool name"
-                        className="flex-1 border border-gray-300 rounded-lg p-2"
+                        placeholder="New teacher pool name"
+                        className={styles.teachersSelect}
                     />
                     <button
                         onClick={handleAddPool}
                         disabled={loading}
-                        className="px-4 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700"
+                        className={styles.button}
                     >
-                        Add Pool
+                        {loading ? "Creating..." : "Add Pool"}
                     </button>
                 </div>
             </div>
 
-            {/* Drop Zone */}
             <div
                 onDrop={handleDrop}
-                onDragOver={(e) => {
-                    e.preventDefault();
-                    setIsDragging(true);
-                }}
+                onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
                 onDragLeave={() => setIsDragging(false)}
-                className={`w-full max-w-xl h-40 flex items-center justify-center border-4 border-dashed rounded-2xl transition-all ${isDragging ? "border-blue-500 bg-blue-50" : "border-gray-300"
-                    }`}
+                className={`${styles.dropZone} ${isDragging ? styles.dragging : ""}`}
             >
-                <p className="text-gray-600 text-center">
-                    {isDragging ? "Drop your .txt file here" : "Drag & drop a .txt file here"}
-                </p>
+                <p>{isDragging ? "Drop .txt file here" : "Upload / Drag .txt (Teacher,Subject,...)"}</p>
                 <input
                     type="file"
                     accept=".txt"
                     onChange={(e) => handleFile(e.target.files[0])}
-                    className="absolute opacity-0 w-full h-full cursor-pointer"
+                    className={styles.hiddenFileInput}
+                    disabled={!selectedSubjectPool}
                 />
             </div>
 
-            {/* Grid Display */}
-            {lines.length > 0 && (
-                <div className="w-full max-w-xl border border-gray-300 rounded-xl shadow-sm overflow-hidden">
-                    <div className="grid grid-cols-1 divide-y divide-gray-200">
-                        {lines.map((line, index) => (
-                            <div
-                                key={index}
-                                className="p-3 hover:bg-gray-50 text-gray-800 font-mono text-sm"
-                            >
-                                {line.join(", ")}
-                            </div>
-                        ))}
-                    </div>
+            <div className={styles.teachersGrid}>
+                <div className={styles.teachersGridHeader}>
+                    <div className={styles.teachersGridCell}>Teacher Name</div>
+                    <div className={styles.teachersGridCell}>Subjects (multi-select)</div>
+                    <div className={styles.teachersGridCell}>Actions</div>
                 </div>
-            )}
+                <div className={styles.teachersGridBody}>
+                    {rows.length === 0 && (
+                        <div className={styles.teachersGridRow}>
+                            <div className={styles.teachersGridCell} style={{ opacity: 0.6 }}>
+                                No rows. Add or upload.
+                            </div>
+                            <div className={styles.teachersGridCell} />
+                            <div className={styles.teachersGridCell} />
+                        </div>
+                    )}
+                    {rows.map((r, i) => (
+                        <div className={styles.teachersGridRow} key={r.id ? `e-${r.id}` : `n-${i}`}>
+                            <div className={styles.teachersGridCell}>
+                                <input
+                                    type="text"
+                                    value={r.name}
+                                    onChange={(e) => {
+                                        const next = [...rows];
+                                        next[i] = { ...next[i], name: e.target.value };
+                                        setRows(next);
+                                    }}
+                                    className={styles.teachersSelect}
+                                    placeholder="Teacher name"
+                                />
+                            </div>
+                            <div className={styles.teachersGridCell}>
+                                <select
+                                    className={styles.teachersSelect}
+                                    multiple
+                                    value={r.subjectIds}
+                                    disabled={!selectedSubjectPool}
+                                    onChange={(e) => {
+                                        const next = [...rows];
+                                        next[i] = { ...next[i], subjectIds: parseSelectedOptions(e) };
+                                        setRows(next);
+                                    }}
+                                >
+                                    {subjectsInPool.map(s => (
+                                        <option key={s.id} value={s.id}>{s.name}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className={styles.teachersGridCell}>
+                                <button
+                                    onClick={() => handleDeleteRow(i)}
+                                    className={styles.deleteButton}
+                                    title="Delete Teacher"
+                                >
+                                    ✖
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <div className={styles.actionRow}>
+                    <button
+                        type="button"
+                        onClick={handleAddRow}
+                        className={styles.button}
+                        disabled={!selectedSubjectPool}
+                    >
+                        + Add Row
+                    </button>
+                    <button
+                        type="button"
+                        onClick={handleSaveAll}
+                        className={styles.button}
+                        disabled={loading || !selectedPool || !selectedSubjectPool || rows.length === 0}
+                    >
+                        {loading ? "Saving..." : "Save All"}
+                    </button>
+                </div>
+            </div>
 
-            {/* Upload Button */}
-            {lines.length > 0 && (
-                <button
-                    onClick={handleUpload}
-                    disabled={loading}
-                    className={`px-6 py-2 rounded-lg text-white font-semibold ${loading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
-                        }`}
-                >
-                    {loading ? "Uploading..." : "Send to Backend"}
-                </button>
-            )}
-
-            {message && <p className="text-center text-gray-700">{message}</p>}
+            {message && <p className={styles.message}>{message}</p>}
         </div>
     );
 }

@@ -1,0 +1,50 @@
+/* Welcome Page Styles */
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.welcome-title {
+    font-size: 2.5rem;
+    color: #ffffff; /* White text */
+    margin-bottom: 1rem;
+}
+
+.welcome-subtitle {
+    font-size: 1.2rem;
+    color: #fca311; /* Orange text */
+    margin-bottom: 2rem;
+}
+
+.welcome-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff; /* White text */
+    background: rgba(0, 0, 0, 0.3); /* Semi-transparent background */
+    backdrop-filter: blur(2px);
+    border: 2px solid rgba(252, 163, 17, 0.5); /* Semi-transparent orange border */
+    border-radius: 10px; /* Slightly rounded corners for a modern look */
+    transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+    width: 200px; /* Fixed width for uniform button size */
+    text-align: center; /* Center text inside the button */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.welcome-button:hover {
+    background-color: #fca311; /* Orange background on hover */
+    color: #000000; /* Black text on hover */
+    transform: scale(1.02); /* Slightly increase size */
+    box-shadow: 0 0 5px #fca311; /* Add glowing effect */
+}

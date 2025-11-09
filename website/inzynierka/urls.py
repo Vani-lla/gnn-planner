@@ -7,5 +7,5 @@ from .views import *
 urlpatterns = [
     path("admin", admin.site.urls),
     path("api/", include("backend.urls")),
-    re_path(r'^add/.*$', TemplateView.as_view(template_name='index.html')),
+    re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
 ]

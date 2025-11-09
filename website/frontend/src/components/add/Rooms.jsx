@@ -1,223 +1,398 @@
 import React, { useState, useEffect, useCallback } from "react";
+import styles from "../../styles/Rooms.module.css";
 
 export default function Rooms() {
-    const [lines, setLines] = useState([]);
+    const [rows, setRows] = useState([]);            // unified existing + new rooms
     const [isDragging, setIsDragging] = useState(false);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
+
     const [roomPools, setRoomPools] = useState([]);
-    const [selectedPool, setSelectedPool] = useState("");
+    const [selectedRoomPool, setSelectedRoomPool] = useState("");
     const [newPoolName, setNewPoolName] = useState("");
 
-    // Fetch RoomPools from the backend
-    useEffect(() => {
-        const fetchRoomPools = async () => {
-            try {
-                const res = await fetch("/api/room-pools/");
-                const data = await res.json();
-                if (res.ok) {
-                    setRoomPools(data);
-                } else {
-                    console.error("Failed to fetch room pools:", data.error);
-                }
-            } catch (error) {
-                console.error("Error fetching room pools:", error);
-            }
-        };
+    const [subjectPools, setSubjectPools] = useState([]);
+    const [selectedSubjectPool, setSelectedSubjectPool] = useState("");
+    const [subjectsInPool, setSubjectsInPool] = useState([]);
 
-        fetchRoomPools();
+    // Fetch pools
+    useEffect(() => {
+        (async () => {
+            try {
+                const [roomPoolsRes, subjectPoolsRes] = await Promise.all([
+                    fetch("/api/room-pools/"),
+                    fetch("/api/subject-pools/"),
+                ]);
+                const rp = await roomPoolsRes.json();
+                const sp = await subjectPoolsRes.json();
+                if (roomPoolsRes.ok) setRoomPools(rp);
+                if (subjectPoolsRes.ok) setSubjectPools(sp);
+            } catch {}
+        })();
     }, []);
 
+    // Fetch subjects for selected subject pool
+    useEffect(() => {
+        const fetchSubjects = async () => {
+            if (!selectedSubjectPool) {
+                setSubjectsInPool([]);
+                setRows([]);
+                return;
+            }
+            try {
+                const r = await fetch(`/api/subjects/?pool_id=${selectedSubjectPool}`);
+                const d = await r.json();
+                setSubjectsInPool(r.ok ? d : []);
+            } catch {
+                setSubjectsInPool([]);
+            }
+        };
+        fetchSubjects();
+    }, [selectedSubjectPool]);
+
+    // Fetch existing rooms when both pools selected
+    useEffect(() => {
+        const fetchRooms = async () => {
+            if (!selectedRoomPool || !selectedSubjectPool) {
+                setRows([]);
+                return;
+            }
+            try {
+                const r = await fetch(`/api/rooms/?pool_id=${selectedRoomPool}`);
+                const d = await r.json();
+                if (!r.ok) {
+                    setRows([]);
+                    return;
+                }
+                // Map rooms to rows: assume compatible_subjects is array of {id,name} or ids
+                const mapped = d.map(room => ({
+                    id: room.id,
+                    name: room.name,
+                    subjectIds: (room.compatible_subjects || []).map(s =>
+                        typeof s === "number" ? s : s.id
+                    ),
+                }));
+                setRows(mapped);
+            } catch {
+                setRows([]);
+            }
+        };
+        fetchRooms();
+    }, [selectedRoomPool, selectedSubjectPool]);
+
+    const parseSelectedOptions = (e) =>
+        Array.from(e.target.selectedOptions)
+            .map(o => Number(o.value))
+            .filter(v => Number.isFinite(v));
+
+    // Drag & drop file: RoomName,SubjectA,SubjectB,...
     const handleFile = (file) => {
-        if (file.type !== "text/plain") {
-            alert("Please upload a .txt file");
+        if (!file || file.type !== "text/plain") {
+            alert("Upload a .txt file");
             return;
         }
-
+        if (!selectedSubjectPool) {
+            alert("Select a subject pool first");
+            return;
+        }
+        const byName = new Map(subjectsInPool.map(s => [s.name.trim().toLowerCase(), s]));
         const reader = new FileReader();
         reader.onload = (e) => {
-            const text = e.target.result;
-            const linesArray = text.split(/\r?\n/).filter((line) => line.trim() !== "");
-            const parsedLines = linesArray.map((line) => line.split(","));
-            setLines(parsedLines);
+            const lines = e.target.result
+                .split(/\r?\n/)
+                .map(l => l.trim())
+                .filter(Boolean);
+            const parsed = lines.map(line => {
+                const parts = line.split(",").map(p => p.trim()).filter(Boolean);
+                const name = parts[0] || "";
+                const subjectIds = parts.slice(1)
+                    .map(n => byName.get(n.toLowerCase()))
+                    .filter(Boolean)
+                    .map(s => s.id);
+                return { name, subjectIds };
+            }).filter(p => p.name);
+            setRows(prev => {
+                const existing = prev.filter(r => r.id);
+                return [...existing, ...parsed];
+            });
         };
         reader.readAsText(file);
     };
 
-    const handleDrop = useCallback((event) => {
-        event.preventDefault();
+    const handleDrop = useCallback((e) => {
+        e.preventDefault();
         setIsDragging(false);
-        const file = event.dataTransfer.files[0];
-        if (file) handleFile(file);
+        const f = e.dataTransfer.files[0];
+        if (f) handleFile(f);
     }, []);
 
-    const handleUpload = async () => {
-        if (!selectedPool) return alert("Please select a room pool!");
-        if (lines.length === 0) return alert("No lines to send!");
-
+    const handleAddPool = async () => {
+        if (!newPoolName.trim()) return;
         try {
             setLoading(true);
             setMessage("");
-
-            const csrftoken = document.cookie
-                .split("; ")
-                .find((row) => row.startsWith("csrftoken="))
-                ?.split("=")[1];
-
-            const res = await fetch("/api/rooms/", {
+            const csrftoken = document.cookie.split("; ").find(r => r.startsWith("csrftoken="))?.split("=")[1];
+            const r = await fetch("/api/room-pools/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "X-CSRFToken": csrftoken },
-                body: JSON.stringify({ rooms: lines, pool_id: selectedPool }),
+                body: JSON.stringify({ name: newPoolName }),
             });
-
-            const data = await res.json();
-
-            if (res.ok) {
-                setMessage(`✅ Uploaded ${data.length} rooms successfully!`);
-                setLines([]); // Clear the lines after successful upload
-            } else {
-                setMessage(`❌ Error: ${data.error || "Unknown error"}`);
-            }
-        } catch (error) {
-            console.error(error);
+            const d = await r.json();
+            if (r.ok) {
+                setRoomPools(p => [...p, d]);
+                setNewPoolName("");
+                setMessage("✅ Room pool created");
+            } else setMessage("❌ Failed to create room pool");
+        } catch {
             setMessage("❌ Network error");
         } finally {
             setLoading(false);
         }
     };
 
-    const handleAddPool = async () => {
-        if (!newPoolName.trim()) return alert("Please enter a name for the new room pool!");
+    const handleAddRow = () => {
+        setRows(prev => [...prev, { name: "", subjectIds: [] }]);
+    };
+
+    const handleDeleteRow = async (index) => {
+        const row = rows[index];
+        if (row?.id) {
+            try {
+                setLoading(true);
+                setMessage("");
+                const csrftoken = document.cookie.split("; ").find(r => r.startsWith("csrftoken="))?.split("=")[1];
+                const res = await fetch(`/api/rooms/${row.id}/`, {
+                    method: "DELETE",
+                    headers: { "X-CSRFToken": csrftoken },
+                });
+                if (!res.ok) {
+                    const err = await res.json().catch(() => ({}));
+                    throw new Error(err.error || "Failed to delete room");
+                }
+                setRows(prev => prev.filter((_, i) => i !== index));
+                setMessage("✅ Deleted room");
+            } catch (e) {
+                setMessage("❌ " + e.message);
+            } finally {
+                setLoading(false);
+            }
+        } else {
+            setRows(prev => prev.filter((_, i) => i !== index));
+        }
+    };
+
+    const handleSaveAll = async () => {
+        if (!selectedRoomPool || !selectedSubjectPool) {
+            alert("Select both pools first");
+            return;
+        }
+        const cleaned = rows.filter(r => r.name.trim() !== "");
+        if (cleaned.length === 0) {
+            alert("No data to save");
+            return;
+        }
+        const newOnes = cleaned.filter(r => !r.id);
+        const existing = cleaned.filter(r => r.id);
+
+        setLoading(true);
+        setMessage("");
+        const csrftoken = document.cookie.split("; ").find(r => r.startsWith("csrftoken="))?.split("=")[1];
 
         try {
-            setLoading(true);
-            setMessage("");
-
-            const csrftoken = document.cookie
-                .split("; ")
-                .find((row) => row.startsWith("csrftoken="))
-                ?.split("=")[1];
-
-            const res = await fetch("/api/room-pools/", {
-                method: "POST",
-                headers: { "Content-Type": "application/json", "X-CSRFToken": csrftoken },
-                body: JSON.stringify({ name: newPoolName }),
-            });
-
-            const data = await res.json();
-
-            if (res.ok) {
-                setMessage(`✅ Created new room pool: ${data.name}`);
-                setRoomPools((prev) => [...prev, data]); // Add the new pool to the list
-                setNewPoolName(""); // Clear the input field
-            } else {
-                setMessage(`❌ Error: ${data.error || "Unknown error"}`);
+            // Create new rooms via bulk create endpoint (requires names not IDs)
+            if (newOnes.length) {
+                const idToName = new Map(subjectsInPool.map(s => [s.id, s.name]));
+                const roomsPayload = newOnes.map(r => [
+                    r.name,
+                    ...r.subjectIds.map(id => idToName.get(id)).filter(Boolean),
+                ]);
+                const cr = await fetch("/api/rooms/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "X-CSRFToken": csrftoken },
+                    body: JSON.stringify({
+                        rooms: roomsPayload,
+                        room_pool_id: selectedRoomPool,
+                        subject_pool_id: selectedSubjectPool,
+                    }),
+                });
+                if (!cr.ok) {
+                    const err = await cr.json().catch(() => ({}));
+                    throw new Error("Create failed: " + (err.error || cr.status));
+                }
             }
-        } catch (error) {
-            console.error(error);
-            setMessage("❌ Network error");
+
+            // Update existing rooms (PATCH each)
+            for (const r of existing) {
+                const ur = await fetch(`/api/rooms/${r.id}/`, {
+                    method: "PATCH",
+                    headers: { "Content-Type": "application/json", "X-CSRFToken": csrftoken },
+                    body: JSON.stringify({
+                        name: r.name,
+                        compatible_subjects: r.subjectIds, // expecting serializer to accept IDs
+                        pool: Number(selectedRoomPool),
+                    }),
+                });
+                if (!ur.ok) {
+                    const err = await ur.json().catch(() => ({}));
+                    throw new Error(`Update failed (${r.name}): ${err.error || ur.status}`);
+                }
+            }
+
+            // Refresh rooms
+            const ref = await fetch(`/api/rooms/?pool_id=${selectedRoomPool}`);
+            if (ref.ok) {
+                const d = await ref.json();
+                const mapped = d.map(room => ({
+                    id: room.id,
+                    name: room.name,
+                    subjectIds: (room.compatible_subjects || []).map(s =>
+                        typeof s === "number" ? s : s.id
+                    ),
+                }));
+                setRows(mapped);
+            }
+            setMessage("✅ Saved");
+        } catch (e) {
+            setMessage("❌ " + e.message);
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="flex flex-col items-center gap-6 p-6">
-            {/* Room Pool Selection */}
-            <div className="w-full max-w-xl">
-                <label htmlFor="room-pool" className="block text-gray-700 font-medium mb-2">
-                    Select a Room Pool:
-                </label>
+        <div className={styles.roomsView}>
+            <div className={styles.roomsSelectors}>
                 <select
-                    id="room-pool"
-                    value={selectedPool}
-                    onChange={(e) => setSelectedPool(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg p-2"
+                    className={styles.roomsSelect}
+                    value={selectedRoomPool}
+                    onChange={(e) => setSelectedRoomPool(e.target.value)}
                 >
-                    <option value="">-- Select a Pool --</option>
-                    {roomPools.map((pool) => (
-                        <option key={pool.id} value={pool.id}>
-                            {pool.name}
-                        </option>
-                    ))}
+                    <option value="">-- Select Room Pool --</option>
+                    {roomPools.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
                 </select>
-            </div>
-
-            {/* Add New Room Pool */}
-            <div className="w-full max-w-xl">
-                <label htmlFor="new-pool" className="block text-gray-700 font-medium mb-2">
-                    Add a New Room Pool:
-                </label>
-                <div className="flex gap-2">
+                <select
+                    className={styles.roomsSelect}
+                    value={selectedSubjectPool}
+                    onChange={(e) => setSelectedSubjectPool(e.target.value)}
+                >
+                    <option value="">-- Select Subject Pool --</option>
+                    {subjectPools.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+                </select>
+                <div className={styles.inlineFlex}>
                     <input
-                        id="new-pool"
                         type="text"
                         value={newPoolName}
                         onChange={(e) => setNewPoolName(e.target.value)}
-                        placeholder="Enter pool name"
-                        className="flex-1 border border-gray-300 rounded-lg p-2"
+                        placeholder="New room pool name"
+                        className={styles.roomsSelect}
                     />
                     <button
                         onClick={handleAddPool}
                         disabled={loading}
-                        className="px-4 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700"
+                        className={styles.button}
                     >
-                        Add Pool
+                        {loading ? "Creating..." : "Add Pool"}
                     </button>
                 </div>
             </div>
 
-            {/* Drop Zone */}
             <div
                 onDrop={handleDrop}
-                onDragOver={(e) => {
-                    e.preventDefault();
-                    setIsDragging(true);
-                }}
+                onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
                 onDragLeave={() => setIsDragging(false)}
-                className={`w-full max-w-xl h-40 flex items-center justify-center border-4 border-dashed rounded-2xl transition-all ${isDragging ? "border-blue-500 bg-blue-50" : "border-gray-300"
-                    }`}
+                className={`${styles.dropZone} ${isDragging ? styles.dragging : ""}`}
             >
-                <p className="text-gray-600 text-center">
-                    {isDragging ? "Drop your .txt file here" : "Drag & drop a .txt file here"}
-                </p>
+                <p>{isDragging ? "Drop .txt file here" : "Upload / Drag .txt (Room,Subject,...)"}</p>
                 <input
                     type="file"
                     accept=".txt"
                     onChange={(e) => handleFile(e.target.files[0])}
-                    className="absolute opacity-0 w-full h-full cursor-pointer"
+                    className={styles.hiddenFileInput}
+                    disabled={!selectedSubjectPool}
                 />
             </div>
 
-            {/* Grid Display */}
-            {lines.length > 0 && (
-                <div className="w-full max-w-xl border border-gray-300 rounded-xl shadow-sm overflow-hidden">
-                    <div className="grid grid-cols-1 divide-y divide-gray-200">
-                        {lines.map((line, index) => (
-                            <div
-                                key={index}
-                                className="p-3 hover:bg-gray-50 text-gray-800 font-mono text-sm"
-                            >
-                                {line.join(", ")}
-                            </div>
-                        ))}
-                    </div>
+            <div className={styles.roomsGrid}>
+                <div className={styles.roomsGridHeader}>
+                    <div className={styles.roomsGridCell}>Room Name</div>
+                    <div className={styles.roomsGridCell}>Compatible Subjects (multi-select)</div>
+                    <div className={styles.roomsGridCell}>Actions</div>
                 </div>
-            )}
+                <div className={styles.roomsGridBody}>
+                    {rows.length === 0 && (
+                        <div className={styles.roomsGridRow}>
+                            <div className={styles.roomsGridCell} style={{ opacity: 0.6 }}>
+                                No rows. Add or upload.
+                            </div>
+                            <div className={styles.roomsGridCell} />
+                            <div className={styles.roomsGridCell} />
+                        </div>
+                    )}
+                    {rows.map((r, i) => (
+                        <div className={styles.roomsGridRow} key={r.id ? `e-${r.id}` : `n-${i}`}>
+                            <div className={styles.roomsGridCell}>
+                                <input
+                                    type="text"
+                                    value={r.name}
+                                    onChange={(e) => {
+                                        const next = [...rows];
+                                        next[i] = { ...next[i], name: e.target.value };
+                                        setRows(next);
+                                    }}
+                                    className={styles.roomsSelect}
+                                    placeholder="Room name"
+                                />
+                            </div>
+                            <div className={styles.roomsGridCell}>
+                                <select
+                                    className={styles.roomsSelect}
+                                    multiple
+                                    value={r.subjectIds}
+                                    disabled={!selectedSubjectPool}
+                                    onChange={(e) => {
+                                        const next = [...rows];
+                                        next[i] = { ...next[i], subjectIds: parseSelectedOptions(e) };
+                                        setRows(next);
+                                    }}
+                                >
+                                    {subjectsInPool.map(s => (
+                                        <option key={s.id} value={s.id}>{s.name}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className={styles.roomsGridCell}>
+                                <button
+                                    onClick={() => handleDeleteRow(i)}
+                                    className={styles.deleteButton}
+                                    title="Delete Room"
+                                >
+                                    ✖
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <div className={styles.actionRow}>
+                    <button
+                        type="button"
+                        onClick={handleAddRow}
+                        className={styles.button}
+                        disabled={!selectedSubjectPool}
+                    >
+                        + Add Row
+                    </button>
+                    <button
+                        type="button"
+                        onClick={handleSaveAll}
+                        className={styles.button}
+                        disabled={loading || !selectedRoomPool || !selectedSubjectPool || rows.length === 0}
+                    >
+                        {loading ? "Saving..." : "Save All"}
+                    </button>
+                </div>
+            </div>
 
-            {/* Upload Button */}
-            {lines.length > 0 && (
-                <button
-                    onClick={handleUpload}
-                    disabled={loading}
-                    className={`px-6 py-2 rounded-lg text-white font-semibold ${loading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
-                        }`}
-                >
-                    {loading ? "Uploading..." : "Send to Backend"}
-                </button>
-            )}
-
-            {message && <p className="text-center text-gray-700">{message}</p>}
+            {message && <p className={styles.message}>{message}</p>}
         </div>
     );
 }

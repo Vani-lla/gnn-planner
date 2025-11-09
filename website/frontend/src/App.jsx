@@ -8,10 +8,11 @@ import StudentGroups from './components/add/StudentGroups';
 import Requirements from './components/add/Requirements';
 import UploadRequirements from './components/add/UploadRequirements';
 import RunEvolutionaryProcess from './components/add/RunEvolutionaryProcess';
-import PlanLessons from './components/PlanLessons';
+import LessonView from './components/LessonView';
 import TeacherAvailability from './components/add/TeacherAvailability';
 import SubjectBlockPage from './components/add/SubjectBlockPage';
-import { Background } from './components/Background';
+import WelcomePage from './pages/WelcomePage';
+import Navigation from './components/Navigation';
 
 function App() {
 
@@ -19,17 +20,27 @@ function App() {
         <BrowserRouter>
             <div className='global-bg-pattern' />
             <Routes>
-                <Route path="/add/teachers" element={<Teachers />} />
-                <Route path="/add/availability" element={<TeacherAvailability />} />
-                <Route path="/add/rooms" element={<Rooms />} />
-                <Route path="/add/subjects" element={<Subjects />} />
-                <Route path="/add/classes" element={<StudentGroups />} />
-                <Route path="/add/blocks" element={<SubjectBlockPage />} />
-                <Route path="/add/requirements" element={<Requirements />} />
-                <Route path="/add/upload-requirements" element={<UploadRequirements />} />
-                <Route path="/add/generation" element={<RunEvolutionaryProcess />} />
-                <Route path="/add/plan" element={<PlanLessons />} />
-                <Route path="/" element={<h1>xD</h1>} />
+                <Route path="/" element={<WelcomePage />} />
+                <Route
+                    path="*"
+                    element={
+                        <>
+                            <Navigation />
+                            <Routes>
+                                <Route path="/plan" element={<LessonView />} />
+                                <Route path="/add/teachers" element={<Teachers />} />
+                                <Route path="/add/availability" element={<TeacherAvailability />} />
+                                <Route path="/add/rooms" element={<Rooms />} />
+                                <Route path="/add/subjects" element={<Subjects />} />
+                                <Route path="/add/classes" element={<StudentGroups />} />
+                                <Route path="/add/blocks" element={<SubjectBlockPage />} />
+                                <Route path="/add/requirements" element={<Requirements />} />
+                                <Route path="/add/upload-requirements" element={<UploadRequirements />} />
+                                <Route path="/add/generation" element={<RunEvolutionaryProcess />} />
+                            </Routes>
+                        </>
+                    }
+                />
             </Routes>
         </BrowserRouter>
     )
