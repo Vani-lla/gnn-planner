@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import styles from "../../styles/SubjectBlocks.module.css";
 
-export default function SubjectBlockPage() {
+export default function SubjectBlocks() {
     const [reqSets, setReqSets] = useState([]);
     const [selectedReqSet, setSelectedReqSet] = useState("");
     const [subjectPoolName, setSubjectPoolName] = useState("-");
@@ -21,7 +21,7 @@ export default function SubjectBlockPage() {
             try {
                 const res = await fetch("/api/requirement-sets/");
                 if (res.ok) setReqSets(await res.json());
-            } catch {}
+            } catch { }
         })();
     }, []);
 
@@ -53,11 +53,11 @@ export default function SubjectBlockPage() {
                         if (grpRes.ok) setStudentGroups(await grpRes.json());
                     }
                 }
-            } catch {}
+            } catch { }
             try {
                 const blocksRes = await fetch(`/api/subject-blocks/?req_set=${selectedReqSet}`);
                 if (blocksRes.ok) setSubjectBlocks(await blocksRes.json());
-            } catch {}
+            } catch { }
         };
         loadForReqSet();
     }, [selectedReqSet]);
@@ -205,7 +205,6 @@ export default function SubjectBlockPage() {
                     <div className={styles.placeholder}>No blocks. Add one.</div>
                 )}
                 {subjectBlocks.map((block, idx) => {
-                    const [colA, colB] = splitSubjects();
                     return (
                         <div key={block.id ?? `new-${idx}`} className={styles.blockCard}>
                             <div className={styles.blockHeader}>
@@ -239,12 +238,12 @@ export default function SubjectBlockPage() {
                                 </button>
                             </div>
 
-                            <div className={styles.blockGrid}>
-                                {/* Column 1 */}
-                                <div className={styles.subjectColumn}>
-                                    <div className={styles.subjectColumnHeader}>Subjects</div>
-                                    {colA.map(s => (
-                                        <div key={s.id} className={styles.subjectRow}>
+                            <div className={styles.blockFlex}>
+                                {/* Subjects flex (auto 2 columns via row wrapping) */}
+                                <div className={styles.subjectsFlex}>
+                                    <div className={styles.subjectsHeader}>Subjects</div>
+                                    {subjects.map(s => (
+                                        <div key={s.id} className={styles.subjectItem}>
                                             <span className={styles.subjectName}>{s.name}</span>
                                             <input
                                                 type="number"
@@ -256,23 +255,8 @@ export default function SubjectBlockPage() {
                                         </div>
                                     ))}
                                 </div>
-                                {/* Column 2 */}
-                                <div className={styles.subjectColumn}>
-                                    <div className={styles.subjectColumnHeader}>Subjects</div>
-                                    {colB.map(s => (
-                                        <div key={s.id} className={styles.subjectRow}>
-                                            <span className={styles.subjectName}>{s.name}</span>
-                                            <input
-                                                type="number"
-                                                min="0"
-                                                className={styles.numInput}
-                                                value={block.numbers?.[s.id] ?? ""}
-                                                onChange={e => updateNumber(idx, s.id, e.target.value)}
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                                {/* Column 3 Groups */}
+
+                                {/* Groups */}
                                 <div className={styles.groupsColumn}>
                                     <div className={styles.groupsHeader}>Applicable Groups</div>
                                     <div className={styles.groupsList}>

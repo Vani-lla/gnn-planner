@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styles from "../../styles/Requirements.module.css";
 
 export default function RunEvolutionaryProcess() {
     const [generations, setGenerations] = useState("");
@@ -7,33 +8,26 @@ export default function RunEvolutionaryProcess() {
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
 
-    // Fetch Requirement Sets from the backend
     useEffect(() => {
         const fetchRequirementSets = async () => {
             try {
                 const res = await fetch("/api/requirement-sets/");
                 const data = await res.json();
-                if (res.ok) {
-                    setRequirementSets(data);
-                } else {
-                    console.error("Failed to fetch requirement sets:", data.error);
-                }
-            } catch (error) {
-                console.error("Error fetching requirement sets:", error);
+                if (res.ok) setRequirementSets(data);
+            } catch {
+                // noop
             }
         };
-
         fetchRequirementSets();
     }, []);
 
     const handleSubmit = async () => {
-        if (!generations || isNaN(generations) || generations <= 0) {
-            alert("Please enter a valid positive integer for generations.");
+        if (!generations || isNaN(generations) || Number(generations) <= 0) {
+            setMessage("❌ Enter a positive integer for generations.");
             return;
         }
-
         if (!selectedSet) {
-            alert("Please select a requirement set.");
+            setMessage("❌ Select a requirement set.");
             return;
         }
 
@@ -57,16 +51,13 @@ export default function RunEvolutionaryProcess() {
                     req_set_id: selectedSet,
                 }),
             });
-
             const data = await res.json();
-
             if (res.ok) {
                 setMessage(`✅ ${data.message}`);
             } else {
-                setMessage(`❌ Error: ${data.error || "Unknown error"}`);
+                setMessage(`❌ ${data.error || "Unknown error"}`);
             }
-        } catch (error) {
-            console.error("Error:", error);
+        } catch {
             setMessage("❌ Network error");
         } finally {
             setLoading(false);
@@ -74,56 +65,43 @@ export default function RunEvolutionaryProcess() {
     };
 
     return (
-        <div className="flex flex-col items-center gap-6 p-6">
-            <h1 className="text-2xl font-bold">Run Evolutionary Process</h1>
+        <div className={styles.requirementsView}>
+            <h2 className={styles.placeholder}>Run Evolutionary Process</h2>
 
-            {/* Requirement Set Selection */}
-            <div className="w-full max-w-md">
-                <label htmlFor="requirement-set" className="block text-gray-700 font-medium mb-2">
-                    Select Requirement Set:
-                </label>
+            <div className={styles.requirementsSelectors}>
                 <select
-                    id="requirement-set"
+                    className={styles.requirementsSelect}
                     value={selectedSet}
                     onChange={(e) => setSelectedSet(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg p-2"
                 >
-                    <option value="">-- Select a Set --</option>
+                    <option value="">Select Requirement Set</option>
                     {requirementSets.map((set) => (
                         <option key={set.id} value={set.id}>
                             {set.name}
                         </option>
                     ))}
                 </select>
-            </div>
 
-            {/* Generations Input */}
-            <div className="w-full max-w-md">
-                <label htmlFor="generations" className="block text-gray-700 font-medium mb-2">
-                    Enter Number of Generations:
-                </label>
                 <input
-                    id="generations"
                     type="number"
+                    min="1"
+                    step="1"
                     value={generations}
                     onChange={(e) => setGenerations(e.target.value)}
-                    placeholder="Enter a positive integer"
-                    className="w-full border border-gray-300 rounded-lg p-2"
+                    placeholder="Number of generations"
+                    className={styles.requirementsSelect}
                 />
+
+                <button
+                    className={styles.button}
+                    onClick={handleSubmit}
+                    disabled={loading || !selectedSet || !generations}
+                >
+                    {loading ? "Processing..." : "Run Process"}
+                </button>
             </div>
 
-            {/* Submit Button */}
-            <button
-                onClick={handleSubmit}
-                disabled={loading}
-                className={`px-6 py-2 rounded-lg text-white font-semibold ${loading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
-                    }`}
-            >
-                {loading ? "Processing..." : "Run Process"}
-            </button>
-
-            {/* Message Display */}
-            {message && <p className="text-center text-gray-700">{message}</p>}
+            {message && <p className={styles.message}>{message}</p>}
         </div>
     );
 }

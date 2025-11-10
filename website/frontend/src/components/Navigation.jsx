@@ -15,6 +15,7 @@ export default function Navigation() {
         "/add/rooms": "Add Rooms",
         "/add/classes": "Add Classes",
         "/add/requirements": "Add Hour Requirements",
+        "/add/blocks": "Create Lesson Blocks",
         "/add/availability": "Add Teacher Availability",
     };
 
@@ -44,8 +45,7 @@ export default function Navigation() {
                         <li><Link to="/add/classes" className="dropdown-item">Add Classes</Link></li>
                         <li><Link to="/add/requirements" className="dropdown-item">Add Hours</Link></li>
                         <li><Link to="/add/availability" className="dropdown-item">Add Availability</Link></li>
-                        <li><Link to="/add/requirements/7" className="dropdown-item">Requirement 7</Link></li>
-                        <li><Link to="/add/requirements/8" className="dropdown-item">Requirement 8</Link></li>
+                        <li><Link to="/add/blocks" className="dropdown-item">Create Blocks</Link></li>
                     </ul>
                 </li>
             </ul>

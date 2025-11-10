@@ -1,4 +1,21 @@
-/* View wrapper (match Subjects/Teachers) */
+:root {
+    --first-col-w: 170px;
+    --group-col-w: 100%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+
+/* View wrapper */
 .requirementsView {
     display: flex;
     flex-direction: column;
@@ -22,7 +39,7 @@
     align-items: center;
 }
 
-/* Inputs/selects styling */
+/* Inputs/selects */
 .requirementsSelect {
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
@@ -32,7 +49,7 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 10px;
     transition: background-color 0.3s, color 0.3s, transform 0.3s;
-    width: 220px;
+    /* width: 220px; */
     text-align: center;
 }
 
@@ -41,69 +58,111 @@
     border-color: #fca311;
 }
 
-/* Card wrapper for grid */
+/* Drag & drop */
+.dropZone {
+    width: 95%;
+    padding: 1rem;
+    text-align: center;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    position: relative;
+    transition: background 0.3s, border-color 0.3s;
+    margin-bottom: 1rem;
+}
+
+.dragging {
+    background: rgba(252, 163, 17, 0.12);
+    border-color: #fca311;
+}
+
+.hiddenFileInput {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Card + scroll area (single definition) */
 .gridCard {
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: 1fr auto;
     width: 95%;
     max-height: 70%;
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
+    overflow: visible;
 }
 
-.placeholder {
-    padding: 1rem;
-    color: #fff;
-    opacity: 0.85;
-}
-
-/* Scrollable area */
 .gridWrapper {
-    overflow: auto;
+    position: relative;
+    overflow: visible;
     max-height: 100%;
 }
 
-/* Table styling */
-.gridTable {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-    color: #fff;
-}
-
-/* Sticky header */
-.stickyHead th {
+/* Header row (sticky) */
+.gridHeader {
     position: sticky;
-    top: 0;
+    top: 81px;
     z-index: 2;
+    display: grid;
+    align-items: center;
     background: rgba(0, 0, 0, 0.55);
     backdrop-filter: blur(2px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Columns */
-.firstCol {
-    text-align: left;
-    padding: 0.6rem 0.8rem;
-    min-width: 220px;
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
+/* Rows */
+.gridRow {
+    display: grid;
+    align-items: center;
+    min-height: 46px;
+    transition: background-color 0.2s;
 }
 
-.groupCol {
-    width: 84px;
-    /* Narrower group columns */
-    min-width: 72px;
-    max-width: 120px;
-    text-align: center;
-    padding: 0.3rem 0.2rem;
+.gridRow:hover .cell {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* Cells */
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 8px;
+    color: #fff;
     border-right: 1px solid rgba(255, 255, 255, 0.08);
+    box-sizing: border-box;
+}
+
+.cell:last-child {
+    border-right: none;
+}
+
+/* First column: use variable widths */
+.firstCol {
+    justify-content: flex-start;
+    font-weight: 600;
+    width: var(--first-col-w);
+    min-width: var(--first-col-w);
+    max-width: var(--first-col-w);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Group columns: use variable widths */
+.groupCol {
+    width: var(--group-col-w);
+    min-width: var(--group-col-w);
+    max-width: var(--group-col-w);
 }
 
 /* Subject separator row */
-.subjectRow td {
+.subjectRow .cell {
     background: rgba(255, 255, 255, 0.06);
     border-top: 1px solid rgba(255, 255, 255, 0.15);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -111,18 +170,12 @@
 
 .subjectTitle {
     font-weight: 700;
-    padding: 0.5rem 0.8rem;
-}
-
-/* Data rows */
-.dataRow:hover td {
-    background: rgba(255, 255, 255, 0.04);
 }
 
 /* Inputs */
 .hoursInput {
-    width: 64px;
-    padding: 0.35rem 0.4rem;
+    width: 90%;
+    padding: 0.3rem 0.35rem;
     text-align: center;
     color: #fff;
     background: rgba(0, 0, 0, 0.35);
@@ -135,7 +188,7 @@
     border-color: #fca311;
 }
 
-/* Buttons (match others) */
+/* Buttons */
 .button {
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
@@ -174,136 +227,4 @@
     background: rgba(0, 0, 0, 0.35);
     padding: 0.6rem 1rem;
     border-radius: 8px;
-}
-
-.dropZone {
-    width: 95%;
-    padding: 1rem;
-    text-align: center;
-    color: #ffffff;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-    position: relative;
-    transition: background 0.3s, border-color 0.3s;
-    margin-bottom: 1rem;
-}
-
-.dragging {
-    background: rgba(252, 163, 17, 0.12);
-    border-color: #fca311;
-}
-
-.hiddenFileInput {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    cursor: pointer;
-}
-
-/* Card + scroll area */
-.gridCard {
-    display: grid;
-    grid-template-rows: 1fr auto;
-    width: 95%;
-    max-height: 70%;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-}
-
-.gridWrapper {
-    position: relative;
-    overflow: auto;
-    /* both axes */
-    max-height: 100%;
-}
-
-/* Header row (sticky) */
-.gridHeader {
-    position: sticky;
-    top: 0;
-    z-index: 2;
-    display: grid;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(2px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Generic grid row */
-.gridRow {
-    display: grid;
-    align-items: center;
-    min-height: 46px;
-    transition: background-color 0.2s;
-}
-
-.gridRow:hover .cell {
-    background: rgba(255, 255, 255, 0.04);
-}
-
-/* Cells */
-.cell {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* gap: 4px; */
-    padding: 6px 8px;
-    color: #fff;
-    border-right: 1px solid rgba(255, 255, 255, 0.08);
-    box-sizing: border-box;
-}
-
-.cell:last-child {
-    border-right: none;
-}
-
-/* First column: fixed width, no shrink, readable */
-.firstCol {
-    justify-content: flex-start;
-    font-weight: 600;
-    width: 220px;
-    /* fixed width */
-    min-width: 220px;
-    max-width: 220px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-/* Group columns: narrow */
-.groupCol {
-    width: 84px;
-    min-width: 84px;
-    max-width: 84px;
-}
-
-/* Subject row styling + title cell */
-.subjectRow .cell {
-    background: rgba(255, 255, 255, 0.06);
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.subjectTitle {
-    font-weight: 700;
-}
-
-/* Hours input */
-.hoursInput {
-    width: 64px;
-    padding: 0.3rem 0.35rem;
-    text-align: center;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.35);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 8px;
-}
-
-.hoursInput:focus {
-    outline: none;
-    border-color: #fca311;
 }

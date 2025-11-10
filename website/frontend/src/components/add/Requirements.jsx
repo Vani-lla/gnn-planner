@@ -358,7 +358,7 @@ export default function Requirements() {
                         {/* Sticky header */}
                         <div
                             className={styles.gridHeader}
-                            style={{ gridTemplateColumns: `220px repeat(${grid.groups.length}, 84px)` }}
+                            style={{ gridTemplateColumns: `170px repeat(${grid.groups.length}, 1fr)` }}
                         >
                             <div className={`${styles.cell} ${styles.firstCol}`}>Subject / Teacher</div>
                             {grid.groups.map(g => (
@@ -373,7 +373,7 @@ export default function Requirements() {
                                     {/* Subject summary row with sums */}
                                     <div
                                         className={`${styles.gridRow} ${styles.subjectRow}`}
-                                        style={{ gridTemplateColumns: `220px repeat(${grid.groups.length}, 84px)` }}
+                                        style={{ gridTemplateColumns: `170px repeat(${grid.groups.length}, 1fr)` }}
                                     >
                                         <div className={`${styles.cell} ${styles.firstCol} ${styles.subjectTitle}`}>
                                             {subject.name}
@@ -392,7 +392,7 @@ export default function Requirements() {
                                             <div
                                                 key={`${t.id}-${subject.id}`}
                                                 className={styles.gridRow}
-                                                style={{ gridTemplateColumns: `220px repeat(${grid.groups.length}, 84px)` }}
+                                                style={{ gridTemplateColumns: `170px repeat(${grid.groups.length}, 1fr)` }}
                                             >
                                                 <div className={`${styles.cell} ${styles.firstCol}`}>{t.name}</div>
                                                 {grid.groups.map(g => (
