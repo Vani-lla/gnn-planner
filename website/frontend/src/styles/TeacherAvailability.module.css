@@ -1,0 +1,174 @@
+.availabilityView {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+.availabilitySelectors {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+    width: 100%;
+}
+
+.inlineFlex {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.poolBadge {
+    padding: 0.6rem 1rem;
+    color: #fff;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 10px;
+}
+
+.availabilitySelect {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 10px;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+    width: 260px;
+    text-align: center;
+}
+
+.availabilitySelect:focus {
+    outline: none;
+    border-color: #fca311;
+}
+
+.dropZone {
+    width: 95%;
+    padding: 1rem;
+    text-align: center;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    position: relative;
+    transition: background 0.3s, border-color 0.3s;
+    margin-bottom: 1rem;
+}
+
+.dragging {
+    background: rgba(252, 163, 17, 0.12);
+    border-color: #fca311;
+}
+
+.hiddenFileInput {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.gridCard {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    width: 95%;
+    max-height: 70%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+.gridHeader {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: grid;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.55);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.gridBody {
+    overflow: auto;
+    max-height: 100%;
+}
+
+.gridRow {
+    display: grid;
+    align-items: center;
+    min-height: 48px;
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 8px;
+    color: #fff;
+    border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+.cell:last-child {
+    border-right: none;
+}
+
+.firstCol {
+    justify-content: flex-start;
+    font-weight: 600;
+    min-width: 220px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #000000;
+    background: #fca311;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.button:hover:not(:disabled) {
+    background: #ffb942;
+    transform: translateY(-1px);
+}
+
+.actionRow {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    justify-content: flex-end;
+    background: rgba(255, 255, 255, 0.04);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.placeholder {
+    padding: 1rem;
+    color: #fff;
+    opacity: 0.85;
+}
+
+.message {
+    margin-top: 0.75rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+}

@@ -23,7 +23,7 @@ router.register(
 router.register(r"subject-blocks", SubjectBlockViewSet, basename="subject-block")
 
 urlpatterns = [
-    path("upload-requirements/", upload_requirements_csv, name="upload-requirements"),
+    path("requirements/import-csv/", import_requirements_csv, name="import-requirements-csv"),
     path(
         "run-evolutionary-process/",
         run_evolutionary_process_endpoint,

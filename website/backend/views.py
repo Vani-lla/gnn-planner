@@ -84,81 +84,149 @@ def get_plan_details(request, plan_id):
 
 @api_view(["POST"])
 @parser_classes([MultiPartParser])
-def upload_requirements_csv(request):
-    """
-    Endpoint to upload a CSV file and process it to create a new RequirementSet.
-    """
+def import_requirements_csv(request):
     file = request.FILES.get("file")
-    if not file:
+    teacher_pool_id = request.data.get("teacher_pool_id")
+    subject_pool_id = request.data.get("subject_pool_id")
+    group_pool_id = request.data.get("group_pool_id")
+    req_set_id = request.data.get("req_set_id")
+    new_req_set_name = (request.data.get("new_req_set_name") or "").strip()
+
+    if not file or not teacher_pool_id or not subject_pool_id or not group_pool_id:
         return Response(
-            {"error": "No file provided"}, status=status.HTTP_400_BAD_REQUEST
+            {"error": "file, teacher_pool_id, subject_pool_id, group_pool_id required"},
+            status=400,
         )
 
     try:
-        # Parse the CSV file
-        csv_file = StringIO(file.read().decode("utf-8"))
-        reader = csv.reader(csv_file)
+        teacher_pool = TeacherPool.objects.get(id=teacher_pool_id)
+        subject_pool = SubjectPool.objects.get(id=subject_pool_id)
+        group_pool = StudentGroupPool.objects.get(id=group_pool_id)
+    except (
+        TeacherPool.DoesNotExist,
+        SubjectPool.DoesNotExist,
+        StudentGroupPool.DoesNotExist,
+    ):
+        return Response({"error": "Invalid pool id(s)"}, status=404)
 
-        # Extract headers
-        first_row = next(reader)  # First row (e.g., I, II, III)
-        second_row = next(reader)  # Second row (e.g., A, B, C, etc.)
-        groups = [
-            f"{first}_{second}" for first, second in zip(first_row[1:], second_row[1:])
-        ]  # Combine first and second rows to form group names
+    # RequirementSet resolve/create
+    if req_set_id:
+        try:
+            req_set = RequirementSet.objects.get(id=req_set_id)
+        except RequirementSet.DoesNotExist:
+            return Response({"error": "RequirementSet not found"}, status=404)
+    else:
+        if not new_req_set_name:
+            return Response(
+                {"error": "Provide new_req_set_name when req_set_id not given"},
+                status=400,
+            )
+        req_set = RequirementSet.objects.create(
+            name=new_req_set_name,
+            teacher_pool=teacher_pool,
+            subject_pool=subject_pool,
+            group_pool=group_pool,
+            room_pool=None,
+        )
 
-        # Create a new RequirementSet
-        req_set = RequirementSet.objects.create(name="Uploaded RequirementSet")
+    csv_text = file.read().decode("utf-8")
+    reader = csv.reader(StringIO(csv_text))
 
-        current_subject = None  # Track the current subject
+    try:
+        first_row = next(reader)
+        second_row = next(reader)
+    except StopIteration:
+        return Response(
+            {"error": "CSV must contain at least two header rows"}, status=400
+        )
 
-        for row in reader:
-            row_name = row[0]
-            if not row_name:
-                continue  # Skip rows without a name
+    # Build combined group names (skip first empty header cell)
+    raw_first = first_row[1:]
+    raw_second = second_row[1:]
+    combined_names = [f"{a}_{b}" for a, b in zip(raw_first, raw_second)]
 
-            # Check if the row_name is a subject
-            subject = Subject.objects.filter(name=row_name).first()
-            if subject:
-                current_subject = subject  # Update the current subject
-                continue  # Skip to the next row since this is a subject row
+    # Existing groups in pool (dict by name)
+    existing_groups = {g.name: g for g in StudentGroup.objects.filter(pool=group_pool)}
+    # Keep only group objects that exist
+    ordered_groups = [
+        existing_groups[name] for name in combined_names if name in existing_groups
+    ]
 
-            # If not a subject, treat it as a teacher
-            teacher = Teacher.objects.filter(name=row_name).first()
-            if not teacher:
-                return Response(
-                    {"error": f"Teacher '{row_name}' does not exist."},
-                    status=status.HTTP_400_BAD_REQUEST,
-                )
+    subjects_cache = {s.name: s for s in Subject.objects.filter(pool=subject_pool)}
+    teachers_cache = {t.name: t for t in Teacher.objects.filter(pool=teacher_pool)}
 
-            # Process the hours for each group
-            for group_name, hours in zip(groups, row[1:]):
-                if not group_name or not hours.strip():
-                    continue  # Skip empty group names or hours
+    def is_numeric(s: str) -> bool:
+        return s.strip().isdigit()
 
-                # Get the student group
-                student_group = StudentGroup.objects.filter(name=group_name).first()
-                if not student_group:
-                    return Response(
-                        {"error": f"Student group '{group_name}' does not exist."},
-                        status=status.HTTP_400_BAD_REQUEST,
-                    )
+    current_subject = None
+    processed_rows = 0
+    upserted = 0
 
-                # Add the requirement
-                Requirement.objects.create(
+    for row in reader:
+        if not row:
+            continue
+        label = (row[0] or "").strip()
+        if not label or is_numeric(label):
+            continue  # skip numeric/empty first cell
+
+        # Subject row
+        if label in subjects_cache:
+            current_subject = subjects_cache[label]
+            processed_rows += 1
+            continue
+
+        # Teacher row (must match existing teacher and have current_subject)
+        if label in teachers_cache and current_subject:
+            teacher = teachers_cache[label]
+            # Iterate hours aligned with filtered existing groups
+            # Need original hours cells corresponding to combined_names indexes
+            hours_cells = row[1:]
+            # Map group objects to their column index
+            for idx, g in enumerate(ordered_groups):
+                if idx >= len(hours_cells):
+                    break
+                val = (hours_cells[idx] or "").strip()
+                if not val:
+                    continue
+                try:
+                    hours_int = int(val)
+                except ValueError:
+                    continue
+                if hours_int <= 0:
+                    continue
+                req_obj = Requirement.objects.filter(
                     req_set=req_set,
                     subject=current_subject,
                     teacher=teacher,
-                    group=student_group,
-                    hours=int(hours),
-                )
+                    group=g,
+                ).first()
+                if req_obj:
+                    req_obj.hours = hours_int
+                    req_obj.save()
+                else:
+                    Requirement.objects.create(
+                        req_set=req_set,
+                        subject=current_subject,
+                        teacher=teacher,
+                        group=g,
+                        hours=hours_int,
+                    )
+                upserted += 1
+            processed_rows += 1
+        # Anything else ignored (no creation)
 
-        return Response(
-            {"message": "Requirements uploaded successfully", "req_set_id": req_set.id},
-            status=status.HTTP_201_CREATED,
-        )
-
-    except Exception as e:
-        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    return Response(
+        {
+            "message": "CSV processed",
+            "requirement_set_id": req_set.id,
+            "rows_processed": processed_rows,
+            "requirements_upserted": upserted,
+            "ignored_groups": [
+                name for name in combined_names if name not in existing_groups
+            ],
+        },
+        status=201,
+    )
 
 
 @csrf_exempt
@@ -228,79 +296,83 @@ class SubjectBlockViewSet(ModelViewSet):
     queryset = SubjectBlock.objects.all()
     serializer_class = SubjectBlockSerializer
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        req_set = self.request.query_params.get("req_set")
+        if req_set:
+            qs = qs.filter(req_set_id=req_set)
+        return qs
+
     def create(self, request, *args, **kwargs):
-        """
-        Create or update SubjectBlocks in bulk.
-        """
         data = request.data
+        if not isinstance(data, list):
+            return Response({"error": "Expect a list of blocks"}, status=400)
         for block in data:
             block_id = block.get("id")
             req_set_id = block.get("req_set")
             groups = block.get("groups", [])
             numbers = block.get("numbers", {})
+            power_block = block.get("power_block", False)
+            max_number = block.get("max_number", 0)
 
-            # Infer subjects from the numbers JSON
-            subjects = list(numbers.keys())
+            subjects = list(numbers.keys())  # derive subjects from numbers map
 
             block_data = {
                 "req_set": req_set_id,
                 "subjects": subjects,
                 "groups": groups,
                 "numbers": numbers,
+                "power_block": power_block,
+                "max_number": max_number,
             }
 
             if block_id:
-                # Update existing SubjectBlock
-                subject_block = SubjectBlock.objects.get(id=block_id)
-                serializer = self.get_serializer(subject_block, data=block_data)
+                instance = SubjectBlock.objects.get(id=block_id)
+                serializer = self.get_serializer(instance, data=block_data)
             else:
-                # Create new SubjectBlock
                 serializer = self.get_serializer(data=block_data)
 
             serializer.is_valid(raise_exception=True)
             serializer.save()
-
-        return Response(
-            {"message": "SubjectBlocks saved successfully."}, status=status.HTTP_200_OK
-        )
+        return Response({"message": "SubjectBlocks saved"}, status=200)
 
 
 class TeacherAvailabilityViewSet(ModelViewSet):
     queryset = TeacherAvailability.objects.all()
     serializer_class = TeacherAvailabilitySerializer
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        req_set = self.request.query_params.get("req_set")
+        if req_set:
+            qs = qs.filter(req_set_id=req_set)
+        return qs
+
     def create(self, request, *args, **kwargs):
-        print(request)
         """
-        Handle bulk creation or update of teacher availability.
+        Bulk replace availability for a req_set.
+        Body: { req_set_id: int, availability: { "<teacherId>": { "0": true, ... "4": false }, ... } }
         """
         req_set_id = request.data.get("req_set_id")
         availability_data = request.data.get("availability")
-
         if not req_set_id or not availability_data:
             return Response(
                 {"error": "Both 'req_set_id' and 'availability' are required."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-
         try:
             req_set = RequirementSet.objects.get(id=req_set_id)
-            bulk_data = []
-
-            for teacher_id, availability in availability_data.items():
+            # Replace all for this req_set
+            TeacherAvailability.objects.filter(req_set=req_set).delete()
+            bulk = []
+            for teacher_id, avail in availability_data.items():
                 teacher = Teacher.objects.get(id=teacher_id)
-                bulk_data.append(
+                bulk.append(
                     TeacherAvailability(
-                        teacher=teacher,
-                        req_set=req_set,
-                        availability=availability,
+                        teacher=teacher, req_set=req_set, availability=avail
                     )
                 )
-
-            # Bulk create or update teacher availability
-            TeacherAvailability.objects.filter(req_set=req_set).delete()
-            TeacherAvailability.objects.bulk_create(bulk_data)
-
+            TeacherAvailability.objects.bulk_create(bulk)
             return Response(
                 {"message": "Teacher availability saved successfully."},
                 status=status.HTTP_201_CREATED,
@@ -309,8 +381,6 @@ class TeacherAvailabilityViewSet(ModelViewSet):
             return Response({"error": "RequirementSet not found."}, status=404)
         except Teacher.DoesNotExist:
             return Response({"error": "Teacher not found."}, status=404)
-        except Exception as e:
-            return Response({"error": str(e)}, status=500)
 
 
 class PlanViewSet(ModelViewSet):
@@ -569,49 +639,42 @@ class RequirementViewSet(ModelViewSet):
 
     @action(detail=False, methods=["get"])
     def grid(self, request):
-        # Fetch all RequirementSets
-        req_sets = RequirementSet.objects.all()
-        grid_data = []
+        req_set_id = request.query_params.get("req_set_id")
+        if req_set_id:
+            try:
+                req_set = RequirementSet.objects.get(id=req_set_id)
+            except RequirementSet.DoesNotExist:
+                return Response({"error": "RequirementSet not found."}, status=404)
 
-        for req_set in req_sets:
             teachers = Teacher.objects.filter(pool=req_set.teacher_pool)
             groups = StudentGroup.objects.filter(pool=req_set.group_pool)
             subjects = Subject.objects.filter(pool=req_set.subject_pool)
 
-            # Fetch existing requirements for this RequirementSet
             requirements = Requirement.objects.filter(req_set=req_set)
             requirements_data = RequirementSerializer(requirements, many=True).data
 
-            # Construct the grid structure for this RequirementSet
-            grid_data.append(
-                {
-                    "req_set": {"id": req_set.id, "name": req_set.name},
-                    "teachers": [
-                        {
-                            "id": teacher.id,
-                            "name": teacher.name,
-                            "subjects": (
-                                [
-                                    {"id": subject.id, "name": subject.name}
-                                    for subject in teacher.teached_subjects.all()
-                                ]
-                                if teacher.teached_subjects.exists()
-                                else []
-                            ),  # Ensure subjects is always a list
-                        }
-                        for teacher in teachers
-                    ],
-                    "groups": [
-                        {"id": group.id, "name": group.name} for group in groups
-                    ],
-                    "subjects": [
-                        {"id": subject.id, "name": subject.name} for subject in subjects
-                    ],  # Add subjects back as a separate list
-                    "requirements": requirements_data,
-                }
-            )
-
-        return Response(grid_data)
+            data = {
+                "req_set": {"id": req_set.id, "name": req_set.name},
+                "teachers": [
+                    {
+                        "id": t.id,
+                        "name": t.name,
+                        "subjects": (
+                            [
+                                {"id": s.id, "name": s.name}
+                                for s in t.teached_subjects.all()
+                            ]
+                            if t.teached_subjects.exists()
+                            else []
+                        ),
+                    }
+                    for t in teachers
+                ],
+                "groups": [{"id": g.id, "name": g.name} for g in groups],
+                "subjects": [{"id": s.id, "name": s.name} for s in subjects],
+                "requirements": requirements_data,
+            }
+            return Response(data, status=200)
 
     def create(self, request, *args, **kwargs):
         print(request.data)

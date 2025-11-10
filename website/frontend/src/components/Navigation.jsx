@@ -14,7 +14,8 @@ export default function Navigation() {
         "/add/teachers": "Add Teachers",
         "/add/rooms": "Add Rooms",
         "/add/classes": "Add Classes",
-        "/add/upload-requirements": "Upload Requirements",
+        "/add/requirements": "Add Hour Requirements",
+        "/add/availability": "Add Teacher Availability",
     };
 
     // Get the current page title based on the route
@@ -41,8 +42,8 @@ export default function Navigation() {
                         <li><Link to="/add/teachers" className="dropdown-item">Add Teachers</Link></li>
                         <li><Link to="/add/rooms" className="dropdown-item">Add Rooms</Link></li>
                         <li><Link to="/add/classes" className="dropdown-item">Add Classes</Link></li>
-                        <li><Link to="/add/requirements/5" className="dropdown-item">Requirement 5</Link></li>
-                        <li><Link to="/add/requirements/6" className="dropdown-item">Requirement 6</Link></li>
+                        <li><Link to="/add/requirements" className="dropdown-item">Add Hours</Link></li>
+                        <li><Link to="/add/availability" className="dropdown-item">Add Availability</Link></li>
                         <li><Link to="/add/requirements/7" className="dropdown-item">Requirement 7</Link></li>
                         <li><Link to="/add/requirements/8" className="dropdown-item">Requirement 8</Link></li>
                     </ul>

@@ -27,7 +27,7 @@ class SubjectBlockSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SubjectBlock
-        fields = ["id", "req_set", "subjects", "groups", "numbers"]
+        fields = ["id", "req_set", "subjects", "groups", "numbers", "power_block", "max_number"]
 
 
 class TeacherAvailabilitySerializer(serializers.ModelSerializer):
@@ -45,7 +45,7 @@ class PlanSerializer(serializers.ModelSerializer):
 class RequirementSetSerializer(serializers.ModelSerializer):
     class Meta:
         model = RequirementSet
-        fields = ["id", "name"]
+        fields = ["id", "name", "teacher_pool", "group_pool", "subject_pool"]
 
 
 class StudentGroupSerializer(serializers.ModelSerializer):

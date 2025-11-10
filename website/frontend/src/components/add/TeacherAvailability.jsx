@@ -1,188 +1,238 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
+import styles from "../../styles/TeacherAvailability.module.css";
 
 export default function TeacherAvailability() {
     const [teacherPools, setTeacherPools] = useState([]);
     const [requirementSets, setRequirementSets] = useState([]);
-    const [selectedTeacherPool, setSelectedTeacherPool] = useState("");
     const [selectedRequirementSet, setSelectedRequirementSet] = useState("");
+    const [teacherPoolId, setTeacherPoolId] = useState("");
     const [teachers, setTeachers] = useState([]);
-    const [availability, setAvailability] = useState({});
+    const [availability, setAvailability] = useState({}); // { [teacherId]: { "0": true, ..., "4": true } }
+    const [isDragging, setIsDragging] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
 
-    // Fetch Teacher Pools and Requirement Sets
+    // CSRF
+    const csrftoken = useMemo(
+        () => document.cookie.split("; ").find((r) => r.startsWith("csrftoken="))?.split("=")[1],
+        []
+    );
+
+    // Load pools and req sets
     useEffect(() => {
-        const fetchData = async () => {
+        (async () => {
             try {
-                const [teacherPoolsRes, requirementSetsRes] = await Promise.all([
+                const [tpRes, rsRes] = await Promise.all([
                     fetch("/api/teacher-pools/"),
                     fetch("/api/requirement-sets/"),
                 ]);
-
-                const teacherPoolsData = await teacherPoolsRes.json();
-                const requirementSetsData = await requirementSetsRes.json();
-
-                setTeacherPools(teacherPoolsData);
-                setRequirementSets(requirementSetsData);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
-
-        fetchData();
+                if (tpRes.ok) setTeacherPools(await tpRes.json());
+                if (rsRes.ok) setRequirementSets(await rsRes.json());
+            } catch { /* noop */ }
+        })();
     }, []);
 
-    // Fetch Teachers when a Teacher Pool is selected
+    // When req set changes, fetch its teacher pool, teachers, and existing availability
     useEffect(() => {
-        if (!selectedTeacherPool) return;
-
-        const fetchTeachers = async () => {
+        const load = async () => {
+            if (!selectedRequirementSet) {
+                setTeacherPoolId("");
+                setTeachers([]);
+                setAvailability({});
+                return;
+            }
             try {
-                const res = await fetch(`/api/teachers/?pool=${selectedTeacherPool}`);
-                const data = await res.json();
-                setTeachers(data);
+                // Requirement set detail -> get teacher_pool id
+                const rsRes = await fetch(`/api/requirement-sets/${selectedRequirementSet}/`);
+                const rs = await rsRes.json();
+                if (!rsRes.ok) throw new Error("Failed to load requirement set");
+                const tPoolId = String(rs.teacher_pool || "");
+                setTeacherPoolId(tPoolId);
 
-                // Set default availability to true for all days
-                const initialAvailability = data.reduce((acc, teacher) => {
-                    acc[teacher.id] = { 0: true, 1: true, 2: true, 3: true, 4: true };
-                    return acc;
-                }, {});
-                setAvailability(initialAvailability);
-            } catch (error) {
-                console.error("Error fetching teachers:", error);
+                // Teachers in that pool
+                if (tPoolId) {
+                    const tRes = await fetch(`/api/teachers/?pool_id=${tPoolId}`);
+                    const tData = await tRes.json();
+                    const list = tRes.ok ? tData : [];
+                    setTeachers(list);
+
+                    // Existing availability for this req set
+                    const aRes = await fetch(`/api/teacher-availability/?req_set=${selectedRequirementSet}`);
+                    const aData = aRes.ok ? await aRes.json() : [];
+                    const byTeacher = new Map(
+                        (Array.isArray(aData) ? aData : []).map((rec) => [rec.teacher, rec.availability])
+                    );
+
+                    // Default true for all days; override with existing if present
+                    const init = list.reduce((acc, t) => {
+                        const existing = byTeacher.get(t.id);
+                        acc[t.id] = existing
+                            ? existing
+                            : { "0": true, "1": true, "2": true, "3": true, "4": true };
+                        return acc;
+                    }, {});
+                    setAvailability(init);
+                } else {
+                    setTeachers([]);
+                    setAvailability({});
+                }
+            } catch {
+                setTeachers([]);
+                setAvailability({});
             }
         };
+        load();
+    }, [selectedRequirementSet]);
 
-        fetchTeachers();
-    }, [selectedTeacherPool]);
-
-    const handleCheckboxChange = (teacherId, day) => {
+    const toggle = (teacherId, dayKey) => {
         setAvailability((prev) => ({
             ...prev,
-            [teacherId]: {
-                ...prev[teacherId],
-                [day]: !prev[teacherId][day],
-            },
+            [teacherId]: { ...prev[teacherId], [dayKey]: !prev[teacherId]?.[dayKey] },
         }));
     };
 
-    const handleSave = async () => {
+    const save = async () => {
         if (!selectedRequirementSet) {
-            alert("Please select a Requirement Set!");
+            alert("Select a Requirement Set first");
             return;
         }
-
         try {
-            const csrftoken = document.cookie
-                .split("; ")
-                .find((row) => row.startsWith("csrftoken="))
-                ?.split("=")[1];
-                
+            setLoading(true);
+            setMessage("");
             const res = await fetch("/api/teacher-availability/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "X-CSRFToken": csrftoken },
                 body: JSON.stringify({
-                    req_set_id: selectedRequirementSet,
-                    availability: availability,
+                    req_set_id: Number(selectedRequirementSet),
+                    availability,
                 }),
             });
-
             const data = await res.json();
-            if (res.ok) {
-                setMessage("✅ Availability saved successfully!");
-            } else {
-                setMessage(`❌ Error: ${data.error || "Unknown error"}`);
-            }
-        } catch (error) {
-            console.error("Error saving availability:", error);
+            setMessage(res.ok ? "✅ Availability saved" : `❌ ${data.error || "Save failed"}`);
+        } catch {
             setMessage("❌ Network error");
+        } finally {
+            setLoading(false);
         }
     };
 
+    // Drag & drop + upload .txt: "teacher_name,1,1,1,0,0"
+    const handleFile = (file) => {
+        if (!file) return;
+        if (!file.name.endsWith(".txt")) {
+            alert("Upload a .txt file");
+            return;
+        }
+        const byName = new Map(teachers.map((t) => [t.name.trim().toLowerCase(), t.id]));
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const lines = String(e.target.result || "")
+                .split(/\r?\n/)
+                .map((l) => l.trim())
+                .filter(Boolean);
+            setAvailability((prev) => {
+                const next = { ...prev };
+                for (const line of lines) {
+                    const parts = line.split(",").map((p) => p.trim());
+                    if (!parts.length) continue;
+                    const name = (parts[0] || "").toLowerCase();
+                    const id = byName.get(name);
+                    if (!id) continue; // ignore teachers not in pool
+                    const vals = parts.slice(1, 6); // 5 days
+                    const obj = { "0": true, "1": true, "2": true, "3": true, "4": true };
+                    vals.forEach((v, i) => {
+                        obj[String(i)] = v === "1";
+                    });
+                    next[id] = obj;
+                }
+                return next;
+            });
+        };
+        reader.readAsText(file);
+    };
+
+    const onDrop = useCallback((e) => {
+        e.preventDefault();
+        setIsDragging(false);
+        const f = e.dataTransfer.files[0];
+        if (f) handleFile(f);
+    }, [teachers]);
+
+    const poolName = teacherPools.find((p) => String(p.id) === String(teacherPoolId))?.name || "-";
+
     return (
-        <div className="flex flex-col items-center gap-6 p-6">
-            <h1 className="text-2xl font-bold">Teacher Availability</h1>
-
-            {/* Teacher Pool Selection */}
-            <div className="w-full max-w-xl">
-                <label className="block text-gray-700 font-medium mb-2">
-                    Select a Teacher Pool:
-                </label>
+        <div className={styles.availabilityView}>
+            <div className={styles.availabilitySelectors}>
                 <select
-                    value={selectedTeacherPool}
-                    onChange={(e) => setSelectedTeacherPool(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg p-2"
-                >
-                    <option value="">-- Select a Pool --</option>
-                    {teacherPools.map((pool) => (
-                        <option key={pool.id} value={pool.id}>
-                            {pool.name}
-                        </option>
-                    ))}
-                </select>
-            </div>
-
-            {/* Requirement Set Selection */}
-            <div className="w-full max-w-xl">
-                <label className="block text-gray-700 font-medium mb-2">
-                    Select a Requirement Set:
-                </label>
-                <select
+                    className={styles.availabilitySelect}
                     value={selectedRequirementSet}
                     onChange={(e) => setSelectedRequirementSet(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg p-2"
                 >
-                    <option value="">-- Select a Requirement Set --</option>
-                    {requirementSets.map((reqSet) => (
-                        <option key={reqSet.id} value={reqSet.id}>
-                            {reqSet.name}
-                        </option>
+                    <option value="">-- Select Requirement Set --</option>
+                    {requirementSets.map((rs) => (
+                        <option key={rs.id} value={rs.id}>{rs.name}</option>
                     ))}
                 </select>
+                <div className={styles.inlineFlex}>
+                    <span className={styles.poolBadge}>Teacher Pool: <b>{poolName}</b></span>
+                </div>
             </div>
 
-            {/* Teacher Availability Table */}
-            {teachers.length > 0 && (
-                <div className="w-full max-w-4xl border border-gray-300 rounded-lg shadow-sm overflow-hidden">
-                    <table className="w-full table-auto">
-                        <thead>
-                            <tr className="bg-gray-100">
-                                <th className="px-4 py-2">Teacher</th>
-                                {[...Array(5).keys()].map((day) => (
-                                    <th key={day} className="px-4 py-2">
-                                        Day {day + 1}
-                                    </th>
-                                ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {teachers.map((teacher) => (
-                                <tr key={teacher.id}>
-                                    <td className="border px-4 py-2">{teacher.name}</td>
-                                    {[...Array(5).keys()].map((day) => (
-                                        <td key={day} className="border px-4 py-2 text-center">
-                                            <input
-                                                type="checkbox"
-                                                checked={availability[teacher.id]?.[day] || false}
-                                                onChange={() => handleCheckboxChange(teacher.id, day)}
-                                            />
-                                        </td>
-                                    ))}
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            )}
-
-            {/* Save Button */}
-            <button
-                onClick={handleSave}
-                className="px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700"
+            <div
+                onDrop={onDrop}
+                onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+                onDragLeave={() => setIsDragging(false)}
+                className={`${styles.dropZone} ${isDragging ? styles.dragging : ""}`}
             >
-                Save Availability
-            </button>
+                <p>{isDragging ? "Drop .txt here" : "Upload / Drag .txt (teacher,1,1,1,0,0)"}</p>
+                <input
+                    type="file"
+                    accept=".txt"
+                    onChange={(e) => handleFile(e.target.files[0])}
+                    className={styles.hiddenFileInput}
+                    disabled={!selectedRequirementSet}
+                />
+            </div>
 
-            {message && <p className="text-center text-gray-700">{message}</p>}
+            <div className={styles.gridCard}>
+                <div className={styles.gridHeader} style={{ gridTemplateColumns: "4fr repeat(5, 1fr)" }}>
+                    <div className={`${styles.cell} ${styles.firstCol}`}>Teacher</div>
+                    <div className={styles.cell}>Day 1</div>
+                    <div className={styles.cell}>Day 2</div>
+                    <div className={styles.cell}>Day 3</div>
+                    <div className={styles.cell}>Day 4</div>
+                    <div className={styles.cell}>Day 5</div>
+                </div>
+                <div className={styles.gridBody}>
+                    {teachers.length === 0 ? (
+                        <div className={styles.placeholder}>Select a Requirement Set to load teachers.</div>
+                    ) : teachers.map((t) => (
+                        <div key={t.id} className={styles.gridRow} style={{ gridTemplateColumns: "4fr repeat(5, 1fr)" }}>
+                            <div className={`${styles.cell} ${styles.firstCol}`}>{t.name}</div>
+                            {["0","1","2","3","4"].map((d) => (
+                                <div key={d} className={styles.cell}>
+                                    <input
+                                        type="checkbox"
+                                        checked={availability[t.id]?.[d] ?? true}
+                                        onChange={() => toggle(t.id, d)}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    ))}
+                </div>
+                <div className={styles.actionRow}>
+                    <button
+                        className={styles.button}
+                        onClick={save}
+                        disabled={loading || !selectedRequirementSet || teachers.length === 0}
+                    >
+                        {loading ? "Saving..." : "Save Availability"}
+                    </button>
+                </div>
+            </div>
+
+            {message && <p className={styles.message}>{message}</p>}
         </div>
     );
 }
