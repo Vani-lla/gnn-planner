@@ -225,12 +225,41 @@
             \item Wymagana tygodniowa liczba godzin każdego bloku.
         \end{itemize}
 
+        Efektem tych działań jest lista krotek takich wymagań oraz lista przypisań godzinowych.
+        \begin{itemize}
+            \item Lista bloków: $\left[\left(\text{Req 1}, \text{Req 2}, \text{Req 3}\right)\right]$
+            \item Macierz wymaganych odbytych godzin każdego bloku na przestrzeni tygodnia. 
+            \[V = \begin{bmatrix} v_1 & v_2 & \dots & v_B \end{bmatrix}, \quad \forall i \in \left\{1, 2, \dots, B\right\}, \quad v_i \in \mathbb{N} \]
+            gdzie $B$ to liczba bloków.
+        \end{itemize}
+        \[  \]
+
 \section{Algorytm ewolucyjny}
     \textit{Opowiedzenie czym jest algorytm ewolucyjny najlepiej w oparciu o jakąś pracę naukową.}
 
     \subsection{Cel algorytmu}
-        
+        Celem algorytmu jest przypisanie godzin lekcyjnych z macierzy $V$ do wszystkich roboczych dni tygodnia.
+        Polega to na stworzeniu 5 wartości całkowitoliczbowych, jednej dla każdego dnia, reprezentujących liczbę godzin, przez które będzie odbywał się dany blok lekcyjny.
+
     \subsection{Kodowanie}
+        Każdy osobnik jest reprezentowany przez macierz przypisań $P$ o wymiarach $5$ na $B$, gdzie $B$ reprezentuje liczbę wszystkich bloków.
+        \[ P = \begin{bmatrix}
+            p_{1,1} & p_{1,2} & p_{1,3} & \cdots & p_{1, B} \\
+            p_{2,1} & p_{2,2} & p_{2,3} & \cdots & p_{2, B} \\
+            p_{3,1} & p_{3,2} & p_{3,3} & \cdots & p_{3, B} \\
+            p_{4,1} & p_{4,2} & p_{4,3} & \cdots & p_{4, B} \\
+            p_{5,1} & p_{5,2} & p_{5,3} & \cdots & p_{5, B} \\
+        \end{bmatrix}\]
+        Taka reprezentacja pozwala na wygodne weryfikowanie ograniczeń:
+        \begin{enumerate}
+            \item Suma przypisań dla każdego dnia tygodnia musi być równa wymaganiom powstałych w wyniku działania poprzedniego algorytmu.
+            \[ \forall i \in \left\{1, 2, \dots, B\right\}, \quad \sum_{d=1}^{5} p_{d,i} = v_d\]
+            \item Maksymalna liczba poszczególnych bloków każdego dnia nie może być większa niż 2.
+            \[ \forall i \in \left\{1, 2, \dots, B\right\}, \forall \quad \sum_{d=1}^{5} p_{d,i} = v_d\]
+            \item Jeśli mamy do rozdzielenia 3 godziny danego bloku, to musiby je przydzielić do maksymalnie 2 dni.
+            \item Uczniowie i nauczyciele muszą mieć równomierny rozkład bloków na przestrzeni tygodnia.
+        \end{enumerate}
+        
     \subsection{Generowanie populacji}
     \subsection{Przystosowanie}
     \subsection{Krzyżowanie}

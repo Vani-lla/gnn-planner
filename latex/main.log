@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.11.11)  12 NOV 2025 23:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.11.13)  13 NOV 2025 16:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/vanilla/new-projects/inzynierka/latex/main.tex
-(/home/vanilla/new-projects/inzynierka/latex/main.tex
+**/home/igorz/Studia/gnn-planner/latex/main.tex
+(/home/igorz/Studia/gnn-planner/latex/main.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
 (/usr/share/texmf-dist/tex/latex/base/book.cls
@@ -1365,18 +1365,18 @@ Package pdftex.def Info: images/excel_wymagania.png  used on input line 77.
 
 [11]
 
-[12]) (./chapters/website.tex
+[12]
 
-[13]
+[13]) (./chapters/website.tex
 
-[14
-
-
-]
+[14]
 Chapter 4.
 ) (./chapters/testy.tex
 
-[15]
+[15
+
+
+]
 
 [16
 
@@ -1414,7 +1414,7 @@ Chapter 6.
 
 
 [23]
-runsystem(latexminted cleantemp  --timestamp 20251112232344 FAD58DE7366495DB4650CFEFAC2FCD61)...executed safely (allowed).
+runsystem(latexminted cleantemp  --timestamp 20251113161810 FAD58DE7366495DB4650CFEFAC2FCD61)...executed safely (allowed).
 
  (./main.aux)
  ***********
@@ -1429,18 +1429,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 8F32FAA6588D1F27CCB095530F242D79;10094.
  ) 
 Here is how much of TeX's memory you used:
- 30480 strings out of 475136
- 549923 string characters out of 5766290
+ 30486 strings out of 475136
+ 549952 string characters out of 5766290
  1160547 words of memory out of 5000000
  52625 multiletter control sequences out of 15000+600000
- 618885 words of font info for 152 fonts, out of 8000000 for 9000
+ 618976 words of font info for 153 fonts, out of 8000000 for 9000
  34 hyphenation exceptions out of 8191
- 99i,17n,96p,1045b,684s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on main.pdf (29 pages, 413603 bytes).
+ 99i,17n,96p,1038b,684s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (29 pages, 421474 bytes).
 PDF statistics:
- 601 PDF objects out of 1000 (max. 8388607)
- 529 compressed objects within 6 object streams
- 112 named destinations out of 1000 (max. 500000)
+ 611 PDF objects out of 1000 (max. 8388607)
+ 537 compressed objects within 6 object streams
+ 116 named destinations out of 1000 (max. 500000)
  33793 words of extra memory for PDF output out of 35830 (max. 10000000)
 
