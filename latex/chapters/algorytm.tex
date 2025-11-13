@@ -1,20 +1,235 @@
-\Chapter{Algorytm}\label{chapter:algorytm}
+\Chapter{Problem układania planu lekcji i algorytm jego rozwiązania}\label{chapter:algorytm}
+    Głównym elementem systemu jest wieloetapowy algorytm generowania planu lekcji.
+    Jego główna innowacja leży w dekompozycji oryginalnego zadania na trzy sekwencyjne fazy.
+    Zadaniem pierwszych dwóch jest zmniejszenie przestrzeni decyzyjnej do coraz mniejszej skali, tak aby w ostatniej fazie można było sformułować i rozwiązać problem programowania całkowitoliczbowego (MIP).
+    Rezultatem takiego podejścia jest redukcja liczby zmiennych decyzyjnych, potrzebnych do zdefiniowania ograniczeń w trzecim etapie.
+
+    Chociaż czyste podejście MIP prowadzi do teoretycznie optymalnych rozwiązań, w praktyce jego zastosowanie do pełnego problemu jest niemożliwe.
+    Złożoność obliczeniowa i pamięciowa przekracza możliwości przeciętnych komputerów, co uniemożliwia efektywny rozwój takiego rozwiązania.
+    Ponadto takie rozwiązanie jest też trudne do zaprogramowania ze względu na bloki lekcyjne.
+
+    Zaprezentowane podejście hybrydowe pozwala pokonać problem złożoności obliczeniowej, oferując praktyczny kompromis między optymalnością a czasem obliczeń.
+
+    \section{Sformułowanie problemu optymalizacyjnego}
+        Na potrzeby pracy warto ujednolicić terminologię, z uwagi na to, że w języku potocznym niektóre z tych terminów są używane zamiennie:
+        \begin{itemize}
+            \item \textbf{Klasa}: Grupa uczniów; przykładowo ``IIA'', ``IVC'', \dots
+            Ze względu na angielską nazwę \textit{class}, która koliduje ze składnią języków programowania, w kodzie często odnoszę się do klas jako \verb|student_group|.
+            \item \textbf{Sala}: Miejsce, w którym prowadzone są zajęcia; przykładowo ``Sala Gimnastyczna 1'', ``2'', \dots
+            \item \textbf{Przedmiot}: Temat zajęć prowadzonych przez nauczyciela; przykładowo ``Wychowanie Fizyczne'', ``Matematyka'', \dots
+            \item \textbf{Lekcja}: Zajęcia prowadzone przez jednego nauczyciela, w jednej sali, z jedną lub więcej klas, które są na temat jednego przedmiotu.
+            \item \textbf{Blok lekcyjny}: Grupa dwóch lub więcej lekcji, które są w tym samym okienku czasowym. 
+            Mogą one dotyczyć jednej klasy oraz wielu nauczycieli, jednego nauczyciela i wielu klas, lub też wielu klas i wielu nauczycieli.
+            \item \textbf{Okienko}: Przerwa między dwoma lekcjami klasy lub nauczyciela. Występuje gdy zajęcia nie są przeprowadzane bezpośrednio po sobie.
+        \end{itemize}
+
+        Problem optymalizacyjny w tej pracy polega na przypisaniu lekcji do odpowiednich slotów czasowych i sal przy jednoczesnym spełnieniu wymagań.
+        W rzeczywistości sformułowanie takiego zadania i wyznaczenie jego rozwiązania stanowi duże wyzwanie.
+        Istnieją ograniczenia, które są różne dla każdej klasy, co utrudnia formułowanie problemu --- wiele lekcji jest realizowanych w blokach, które są definiowane każdy z osobna.
+        Przez te wyjątki nie jest możliwym wykorzystanie prostych algorytmów.
+        Nie jest także możliwym rozwiązanie jednego wielkiego problemu programowania całkowitoliczbowego w sensownym czasie przy użyciu komputera z przeciętną specyfikacją.
+
+        \begin{samepage}
+            Oczekiwanym rezultatem działania algorytmu powinna być lista przypisań. Każde takie przypisanie powinno mieć 5 wartości:
+            \begin{enumerate}
+                \item Slot czasowy
+                \item Klasa
+                \item Sala
+                \item Nauczyciel
+                \item Przedmiot
+            \end{enumerate}
+            W przypadku lekcji, która obejmują więcej klas niż jedna, należy stworzyć przypisanie dla każdej klasy osobno.
+        \end{samepage}
+
+        \subsection{Ograniczenia}
+            Wcześniej wspomniane ograniczenia można podzielić na 4 kategorie:
+
+            \subsubsection{Ograniczenia fizyczne}
+                \begin{itemize}
+                    \item Żaden nauczyciel nie może być w 2 miejscach na raz.
+                    \item Nauczyciel musi być dostępny.
+                    Ze względu na charakter pracy nauczyciele często są zmuszeni do pracy w wielu miastach w wielu szkołach.
+                    Układając plan musimy brać pod uwagę ich dostępność.
+                    \item Żaden uczeń nie może być w 2 miejscach na raz.
+                    \item W żadnej sali nie mogą odbywać się 2 lekcje na raz.
+                \end{itemize}
+            
+            \subsubsection{Ograniczenia prawne}
+                \begin{itemize}
+                    \item Maksymalnie 9 godzin lekcyjnych dziennie.
+                    \item Nie więcej niż 2 godziny lekcyjne tego samego przedmiotu dziennie.
+                    \item Jeśli danego dnia mają zostać przeprowadzone 2 godziny jednego przedmiotu, to muszą one wystąpić bezpośrednio po sobie.
+                \end{itemize}
+
+            \subsubsection{Ograniczenia jakościowe}
+                \begin{itemize}
+                    \item Brak okienek dla uczniów.
+                    \item Równomierny rozkład godzin na przestrzeni tygodnia. Nie może wystąpić sytuacja gdzie jednego dnia uczeń ma dwie lekcje, a następnego dziesięć.
+                    \item Odpowiednie przypisanie sal. Lekcje wychowania fizycznego muszą odbyć się w przeznaczonych do tego salach, podobnie lekcji informatyki itd.
+                \end{itemize}
+            
+            \subsubsection{Ograniczenie główne}\label{subsubsection:ograniczenie_glowne}
+                Ilość godzin tygodniowo odbytych przez klasę z danym nauczycielem w ramach danego przedmiotu musi być równa ilości przypisanej w pierwszym etapie układania planu.
+                Aby łatwiej zrozumieć na czym polega takie przypisanie warto spojrzeć na dotychczasowy sposób przypisywania ilości godzin nauczycieli do klas (Rysunek~\ref{fig:excel_wymagania}) w liceum, które dostarczyło dane na potrzebu tej pracy.
+            
+                \begin{figure}[ht]
+                    \centering
+                    \includegraphics[width=0.9\textwidth]{images/excel_wymagania.png}
+                    \caption{Zrzut ekranu z arkusza kalkulacyjnego przedstawiąjący przypisanie godzinowe nauczycieli dla każdej klasy}\label{fig:excel_wymagania}
+                \end{figure}
+                Każdy nauczyciel jest przypisany do prowadzonych przez niego przedmiotów. 
+                Następnie w odpowiednim wierszu nauczyciela, pod odpowiednim przedmiotem, w kolumnie każdej klasy definiowana jest ilość godzin, która będzie poświęcona na prowadzenie tego przedmiotu.
+
+\section{Poprzednie podejścia}
+    Aby w pełni zrozumieć mój wybór narzędzi warto szybko przetoczyć historię moich poprzednich podejść do rozwiązania tego problemu.
+    
+    \subsection{Programowanie zero-jedynkowe}
+        Moim pierwszym podejściem była próba użycia tylko i wyłącznie solvera liniowego.
+        Użyłem w tym celu pakietu \textit{IBM ILOG CPLEX}.
+        Problem zdefiniowałem używając zmiennych binarnych, tworząc sześcio wymiarową macierz:
+        \begin{enumerate}
+            \item Wymiar nauczycieli
+            \item Wymiar klas
+            \item Wymiar przedmiotów
+            \item Wymiar dnia
+            \item Wymiar slotu czasowego
+            \item Wymiar sal
+        \end{enumerate}
+
+        Jak można zauważyć złożoność pamięciowa takiego podejścia uniemożliwia jego efektywne skalowanie.
+        Nawet dla danych średniej szkoły, mającej mniej niż 100 sal, nauczycieli, klas i przedmitów, taka macierz zajmowała setki GB pamięci RAM.
+        Rozwiązaniem tego problemu było zastosowanie słownika z wartościami jako zmienne binarne i kluczami jako krotki 6 liczb całkowitych.
+        W ten sposób pozbywam się wszystkich niemożliwych wartości, przykładowo wychowania fizycznego z nauczycielem matematyki.
+        Używając tej metody nadal możemy używać intuicji, która towarzyszy z macierzą.
+        Musimy tylko sprawdzać czy dane zmienne binarne faktycznie istnieją.
+
+        Jest to intuicyjny sposób poradzenia sobie z problemem harmonogramowania zajęć o stałem długości. 
+        Bardzo łatwo można definiować ograniczenia fizyczne. Przykładowo ograniczenie prowadzenia maksymalnie jednej lekcji dla wszystkich nauczycieli:
+        \[ \forall t \in \left\{0, 1, 2, \dots, t_\text{max}\right\} \quad \sum_{c=0}^{c_\text{max}} \sum_{s=0}^{s_\text{max}} \sum_{d=0}^{4} \sum_{h=0}^{h_\text{max}} \sum_{r=0}^{r_\text{max}} x_{t,c,s,d,h,r} = 1 \]
+        Gdzie:
+        \begin{itemize}
+            \item $t$ to indeks nauczyciela i $t_\text{max}$ to liczba nauczycieli minus jeden (indeksowanie zaczynamy od 0)
+            \item $c$ to indeks klasy i podobnie $c_\text{max}$ to liczba klas minus jeden
+            \item $d$ to dzień, gdzie 1 oznacza poniedziałek, a 4 piątek
+            \item $h$ to slot czasowy, a $h_\text{max}$ to horyzont
+            \item $r$ to indeks sali, a $r_\text{max}$ to liczba wszystkich sal minus jeden
+        \end{itemize}
+
+        Problemem tego rozwiązania jest niemożność wprowadzenia bloków lekcyjnych przy jednoczesnym zachowaniu prostoty obliczeniowej.
+        Bardzo ciężkim okazało się również wprowadzenie minimalizacji liczby okienek.
+        Zmienne binarne nie oferują wystarczającej wszechstronności.
+    
+    \subsection{Grafowe sieci neuronowe}
+        W odpowiedzi na problemy z MIP, zdecydowałem się na zbadanie alternatywnych metod rozwiązania.
+        Wybrałem niekonwencjonalną reprezentację problemu harmonogramowania używając grafowych sieci neuronowych~\cite{schlichtkrull2018modeling}.
+        W przyjętym modelu problem został przedstawiony w postaci grafu, gdzie węzły reprezentowały wymagania główne (\ref{subsubsection:ograniczenie_glowne}), 
+            a krawędzie łączyły zajęcia o tych samych nauczycielach lub tych samych klasach.
+        
+        Taka reprezentacja okazała się szczególnie atrakcyjna pod względem implementacji funkcji celu.
+        Ocena dopuszczalności rozwiązania sprowadzała się do weryfikacji spełnienia ograniczeń, które można było w prosty sposób zamodelować za pomocą funkcji kary
+        Jednocześnie można nagradzać model za przypisywanie lekcji do poprawnych bloków.
+        Początkowe rezultaty były bardzo obiecujące --- model już po kilkadziesięciu epokach wykazywał zdolność do identyfikowania, które lekcji powinny być w blokach, a które wymagają rozdzielenia w celu uniknięcia kolizji.
+
+        Główną wadą w tym podejściu okazał się brak gwarancji spełnienia ograniczeń twardych oraz trudności przy układaniu planu iteracyjnie (lekcja po lekcji).
+        Eksperymenty wykazały, że przy zastosowaniu zbyt wysokich współczynników kary, proces uczenia nie przynosił rezultatów. 
+        Zbyt niskie natomiast powodowały, że model preferował optymalizację nagrody za grupowanie lekcji kosztem naruszenia ograniczeń.
+
 \section{Wybór metod i technologi}
-    Dlaczego takie i takie i takie metody. Dlaczego GoogleORTools jako solver liniowy. Wcześniejsze podejścia i dlaczego są gorsze.
+    W świetle przeprowadzonych eksperymentów i poprzednich prób rozwiazania problemu zauważyłem, że poleganie wyłącznie na metodach inteligentnych lub MIP nie doprowadzi do sensownych rezultatów.
+    Zdecydowałem się na użycie:
+    \begin{itemize}
+        \item Algorytmu zachłannego do łączenia lekcji w bloki, gdyż jest to najefektywniejsza i najprostsza metoda do tego zadania.
+        \item Algorytmu ewolucyjnego do przydziału godzin do każdego dnia tygodnia.
+        \item Solvera liniwego do ułożenia samego planu dla każdego dnia tygodnia osobno.
+    \end{itemize}
+    Ze względu na prostotę integracji z backendem aplikacji użyłem języka programowania Python.
+    Otwarta natura narzędzia Google OR-Tools oraz jego wygodne API w Pythonie skłoniło mnie do decyzji przeciwko CPLEX i Gurobi.
+
+\section{Dane i parametry}
+    Opis działania algorytmu warto zacząć od przedstawienia sposobu reprezentacji wymagań w kodzie zaczynając od wymagań głównych.
+    Zaczynając procedurę generowania planu lekcji zaczynamy od pobrania z bazy danych odpowiednich rekordów.
+    Do otrzymanych w ten sposób rezultatów należy: lista wymagań głównych, lista nauczycieli, lista sal, lista klas, lista przedmiotów, lista dostępności nauczycieli, 
+
+    Podczas wszystkich etapów tworzenia planu lekcji mamy dostęp do list:
+    \begin{itemize}
+        \item ID nauczycieli,
+        \item ID klas,
+        \item ID przedmiotów,
+        \item ID sal.
+    \end{itemize}
+    Ponadto mamy do dyspozycji listę wymagań głównych, gdzie każde z nich jest reprezentowane klasą~\cite{djangomodeldocs} w Pythonie, która ma poniższe atrybuty:
+    \begin{itemize}
+        \item ID nauczyciela,
+        \item ID klasy,
+        \item ID przedmiotu,
+        \item niezerowa liczba godzin.
+    \end{itemize}
+    Każdy nauczyciel ma też zdefiniowaną dostępność, która jest reprezentowana przez macierz o wymiarach $T$ na $5$, gdzie $T$ to liczba wszystkich nauczycieli.
+    Macierz jest zero-jedynkowa, gdzie 1 oznacza, że $t$-ty nauczyciel jest dostępny $i$-tego dnia tygodnia, a 0 że nie jest dostepny.
+    \[ \begin{bmatrix}
+        x_{1,1} & x_{1,2} & x_{1,3} & x_{1,4} & x_{1,5} \\
+        x_{2,1} & x_{2,2} & x_{2,3} & x_{2,4} & x_{2,5} \\
+        \vdots & \vdots & \vdots & \vdots \\  \\
+        x_{T,1} & x_{T,2} & x_{T,3} & x_{T,4} & x_{T,5} \\
+    \end{bmatrix}, \quad \forall t \in \left\{1, 2, \dots, T\right\}, \forall i \in \left\{1, 2, 3, 4, 5\right\}, \quad x_{t, i} \in \left\{0, 1\right\} \]
+    W celu tworzenia bloków mamy także dostęp do klasy bloku przedmiotów, która ma następujące atrybuty:
+    \begin{itemize}
+        \item Listę ID przedmiotów.
+        \item Listę liczby tych przedmiotów w bloku.
+        \item Klas których dotyczy blok.
+        \item Wartość binarną informującą o tym czy blok jest \textit{agregujący}.
+        \item Liczbę naturalną z informacją o maksymalnej ilości takich bloków tygodniowo.
+    \end{itemize}
 
 \section{Struktura algorytmu}
-    Krótki opis i diagram(y) na temat etapów algorytmu
+    Pierwszy etap algorytmu służy do stworzenia bloków lekcyjnych.
 
 \section{Algorytm zachłanny}
+    \textit{Opowiedzenie czym jest algorytm zachłanny najlepiej w oparciu o jakąś pracę naukową.}
+
     \subsection{Bloki lekcyjne}
-        Pierwszym krokiem w moim rozwiązaniu jest tworzenie bloków tak jak panu opowiadałem. Przykładowo Franc+Niem+Rus
-    \subsection{Wpływ na złożoność problemu}
+        Operując na blokach lekcyjnych duży łatwiej zdefiniować ograniczenia fizyczne.
+        Weźmy na przykład 3 lekcje: Język Niemiecki, Język Francuski oraz Język Rosyjski.
+        Gdybyśmy mieli definiować dla nich ograniczenie określające, że żaden uczeń nie może mieć przypisanych dwóch lub więcej lekcji w tym samym czasie, musielibyśmy zapewnić, że żadna z tych lekcji nie pokrywa się z innymi lekcjami tej klasy, takimi jak Matematyka czy Fizyka, 
+            przy jednoczesnym zapewnieniu, że te lekcji mogą się na siebie nałożyć.
+        Te zajęcia stanowią obowiązkowy język dodatkowy, który uczniowie wybierają każdy z osobna.
+        Każdy uczeń może wybrać tylko jeden język, co za tym idzie lekcje mogą odbywać się niezależnie od siebie.
+        Grupując takie ograniczenia główne w bloki 3 lekcji możemy potraktować taki blok jak każdą inną lekcję przy definiowaniu ograniczeń ---
+        nie może być przypisany do tego samego slotu czasowego z żadną inną lekcją.
+
+        Następną zaletą jest prostota w projektowaniu ograniczeń dla lekcji, które odbywają się dla więcej niż jednej klasy.
+        Często w szkołach brakuje uczniów zapisanych na przykładowo Język Rosyjski w jednej klasie, aby uzasadnić indywidualną lekcję prowadzoną przez nauczyciela z tylko i wyłącznie jedną klasą.
+        W takich przypadkach szkoła definiuje lekcje, które nauczyciel prowadzi dla wielu klas jednocześnie.
+        Podobnie jak w poprzednim przykładzie, definiowanie ograniczeń dla każdej lekcji z osobna wiąże się z wyjątkami.
+        Jeśli natomiast połączymy wymagania główne dla paru klas w jeden blok, możemy go traktować tak jak każdą inną lekcję.
+
+        Kolejną zaletą tego rozwiązania jest możliwość łączenia bloków w jeszcze większe bloki.
+        Wyobraźmy sobie sytuację, w której mamy trzy klasy: IIIA, IIIB i IIIC, oraz 3 przedmioty do przeprowadzenia: Język Niemiecki, Język Francuski i Język Rosyjski.
+        Z uwagi na niską liczbę uczniów zapisanych na rosyjski i francuski te zajęcia sa prowadzone w następujących grupach:
+        \begin{itemize}
+            \item wszystkie 3 klasy mają razem Język Rosyjski,
+            \item klasa IIIA i IIIB mają razem Język Francuski, a klasa IIIC ma indywidualnie z innym nauczycielem,
+            \item każda klasa ma indywidualnie Język Niemiecki, z czego klasa IIIA i IIIC mają tego samego nauczyciela.
+        \end{itemize}
+        Jak można łatwo zauważyć wszystkie te lekcji poza jedną lekcją języka niemieckiego mogą odbyć się jednocześnie.
+        Po stworzeniu wieloklasowych bloków lekcyjnych możemy je łączyć dalej.
+        Język Rosyjski może być połączony z blokiem Języka Francuskiego dla klas IIIA i IIIB oraz lekcją klasy IIIC.
+        Do tego możemy też dodać dwie lekcje języka Niemieckiego pozostawiając ostatnią lekcję poza blokiem ze względu na kolizję nauczycieli.
+
     \subsection{Działanie}
+        \textit{Pseudokod i dokładne działanie.}
+
+        Ważnym jest wyjście tego algorytmu:
+        \begin{itemize}
+            \item Lista bloków,
+            \item Wymagana tygodniowa liczba godzin każdego bloku.
+        \end{itemize}
 
 \section{Algorytm ewolucyjny}
+    \textit{Opowiedzenie czym jest algorytm ewolucyjny najlepiej w oparciu o jakąś pracę naukową.}
+
     \subsection{Cel algorytmu}
-        Drugim krokiem jest przydział każdego bloku do odpowiedniego dnia.
-        W ten sposób rozbijam jeden wielki problem na 5 mniejszych problemów (jeden dla każdego dnia) którymi karmię solver liniowy.
+        
     \subsection{Kodowanie}
     \subsection{Generowanie populacji}
     \subsection{Przystosowanie}

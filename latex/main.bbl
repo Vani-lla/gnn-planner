@@ -1,23 +1,18 @@
 \begin{thebibliography}{1}
 
-\bibitem{babington2008}
-P.~Babington.
-\newblock {\em The title of the book}, chapter ,,The title of the chapter''.
-\newblock Wydawca, Wrocław, 2 edition, (2008).
+\bibitem{djangomodeldocs}
+D.~S. Foundation.
+\newblock Documentation, models, (2025).
+\newblock Ostatnio otworzono 12 listopada 2025.
 
-\bibitem{nowak2018}
-J.~Nowak.
-\newblock {\em The title of the book}.
-\newblock Wydawca, Wrocław, 2 edition, (2008).
+\bibitem{rappos2022mixed}
+E.~Rappos, E.~Thi{\'e}mard, S.~Robert, and J.-F. H{\^e}che.
+\newblock A mixed-integer programming approach for solving university course timetabling problems.
+\newblock {\em Journal of Scheduling}, 25(4):391--404, 2022.
 
-\bibitem{nowak2016}
-J.~Nowak and P.~Kowalczyk.
-\newblock The title of the article.
-\newblock {\em Journal Name}, 12234, (2016).
-
-\bibitem{w4n2017}
-W4n.
-\newblock Nazwa strony, (2017).
-\newblock Last accessed 16 September 2017.
+\bibitem{schlichtkrull2018modeling}
+M.~Schlichtkrull, T.~N. Kipf, P.~Bloem, R.~Van Den~Berg, I.~Titov, and M.~Welling.
+\newblock Modeling relational data with graph convolutional networks.
+\newblock In {\em European semantic web conference}, pages 593--607. Springer, 2018.
 
 \end{thebibliography}

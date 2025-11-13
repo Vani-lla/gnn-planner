@@ -18,8 +18,6 @@ def run_evolutionary_process(generations: int, req_set_id: int):
         for teacher in TEACHERS
     ])
     STUDENT_GROUPS = list(StudentGroup.objects.filter(pool=REQ_SET.group_pool))
-    
-    # for teacher in TEACHERS:
 
     # Generate blocks and evaluate population
     BLOCK_LIST, BLOCK_VAL = generate_blocks(REQUIREMENTS, REQ_SET, VALIDATION_HOURS)

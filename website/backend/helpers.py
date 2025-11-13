@@ -162,13 +162,13 @@ def generate_blocks(
     singular_blocks = [
         block
         for block in subject_blocks
-        if block.groups.count() == 1 or block.groups.count() > 14
+        if block.groups.count() == 1 or block.groups.count() > len(student_groups)//2
     ]
     multi_blocks = [
         block
         for block in subject_blocks
         if block.groups.count() != 1
-        and block.groups.count() <= 14
+        and block.groups.count() <= len(student_groups)//2
         and len([k for k, v in block.numbers.items() if v]) == 1
     ]
     combinatory_blocks = [

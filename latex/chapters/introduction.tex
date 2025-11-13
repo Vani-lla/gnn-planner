@@ -1,41 +1,65 @@
 \Chapter{Wstęp}\label{chapter:introduction}
-    \section{Wprowadzenie}
-        Jednym z corocznych wyzwań placówek oświatowych jest ułożenie dobrego planu lekcji. 
-        Jest to nierozłączny proces towarzyszący prowadzeniu szkoły, który do tej pory sprawia problemy nawet najlepszym ośrodkom.
-        Można go podzielić na 2 etapy:
+    Jednym z corocznych wyzwań placówek oświatowych jest ułożenie dobrego planu lekcji. 
+    Jest to nieodłączny proces towarzyszący prowadzeniu szkoły, który do tej pory sprawia problemy nawet najlepszym ośrodkom.
+    Można go podzielić na 2 etapy:
 
-        \begin{enumerate}
-            \item \textbf{Przydział godzinowy nauczycieli do każdej klasy.} Jeszcze przed tym jak wiadoma będzie dokładna ilość uczniów, a dostępne są jedynie prognozy,
-                potrzebnym jest stworzenie przydziału nauczycieli do klas. 
-                Jest to ważne choćby dlatego, aby zapewnić ciągłość nauczania jednego nauczyciela z roku na rok dla jednej klasy.
-            \item \textbf{Przydział lekcji do slotów czasowych i sal.} Mając już informację o ilości godzin lekcyjnych, które każda klasa musi odbyć z każdym nauczycielem, możemy przejść do tworzenia właściwego planu.
-                Głównym ograniczeniem jest stworzona w etapie 1.\ rozpiska. Istnieje jednak wiele innych ograniczeń, które sprawiają, że proces ręcznego układania takiego harmonogramu zajmuje niejednokrotnie dziesiątki godzin.
-                Przez to pierwszy miesiąc w szkołach bardzo często jest bardzo chaotyczny --- ciągłe zmiany godzin i sal.
-        \end{enumerate}
+    \begin{enumerate}
+        \item \textbf{Przydział godzinowy nauczycieli do każdej klasy.} Przydział nauczycieli do klas jest zadaniem, które wykonuje się przed rekrutacją.
+            W praktyce oznacza to rozpoczęcie pracy nad planem bez informacji o dokładnej ilości uczniów. 
+            Dostępne są jedynie prognozy które pozwalają na określenie ilości klas, co zapewnia to ciągłość nauczania jednego nauczyciela z roku na rok dla danej klasy.
+        \item \textbf{Przydział lekcji do slotów czasowych i sal.} Mając już informację o ilości godzin lekcyjnych, które każda klasa musi odbyć z każdym nauczycielem, możemy przejść do tworzenia właściwego planu.
+            Głównym ograniczeniem jest stworzona w etapie 1.\ rozpiska. Istnieje jednak wiele innych ograniczeń, które sprawiają, że proces ręcznego układania takiego harmonogramu zajmuje niejednokrotnie dziesiątki godzin.
+            W efekcie pierwszy miesiąc w szkołach bywa bardzo chaotyczny ze względu na ciągłe zmiany godzin i sal.
+    \end{enumerate}
 
-        Drugi etap jest niczym innym jak problemem harmonogramowania z twardymi i miękkimi ograniczeniami.
-        Na przestrzeni lat wykształcono wiele podejść do rozwiązywania takich problemów. 
-        Jednym z nich jest hybrodowe podejście, opierające się na jednoczesnym zastosowaniu metod sztucznej inteligencji oraz metod programowania całkowitoliczbowego.
-        Jedną z takich metod jest algorytm ewolucyjny, inspirowany biologiczną ewolucją.
-        Używa takich samych metod do tworzenia najlepszych osobników jak natura: mutacja, krzyżowanie i selekcja.
-        Zastosowanie takiego podejścia pozwala na stworzenie problemu liniowego, który można rozwiązać w satysfakcjonującym czasie.
-        Umożliwia to jednoczesne zachowanie wysokiej jakości rozwiązania, poprzez użycie solvera liniowego, oraz zmniejszenie czasu obliczeń w porównaniu do rozwiązań realizowanych tylko i wyłącznie przy użyciu programowania całkowitoliczbowego. 
+    Drugi etap jest niczym innym jak problemem harmonogramowania z twardymi i miękkimi ograniczeniami.
+    Na przestrzeni lat wykształcono wiele podejść do rozwiązywania takich problemów. 
+    Jednym z nich jest hybrodowe podejście, opierające się na jednoczesnym zastosowaniu metod sztucznej inteligencji oraz metod programowania całkowitoliczbowego.
+    Metodą którą będę realizował w tej pracy jest algorytm ewolucyjny, inspirowany biologiczną ewolucją.
+    Używa takich samych metod do tworzenia najlepszych osobników jak natura: mutacja, krzyżowanie i selekcja.
+    Zastosowanie takiego podejścia pozwala na stworzenie problemu liniowego, który można rozwiązać w satysfakcjonującym czasie.
+    Umożliwia to jednoczesne zachowanie wysokiej jakości rozwiązania, poprzez użycie solvera liniowego, oraz zmniejszenie czasu obliczeń w porównaniu do rozwiązań realizowanych tylko i wyłącznie przy użyciu programowania całkowitoliczbowego. 
     
     \section{Cel i zakres pracy}
-        Opracowanie algorytmu ewolucyjnego. Sformułowanie problemu liniowego. Implementacja rozwiązania w Google OR Tools. Przedstawienie dlaczego ta Googlowska biblioteka jest super do tego celu.
-        Faktyczna optymalizacja okienek nauczycieli w odróżnieniu do szukania możliwych rozwiązań.
+        Celem pracy jest opracowanie i stworzenie aplikacji webowej wspomagającej układanie planu lekcji.
+        Konieczne w tym celu jest:
+        \begin{itemize}
+            \item Zaprojektowanie i implementacja bazy danych do przechowywania ograniczeń, specyfikacji bloków lekcyjnych oraz końcowych wyników.
+            \item Zaprojektowanie i wykonanie interfejsu graficznego, pozwalającego użytkownikowi na wprowadzenie wszystkich potrzebnych ograniczeń oraz zobaczenie końcowego planu lekcji.
+            \item Zintegrowanie aplikacji webowej z algorytmem do układania planu lekcji, który będze używał algorytmu genetyczny, algorytmu zachłannego oraz solvera liniowego.
+        \end{itemize}
+        Aplikacja musi umożliwiać użytkownikowi na automatyczne generowanie planu na podstawie wprowadzonych danych.
+        Pod uwagę będą brane ogarniczenia fizyczne takie jak dostępność sal i kolizje zajęć, ograniczenia jakościowe takie jak ciągłośc zajęć, ale także ograniczenia definiowane przez użytkownika.
+        Realizując te ograniczenia algorytm powinien minimalizować ilość okienek nauczycieli, tak aby zmniejszyć czas spędzony przez nauczycieli w szkołach.
 
+        \textit{Coś o podejściu systemowym?}
+        Aplikacja będzie przetestowana na rzeczywistych danych, co pozowli na sprawdzenie rozwiązania i zweryfikowanie, czy algorytm nadaje się do układania tego typu planów.
 
-Nowe podejście do formułowania ograniczeń. Nietypowe dane wejściowe. Zastosowanie metody inteligentnej razem z solverem liniowym.
-Problemy rozwiązania. Użyte Technologie.
+    
+    \subsection{Dane wejściowe}
+        \textit{Napisałem tą sekcję jeszcze przed otrzymaniej maila od pana na temat zmiany struktury pracy, także nie wiem jeszcze gdzie ją dam}\\
 
+        Aby móc umożliwić użytkownikowi stworzenie ograniczenia głównego (\ref{subsubsection:ograniczenie_glowne}) potrzebujemy określonych danych wejściowych:
+        \begin{itemize}
+            \item Lista przedmiotów.
+            \item Lista nauczycieli oraz przedmioty, które mogą prowadzić.
+            \item Lista klas.
+        \end{itemize}
 
-\section{Sformułowanie problemu}
-Opisanie danych wejściowych i oczekiwanych danych wyjściowych.
-
-Odwołanie się do konkretnych danych które mam z liceum.
-
-Trzeba ułożyć plan, co jak się dowiedziałem --- jest całkiem trudne. Trzeba zaprojektować bazę danych. Stworzyć strony do aplikacji webowej. Stworzyć backend. Zintegrować wszystko.
+        \begin{samepage}
+            Mając te informacje użytkownik może stworzyć tabelę, która będzie służyć do wprowadzenia tygodniowych godzin lekcyjnych.
+            Nie jest to wystarczająco, aby ułożyć plan zajęć.
+            W tym celu potrzebujemy więcej informacji:
+            \begin{itemize}
+                \item Informacje o dostępności nauczyciela w dane dni.
+                \item Informacje o blokach lekcyjnych:
+                \begin{itemize}
+                    \item Jakie klasy mogą występować w jednych bloku.
+                    \item Jakie przedmioty mogą występować w jednym bloku.
+                \end{itemize}
+                \item Listę sal oraz przedmiotów, które mogą być w nich prowadzone.
+            \end{itemize}
+        \end{samepage}
 
 \section{Układ pracy}
 Zarysuj strukturę swojej pracy dyplomowej. Ogólnie przedstawienie pracy. Przykładowo: ,,Praca dzieli się na $7$ rozdziałów (\dots)''. Rozdział \ref{chapter:politechnika} dotyczy (\dots). Temat został rozwinięty~w~\ref{chapter:podrozdzial}.
