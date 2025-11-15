@@ -144,6 +144,7 @@ def import_requirements_csv(request):
     raw_first = first_row[1:]
     raw_second = second_row[1:]
     combined_names = [f"{a}_{b}" for a, b in zip(raw_first, raw_second)]
+    print(combined_names)
 
     # Existing groups in pool (dict by name)
     existing_groups = {g.name: g for g in StudentGroup.objects.filter(pool=group_pool)}
@@ -151,6 +152,8 @@ def import_requirements_csv(request):
     ordered_groups = [
         existing_groups[name] for name in combined_names if name in existing_groups
     ]
+    
+    print(list(existing_groups.keys()))
 
     subjects_cache = {s.name: s for s in Subject.objects.filter(pool=subject_pool)}
     teachers_cache = {t.name: t for t in Teacher.objects.filter(pool=teacher_pool)}

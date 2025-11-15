@@ -36,14 +36,24 @@ def get_group_block_indexes(
     return l
 
 
-def initialize_population(n: int, validation_hours, availability) -> np.ndarray:
+def initialize_population(
+    n: int, validation_hours: np.ndarray[int], availability: np.ndarray[bool]
+) -> np.ndarray[np.ndarray[int]]:
     population = []
     for _ in range(n):
         specimen = []
         for h, aval in zip(validation_hours, availability):
             day_distribution = np.zeros(5, dtype=int)
-            if h > 0 and any(aval):
-                valid_days = np.array(aval, dtype=bool)
+            valid_days = np.array(aval, dtype=bool)
+
+            if h == 3 and any(aval):
+                day_distribution = np.zeros(5, dtype=int)
+                valid_indices = np.where(valid_days)[0]
+                selected_indices = np.random.choice(valid_indices, size=2, replace=False)
+                day_distribution[selected_indices[0]] = 2
+                day_distribution[selected_indices[1]] = 1
+            
+            elif h > 0 and any(aval):
                 probabilities = valid_days / valid_days.sum()
                 day_distribution = np.random.multinomial(h, probabilities)
 
@@ -54,6 +64,8 @@ def initialize_population(n: int, validation_hours, availability) -> np.ndarray:
                         day_distribution[idx] = 2
                         redistribution = np.random.multinomial(excess, probabilities)
                         day_distribution += redistribution * valid_days
+            else:
+                print("xd")
 
             specimen.append(day_distribution)
         population.append(np.array(specimen).T)
@@ -162,20 +174,16 @@ def generate_blocks(
     singular_blocks = [
         block
         for block in subject_blocks
-        if block.groups.count() == 1 or block.groups.count() > len(student_groups)//2
+        if block.groups.count() == 1 or block.groups.count() > len(student_groups) // 2
     ]
     multi_blocks = [
         block
         for block in subject_blocks
         if block.groups.count() != 1
-        and block.groups.count() <= len(student_groups)//2
+        and block.groups.count() <= len(student_groups) // 2
         and len([k for k, v in block.numbers.items() if v]) == 1
     ]
-    combinatory_blocks = [
-        block
-        for block in subject_blocks
-        if block.power_block
-    ]
+    combinatory_blocks = [block for block in subject_blocks if block.power_block]
 
     multi_req_groups = []
     for block in multi_blocks:
@@ -491,8 +499,10 @@ def evaluate_population(
     """
     # Teacher day hours
     a1 = teacher_day_hours_population(block_list, req_set, population, teachers)
+    zeros = np.where(a1 == 0)
     # a1: np.ndarray = alphas[0] * (2 - np.abs(a1 - 7)) / len(teachers)
     a1: np.ndarray = alphas[0] * (-((7 - a1) ** 2) + 2) / len(teachers)
+    a1[zeros] = 0.0
 
     a1_ = a1.sum(axis=2)
     a1 = a1.sum(axis=(1, 2))
@@ -687,7 +697,14 @@ def mutate_population(
         for block_idx in range(n_blocks):
             total = block_val[block_idx]
             valid_days = availability[block_idx]
-            if total > 0 and valid_days.any():
+            if total == 3:
+                day_distribution = np.zeros(5, dtype=int)
+                valid_indices = np.where(valid_days)[0]
+                selected_indices = np.random.choice(valid_indices, size=2, replace=False)
+                day_distribution[selected_indices[0]] = 2
+                day_distribution[selected_indices[1]] = 1
+                mutated_population[specimen_idx, :, block_idx] = day_distribution
+            elif total > 0 and valid_days.any():
                 probabilities = valid_days / valid_days.sum()
                 new_distribution = np.random.multinomial(total, probabilities)
                 while np.any(new_distribution > 2):
@@ -792,7 +809,7 @@ def evolutionary_loop(
 
         # Convert the new population back to a NumPy array
         population = np.array(new_population)
-        population = mutate_population(population, block_val, availability, 0.2)
+        population = mutate_population(population, block_val, availability, 0.4)
         # population = add_integer_noise_batch(population)
 
         population = np.concatenate(

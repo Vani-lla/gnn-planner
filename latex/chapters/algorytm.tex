@@ -164,14 +164,14 @@
         \item ID przedmiotu,
         \item niezerowa liczba godzin.
     \end{itemize}
-    Każdy nauczyciel ma też zdefiniowaną dostępność, która jest reprezentowana przez macierz o wymiarach $T$ na $5$, gdzie $T$ to liczba wszystkich nauczycieli.
+    Każdy nauczyciel ma też zdefiniowaną dostępność, która jest reprezentowana przez macierz $A$ o wymiarach $T$ na $5$, gdzie $T$ to liczba wszystkich nauczycieli.
     Macierz jest zero-jedynkowa, gdzie 1 oznacza, że $t$-ty nauczyciel jest dostępny $i$-tego dnia tygodnia, a 0 że nie jest dostepny.
-    \[ \begin{bmatrix}
-        x_{1,1} & x_{1,2} & x_{1,3} & x_{1,4} & x_{1,5} \\
-        x_{2,1} & x_{2,2} & x_{2,3} & x_{2,4} & x_{2,5} \\
+    \[ A = \begin{bmatrix}
+        a_{1,1} & a_{1,2} & a_{1,3} & a_{1,4} & a_{1,5} \\
+        a_{2,1} & a_{2,2} & a_{2,3} & a_{2,4} & a_{2,5} \\
         \vdots & \vdots & \vdots & \vdots \\  \\
-        x_{T,1} & x_{T,2} & x_{T,3} & x_{T,4} & x_{T,5} \\
-    \end{bmatrix}, \quad \forall t \in \left\{1, 2, \dots, T\right\}, \forall i \in \left\{1, 2, 3, 4, 5\right\}, \quad x_{t, i} \in \left\{0, 1\right\} \]
+        a_{T,1} & a_{T,2} & a_{T,3} & a_{T,4} & a_{T,5} \\
+    \end{bmatrix}, \quad \forall t \in \left\{1, 2, \dots, T\right\}, \forall i \in \left\{1, 2, 3, 4, 5\right\}, \quad a_{t, i} \in \left\{0, 1\right\} \]
     W celu tworzenia bloków mamy także dostęp do klasy bloku przedmiotów, która ma następujące atrybuty:
     \begin{itemize}
         \item Listę ID przedmiotów.
@@ -229,39 +229,151 @@
         \begin{itemize}
             \item Lista bloków: $\left[\left(\text{Req 1}, \text{Req 2}, \text{Req 3}\right)\right]$
             \item Macierz wymaganych odbytych godzin każdego bloku na przestrzeni tygodnia. 
-            \[V = \begin{bmatrix} v_1 & v_2 & \dots & v_B \end{bmatrix}, \quad \forall i \in \left\{1, 2, \dots, B\right\}, \quad v_i \in \mathbb{N} \]
-            gdzie $B$ to liczba bloków.
+            \[ V = \begin{bmatrix} v_1 & v_2 & \cdots & v_N \end{bmatrix}, \quad \forall i \in \left\{1, 2, \dots, N\right\}, \quad v_i \in \mathbb{N} \]
+            gdzie $N$ to liczba wszystkich bloków.
+            \item Na potrzeby dalszych rozważań możemy przyjąć, że mamy dostęp także do macierzy
+            \[ B = \begin{bmatrix} b_1 & b_2 & \cdots & b_N \end{bmatrix}, \quad \forall i \in \left\{1, 2, \dots, N\right\}, \quad b_i \in \mathbb{N}^+ \]
+            gdzie $b_i$ to liczba wymagań w $i$-tym bloku. W faktycznym kodzie nie definiuję tej macierzy, tylko w razie potrzeby sprawdzam liczbę elementów w krotce.
         \end{itemize}
-        \[  \]
+        
 
 \section{Algorytm ewolucyjny}
     \textit{Opowiedzenie czym jest algorytm ewolucyjny najlepiej w oparciu o jakąś pracę naukową.}
 
     \subsection{Cel algorytmu}
-        Celem algorytmu jest przypisanie godzin lekcyjnych z macierzy $V$ do wszystkich roboczych dni tygodnia.
-        Polega to na stworzeniu 5 wartości całkowitoliczbowych, jednej dla każdego dnia, reprezentujących liczbę godzin, przez które będzie odbywał się dany blok lekcyjny.
+        Algorytm ma na celu przydział godzin lekcyjnych z macierzy bloków $V$ do pięciu roboczych dni tygodnia. 
+        Dla każdego bloku generowanych jest pięć wartości całkowitoliczbowych reprezentujących liczbę godzin lekcyjnych przydzielonych do poszczególnych dni, przy zachowaniu wymagań wynikających z poprzedniego etapu przetwarzania.
 
-    \subsection{Kodowanie}
-        Każdy osobnik jest reprezentowany przez macierz przypisań $P$ o wymiarach $5$ na $B$, gdzie $B$ reprezentuje liczbę wszystkich bloków.
-        \[ P = \begin{bmatrix}
-            p_{1,1} & p_{1,2} & p_{1,3} & \cdots & p_{1, B} \\
-            p_{2,1} & p_{2,2} & p_{2,3} & \cdots & p_{2, B} \\
-            p_{3,1} & p_{3,2} & p_{3,3} & \cdots & p_{3, B} \\
-            p_{4,1} & p_{4,2} & p_{4,3} & \cdots & p_{4, B} \\
-            p_{5,1} & p_{5,2} & p_{5,3} & \cdots & p_{5, B} \\
+    \subsection{Kodowanie}\label{subsection:kodowanie}
+    Każdy osobnik w populacji jest reprezentowany przez macierz przydziałów $S$ o wymiarach $5 \times N$.
+        \[ S = \begin{bmatrix}
+            s_{1,1} & s_{1,2} & s_{1,3} & \cdots & s_{1, B} \\
+            s_{2,1} & s_{2,2} & s_{2,3} & \cdots & s_{2, B} \\
+            s_{3,1} & s_{3,2} & s_{3,3} & \cdots & s_{3, B} \\
+            s_{4,1} & s_{4,2} & s_{4,3} & \cdots & s_{4, B} \\
+            s_{5,1} & s_{5,2} & s_{5,3} & \cdots & s_{5, B} \\
         \end{bmatrix}\]
-        Taka reprezentacja pozwala na wygodne weryfikowanie ograniczeń:
+        gdzie $s_{d,i}$ oznacza liczbę godzin $i$-tego bloku lekcyjnego przydzielonych do $d$-tego dnia tygodnia.
+
+        Tak przyjęta reprezentacja umożliwia prostą weryfikację następujących ograniczeń:
         \begin{enumerate}
-            \item Suma przypisań dla każdego dnia tygodnia musi być równa wymaganiom powstałych w wyniku działania poprzedniego algorytmu.
-            \[ \forall i \in \left\{1, 2, \dots, B\right\}, \quad \sum_{d=1}^{5} p_{d,i} = v_d\]
-            \item Maksymalna liczba poszczególnych bloków każdego dnia nie może być większa niż 2.
-            \[ \forall i \in \left\{1, 2, \dots, B\right\}, \forall \quad \sum_{d=1}^{5} p_{d,i} = v_d\]
-            \item Jeśli mamy do rozdzielenia 3 godziny danego bloku, to musiby je przydzielić do maksymalnie 2 dni.
-            \item Uczniowie i nauczyciele muszą mieć równomierny rozkład bloków na przestrzeni tygodnia.
+            \item Całkowita liczba godzin każdego bloku musi odpowiadać wymaganiom określonym w macierzy $V$.
+            \[ \forall i \in \left\{1, 2, \dots, B\right\}, \quad \sum_{d=1}^{5} p_{d,i} = v_i \]
+            \item Maksymalna liczba godzin danego bloku w pojedynczym dniu nie może być większa niż 2.
+            \[ \forall i \in \left\{1, 2, \dots, B\right\}, \forall d \in \left\{1, 2, 3, 4, 5\right\}, \quad p_{d, i} \leq 2 \]
+            \item Dla bloków 3-godzinnych konieczne jest przedzielenie 2 godzin do jednego dnia.
+            \[ \forall i \in \left\{1, 2, \dots, B\right\}, \quad v_{i} = 3 \implies \exists d \in \left\{1, 2, 3, 4, 5\right\} \text{ takie, że } s_{d, i} = 2 \]
         \end{enumerate}
         
-    \subsection{Generowanie populacji}
+    \subsection{Generowanie populacji początkowej}
+    Generowanie osobników odbywa się losowo z uwzględnieniem wymagań bloków oraz dostępności nauczycieli. 
+    Wykorzystuję w tym celu rozkład wielomianowy~\cite{feller1971introduction}, który zapewnia spełnienie podstawowych ograniczeń. 
+    Proces generowania pojedynczego osobnika składa się z następujących etapów wykonywanych dla każdego $i$-tego bloku:
+        \begin{enumerate}
+            \item \textbf{Zagregowanie dostępności nauczycieli:}\\
+            Dla każdego dnia wyznaczana jest dostępność wszystkich nauczycieli przypisanych do $i$-tego bloku.
+            \[ \forall d \in \left\{1, 2, 3, 4, 5\right\}, \quad a_d' = \bigwedge\limits_{j=1}^{b_i} a_{t_j,d} \]
+            gdzie $t_j$ to identyfikator $j$-tego nauczycielaw bloku. W dalszej części algorytmu wartości logiczne traktujemy jako wartości zerojedynkowe.
+            \item \textbf{Jeśli $v_i = 3$ to:}
+            \begin{enumerate}
+                \item $X_i \gets \begin{bmatrix} 0 & 0 & 0 & 0 & 0 \end{bmatrix}$
+                \item $k, l \gets \text{losowe dni, dla których } a'_i = a'_j = 1$
+                \item $x_k \gets 2, x_l \gets 1$
+            \end{enumerate}
+            Po wykonaniu tych kroków generowanie dla bieżącego bloku jest zakończone.
+            \item \textbf{Stworzenie macierzy prawdopodobieństw wystąpienia bloku w danym dniu:}\\
+            Tworzymy wektor prawdopodobieństw:
+            \begin{align*}
+                P &= \begin{bmatrix} \frac{a'_1}{\sum_{i=1}^{5}a'_i} & \frac{a'_2}{\sum_{i=1}^{5}a'_i} & \frac{a'_3}{\sum_{i=1}^{5}a'_i} & \frac{a'_4}{\sum_{i=1}^{5}a'_i} & \frac{a'_5}{\sum_{i=1}^{5}a'_i} \end{bmatrix} \\
+                P &= \begin{bmatrix} p_1 & p_2 & p_3 & p_4 & p_5 \end{bmatrix}
+            \end{align*}
+            tak stworzone prawdopodobieństwa zapewniają, że $p_d = 0$ jeśli którykolwiek nauczyciel jest niedostępny $d$-tego dnia oraz $\sum_{d=1}^{5} p_d = 1$.
+            \item \textbf{Losowanie z rozkładu wielomianowego:}\\
+            Korzystając z implementacji biblioteki \verb|numpy|~\cite{numpymultinomialdocs}, generowana jest próbka:
+            \[ \verb|numpy.random.multinomial(r,| \begin{bmatrix} p_1 & p_2 & \cdots & p_5 \end{bmatrix}\verb|)| \]
+            Wynikiem tej funkcji jest macierz $X_i = \begin{bmatrix} x_0 & x_1 & \cdots & x_5 \end{bmatrix}$, która ze względu na własności rozkładu spełnia:
+            \[ \begin{cases}
+                    x_d \in \mathbb{N} & \forall d \in \left\{1, 2, \dots, 5\right\} \\
+                    \sum_{d=1}^{5} x_d = v_i & 
+                \end{cases} \]
+            \item \textbf{Korekcja przekroczeń limitu dziennego:}\\
+            Dopóki $\exists d \in \left\{1, 2, 3, 4, 5\right\} : x_d > 2$:
+            \begin{enumerate}
+                \item Dla każdego $d \in \left\{1, 2, 3, 4, 5\right\}$ spełniającego $x_d > 2$:
+                \begin{enumerate}
+                    \item $X_i' \gets \verb|numpy.random.multinomial(|x_d - 2\verb|, |P\verb|)|$
+                    \item $x_d \gets 2$
+                    \item $X_i \gets X_i + X_i'$
+                \end{enumerate}
+            \end{enumerate}
+        \end{enumerate}
+        
+        Po wykonaniu powyższej procedury dla wszystkich bloków, uzyskane wektory $X_i$ łączy się w macierz:
+        \[ X = \begin{bmatrix} X_1 \\ X_2 \\ \vdots \\ X_N \end{bmatrix} \]
+        Osobnik populacji reprezentowany jest przez transpozycję tej macierzy: $S = X^T$.
+
     \subsection{Przystosowanie}
+        Ocena jakości osobników odbywa się na podstawie czterech niezależnych metryk:        
+        \begin{itemize}
+            \item Równomierność rozkładu godzin pracy nauczycieli w ciągu tygodnia
+            \item Równomierność rozkładu godzin lekcyjnych klas w ciągu tygodnia
+            \item Liczba dni, w których nauczyciele muszą pojawić się w szkole
+            \item Różnica między najdłuższym i najkrótszym dniem lekcyjnym dla klas
+        \end{itemize}
+        
+        W początkowej fazie prac wykorzystałem funkcję gęstości rozkładu normalnego z wartością oczekiwaną $\mu = 8$, co wynika z ośmiogodzinnego dnia pracy. 
+        Okazało się jednak, że takie podejście zapewniało wyłącznie nagrody, nie oferując mechanizmu karania niepożądanych rozwiązań.
+        Ograniczało to zdolność algorytmu do korekcji błędów.
+        W odpowiedzi na te wyzwania zaprojektowałem funkcję kwadratową:
+        \[ f(x) = -\left(7 - x\right)^2 + 2 \]
+
+        Jak widać na wykresie funkcji~\ref{fig:funkcja_rownomiernosc}, jej głównym zadaniem jest karanie dni o skrajnym obciążeniu dydaktycznym zarówno dla nauczycieli, jak i uczniów.
+        Wierzchołek funkcji umieściłem w punkcie $x = 7$, a nie $x = 8$, ponieważ pięciogodzinny dzień pracy jest znacznie bardziej akceptowalny niż dziesięciogodzinny.
+        Funkcja nagradza wartości z przedziału $(5, 9)$, przy czym wartości bliskie 7 otrzymują maksymalną ocenę.
+        Wartości spoza tego przedziału są znacząco karane, co zapewnia spełnienie dwóch kluczowych warunków: brak ponad dziesięciogodzinnych dni pracy dla nauczycieli oraz utrzymanie około siedmiogodzinnych dni lekcyjnych dla uczniów.
+
+        Nawet w przypadkach, gdy program nauczania przekracza $35$ godzin tygodniowo (co uniemożliwia dodatnią wartość tej funkcji przy równomiernym rozłożeniu), funkcja zachowuje swoją przydatność w zapewnianiu zgodności z wymaganiami równomiernych rozkładów godzin.
+        Ze względu na malejącą pochodną w przedziale $[7, +\infty)$, rozwiązania z jednym dniem 7-godzinnym kosztem dnia 11-godzinnego otrzymują gorszą ocenę niż rozwiązania z dwoma dniami 9-godzinnymi, co promuje bardziej zrównoważony rozkład obciążenia. będą gorzej oceniane niż osobniki z dwoma dniami o 9 godzinach.
+
+        \begin{figure}[h]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                    width=0.9\textwidth,
+                    height=8cm,
+                    axis lines = middle,
+                    xlabel = $x$,
+                    ylabel = $y$,
+                    xmin=0, xmax=14,
+                    ymin=-50, ymax=10,
+                    tick style={black},
+                    samples=100,
+                    domain=0:14,
+                ]
+                
+                    \addplot [blue, thick] {-(7-x)^2 + 2};
+                    \node at (axis cs:7,2) [above] {\((7,2)\)};
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Wykres funkcji użytej do ewaluacji rozkładu godzin nauczycieli i klas na przestrzeni tygodnia.}
+            \label{fig:funkcja_rownomiernosc}
+        \end{figure}
+
+        Ocena równomierności rozpoczyna się od obliczenia dla każdego nauczyciela wektora obciążenia godzinowego:
+        \[ \begin{bmatrix} t_{i,1} & t_{i,2} & t_{i,3} & t_{i,4} & t_{i,5} \end{bmatrix} \]
+        gdzie $t_{i,d}$ oznacza liczbę godzin lekcyjnych do przeprowadzenia $i$-tego nauczyciela $d$-tego dnia.
+        Następnie wyznaczam sumę wartości funkcji dla wszystkich argumentów tego wektora.
+        Problemem jest to, że osobniki są karane, kiedy zgodnie z przydziałem nauczyciel ma dzień wolny --- jest to niezgodne z założeniami.
+        Wolimy, aby nauczyciej miał cztery dni 8-godzinne niż pięć dni po 6 lub 7 godzin.
+        Aby osiągnąć taką właściwość zeruję wartość funkcji dla $x=0$, co skutkuje następującą funkcją:
+        \[
+            \begin{cases*}
+                f(x) = 0 & x = 0\\
+                f(x) = -\left(7-x\right)^2 + 2 & \text{ wpp.}\\
+            \end{cases*}
+        \]
+
+
     \subsection{Krzyżowanie}
     \subsection{Mutacja}
     \subsection{Jaki jest oczekiwany najlepszy osobnik}
