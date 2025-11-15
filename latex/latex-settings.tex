@@ -2,14 +2,14 @@
 
 % Podstawowe ustawienia języka, według którego formatowany będzie dokument
 %\usepackage[english,polish]{babel}
-\usepackage[english]{babel}
+\usepackage[polish]{babel}
 
 % Pakiet babel dla polskiego języka powoduje konflikt z pakietem amssymb.
 % Polecenie '\lll' definiują oba pakiety - porządana jest druga definicja.
 \let\lll\undefined
 
 % W przypadku wielojęzykowości ustawia główny język dokumentu
-\selectlanguage{english}
+\selectlanguage{polish}
 
 % Kodowanie dokumentu
 \usepackage[utf8]{inputenc} 
@@ -119,7 +119,7 @@
 \fancypagestyle{custom}{
 	\fancyhf{}									% wyczyść stopki i nagłówki
 	\fancyhead[RO]{								% Prawy, nieparzysty nagłówek
-		\hrulefill \hspace{16pt} \large Chapter \thechapter
+		\hrulefill \hspace{16pt} \large Rozdział \thechapter
 		\put(-471.5,5.5){%
 			\makebox(0,0)[l]{%
 				\small Politechnika Wrocławska
@@ -127,8 +127,8 @@
 		}
 	}
 	\fancyhead[LE]{								% Lewy, parzysty nagłówek
-		\large Chapter \thechapter \hspace{16pt} \hrulefill 
-		\put(-267,5.5){%
+		\large Rozdział \thechapter \hspace{16pt} \hrulefill 
+		\put(-188,5.5){%
 			\makebox(0,0)[l]{%
 				\small Wydział Informatyki i Telekomunikacji
 			}

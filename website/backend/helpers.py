@@ -49,10 +49,12 @@ def initialize_population(
             if h == 3 and any(aval):
                 day_distribution = np.zeros(5, dtype=int)
                 valid_indices = np.where(valid_days)[0]
-                selected_indices = np.random.choice(valid_indices, size=2, replace=False)
+                selected_indices = np.random.choice(
+                    valid_indices, size=2, replace=False
+                )
                 day_distribution[selected_indices[0]] = 2
                 day_distribution[selected_indices[1]] = 1
-            
+
             elif h > 0 and any(aval):
                 probabilities = valid_days / valid_days.sum()
                 day_distribution = np.random.multinomial(h, probabilities)
@@ -700,7 +702,9 @@ def mutate_population(
             if total == 3:
                 day_distribution = np.zeros(5, dtype=int)
                 valid_indices = np.where(valid_days)[0]
-                selected_indices = np.random.choice(valid_indices, size=2, replace=False)
+                selected_indices = np.random.choice(
+                    valid_indices, size=2, replace=False
+                )
                 day_distribution[selected_indices[0]] = 2
                 day_distribution[selected_indices[1]] = 1
                 mutated_population[specimen_idx, :, block_idx] = day_distribution
@@ -779,12 +783,14 @@ def evolutionary_loop(
 
         # Select the top 50% of the population
         top_half = population[: population_size // 2]
+        top_half_eval = evaluations[: population_size // 2]
+        p = np.exp(top_half_eval)/sum(np.exp(top_half_eval))
 
         # Breed the top 50% to create the next generation
         new_population = []  # Start with the best specimen
         while len(new_population) < population_size - 1:
             # Randomly select two parents from the top half
-            parent_indices = np.random.choice(len(top_half), 2, replace=False)
+            parent_indices = np.random.choice(len(top_half), 2, replace=False, p=p)
 
             parent1, parent2 = top_half[parent_indices]
             eval1, eval2 = evaluations[parent_indices]
