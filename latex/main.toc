@@ -14,20 +14,20 @@
 \contentsline {subsection}{\numberline {3.1.1}Ograniczenia}{6}{subsection.3.1.1}%
 \contentsline {subsubsection}{Ograniczenie główne}{7}{subsubsection*.1}%
 \contentsline {section}{\numberline {3.2}Poprzednie podejścia}{7}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Programowanie zero-jedynkowe}{8}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.1}Programowanie zero-jedynkowe}{7}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Grafowe sieci neuronowe}{9}{subsection.3.2.2}%
 \contentsline {section}{\numberline {3.3}Wybór metod i technologi}{9}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Dane i parametry}{9}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Struktura algorytmu}{10}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Algorytm zachłanny}{10}{section.3.6}%
+\contentsline {section}{\numberline {3.4}Dane i parametry}{10}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Struktura algorytmu}{11}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Algorytm zachłanny}{11}{section.3.6}%
 \contentsline {subsection}{\numberline {3.6.1}Bloki lekcyjne}{11}{subsection.3.6.1}%
-\contentsline {subsection}{\numberline {3.6.2}Działanie}{11}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.2}Działanie}{12}{subsection.3.6.2}%
 \contentsline {subsection}{\numberline {3.6.3}Przykładowe rezultaty}{13}{subsection.3.6.3}%
 \contentsline {section}{\numberline {3.7}Algorytm ewolucyjny}{13}{section.3.7}%
-\contentsline {subsection}{\numberline {3.7.1}Cel algorytmu}{13}{subsection.3.7.1}%
-\contentsline {subsection}{\numberline {3.7.2}Kodowanie}{13}{subsection.3.7.2}%
+\contentsline {subsection}{\numberline {3.7.1}Cel algorytmu}{14}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Kodowanie}{14}{subsection.3.7.2}%
 \contentsline {subsection}{\numberline {3.7.3}Generowanie populacji początkowej}{14}{subsection.3.7.3}%
-\contentsline {subsection}{\numberline {3.7.4}Przystosowanie}{15}{subsection.3.7.4}%
+\contentsline {subsection}{\numberline {3.7.4}Przystosowanie}{16}{subsection.3.7.4}%
 \contentsline {subsubsection}{Ocena względem nauczycieli}{16}{subsubsection*.4}%
 \contentsline {subsubsection}{Ocena względem klas}{17}{subsubsection*.5}%
 \contentsline {subsubsection}{Normalizacja i wagi}{17}{subsubsection*.6}%
@@ -35,7 +35,7 @@
 \contentsline {subsection}{\numberline {3.7.6}Krzyżowanie}{18}{subsection.3.7.6}%
 \contentsline {subsubsection}{Względem oceny nauczycieli}{18}{subsubsection*.7}%
 \contentsline {subsubsection}{Względem oceny klas}{19}{subsubsection*.8}%
-\contentsline {subsection}{\numberline {3.7.7}Mutacja}{19}{subsection.3.7.7}%
+\contentsline {subsection}{\numberline {3.7.7}Mutacja}{20}{subsection.3.7.7}%
 \contentsline {subsection}{\numberline {3.7.8}Przykładowe rezultaty}{20}{subsection.3.7.8}%
 \contentsline {section}{\numberline {3.8}Solver liniowy}{20}{section.3.8}%
 \contentsline {subsection}{\numberline {3.8.1}Czym są interwały}{21}{subsection.3.8.1}%

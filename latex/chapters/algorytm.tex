@@ -18,7 +18,8 @@
             \item \textbf{Sala}: Miejsce, w którym prowadzone są zajęcia; przykładowo ``Sala Gimnastyczna 1'', ``2'', \dots
             \item \textbf{Przedmiot}: Temat zajęć prowadzonych przez nauczyciela; przykładowo ``Wychowanie Fizyczne'', ``Matematyka'', \dots
             \item \textbf{Lekcja}: Zajęcia prowadzone przez jednego nauczyciela, w jednej sali, z jedną lub więcej klas, które są na temat jednego przedmiotu.
-            \item \textbf{Blok lekcyjny}: Grupa dwóch lub więcej lekcji, które są w tym samym okienku czasowym. 
+            \item \textbf{Slot czasowy}: Czas w którym odbywa się lekcja; przykładowo slot zerowy może odbywać się od 7:00 do 7:45.
+            \item \textbf{Blok lekcyjny}: Grupa dwóch lub więcej lekcji, które odbywają się w tym samym slocie czasowym.
             Mogą one dotyczyć jednej klasy oraz wielu nauczycieli, jednego nauczyciela i wielu klas, lub też wielu klas i wielu nauczycieli.
             \item \textbf{Okienko}: Przerwa między dwoma lekcjami klasy lub nauczyciela. Występuje gdy zajęcia nie są przeprowadzane bezpośrednio po sobie.
         \end{itemize}
@@ -41,6 +42,21 @@
             W przypadku lekcji, która obejmują więcej klas niż jedna, należy stworzyć przypisanie dla każdej klasy osobno.
         \end{samepage}
 
+        Proces tworzenia takich przypisań można rozbić na 3 etapy:
+        \begin{enumerate}
+            \item Tworzenie bloków lekcyjnych z ograniczeń głównych zdefiniowanych w~\ref{subsubsection:ograniczenie_glowne}:
+            \begin{itemize}
+                \item Łączenie ograniczeń głównych w lekcje międzyklasowe.
+                \item Łączenie lekcji międzyklasowych w bloki lekcyjne.
+                \item Łączenie ograniczeń głównych w bloki lekcyjne.
+            \end{itemize}
+            \item Przydział bloków lekcyjnych do poszczególnych dni tygodnia.
+            \begin{itemize}
+                \item Przykładowo: dwie godziny matematyki w poniedziałek, godzina matematyki w środę, dwie godziny matematyki w czwartek i zero w piątek.
+            \end{itemize}
+            \item Tworzenie przypisań dla każdego dnia tygodnia osobno.
+        \end{enumerate}
+
         \subsection{Ograniczenia}\label{subsection:ograniczenia}
             Wcześniej wspomniane ograniczenia można podzielić na 4 kategorie:
 
@@ -56,9 +72,8 @@
             
             \textbf{Ograniczenia prawne}~\cite{karta_nauczyciela, prawo_oswiatowe, obwieszczenie}
                 \begin{itemize}
-                    \item Maksymalnie 9 godzin lekcyjnych dziennie.
-                    \item Nie więcej niż 2 godziny lekcyjne tego samego przedmiotu dziennie.
-                    \item Jeśli danego dnia mają zostać przeprowadzone 2 godziny jednego przedmiotu, to muszą one wystąpić bezpośrednio po sobie.
+                    \item Uczeń nie może mieć więcej niż 2 godzin lekcyjnych tego samego przedmiotu dziennie.
+                    \item Jeśli danego dnia mają zostać przeprowadzone 2 godziny jednego przedmiotu, to uczeń musi je mieć bezpośrednio po sobie.
                 \end{itemize}
 
             \textbf{Ograniczenia jakościowe}
