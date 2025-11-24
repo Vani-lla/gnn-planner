@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{karta_nauczyciela}
 Ustawy karta nauczyciela z dnia 26 stycznia 1982r.
@@ -12,25 +12,35 @@ Ustawy prawo oświatowe z dnia 14 grudnia 2016r.
 Obwieszczenie ministra edukacji narodowej z dnia 4 września 2020 r. w sprawie ogłoszenia jednolitego tekstu rozporządzenia ministra edukacji narodowej i sportu w sprawie bezpieczeństwa i higieny w publicznych i niepublicznych szkołach i placówkach.
 \newblock Dz.U. 2020 poz. 1604, 2020.
 
+\bibitem{cormen2022introduction}
+T.~H. Cormen, C.~E. Leiserson, R.~L. Rivest, and C.~Stein.
+\newblock {\em Introduction to algorithms}.
+\newblock MIT press, 2022.
+
 \bibitem{numpymultinomialdocs}
 N.~Developers.
 \newblock Documentation, numpy.random.multinomial, (2025).
 \newblock Ostatnio otworzono 14 listopada 2025.
+
+\bibitem{eiben2015evolutionary}
+A.~E. Eiben and J.~E. Smith.
+\newblock What is an evolutionary algorithm?
+\newblock In {\em Introduction to evolutionary computing}, pages 15--35. Springer, 2015.
 
 \bibitem{feller1971introduction}
 W.~Feller et~al.
 \newblock {\em An introduction to probability theory and its applications}, volume 963.
 \newblock Wiley New York, 1971.
 
-\bibitem{djangomodeldocs}
-D.~S. Foundation.
-\newblock Documentation, models, (2025).
-\newblock Ostatnio otworzono 12 listopada 2025.
-
 \bibitem{googleortoolsintervalvar}
 Google.
 \newblock Documentation, or-tools - intervalvar, (2025).
 \newblock Ostatnio otworzono 15 listopada 2025.
+
+\bibitem{holland1992genetic}
+J.~H. Holland.
+\newblock Genetic algorithms.
+\newblock {\em Scientific american}, 267(1):66--73, 1992.
 
 \bibitem{rappos2022mixed}
 E.~Rappos, E.~Thi{\'e}mard, S.~Robert, and J.-F. H{\^e}che.
@@ -41,5 +51,10 @@ E.~Rappos, E.~Thi{\'e}mard, S.~Robert, and J.-F. H{\^e}che.
 M.~Schlichtkrull, T.~N. Kipf, P.~Bloem, R.~Van Den~Berg, I.~Titov, and M.~Welling.
 \newblock Modeling relational data with graph convolutional networks.
 \newblock In {\em European semantic web conference}, pages 593--607. Springer, 2018.
+
+\bibitem{xiong2022survey}
+H.~Xiong, S.~Shi, D.~Ren, and J.~Hu.
+\newblock A survey of job shop scheduling problem: The types and models.
+\newblock {\em Computers \& Operations Research}, 142:105731, 2022.
 
 \end{thebibliography}

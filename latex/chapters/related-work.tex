@@ -10,9 +10,56 @@
         Fajna praca~\cite{rappos2022mixed}, którą luźno się interesowałem --- też rozbijała problem na 2 etapy.
         Też stopniowo rozwiązywała problem i stopniowo dodawała ograniczenia do solvera liniowego.
 
+
+        Jak będzie trzeba więcej.
+
+    \section{Job-Shop Problem}
+        Problem harmonogramowania typu \textit{Job-Shop} (JSSP) jest jednym z najbardziej klasycznych i istotnych problemów optymalizacji kombinatorycznej w badaniach operacyjnych i zarządzaniu produkcją.
+        Ze względu na bardzo szerokie zastosowania inżynierskie był intensywnie studiowany przez wielu autorów.
+        Klasyczny wariant można opisać następująco~\cite{xiong2022survey}.
+
+        Posiadamy zbiór maszyn:
+        \[ M = \{ M_1, M_2, \dots, M_m \} \]
+        oraz zbiór zadań (prac):
+        \[ J = \{ J_1, J_2, \dots, J_n \}. \]
+        Każde zadanie (job) $J_i$ składa się z liniowo uporządkowanej sekwencji operacji:
+        \[ O_i = \{ O_{i1}, O_{i2}, \dots, O_{i n_i} \}, \]
+        które muszą zostać wykonane w ściśle określonej kolejności technologicznej:
+        \[ O_{i1} \prec O_{i2} \prec \dots \prec O_{i n_i}. \]
+
+        Każda operacja $O_{ij}$ jest przypisana do dokładnie jednej maszyny poprzez odwzorowanie:
+        \[ \mu : (i,j) \mapsto k \quad \text{tak że } O_{ij} \text{ musi być przetwarzana na } M_{\mu(i,j)}, \]
+        oraz posiada znany czas przetwarzania:
+        \[ p_{ij} \in \mathbb{N}^+. \]
+
+        Celem jest wyznaczenie kolejności (szeregowania) i czasów rozpoczęcia wszystkich operacji na maszynach tak, aby zminimalizować maksymalny czas zakończenia dowolnego zadania (tzw. \textit{makespan}):
+        \[ C_{\max} = \max_{i} C_i, \]
+        gdzie
+        \[ C_i = S_{i n_i} + p_{i n_i}, \]
+        a $S_{ij}$ oznacza czas rozpoczęcia operacji $O_{ij}$.
+
+        \paragraph{Zmienne decyzyjne.}
+        \[ S_{ij} \in \mathbb{N}_{0} \quad \forall i=1,\dots,n,\ \forall j=1,\dots,n_i. \]
+
+        \paragraph{Ograniczenia precedencji.}
+        \[ S_{i,j+1} \ge S_{ij} + p_{ij} \quad \forall i,\ \forall j=1,\dots,n_i-1. \]
+
+        \paragraph{Ograniczenia nieprzerywalności.}
+        Każda operacja po rozpoczęciu zajmuje swoją maszynę nieprzerwanie przez $p_{ij}$ jednostek czasu (modelowane implicit przez definicję przedziału $[S_{ij}, S_{ij}+p_{ij})$).
+
+        \paragraph{Ograniczenia dysjunktywne maszyn.}
+        Dla każdej pary różnych operacji $(O_{ij}, O_{kl})$ przypisanych do tej samej maszyny ($\mu(i,j)=\mu(k,l)=k$) zachodzi jedno z dwóch:
+        \[ S_{ij} + p_{ij} \le S_{kl} \ \lor\ S_{kl} + p_{kl} \le S_{ij}. \]
+        W liniowym sformułowaniu wprowadza się binarne zmienne $y_{(ij),(kl)}$:
+        \[
+            S_{ij} + p_{ij} \le S_{kl} + M \cdot y_{(ij),(kl)}, \quad
+            S_{kl} + p_{kl} \le S_{ij} + M \cdot (1 - y_{(ij),(kl)}),
+        \]
+        gdzie $M$ jest wystarczająco dużą stałą.
+
+        \paragraph{Funkcja celu.}
+        \[ \min C_{\max} \quad \text{przy} \quad C_{\max} \ge S_{i n_i} + p_{i n_i} \ \forall i. \]
+
 \section{Istniejące rozwiązania}
     \subsection{Vulcan}
     \subsection{Dobry Plan??}
-        Jak będzie trzeba więcej.
-    \subsection{Flow-shop scheduling}
-        Inspirowałem się rozwiązaniem tego problemu, więc warto zawrzeć.
