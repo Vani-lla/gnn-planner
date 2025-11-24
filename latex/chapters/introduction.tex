@@ -7,30 +7,32 @@
         \item \textbf{Przydział godzinowy nauczycieli do każdej klasy.} Przydział nauczycieli do klas jest zadaniem, które wykonuje się przed rekrutacją.
             W praktyce oznacza to rozpoczęcie pracy nad planem bez informacji o dokładnej ilości uczniów. 
             Dostępne są jedynie prognozy które pozwalają na określenie ilości klas, co zapewnia to ciągłość nauczania jednego nauczyciela z roku na rok dla danej klasy.
-        \item \textbf{Przydział lekcji do slotów czasowych i sal.} Mając już informację o ilości godzin lekcyjnych, które każda klasa musi odbyć z każdym nauczycielem, możemy przejść do tworzenia właściwego planu.
-            Głównym ograniczeniem jest stworzona w etapie 1.\ rozpiska. Istnieje jednak wiele innych ograniczeń, które sprawiają, że proces ręcznego układania takiego harmonogramu zajmuje niejednokrotnie dziesiątki godzin.
+        \item \textbf{Przypisania godzin rozpoczęcia i skończenia lekcji oraz sal, w których będą się odbywać.} Mając już informację o ilości godzin lekcyjnych, które każda klasa musi odbyć z każdym nauczycielem, możemy przejść do tworzenia właściwego planu.
+            Głównym ograniczeniem jest stworzony w etapie 1.\ przydział godzin. Istnieje jednak wiele innych ograniczeń, które sprawiają, że proces ręcznego układania takiego planu zajmuje niejednokrotnie dziesiątki godzin.
             W efekcie pierwszy miesiąc w szkołach bywa bardzo chaotyczny ze względu na ciągłe zmiany godzin i sal.
     \end{enumerate}
 
-    Drugi etap jest niczym innym jak problemem harmonogramowania z twardymi i miękkimi ograniczeniami.
-    Na przestrzeni lat wykształcono wiele podejść do rozwiązywania takich problemów. 
-    Jednym z nich jest hybrodowe podejście, opierające się na jednoczesnym zastosowaniu metod sztucznej inteligencji oraz metod programowania całkowitoliczbowego.
+    Drugi etap jest niczym innym jak harmonogramowaniem z twardymi i miękkimi ograniczeniami.
     Metodą którą będę realizował w tej pracy jest algorytm ewolucyjny, inspirowany biologiczną ewolucją.
     Używa takich samych metod do tworzenia najlepszych osobników jak natura: mutacja, krzyżowanie i selekcja.
-    Zastosowanie takiego podejścia pozwala na stworzenie problemu liniowego, który można rozwiązać w satysfakcjonującym czasie.
-    Umożliwia to jednoczesne zachowanie wysokiej jakości rozwiązania, poprzez użycie solvera liniowego, oraz zmniejszenie czasu obliczeń w porównaniu do rozwiązań realizowanych tylko i wyłącznie przy użyciu programowania całkowitoliczbowego. 
+    Zastosowanie takiego podejścia pozwala na zaprogramowanie problemu programowania liniowego, który można rozwiązać w satysfakcjonującym czasie.
+    Umożliwia to jednoczesne zachowanie wysokiej jakości rozwiązania, poprzez użycie pakietów optymalizacyjnych, oraz zmniejszenie czasu obliczeń w porównaniu do rozwiązań realizowanych tylko i wyłącznie przy użyciu programowania całkowitoliczbowego. 
     
     \section{Cel i zakres pracy}
-        Celem pracy jest opracowanie i stworzenie aplikacji webowej wspomagającej układanie planu lekcji.
+        Celem pracy jest opracowanie i stworzenie aplikacji webowej wspomagającej układanie planu lekcji,
+        która będzie wykorzystywać algorytm ewolucyjny przy automatycznej generacji planu. 
+        Aplikacja musi umożliwiać użytkownikowi na automatyczne generowanie planu na podstawie wprowadzonych danych.
+        Pod uwagę będą brane ogarniczenia fizyczne takie jak dostępność sal i kolizje zajęć, ograniczenia jakościowe takie jak ciągłośc zajęć, ale także ograniczenia definiowane przez użytkownika.
+        Realizując te ograniczenia algorytm powinien minimalizować ilość okienek nauczycieli, tak aby zmniejszyć czas spędzony przez nauczycieli w szkołach.
+
+        \newpage
+        \noindent
         Konieczne w tym celu jest:
         \begin{itemize}
             \item Zaprojektowanie i implementacja bazy danych do przechowywania ograniczeń, specyfikacji bloków lekcyjnych oraz końcowych wyników.
             \item Zaprojektowanie i wykonanie interfejsu graficznego, pozwalającego użytkownikowi na wprowadzenie wszystkich potrzebnych ograniczeń oraz zobaczenie końcowego planu lekcji.
             \item Zintegrowanie aplikacji webowej z algorytmem do układania planu lekcji, który będze używał algorytmu genetyczny, algorytmu zachłannego oraz solvera liniowego.
         \end{itemize}
-        Aplikacja musi umożliwiać użytkownikowi na automatyczne generowanie planu na podstawie wprowadzonych danych.
-        Pod uwagę będą brane ogarniczenia fizyczne takie jak dostępność sal i kolizje zajęć, ograniczenia jakościowe takie jak ciągłośc zajęć, ale także ograniczenia definiowane przez użytkownika.
-        Realizując te ograniczenia algorytm powinien minimalizować ilość okienek nauczycieli, tak aby zmniejszyć czas spędzony przez nauczycieli w szkołach.
 
         \textit{Coś o podejściu systemowym?}
         Aplikacja będzie przetestowana na rzeczywistych danych, co pozowli na sprawdzenie rozwiązania i zweryfikowanie, czy algorytm nadaje się do układania tego typu planów.
