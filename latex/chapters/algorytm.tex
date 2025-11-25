@@ -9,10 +9,10 @@
     \section{Sformułowanie problemu optymalizacyjnego}
         Na potrzeby pracy warto ujednolicić terminologię, z uwagi na to, że w języku potocznym niektóre z tych terminów są używane zamiennie:
         \begin{itemize}
-            \item \textbf{Klasa}: Grupa uczniów; przykładowo ``IIA'', ``IVC'', \dots
+            \item \textbf{Klasa}: Grupa uczniów; przykładowo ,,IIA'', ,,IVC'', \dots
             Ze względu na angielską nazwę \textit{class}, która koliduje ze składnią języków programowania, w kodzie często odnoszę się do klas jako \verb|student_group|.
-            \item \textbf{Sala}: Miejsce, w którym prowadzone są zajęcia; przykładowo ``Sala Gimnastyczna 1'', ``2'', \dots
-            \item \textbf{Przedmiot}: Temat zajęć prowadzonych przez nauczyciela; przykładowo ``Wychowanie Fizyczne'', ``Matematyka'', \dots
+            \item \textbf{Sala}: Miejsce, w którym prowadzone są zajęcia; przykładowo ,,Sala Gimnastyczna 1'', ,,2'', \dots
+            \item \textbf{Przedmiot}: Temat zajęć prowadzonych przez nauczyciela; przykładowo ,,Wychowanie Fizyczne'', ,,Matematyka'', \dots
             \item \textbf{Lekcja}: Zajęcia prowadzone przez jednego nauczyciela, w jednej sali, z jedną lub więcej klas, które są na temat jednego przedmiotu.
             \item \textbf{Slot czasowy}: Czas w którym odbywa się lekcja; przykładowo slot zerowy może odbywać się od 7:00 do 7:45.
             \item \textbf{Blok lekcyjny}: Grupa dwóch lub więcej lekcji, które odbywają się w tym samym slocie czasowym.
@@ -20,7 +20,7 @@
             \item \textbf{Okienko}: Przerwa między dwoma lekcjami klasy lub nauczyciela. Występuje gdy zajęcia nie są przeprowadzane bezpośrednio po sobie.
         \end{itemize}
 
-        Słownik oznaczeń:
+        Słownik oznaczeń:\label{slownik_oznaczen}
         \begin{itemize}
             \item $\mathcal{C}$ --- zbiór klas
             \item $\mathcal{T}$ --- zbiór nauczycieli  
@@ -140,7 +140,7 @@
             \subsubsection{Ograniczenia fizyczne}
                 \begin{itemize}
                     \item Żaden nauczyciel nie może być w 2 miejscach na raz.
-                    \[ \forall i, j \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}: \left(d_{z_i} = d_{z_j} \land h_{z_i} = h_{z_j} \land r_{z_i} \neq r_{z_j} \land i \neq j\right) \impliedby t_{z_i} \neq t_{z_j} \]
+                    \[ \forall i, j \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}: t_{z_i} \neq t_{z_j} \implies \left(d_{z_i} = d_{z_j} \land h_{z_i} = h_{z_j} \land r_{z_i} \neq r_{z_j} \land i \neq j\right) \]
                     \item Nauczyciel musi być dostępny.
                     \[ \forall i \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}: a_{t_{z_i},d_{z_i}} = 1 \]
                     Ze względu na charakter pracy nauczyciele często są zmuszeni do pracy w wielu miastach w wielu szkołach.
@@ -453,7 +453,7 @@
             % \end{enumerate}
 
         % \textbf{Procedura}\\
-        % Warto zwrócić uwagę na blok różnicę między ``blokiem przedmiotów'' a ``blokiem lekcyjnym''. Blok przedmiotów to byt, który jest definiowany przez uzytkownika w celu tworzenia przez algorytm bloków lekcyjnych.
+        % Warto zwrócić uwagę na blok różnicę między ,,blokiem przedmiotów'' a ,,blokiem lekcyjnym''. Blok przedmiotów to byt, który jest definiowany przez uzytkownika w celu tworzenia przez algorytm bloków lekcyjnych.
         % \begin{enumerate}
         %     \item Podzielenie bloków na 3 grupy:
         %     \begin{enumerate}
@@ -545,8 +545,8 @@
 
 \section{Algorytm ewolucyjny}
     Algorytm ewolucyjny jest populacyjną metodą przeszukiwania inspirowaną mechanizmami doboru naturalnego: selekcją, krzyżowaniem i mutacją.
-    Klasyczne podstawy teorii zaprezentował Holland~\cite{holland1992genetic}.
-    W odróżnieniu od podejść gradientowych lub zachłannych algorytm genetyczny eksploruje wiele konkurujących rozwiązań równolegle, co ułatwia balansowanie kilku kryteriów jakości oraz unikanie wczesnego utknięcia na lokalnych wierzchołkach funkcji celu.
+    Klasyczne podstawy teorii zaprezentował Holland w pracy ,,Genetic algorithms''~\cite{holland1992genetic}.
+    W odróżnieniu od podejść gradientowych lub zachłannych algorytm genetyczny eksploruje wiele konkurujących rozwiązań równolegle oraz uniknięcie wczesnego utknięcia na lokalnych wierzchołkach funkcji celu.
 
     W mojej pracy algorytm ewolucyjny pełni rolę drugiego etapu dekompozycji: po redukcji problemu do listy bloków lekcyjnych pozostaje dyskretne zadanie rozdziału tygodniowych godzin każdego bloku na pięć dni roboczych przy prostych ograniczeniach.
 
@@ -561,7 +561,7 @@
     Ogólna struktura algorytmu:
     \begin{center}
         \begin{algorithm}[H]
-            \caption{``The general scheme of an evolutionary algorithm in pseudocode''\cite{eiben2015evolutionary}}
+            \caption{,,The general scheme of an evolutionary algorithm in pseudocode''\cite{eiben2015evolutionary}}
             \SetAlgoLined
             
             INITIALISE population with random individuals\;
@@ -776,7 +776,7 @@
             gdzie $\left|\mathcal{C}\right|$ to liczba wszystkich klas.
 
         \subsubsection{Normalizacja i wagi}
-            Wyznaczanie końcowej wartości funkcji przystosowania wymaga uwzględnienia stosuneku liczby nauczycieli do liczby uczniów.
+            Wyznaczanie końcowej wartości funkcji przystosowania wymaga uwzględnienia stosunku liczby nauczycieli do liczby uczniów.
             W typowych placówkach oświatowych liczba nauczycieli przywyższa liczbę klas.
             Bezpośrednie dodawanie ocen $F_{c_T} + F_{c_G}$ prowadziłoby do znaczącej dominacji oceny nauczycieli w ocenie końcowej.
             W celu rozwiązania tego problemu zastosowałem normalizację poprzez dzielenie każdej składowej przez odpowiednio $\left|\mathcal{T}\right|$ i $\left|\mathcal{C}\right|$.
@@ -893,7 +893,7 @@
     \subsection{Przykładowe rezultaty}
         \textit{Przykładowe macierze z opisami}
 
-\section{Solver programowania liniowego z ograniczeniami}
+\section{Solver programowania liniowego z ograniczeniami}\label{section:solver}
     W trzecim etapie algorytmu wykorzystuję solver programowania liniowego z ograniczeniami (Constraint Programming --- CP), konkretnie implementację CP-SAT z pakietu \textit{Google OR-Tools}.
     W odróżnieniu od czystego programowania liniowego (MIP), solver CP operuje na szerszej klasie ograniczeń, w tym na zmiennych interwałowych, co czyni go idealnym narzędziem do problemów harmonogramowania.
     W odpowiedzi na wyzwania napotkane w podejściu opisanym w podrozdziale~\ref{subsection:podejscie_zerojedynkowe} zdecydowałem się na wykorzystanie zmiennych interwałowych opisanych w dokumentacji OR-Tools~\cite{googleortoolsintervalvar}. 
@@ -903,7 +903,6 @@
             \item \textbf{Naturalne modelowanie}: Zmienne interwałowe bezpośrednio reprezentują zajęcia o określonym czasie rozpoczęcia i zakończenia.
             \item \textbf{Efektywność pamięciowa}: W porównaniu z reprezentacją binarną z podrozdziału~\ref{subsection:podejscie_zerojedynkowe}, podejście interwałowe redukuje liczbę zmiennych decyzyjnych.
             \item \textbf{Specjalizowane ograniczenia}: Solver oferuje gotowe implementacje ograniczeń typowych dla harmonogramów --- nakładanie się.
-            \item \textbf{Szybkość rozwiązywania}: Algorytmy propagacji ograniczeń efektywnie zawężają przestrzeń poszukiwań.
         \end{itemize}
 
     Proces jest wykonywany niezależnie dla każdego dnia tygodnia $d \in \{1,2,3,4,5\}$, reprezentowanego przez wiersze macierzy $S_{\text{best}}$.

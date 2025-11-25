@@ -1,65 +1,298 @@
 \Chapter{Powiązane prace}\label{chapter:related}
-    Na przestrzeni lat wykształcono wiele podejść do rozwiązywania takich problemów. 
-    Jednym z nich jest hybrodowe podejście, opierające się na jednoczesnym zastosowaniu metod sztucznej inteligencji oraz metod programowania całkowitoliczbowego.
+    Struktura rozdziału?
 
-    \section{A mixed-integer programming approach for solving university course timetabling problems.}
-        Rappos, E., Thiémard, E., Robert, S. and Hêche, J.F., 2022.
-        A mixed-integer programming approach for solving university course timetabling problems.
-        Journal of Scheduling, 25(4), pp.391-404.
+    \section{Inspiracja podejściem iteracyjnym}
+        Praca ,,A mixed-integer programming approach for solving university course timetabling problems''~\cite{rappos2022mixed} przedstawia innowacyjne podejście do rozwiązywania problemów harmonogramowania poprzez dekompozycję na prostsze podproblemy i iteracyjne dodawanie ograniczeń. 
+        Autorzy wykorzystują strategię polegającą na:
+        \begin{enumerate}
+            \item Uzyskaniu rozwiązania początkowego z podstawowym zestawem ograniczeń
+            \item Iteracyjnym ,,wstrzykiwaniu'' kolejnych ograniczeń z wykorzystaniem zmiennych sztucznych
+            \item Stosowaniu heurystyk redukcji zmiennych dla kontroli złożoności obliczeniowej
+            \item Utrzymywaniu wykonalności rozwiązania na każdym etapie
+        \end{enumerate}
 
-        Fajna praca~\cite{rappos2022mixed}, którą luźno się interesowałem --- też rozbijała problem na 2 etapy.
-        Też stopniowo rozwiązywała problem i stopniowo dodawała ograniczenia do solvera liniowego.
+        \subsection{Adaptacja}
+            W mojej pracy zaadaptowałem i rozwinąłem tę fundamentalną ideę, dostosowując ją do specyfiki problemu układania planu lekcji.
 
+            \subsubsection{Dekompozycja problemu}
+                Podobnie jak w pracy źródłowej, gdzie autorzy rozbijają problem na warstwy ograniczeń, w moim rozwiązaniu zastosowałem trójetapową dekompozycję:
+                \[ \text{Problem pełny} \longrightarrow \text{Etap 1} \longrightarrow \text{Etap 2} \longrightarrow \text{Etap 3} \]
+                gdzie każdy etap rozwiązuje wyraźnie wydzielony podproblem o mniejszej złożoności.
 
-        Jak będzie trzeba więcej.
+            \subsubsection{Rozwiązanie początkowe z prostymi ograniczeniami}
+                Analogicznie do podejścia z tej pracy, gdzie zaczynają od podstawowych ograniczeń równościowych, w moim algorytmie:
+                \begin{itemize}
+                    \item \textbf{Etap 1 (algorytm zachłanny)}: Koncentruje się wyłącznie na ograniczeniach głównych i strukturalnych bloków lekcyjnych~(\ref{slownik_oznaczen}):
+                    \[ \mathcal{L} = \text{Greedy}(\mathcal{W}, \mathcal{B}) \]
+                    pomijając tymczasowo ograniczenia czasowe i przestrzenne.
+                    \item \textbf{Etap 2 (algorytm ewolucyjny)}: Dodaje ograniczenia dostępności nauczycieli i równomierności rozkładu:
+                    \[ S_{\text{best}} = \text{Evolutionary}(\mathcal{L}, V, A) \]
+                    ale wciąż operuje na poziomie dni, a nie konkretnych slotów czasowych.
+                \end{itemize}
+
+            \subsubsection{Hierarchiczna dekompozycja problemu}
+                Podczas gdy w pracy~\cite{rappos2022mixed} dekompozycja dotyczy głównie warstw ograniczeń, w moim rozwiązaniu wprowadziłem dekompozycję całego problemu:
+                \begin{align*}
+                    \text{Poziom 1:} & \quad \text{Struktura bloków lekcyjnych } \mathcal{L} \\
+                    \text{Poziom 2:} & \quad \text{Rozkład tygodniowy } S_{\text{best}} \\
+                    \text{Poziom 3:} & \quad \text{Przypisania szczegółowe } \mathcal{Z}
+                \end{align*}
+
+            Każdy poziom rozwiązuje inny problem i wykorzystuje odpowiednie do tego celu algorytmy.
+
+            \subsubsection{Kombinacja metod optymalizacyjnych}
+                W odróżnieniu od pracy źródłowej, która wykorzystuje wyłącznie solver MIP z heurystykami, w moim podejściu zastosowałem wiele technik:
+                \begin{itemize}
+                    \item \textbf{Algorytm zachłanny} --- dla problemów konstrukcyjnych (tworzenie bloków)
+                    \item \textbf{Algorytm ewolucyjny} --- dla dyskretnego przydziału bloków do dni
+                    \item \textbf{Solver CP} --- dla problemów szeregowania
+                \end{itemize}
+
+        \subsection{Korzyści z podejścia iteracyjnego}
+            \subsubsection{Redukcja złożoności obliczeniowej}
+                Pełny problem harmonogramowania wymagałby liczby zmiennych decyzyjnych proporcjonalnych do:
+                \[ |\mathcal{T}| \times |\mathcal{C}| \times |\mathcal{S}| \times 5 \times H \times |\mathcal{R}| \]
+                co dla typowej szkoły daje setki milionów potencjalnych zmiennych.
+
+                W podejściu dekompozycyjnym:
+                \begin{itemize}
+                    \item \textbf{Etap 1}: Operuje na $|\mathcal{W}|$ wymaganiach
+                    \item \textbf{Etap 2}: Operuje na $5 \times |\mathcal{L}|$ zmiennych
+                    \item \textbf{Etap 3}: Rozwiązuje 5 niezależnych podproblemów o rozmiarze 20\% oryginalnego problemu
+                \end{itemize}
+
+                Każdy etap można modyfikować lub wymieniać niezależnie. Jest to ważna zaleta podczas rozwijania oprogramowania.
+                W szczególności jeśli takie oprogramowanie może być w przyszłości rozwijane przez więcej niż jednego dewelopera.
+
+                Podejście dekompozycyjne zaprezentowane zarówno w pracy \cite{rappos2022mixed}, jak i w mojej pracy, demonstruje fundamentalną zasadę inżynierii oprogramowania: ,,dziel i zwyciężaj''.
 
     \section{Job-Shop Problem}
         Problem harmonogramowania typu \textit{Job-Shop} (JSSP) jest jednym z najbardziej klasycznych i istotnych problemów optymalizacji kombinatorycznej w badaniach operacyjnych i zarządzaniu produkcją.
         Ze względu na bardzo szerokie zastosowania inżynierskie był intensywnie studiowany przez wielu autorów.
         Klasyczny wariant można opisać następująco~\cite{xiong2022survey}.
-
+    
         Posiadamy zbiór maszyn:
         \[ M = \{ M_1, M_2, \dots, M_m \} \]
         oraz zbiór zadań (prac):
         \[ J = \{ J_1, J_2, \dots, J_n \}. \]
         Każde zadanie (job) $J_i$ składa się z liniowo uporządkowanej sekwencji operacji:
         \[ O_i = \{ O_{i1}, O_{i2}, \dots, O_{i n_i} \}, \]
-        które muszą zostać wykonane w ściśle określonej kolejności technologicznej:
+        które muszą zostać wykonane w ściśle określonej kolejności:
         \[ O_{i1} \prec O_{i2} \prec \dots \prec O_{i n_i}. \]
-
-        Każda operacja $O_{ij}$ jest przypisana do dokładnie jednej maszyny poprzez odwzorowanie:
-        \[ \mu : (i,j) \mapsto k \quad \text{tak że } O_{ij} \text{ musi być przetwarzana na } M_{\mu(i,j)}, \]
-        oraz posiada znany czas przetwarzania:
+    
+        Każda operacja $O_{ij}$ jest przypisana do dokładnie jednej maszyny oraz posiada znany czas przetwarzania:
         \[ p_{ij} \in \mathbb{N}^+. \]
-
-        Celem jest wyznaczenie kolejności (szeregowania) i czasów rozpoczęcia wszystkich operacji na maszynach tak, aby zminimalizować maksymalny czas zakończenia dowolnego zadania (tzw. \textit{makespan}):
-        \[ C_{\max} = \max_{i} C_i, \]
+    
+        Celem jest wyznaczenie kolejności (szeregowania) i czasów rozpoczęcia wszystkich operacji na maszynach tak, aby zminimalizować maksymalny czas zakończenia dowolnego zadania (ang. \textit{makespan}):
+        \[ C_{\max} = \max_{i} C_i \]
         gdzie
-        \[ C_i = S_{i n_i} + p_{i n_i}, \]
+        \[ C_i = S_{i n_i} + p_{i n_i} \]
         a $S_{ij}$ oznacza czas rozpoczęcia operacji $O_{ij}$.
-
-        \paragraph{Zmienne decyzyjne.}
+    
+        Zmienne decyzyjne:
         \[ S_{ij} \in \mathbb{N}_{0} \quad \forall i=1,\dots,n,\ \forall j=1,\dots,n_i. \]
-
-        \paragraph{Ograniczenia precedencji.}
-        \[ S_{i,j+1} \ge S_{ij} + p_{ij} \quad \forall i,\ \forall j=1,\dots,n_i-1. \]
-
-        \paragraph{Ograniczenia nieprzerywalności.}
-        Każda operacja po rozpoczęciu zajmuje swoją maszynę nieprzerwanie przez $p_{ij}$ jednostek czasu (modelowane implicit przez definicję przedziału $[S_{ij}, S_{ij}+p_{ij})$).
-
-        \paragraph{Ograniczenia dysjunktywne maszyn.}
-        Dla każdej pary różnych operacji $(O_{ij}, O_{kl})$ przypisanych do tej samej maszyny ($\mu(i,j)=\mu(k,l)=k$) zachodzi jedno z dwóch:
+    
+        Ograniczenia precedencji:
+        \[ S_{i,j+1} \ge S_{ij} + p_{ij} \quad \forall i,j = 1,\dots,n_i-1. \]
+    
+        Dla każdej pary różnych operacji $(O_{ij}, O_{kl})$ przypisanych do tej samej maszyny zachodzi jedno z dwóch:
         \[ S_{ij} + p_{ij} \le S_{kl} \ \lor\ S_{kl} + p_{kl} \le S_{ij}. \]
-        W liniowym sformułowaniu wprowadza się binarne zmienne $y_{(ij),(kl)}$:
-        \[
-            S_{ij} + p_{ij} \le S_{kl} + M \cdot y_{(ij),(kl)}, \quad
-            S_{kl} + p_{kl} \le S_{ij} + M \cdot (1 - y_{(ij),(kl)}),
-        \]
-        gdzie $M$ jest wystarczająco dużą stałą.
+    
+        Funkcja celu:
+        \[ F_c = \min C_{\max} \quad \text{przy} \quad C_{\max} \ge S_{i n_i} + p_{i n_i} \ \forall i \]
+    
+        \subsection{Podobieństwa do problemu układania planu lekcji}
+            Problem harmonogramowania dla szkół można rozpatrywać jako specyficzną odmianę JSSP z wieloma zasobami. 
+            Podstawowe podobieństwa strukturalne obejmują:
+    
+            \subsubsection{Struktura zasobów}
+                W JSSP mamy zbiór maszyn $M$, natomiast w problemie planu lekcji dysponujemy trzema typami zasobów:
+                \[ \left\{\mathcal{T}, \mathcal{C}, \mathcal{R}\right\} \]
+                gdzie:
+                \begin{itemize}
+                    \item $\mathcal{T}$ --- zbiór nauczycieli (maszyny typu ,,nauczyciel'')
+                    \item $\mathcal{C}$ --- zbiór klas (maszyny typu ,,klasa)'' 
+                    \item $\mathcal{R}$ --- zbiór sal (maszyny typu ,,sala'')
+                \end{itemize}
+    
+            \subsubsection{Struktura zadań}
+            W klasycznym JSSP zadania $J_i$ składają się z operacji $O_{ij}$. W problemie planu lekcji:
+            \[ \text{Lekcja } z_i = (d_i, h_i, c_i, t_i, s_i, r_i) \]
+            można traktować jako operację wymagającą jednoczesnego dostępu do trzech zasobów: nauczyciela, klasy i sali.
+            gdzie $d_i$ to dzień lekcji, $h_i$ to godzina rozpoczęcia lekcji, $c_i$ to klasa, $t_i$ to nauczyciel, $s_i$ to przedmiot, a $r_i$ to sala.
+    
+            \subsubsection{Ograniczenia nakładania się}
+            Analogia do ograniczenia w JSSP:
+            \[ \forall \text{pary lekcji } (z_i, z_j) \text{ współdzielących zasób } \mathcal{R}: \]
+            \[ h_i \neq h_j \ \lor \ d_i \neq d_j \ \lor \ r_i \neq r_j \]
+            co odpowiada warunkowi w JSSP:
+            \[ S_{ij} + p_{ij} \le S_{kl} \ \lor\ S_{kl} + p_{kl} \le S_{ij} \]
 
-        \paragraph{Funkcja celu.}
-        \[ \min C_{\max} \quad \text{przy} \quad C_{\max} \ge S_{i n_i} + p_{i n_i} \ \forall i. \]
+            Analogiczne ograniczenia należałoby definiować dla pozostałych zasobów $\mathcal{T}$ i $\mathcal{C}$.
+    
+            \subsubsection{Reprezentacja interwałowa}
+            Kluczowym podobieństwem jest wykorzystanie zmiennych interwałowych. W JSSP operację $O_{ij}$ reprezentujemy jako interwał:
+            \[ I_{ij} = (S_{ij}, p_{ij}, C_{ij}) \]
+            gdzie $C_{ij} = S_{ij} + p_{ij}$.
+    
+            W problemie planu lekcji, lekcję $z_i$ reprezentujemy jako:
+            \[ I_i = (h_i, v_i, h_i + v_i) \]
+            gdzie $v_i$ to liczba godzin (czas trwania), a $h_i$ to slot rozpoczęcia.
+    
+        \subsection{Różnice i specyfika problemu szkolnego}
+            Pomimo strukturalnych podobieństw, problem układania planu lekcji wprowadza istotne modyfikacje:
+    
+            \subsubsection{Wielozasobowość}
+                Podczas gdy w klasycznym JSSP każda operacja wymaga jednej maszyny, lekcja wymaga \textbf{jednoczesnego} dostępu do trzech zasobów:
+                \[ \text{Lekcja } z_i \text{ wymaga: } (t_i, c_i, r_i) \in \mathcal{T} \times \mathcal{C} \times \mathcal{R} \]
+    
+            \subsubsection{Ograniczenia miękkie i jakościowe}
+                Problem szkolny wprowadza bogaty zestaw ograniczeń jakościowych niewystępujących w klasycznym JSSP:
+                \begin{itemize}
+                    \item Brak okienek dla uczniów (ciągłość zajęć)
+                    \item Równomierny rozkład godzin w tygodniu
+                    \item Ograniczenia prawne (max 2 godziny tego samego przedmiotu dziennie)
+                    \item Dostępność nauczycieli
+                \end{itemize}
+    
+            Innowacją w podejściu jest wprowadzenie bloków lekcyjnych $\mathcal{L}$, które grupują lekcje $z_i$ odbywające się równocześnie, co stanowi rozszerzenie klasycznej koncepcji operacji w JSSP.
+            Umożliwia to znacznie łatwiejsze definiowanie ograniczeń.
 
-\section{Istniejące rozwiązania}
-    \subsection{Vulcan}
-    \subsection{Dobry Plan??}
+        \subsection{Gotowe rozwiązania}
+            Istnieje wiele istniejących rozwiązań JSSP, jednak szczególnie inspirujące okazało się podejście zaprezentowane w dokumentacji Google OR-Tools~\cite{googleortoolsjssp}, które wykorzystuje zmienne interwałowe do modelowania operacji.
+            
+            \begin{figure}[ht]
+                \centering
+                \includegraphics[width=0.9\textwidth]{images/interval_vars.png}
+                \caption{Wizualizacja rozwiązania klasycznego problemu JSSP z wykorzystaniem zmiennych interwałowych~\cite{googleortoolsjssp}}\label{fig:intervals}
+            \end{figure}
+            Wyraźnie widać te inspiracje w sekcji trzeciej algorytmu dotyczącej solvera CP~(\ref{section:solver}), gdzie zastosowano:
+            \begin{itemize}
+                \item Reprezentację lekcji jako interwałów czasowych
+                \item Ograniczenia NoOverlap dla zasobów (nauczyciele, klasy, sale)
+                \item Optional intervals dla przypisań sal
+                \item Specjalistyczne ograniczenia ciągłości czasowej
+            \end{itemize}
+
+            Kluczowe koncepcje zaadaptowane w mojej pracy:
+    
+            \subsubsection{Zmienne interwałowe}
+                \begin{itemize}
+                    \item W JSSP: $\text{IntervalVar}(start, duration, end)$.
+                    \item W planie lekcji: $\text{IntervalVar}(h_i, v_i, h_i + v_i)$, gdzie $h_i$ to slot czasowy~(\ref{slownik_oznaczen}), a $v_i$ to długość trwania lekcji.
+                \end{itemize}
+    
+            \subsubsection{Ograniczenie NoOverlap}
+                \begin{itemize}
+                    \item W JSSP: $\text{AddNoOverlap}([\verb|interval|_1, \dots, \verb|interval|_n])$ dla operacji na tej samej maszynie~\cite{googleortoolsoverlap}.
+                    \item W planie lekcji: $\text{AddNoOverlap}$ zastosowane dla:
+                    \begin{itemize}
+                        \item Wszystkich lekcji tej samej klasy
+                        \item Wszystkich lekcji tego samego nauczyciela  
+                        \item Wszystkich lekcji w tej samej sali
+                    \end{itemize}
+                \end{itemize}
+    
+            \subsubsection{Optional Intervals}
+                Rozszerzenie o interwały opcjonalne pozwala na modelowanie przypisań sal do nauczycieli w blokach lekcyjnych:
+                \[ \text{OptionalIntervalVar}(start, duration, end, presence) \]
+                Takie interwały są brane pod uwagę w ograniczeniach tylko i wyłącznie, jeśli $presence = 1$;
+                Oznaczna to, że interwał jest ,,aktywny''.
+
+\section{Istniejące kompleksowe rozwiązania}
+    Zadanie układania planu lekcji jest powszechnym wyzwaniem dla placówek edukacyjnych na całym świecie, w tym Polsce, co zaowocowało rozwojem komercyjnych rozwiązań tego problemu. 
+    Na polskim rynku dominuje kilka systemów, wśród których szczególną pozycję zajmuje firma Vulcan, oferująca zintegrowany system zarządzania oświatą.
+    Obok niej funkcjonują takie rozwiązania jak Dobry Plan, czy Librus.
+
+    \subsection{Plan lekcji Optivum}
+        Vulcan, jako jeden z najstarszych na rynku dostawców, opracował kompleksowe rozwiązanie obejmujące nie tylko układanie planu lekcji, ale także dziennik elektroniczny, sekretariat i inne moduły zarządzania szkołą.
+        Jego popularność w polskich szkołach wynika z lat doświadczenia w dostosowywaniu systemu do specyficznych wymagań polskiego systemu edukacji.
+
+        Aplikacja ,,Plan lekcji Optivum'' firmy Vulcan to zaawansowane narzędzie wspomagające proces tworzenia szkolnego planu zajęć.
+        Jego główną zaletą jest elastyczność w definiowaniu skomplikowanych ograniczeń, w tym szczegółowe zarządzanie podziałami uczniów na grupy.
+
+        Proces rozpoczyna się od zaimportowania danych z arkusza organizacyjnego, a kończy na publikacji gotowego planu~\cite{vulcanprzewodnik}.
+
+        Podstawą do tworzenia planu są dane zaimportowane z arkusza organizacyjnego. 
+        Kluczowym wymaganiem, które zostało mi przedstawione przez liceum, które zaopatrzyło mnie w dane do tej pracy jest możliwość importowania podobnych plików w aplikacji.
+        W ten sposób pozbywamy się żmudnego procesu ręcznego wprowadzania ograniczeń.
+
+        \begin{figure}[!h]
+            \centering
+            \includegraphics[width=0.65\textwidth]{images/vulcan/import_arkusz.png}
+            \caption{Zrzut ekranu importowania arkusza organizacyjnego do programu ,,Plan lekcji Optivum''~\cite{vulcanprzewodnik}}
+        \end{figure}
+
+        W następnym etapie użytkownik definije zasoby lokalne zaczynając od sal oraz preferencji.
+        Dla zajęć grupowych kluczowe jest poprawne zdefiniowanie sal. 
+        Jeśli kilka grup ma korzystać z jednego dużego pomieszczenia (sala gimnastyczna, pracownia), należy je podzielić na części (przykładowo: salagim1, salagim2) i traktować jako odrębne sale.
+        Dla zajęć poza szkołą (basen) wykorzystuje się tzw. ,,salę pozorną''.
+
+        \begin{figure}[!h]
+            \centering
+            \includegraphics[width=0.65\textwidth]{images/vulcan/sale.png}
+            \caption{Zrzut ekranu wprowadzania sal do programu ,,Plan lekcji Optivum''~\cite{vulcanprzewodnik}}
+        \end{figure}
+        
+        \begin{figure}[!h]
+            \centering
+            \includegraphics[width=0.65\textwidth]{images/vulcan/sale_pref2.png}
+            \caption{Zrzut ekranu wprowadzania preferencji sal względem przedmiotów do programu ,,Plan lekcji Optivum''~\cite{vulcanprzewodnik}}
+        \end{figure}
+        
+        \begin{figure}[!h]
+            \centering
+            \includegraphics[width=0.65\textwidth]{images/vulcan/sale_pref1.png}
+            \caption{Zrzut ekranu wprowadzania preferencji sal względem nauczycieli do programu ,,Plan lekcji Optivum''~\cite{vulcanprzewodnik}}
+        \end{figure}
+
+        \newpage
+        Po wprowadzeniu sal oraz ich preferencji użytkownik jest poproszony o wprowadzenie ewentualnych podziałów na bloki.
+        Decyzja o rozkładzie godzin w tygodniu ma bezpośredni wpływ na grupy.
+        Dla przydziału 4-godzinnego WF-u, podział na bloki 2,1,1 oznacza, że jedna z lekcji (przykładowo dla dziewcząt) będzie dwugodzinnym blokiem, a pozostałe pojedynczymi.
+        
+        \begin{figure}[!h]
+            \centering
+            \includegraphics[width=0.65\textwidth]{images/vulcan/bloki.png}
+            \caption{Zrzut ekranu wprowadzania bloków przedmiotów do programu ,,Plan lekcji Optivum''~\cite{vulcanprzewodnik}}
+        \end{figure}
+        
+        W kolejnym etapie wprowadzane są terminy odbycia zajęć w poszczególnych klasach.
+        Program na bieżąco wylicza ,,Bilans gwiazdek'' --- różnicę między liczbą gwiazdek a minimalną liczbą potrzebną do ułożenia planu.
+        Dla oddziałów z podziałami na grupy, prawidłowe rozmieszczenie gwiazdek jest kluczowe, aby uniknąć okienek lub niemożności ułożenia planu.
+
+        \begin{figure}[!h]
+            \centering
+            \includegraphics[width=0.65\textwidth]{images/vulcan/horyzont.png}
+            \caption{Zrzut ekranu wprowadzania terminów zajęć dla poszczególnych klas do programu ,,Plan lekcji Optivum''~\cite{vulcanprzewodnik}}
+        \end{figure}
+        
+        Następnie definiuje się dostępność nauczycieli. 
+        Wybrane terminy nauczyciela można zablokować lub wskazać jako szczególnie pożądane poprzez odpowiednio symbole $\ominus$ oraz $\oplus$.
+
+        \begin{figure}[!h]
+            \centering
+            \includegraphics[width=0.65\textwidth]{images/vulcan/dostepnosc_nauczycieli.png}
+            \caption{Zrzut ekranu wprowadzania dostępności nauczycieli do programu ,,Plan lekcji Optivum''~\cite{vulcanprzewodnik}}
+        \end{figure}
+
+        Przed automatycznym ułożeniem całego planu, zaleca się ręczne lub automatyczne umieszczenie lekcji uznanych za najtrudniejsze, do których należą zajęcia dzielone na grupy i międzyoddziałowe.
+ 
+        \begin{figure}[!h]
+            \centering
+            \includegraphics[width=0.65\textwidth]{images/vulcan/plan_trudne.png}
+            \caption{Zrzut ekranu wprowadzania ,,trudnych'' lekcji do programu ,,Plan lekcji Optivum''~\cite{vulcanprzewodnik}}
+        \end{figure}
+
+        Po ułożeniu ,,trudnych'' lekcji uruchamia się automat dla całego planu.        
+        Jeśli automat nie poradzi sobie z ułożeniem wszystkich lekcji (przykładowo z powodu zbyt restrykcyjnych warunków dla grup), należy analizować nieułożone lekcje i łagodzić parametry.
+        Czasami pomaga kilkakrotne wykonanie minimalizacji okienek i układania całego planu.
+
+        Narzędzie ,,Plan lekcji Optivum'' jest bardzo obszernym narzędziem oferującym wiele możliwości. 
+        Bierze pod uwagę praktycznie każdy możliwy scenariusz, który może wystąpić w polskiej szkole, co jest rezultatem wieloletniej obecności na rynku oraz doświadczenia deweloperów. 
+
+        Aplikacja znakomicie ilustruje cenę uniwersalności, którą jest konieczność stworzenia rozbudowanej aplikacji wymagającej od użytkowników definiowania wielu ograniczeń, nawet tych rzadko spotykanych w przeciętnej szkole. 
+        Kolejnym kosztem takiego podejścia jest konieczność specjalistycznych szkoleń --- Vulcan oferuje kosztowne szesnastogodzinne szkolenia online poświęcone wyłącznie obsłudze aplikacji do układania planu lekcji.
+
+        Podsumowując, ,,Plan lekcji Optivum'' to doskonałe narzędzie dla dużych placówek, które potrzebują sprawdzonego i kompleksowego rozwiązania.
+        Niemniej jednak dla małych i średnich szkół, które nie dysponują odpowiednimi funduszami ani czasem na obsługę tak rozbudowanego systemu, może okazać się zbyt skomplikowane i kosztowne.

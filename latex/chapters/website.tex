@@ -2,7 +2,65 @@
 
 \section{Specyfikacja wymagań}
     \subsection{Wymagania funkcjonalne}
+        Najważniejszym aspektem działania aplikacji są funkcjonalności, które ona posiada.
+        Takie wymagania nazywamy funkcjonalnymi --- definiują one konkretne zachowania i funkcje, które system musi porafić wykonać.
+
+        W mojej aplikacji mogę podzielić takie wymagania na 4 grupy:
+        \begin{itemize}
+            \item \textbf{Obsługa wielu planów lekcji i konfiguracji:}
+            \begin{itemize}
+                \item Tworzenie i przechowywanie wielu planów lekcji.
+                \item Możliwość pracy z wieloma zestawami zasobów i ograniczeń równolegle.
+                Przykładowo dla obecnego roku szkolnego mamy zbiór ograniczeń głównych $\mathcal{W}_{2025/2026}$, ale dla następnego jest to juz zupełnie inne zbiór ograniczeń $\mathcal{W}_{2026/2027}$.
+            \end{itemize}
+            \item \textbf{Wymagania dotyczące wprowadzania danych:}
+            \begin{itemize}
+                \item Import plików \verb|txt| oraz \verb|csv| z zasobami i wymaganiami w formacie używanym przez placówkę, która dostarczyła dane na potrzeby tej pracy.
+                \item Możliwość ręcznego wprowadzenia i edycji wszystkich typów danych:
+                \begin{itemize}
+                    \item Nauczyciele, klasy, przedmioty, sale.
+                    \item Wymagania główne i bloki przedmiotów.
+                    \item Dostępności i możliwości sal.
+                \end{itemize}
+            \end{itemize}
+            \item \textbf{Wymagania dotyczące generowania planu lekcji:}
+            \begin{itemize}
+                \item Automatyczne generowanie kompletnych planów na podstawie zdefiniowanych ograniczeń.
+                \item Możliwość sterowania czasem generowania planu poprzez wprowadzanie liczby generacji w algorytmie ewolucyjnym.
+            \end{itemize}
+            \item \textbf{Wymagania dotyczące wglądu na utworzone plany:}
+            \begin{itemize}
+                \item Wymagany jest wgląd na plan z perspektywy:
+                \begin{itemize}
+                    \item Nauczycieli
+                    \item Klas
+                \end{itemize}
+                \item Wymagana jest możliwość wglądu w wiele różnych planów lekcji.
+            \end{itemize}
+        \end{itemize}
+
     \subsection{Wymagania niefunkcjonalne}
+        Wymagania niefunkcjonalne określają jakościowe cechy systemu, wpływające na jego użyteczność, wydajność i niezawodność.
+
+        Dla rozpatrywanej aplikacji przyjąłem 2 grupy tych wymagań:
+
+        \begin{itemize}
+            \item \textbf{Wymagania wydajnościowe:}
+            \begin{itemize}
+                \item Czas generowania kompletnego planu nie powinien przekraczać 10 minut dla typowych przypadków.
+                \item Aplikacja musi obsługiwać realistyczne rozmiary danych: do 1000 wymagań głównych, 100 nauczycieli, 50 klas i 100 sal.
+                \item Zużycie pamięci operacyjnej nie może przekraczać 8GB podczas generowania planu.
+            \end{itemize}
+            \item \textbf{Wymagania co do interfejsu:}
+            \begin{itemize}
+                \item Interfejs powinien być intuicyjny dla użytkowników zaznajomionych z arkuszami kalkulacyjnymi.
+                \item Spójność interfejsu we wszystkich modułach aplikacji.
+                \item Przejrzystość, minimalizm, wygoda i prostota w użytkowaniu interfejsu.
+            \end{itemize}
+        \end{itemize}
+
+        Uwzględnienie zarówno wymagań funkcjonalnych, jak i niefunkcjonalnych pozwala na stworzenie kompletnej aplikacji, która nie tylko realizuje założone funkcje, ale także zapewnia komfortowe i niezawodne środowisko pracy dla docelowych użytkowników.
+
     \subsection{Przypadki użycia}
 
 \section{Projekt}
