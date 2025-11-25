@@ -33,6 +33,7 @@
             \item $H$ --- liczba slotów czasowych w dniu
             \item $V$ --- wektor godzin bloków
             \item $S$ --- macierz przydziału do dni, kodowanie osobnika
+            \item $\mathfrak{P}$ --- wielkość populacji w algorytmie ewolucyjnym
         \end{itemize}
 
         Problem optymalizacyjny w tej pracy polega na przypisaniu lekcji do odpowiednich slotów czasowych i sal przy jednoczesnym spełnieniu wymagań.
@@ -41,7 +42,7 @@
         Przez te wyjątki nie jest możliwym wykorzystanie prostych algorytmów.
         Nie jest także możliwym rozwiązanie jednego wielkiego problemu programowania całkowitoliczbowego w sensownym czasie przy użyciu komputera z przeciętną specyfikacją.
 
-        Oczekiwanym rezultatem działania algorytmu powinno być pięć zbiorów przypisań $\mathcal{Z}$. Każde takie przypisanie powinno mieć 6 wartości:\label{fragment:przypisania}
+        Oczekiwanym rezultatem działania algorytmu powinien być zbior przypisań $\mathcal{Z}$. Każde takie przypisanie powinno mieć 6 wartości:\label{fragment:przypisania}
         \[ z_i \triangleq \left(d_{z_i},h_{z_i},c_{z_i},t_{z_i},s_{z_i},r_{z_i}\right) \in \mathcal{Z}_d, \quad \forall i \in \left\{1, 2, \dots, \left|\mathcal{Z}_d\right|\right\}: \begin{cases} d_{z_i} &\in \left\{1, 2, 3, 4, 5\right\} \\h_{z_i} &\in \left\{1, 2, \dots, H\right\}\\ c_{z_i} &\in \mathcal{C}\\ t_{z_i} &\in \mathcal{T}\\s_{z_i} &\in \mathcal{S}\\r_{z_i} &\in \mathcal{R} \end{cases} \]
         Przykładowe interpretacje takich przypisań:
         \begin{itemize}
@@ -60,8 +61,9 @@
                 \item Łączenie lekcji międzyklasowych w bloki lekcyjne.
                 \item Łączenie ograniczeń głównych w bloki lekcyjne.
             \end{itemize}
-            \item \textbf{Przydział bloków lekcyjnych do poszczególnych dni tygodnia $S$.}
+            \item \textbf{Przydział bloków lekcyjnych do poszczególnych dni tygodnia.}
             \begin{itemize}
+                \item Tworzenie macierzy $S$.
                 \item Przykładowo: dwie godziny matematyki w poniedziałek, godzina matematyki w środę, dwie godziny matematyki w czwartek i zero w piątek.
             \end{itemize}
             \item \textbf{Tworzenie samych przypisań $\mathcal{Z}$ dla każdego dnia tygodnia osobno.}
@@ -70,8 +72,8 @@
         \subsection{Dane i szukane}
             \subsubsection{Wymagania główne}
                 Warto zacząć od przedstawienia sposobu reprezentacji zmiennych w kodzie zaczynając od wymagań głównych.
-                Ilość godzin tygodniowo odbytych przez klasę z danym nauczycielem w ramach danego przedmiotu musi być równa ilości przypisanej w pierwszym etapie układania planu.
-                Aby łatwiej zrozumieć na czym polega takie przypisanie warto spojrzeć na dotychczasowy sposób przypisywania ilości godzin nauczycieli do klas (Rysunek~\ref{fig:excel_wymagania}) w liceum, które dostarczyło dane na potrzeby tej pracy.
+                Ilość godzin tygodniowo odbytych przez klasę z danym nauczycielem w ramach danego przedmiotu jest z góry ustalona.
+                Aby łatwiej zrozumieć na czym polegają takie przypisania warto spojrzeć na dotychczasowy sposób przypisywania ilości godzin nauczycieli do klas (Rysunek~\ref{fig:excel_wymagania}) w liceum, które dostarczyło dane na potrzeby tej pracy.
             
                 \begin{figure}[ht]
                     \centering
@@ -82,7 +84,9 @@
                 Następnie w odpowiednim wierszu nauczyciela, pod odpowiednim przedmiotem, w kolumnie każdej klasy definiowana jest ilość godzin, która będzie poświęcona na prowadzenie tego przedmiotu.
 
                 Zbiór takich wymagań $\mathcal{W}$ definiuje się następująco:
-                \[ w_i \triangleq \left(t_{w_i}, c_{w_i}, s_{w_i}, g_{w_i}\right) \in \mathcal{W}, \quad \forall i \in \left\{1, 2, \dots, \left|\mathcal{W}\right|\right\}: \begin{cases} t_{w_i} &\in \mathcal{T}\\c_{w_i} &\in \mathcal{C}\\s_{w_i} &\in \mathcal{S}\\g_{w_i} &\in \mathbb{N}^+ \end{cases}  \]
+                \begin{equation}\label{eq:wymaganie_glowne}
+                    w_i \triangleq \left(t_{w_i}, c_{w_i}, s_{w_i}, g_{w_i}\right) \in \mathcal{W}, \quad \forall i \in \left\{1, 2, \dots, \left|\mathcal{W}\right|\right\}: \begin{cases} t_{w_i} &\in \mathcal{T}\\c_{w_i} &\in \mathcal{C}\\s_{w_i} &\in \mathcal{S}\\g_{w_i} &\in \mathbb{N}^+ \end{cases}
+                \end{equation}
                 gdzie $g_{w_i}$ to liczba wymaganych tygodniowo godzin przedmiotu $s_{w_i}$ przeprowadzonego przez nauczyciela $t_{w_i}$ dla klasy $c_{w_i}$.
 
                 Ponadto każdy nauczyciel ma też zdefiniowaną dostępność, która jest reprezentowana przez macierz $A$ o wymiarach $\left|\mathcal{T}\right|$ na $5$, gdzie $\left|\mathcal{T}\right|$ to liczba wszystkich nauczycieli.
@@ -136,7 +140,7 @@
             \subsubsection{Ograniczenia fizyczne}
                 \begin{itemize}
                     \item Żaden nauczyciel nie może być w 2 miejscach na raz.
-                    \[ \forall i, j \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}: r_{z_i} = r_{z_j} \implies t_{z_i} \neq t_{z_j} \]
+                    \[ \forall i, j \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}: \left(d_{z_i} = d_{z_j} \land h_{z_i} = h_{z_j} \land r_{z_i} \neq r_{z_j} \land i \neq j\right) \impliedby t_{z_i} \neq t_{z_j} \]
                     \item Nauczyciel musi być dostępny.
                     \[ \forall i \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}: a_{t_{z_i},d_{z_i}} = 1 \]
                     Ze względu na charakter pracy nauczyciele często są zmuszeni do pracy w wielu miastach w wielu szkołach.
@@ -145,37 +149,45 @@
                     \item Żaden uczeń nie może być w 2 miejscach na raz.
                     \begin{align*}
                         \forall i, j \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}, \exists k \in \left\{1, 2, \dots \left|\mathcal{B}\right|\right\}:\\
-                        \left(d_{z_i} = d_{z_j} \land h_{z_i} = h_{z_j} \land c_{z_i} = c_{z_j}\right) \implies c_{z_i} \in \vec{C_{b_k}} \land s_{z_i},s_{z_j} \in \vec{S_{b_k}}
+                        \left(d_{z_i} = d_{z_j} \land h_{z_i} = h_{z_j} \land c_{z_i} = c_{z_j} \land i \neq j \right) \implies c_{z_i} \in \vec{C_{b_k}} \land s_{z_i},s_{z_j} \in \vec{S_{b_k}}
                     \end{align*}
                     \item W żadnej sali nie mogą odbywać się 2 lekcje na raz.
                     \begin{align*}
                         \forall i, j \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}, \exists k \in \left\{1, 2, \dots \left|\mathcal{B}\right|\right\}:\\
-                        \left(d_{z_i} = d_{z_j} \land h_{z_i} = h_{z_j} \land r_{z_i} = r_{z_j}\right) \implies s_{z_i} = s_{z_j} \land s_{z_i}, s_{z_j} \in \vec{S_{b_k}}
+                        \left(d_{z_i} = d_{z_j} \land h_{z_i} = h_{z_j} \land r_{z_i} = r_{z_j} \land i \neq j \right) \implies s_{z_i} = s_{z_j} \land s_{z_i}, s_{z_j} \in \vec{S_{b_k}}
                     \end{align*}
                 \end{itemize}
             
             \subsubsection{Ograniczenia prawne}~\cite{karta_nauczyciela, prawo_oswiatowe, obwieszczenie}
                 \begin{itemize}
                     \item Uczeń nie może mieć więcej niż 2 godzin lekcyjnych tego samego przedmiotu dziennie.
-                    \[ \forall d \in \left\{1, 2, 3, 4, 5\right\}, c \in \mathcal{C}, s \in \mathcal{S}: \left|\left\{z_i: z_i \in \mathcal{Z} \land d_{z_i} = d \land c_{z_i} = c \land s_{z_i} = s\right\}\right| \leq 2 \]
+                    \[ \forall d \in \left\{1, 2, 3, 4, 5\right\}, c \in \mathcal{C}, s \in \mathcal{S}: \left|\left\{z \in \mathcal{Z}: d_z = d \land c_z = c \land s_z = s\right\}\right| \leq 2 \]
                     \item Jeśli danego dnia mają zostać przeprowadzone 2 godziny jednego przedmiotu, to uczeń musi je mieć bezpośrednio po sobie.
                     \begin{align*}
                         \forall i, j \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}, c \in \mathcal{C}, s \in \mathcal{S}:\\
-                        \left(d_{z_i} = d_{z_j} \land c_{z_i} = c_{z_j} \land s_{z_i} = s_{z_j}\right) \implies \left|h_{z_i} - h_{z_j}\right| = 1
+                        \left(d_{z_i} = d_{z_j} \land c_{z_i} = c_{z_j} \land s_{z_i} = s_{z_j} \land i \neq j \right) \implies \left|h_{z_i} - h_{z_j}\right| = 1
                     \end{align*}
                 \end{itemize}
 
             \subsubsection{Ograniczenia jakościowe}
                 \begin{itemize}
-                    \item Brak okienek dla uczniów.
+                    \item Brak okienek dla uczniów. Nie istnieje taka para przypisań, dla których różnica między slotami czasowymi jest większa niż suma wszystkich lekcji danego dnia.
                     \begin{align*}
                         \nexists i, j \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}, c \in \mathcal{C}:\\
                         d_{z_i} = d_{z_j} \land c_{z_i} = c_{z_j} \land \left|h_{z_i} - h_{z_j}\right| > \left|\left\{z_k: d_{z_k} = d_{z_i} \land c_{z_i}\right\}\right|
                     \end{align*}
                     \item Odpowiednie przypisanie sal. Lekcje wychowania fizycznego muszą odbyć się w przeznaczonych do tego salach, podobnie lekcji informatyki itd.
-                    \[ \forall z \in \mathcal{Z}: s_z \in R_{r_z} \]
+                    \[ \forall z \in \mathcal{Z}: s_z \in \vec{R_{r_z}} \]
+                    \item Dla bloków lekcyjnych, które odbywają się 3 razy w tygodniu konieczne jest stworzenie jednego bloku dwugodzinnego.
+                    \begin{align*}
+                        \forall w \in \mathcal{W}, \exists d \in \left\{1, 2, 3, 4, 5\right\}: \\ 
+                        g_w = 3 \implies \left|\left\{z \in \mathcal{Z}: c_w = c_z \land s_w = s_z \land t_w = t_z \land d_z = d \right\}\right| = 2
+                    \end{align*}
                 \end{itemize}
- 
+
+            \subsubsection{Ograniczenie główne}
+                Zgodnie z definicją przyjętą w~\ref{eq:wymaganie_glowne} tygodniowa liczba godzin każdego przedmiotu musi być równa tej ustalonej w zbiorze wymagań:
+                \[ \forall w \in \mathcal{W}: \left|\left\{z \in \mathcal{Z}: c_w = c_z \land t_w = t_z \land s_w = s_z\right\}\right| = g_w \]      
 
 \section{Poprzednie podejścia}
     Aby w pełni zrozumieć mój wybór narzędzi warto szybko przetoczyć historię moich poprzednich podejść do rozwiązania tego problemu.
@@ -288,7 +300,7 @@
     Wielkość innych bloków nie wpływa na ten wynik, co oznacza, że rozwiązanie optymalne lokalnie jest również optymalne globalnie.
 
     \subsection{Bloki lekcyjne}
-        Operując na blokach lekcyjnych duży łatwiej zdefiniować ograniczenia fizyczne.
+        Operując na blokach lekcyjnych dużo łatwiej zdefiniować ograniczenia fizyczne.
         Weźmy na przykład 3 lekcje: Język Niemiecki, Język Francuski oraz Język Rosyjski.
         Gdybyśmy mieli definiować dla nich ograniczenie określające, że żaden uczeń nie może mieć przypisanych dwóch lub więcej lekcji w tym samym czasie, musielibyśmy zapewnić, że żadna z tych lekcji nie pokrywa się z innymi lekcjami tej klasy, takimi jak Matematyka czy Fizyka, 
             przy jednoczesnym zapewnieniu, że te lekcji mogą się na siebie nałożyć.
@@ -317,59 +329,128 @@
         Do tego możemy też dodać dwie lekcje języka Niemieckiego pozostawiając ostatnią lekcję poza blokiem ze względu na kolizję nauczycieli.
 
     \subsection{Działanie}
-        \textbf{Dane wejściowe}
+        \subsubsection{Dane wejściowe}
         \begin{itemize}
             \item $\mathcal{B}$
             \item $\mathcal{W}$
         \end{itemize}
 
-        \textbf{Klasyfikacja bloków}
-        \begin{itemize}
-            \item \textbf{Bloki pojedyncze} --- obejmują pojedyncze klasy
-            \item \textbf{Bloki wieloklasowe} --- łączą wymagania z wielu klas dla tych samych przedmiotów
-            \item \textbf{Bloki agregujące} --- tworzą wyższy poziom hierarchii, łącząc istniejące bloki i wymagania w jeszcze większe bloki
-        \end{itemize}
+        \subsubsection{Klasyfikacja bloków}
+            \begin{itemize}
+                \item \textbf{Bloki agregujące} --- tworzą wyższy poziom hierarchii, łącząc istniejące bloki i wymagania w jeszcze większe bloki
+                \[ \mathcal{B}_{\text{agg}} = \left\{b \in \mathcal{B}: \verb|is_aggregating|_b = 1 \right\} \]
+                \item \textbf{Bloki wieloklasowe} --- łączą wymagania z wielu klas dla tych samych przedmiotów
+                \[ \mathcal{B}_{\text{multi}} = \left\{b \in \mathcal{B}: \left|\vec{S_{b}}\right| = 1 \right\} \]
+                \item \textbf{Bloki pojedyncze} --- obejmują pojedyncze klasy
+                \[ \mathcal{B}_{\text{single}} = \mathcal{B} \cap \left(\mathcal{B}_{\text{multi}} \cup \mathcal{B}_{\text{multi}}\right) \]
+            \end{itemize}
 
-        \textbf{Działanie}
+        \subsubsection{Inicjalizacja}
+            \begin{align*}
+                \mathcal{L} &\gets \emptyset \quad \text{(zbiór bloków lekcyjnych)} \\
+                V &\gets \emptyset \quad \text{(wektor godzin bloków)} \\
+                U: \mathcal{W} &\to \mathbb{N} \quad \text{(funkcja wykorzystania godzin wymagań)} \\
+                U(w) &\gets 0 \quad \forall w \in \mathcal{W}
+            \end{align*}
+
+        \subsubsection{Tworzenie grup wieloklasowych}
+            Dla każdego bloku $b \in \mathcal{B}_{\text{multi}}$ tworzymy zbiór wymagań zgodnych z definicją bloku:
+            \[
+                \begin{cases}
+                    \mathcal{W}_b = \left\{w \in \mathcal{W}: s_w \in \vec{S_b} \land c_w \in \vec{C_b} \right\} & \\
+                    \left|\left\{w \in \mathcal{W}_b: s_w = s\right\}\right| = g_b & \forall s \in \vec{S_b}
+                \end{cases}
+            \]
+            Grupy te stanowią podstawę do tworzenia bloków lekcyjnych międzyklasowych.
+
+        \subsubsection{Agregacja bloków}
+            Dla każdego bloku $b \in \mathcal{B}_{\text{agg}}$:
             \begin{enumerate}
-                \item \textbf{Inicjalizacja struktur danych:}
-                \begin{itemize}
-                    \item Słownik śledzący wykorzystanie godzin wymagań
-                    \item Listy przechowujące pogrupowane wymagania
-                \end{itemize}
-                \item \textbf{Tworzenie bloków wieloklasowych:}
-                \begin{itemize}
-                    \item Grupowanie wymagań według przedmiotów i klas zdefiniowanych w blokach wieloklasowych
-                    \item Każda grupa tworzy potencjalny blok lekcyjny
-                \end{itemize}
-
-                \item \textbf{Agregacja bloków:}
-                \begin{itemize}
-                    \item Łączenie bloków wieloklasowych w większe jednostki
-                    \item Unikanie konfliktów nauczycieli poprzez śledzenie wykorzystanych pedagogów
-                    \item Przydział godzin oparty na minimalnym wymaganiu w grupie
-                \end{itemize}
-
-                \item \textbf{Generowanie bloków pojedynczych:}
-                \begin{itemize}
-                    \item Tworzenie kombinacji wymagań dla pojedynczych klas
-                    \item Uwzględnienie przypadków z wieloma nauczycielami tego samego przedmiotu
-                    \item Walidacja zgodności z definicjami bloków
-                \end{itemize}
-
-                \item \textbf{Iteracyjna alokacja godzin:}
-                \begin{itemize}
-                    \item Równomierny przydział pozostałych godzin do bloków
-                    \item Respektowanie maksymalnych limitów tygodniowych
-                    \item Gwarancja wykorzystania wszystkich wymaganych godzin
-                \end{itemize}
-
-                \item \textbf{Finalizacja:}
-                \begin{itemize}
-                    \item Dodanie pozostałych wymagań jako bloków jednostkowych
-                    \item Zwrócenie listy bloków i odpowiadających im godzin
-                \end{itemize}
+                \item Wybieramy maksymalnie duży zbiór wymagań $\mathcal{W}_{\text{agg}} \subseteq \mathcal{W}$ spełniający:
+                    \[ \forall w \in \mathcal{W}_{\text{agg}}: c_w \in \vec{C_b} \land s_w \in \vec{S_b} \]
+                    \begin{itemize}
+                        \item Nauczyciele w $\mathcal{W}_{\text{agg}}$ są różni.
+                        \item Wymagania nie były wcześniej wykorzystane.
+                    \end{itemize}
+                    Robimy to poprzez łączenie odpowiednich bloków $\mathcal{W}_b$ dla $b \in \mathcal{B}_{\text{multi}}$.
+                \item Określamy liczbę godzin: $v = \min\{g_w - U(w) : w \in \mathcal{W}_{\text{agg}}\}$
+                \item Dodajemy do wyników: $\mathcal{L} \gets \mathcal{L} \cup \{\mathcal{W}_{\text{agg}}\}$, $V \gets V \cup \{v\}$
+                \item Aktualizujemy wykorzystanie: $U(w) \gets U(w) + v$ dla $w \in \mathcal{W}_{\text{agg}}$
             \end{enumerate}
+
+        \subsubsection{Przetwarzanie bloków wieloklasowych}
+            Dla każdej utworzonej wcześniej grupy $\mathcal{W}_b$:
+            \begin{enumerate}
+                \item Jeśli wymagania nie zostały w pełni wykorzystane, tworzymy blok
+                \item Liczba godzin: $v = \min\{g_w - U(w) : w \in \mathcal{W}_b\}$
+                \item Dodajemy do wyników i aktualizujemy wykorzystanie
+            \end{enumerate}
+
+        \subsubsection{Generowanie bloków pojedynczych}
+            Dla każdego bloku $b \in \mathcal{B}_{\text{single}}$ i klasy $c \in \vec{C_b}$:
+            \begin{enumerate}
+                \item Znajdujemy wymagania: $\mathcal{W}_c = \{w \in \mathcal{W}: c_w = c \land s_w \in \vec{S_b}\}$
+                \item Jeśli zbiór spełnia warunki bloku co do ilości przemiotów, tworzymy blok lekcyjny
+                \item W przeciwnym przypadku generujemy wszystkie poprawne kombinacje wymagań
+                \item Dla każdej poprawnej kombinacji $\mathcal{W}' \subseteq \mathcal{W}_c$ tworzymy blok
+            \end{enumerate}
+
+        \subsubsection{Iteracyjna alokacja pozostałych godzin}
+            \begin{enumerate}
+                \item Dopóki istnieją nie w pełni wykorzystane wymagania w blokach pojedynczych:
+                \begin{enumerate}
+                    \item Równomiernie zwiększamy liczbę godzin we wszystkich możliwych blokach. 
+                    Równomiernie oznacza, że iteruję się przez wszystkie bloki i ziększam ich przypisanie o 1, gwarantując tym samym, że wszystkie zostaną użyte. 
+                    \item Respektujemy ograniczenia maksymalnej liczby bloków tygodniowo
+                \end{enumerate}
+            \end{enumerate}
+
+        \subsubsection{Finalizacja}
+            \begin{enumerate}
+                \item Dla każdego wymagania $w \in \mathcal{W}$ z niewykorzystanymi godzinami:
+                \item Tworzymy blok jednostkowy: $\mathcal{L} \gets \mathcal{L} \cup \{\{w\}\}$
+                \item $V \gets V \cup \{g_w - U(w)\}$
+            \end{enumerate}
+        % \textbf{Działanie}
+            % \begin{enumerate}
+            %     \item \textbf{Inicjalizacja struktur danych:}
+            %     \begin{itemize}
+            %         \item Słownik śledzący wykorzystanie godzin wymagań
+            %         \item Listy przechowujące pogrupowane wymagania
+            %     \end{itemize}
+            %     \item \textbf{Tworzenie bloków wieloklasowych:}
+            %     \begin{itemize}
+            %         \item Grupowanie wymagań według przedmiotów i klas zdefiniowanych w blokach wieloklasowych
+            %         \item Każda grupa tworzy potencjalny blok lekcyjny
+            %     \end{itemize}
+
+            %     \item \textbf{Agregacja bloków:}
+            %     \begin{itemize}
+            %         \item Łączenie bloków wieloklasowych w większe jednostki
+            %         \item Unikanie konfliktów nauczycieli poprzez śledzenie wykorzystanych pedagogów
+            %         \item Przydział godzin oparty na minimalnym wymaganiu w grupie
+            %     \end{itemize}
+
+            %     \item \textbf{Generowanie bloków pojedynczych:}
+            %     \begin{itemize}
+            %         \item Tworzenie kombinacji wymagań dla pojedynczych klas
+            %         \item Uwzględnienie przypadków z wieloma nauczycielami tego samego przedmiotu
+            %         \item Walidacja zgodności z definicjami bloków
+            %     \end{itemize}
+
+            %     \item \textbf{Iteracyjna alokacja godzin:}
+            %     \begin{itemize}
+            %         \item Równomierny przydział pozostałych godzin do bloków
+            %         \item Respektowanie maksymalnych limitów tygodniowych
+            %         \item Gwarancja wykorzystania wszystkich wymaganych godzin
+            %     \end{itemize}
+
+            %     \item \textbf{Finalizacja:}
+            %     \begin{itemize}
+            %         \item Dodanie pozostałych wymagań jako bloków jednostkowych
+            %         \item Zwrócenie listy bloków i odpowiadających im godzin
+            %     \end{itemize}
+            % \end{enumerate}
 
         % \textbf{Procedura}\\
         % Warto zwrócić uwagę na blok różnicę między ``blokiem przedmiotów'' a ``blokiem lekcyjnym''. Blok przedmiotów to byt, który jest definiowany przez uzytkownika w celu tworzenia przez algorytm bloków lekcyjnych.
@@ -451,11 +532,14 @@
         Algorytm zwraca:
         \begin{itemize}
             \item Zbiór bloków lekcyjnych $\mathcal{L}$, gdzie każdy blok $L_i$ jest wekrotem zbiorem wymagań głównych:
-            \[ \mathcal{L} = \left\{L_1, L_2, L_{\mathfrak{N}}\right\}, \quad \forall i \in \left\{1, 2, \dots, \mathfrak{N}\right\}: L_i \subset \mathcal{W} \]
-            gdzie $\mathfrak{N}$ to liczba wszystkich bloków.
+            \[ \mathcal{L} = \left\{L_1, L_2, \dots, L_{\left|\mathcal{L}\right|}\right\}, \quad \forall i \in \left\{1, 2, \dots, \left|\mathcal{L}\right|\right\}: L_i \subset \mathcal{W} \]
+            gdzie $\left|\mathcal{L}\right|$ to liczba wszystkich bloków.
             \item Macierz wymagań głównych bloków --- liczby godzin tygodniowych, gdzie $v_i$ oznacza liczbę godzin przeznaczonych na blok $b_i$ na przestrzeni tygodnia. 
-            \[ V = \begin{bmatrix} v_1 & v_2 & \cdots & v_\mathfrak{N} \end{bmatrix}, \quad \forall i \in \left\{1, 2, \dots, \mathfrak{N}\right\}: v_i \in \mathbb{N}^+ \]
+            \[ V = \begin{bmatrix} v_1 & v_2 & \cdots & v_{\left|\mathcal{L}\right|} \end{bmatrix}, \quad \forall i \in \left\{1, 2, \dots, \left|\mathcal{L}\right|\right\}: v_i \in \mathbb{N}^+ \]
         \end{itemize}
+
+        Przy czym gwarantowane jest spełnienie wymagania głównego:
+        \[ \forall w \in \mathcal{W}: \sum_{i: w \in L_i} v_i = g_w \]
         
     \subsection{Przykładowe rezultaty}
 
@@ -534,14 +618,14 @@
             \end{itemize}
 
     \subsection{Kodowanie i ograniczenia twarde}\label{subsection:kodowanie}
-        Każdy osobnik w populacji jest reprezentowany przez macierz przydziałów $S$ o wymiarach $5 \times \mathfrak{N}$.
+        Każdy osobnik w populacji jest reprezentowany przez macierz przydziałów $S$ o wymiarach $5 \times \left|\mathcal{L}\right|$.
         \begin{equation}\label{specimen}
              S = \begin{bmatrix}
-                s_{1,1} & s_{1,2} & s_{1,3} & \cdots & s_{1, \mathfrak{N}} \\
-                s_{2,1} & s_{2,2} & s_{2,3} & \cdots & s_{2, \mathfrak{N}} \\
-                s_{3,1} & s_{3,2} & s_{3,3} & \cdots & s_{3, \mathfrak{N}} \\
-                s_{4,1} & s_{4,2} & s_{4,3} & \cdots & s_{4, \mathfrak{N}} \\
-                s_{5,1} & s_{5,2} & s_{5,3} & \cdots & s_{5, \mathfrak{N}} \\
+                s_{1,1} & s_{1,2} & s_{1,3} & \cdots & s_{1, \left|\mathcal{L}\right|} \\
+                s_{2,1} & s_{2,2} & s_{2,3} & \cdots & s_{2, \left|\mathcal{L}\right|} \\
+                s_{3,1} & s_{3,2} & s_{3,3} & \cdots & s_{3, \left|\mathcal{L}\right|} \\
+                s_{4,1} & s_{4,2} & s_{4,3} & \cdots & s_{4, \left|\mathcal{L}\right|} \\
+                s_{5,1} & s_{5,2} & s_{5,3} & \cdots & s_{5, \left|\mathcal{L}\right|} \\
             \end{bmatrix}, \quad S \in \mathbb{N}^2 
         \end{equation}
         gdzie $s_{d,i}$ oznacza liczbę godzin $i$-tego bloku lekcyjnego $L_i$ przydzielonych do $d$-tego dnia tygodnia.
@@ -549,11 +633,11 @@
         Tak przyjęta reprezentacja umożliwia prostą weryfikację następujących ograniczeń:
         \begin{enumerate}
             \item Całkowita liczba godzin każdego bloku musi odpowiadać wymaganiom określonym w macierzy $V$.
-            \[ \forall i \in \left\{1, 2, \dots, \mathfrak{N}\right\}: \sum_{d=1}^{5} s_{d,i} = v_i \]
+            \[ \forall i \in \left\{1, 2, \dots, \left|\mathcal{L}\right|\right\}: \sum_{d=1}^{5} s_{d,i} = v_i \]
             \item Maksymalna liczba godzin każdego bloku w pojedynczym dniu nie może być większa niż 2.
-            \[ \forall i \in \left\{1, 2, \dots, \mathfrak{N}\right\}, \forall d \in \left\{1, 2, 3, 4, 5\right\}: s_{d, i} \leq 2 \]
+            \[ \forall i \in \left\{1, 2, \dots, \left|\mathcal{L}\right|\right\}, \forall d \in \left\{1, 2, 3, 4, 5\right\}: s_{d, i} \leq 2 \]
             \item Dla bloków 3-godzinnych konieczne jest przedzielenie 2 godzin do jednego dnia.
-            \[ \forall i \in \left\{1, 2, \dots, \mathfrak{N}\right\}: v_{i} = 3 \implies \exists d \in \left\{1, 2, 3, 4, 5\right\} \text{ takie, że } s_{d, i} = 2 \]
+            \[ \forall i \in \left\{1, 2, \dots, \left|\mathcal{L}\right|\right\}: v_{i} = 3 \implies \exists d \in \left\{1, 2, 3, 4, 5\right\} \text{ takie, że } s_{d, i} = 2 \]
         \end{enumerate}
 
     \subsection{Generowanie populacji początkowej}\label{subsection:generowanie_populacji}
@@ -600,7 +684,7 @@
         \end{enumerate}
 
         Po wykonaniu powyższej procedury dla wszystkich bloków, uzyskane wektory $X_i$ łączy się w macierz:
-        \[ X = \begin{bmatrix} X_1 \\ X_2 \\ \vdots \\ X_\mathfrak{N} \end{bmatrix} \]
+        \[ X = \begin{bmatrix} X_1 \\ X_2 \\ \vdots \\ X_{\left|\mathcal{L}\right|} \end{bmatrix} \]
         Osobnik populacji reprezentowany jest przez transpozycję tej macierzy: $S = X^T$.
 
     \subsection{Przystosowanie}\label{subsection:przystosowanie}
@@ -734,8 +818,8 @@
             \noindent
             \textbf{Proces:}
             \begin{enumerate}
-                \item Inicjalizacja macierzy potomka: $S_{\text{child}} = \mathbf{0}_{5 \times \mathfrak{N}}$
-                \item Dla każdego nauczyciela $i \in {1, 2, \dots, \left|\mathcal{T}\right|}$:
+                \item Inicjalizacja macierzy potomka: $S_{\text{child}} = \mathbf{0}_{5 \times \left|\mathcal{L}\right|}$
+                \item Dla każdego nauczyciela $i \in \left\{1, 2, \dots, \left|\mathcal{T}\right|\right\}$:
                 \begin{enumerate}
                     \item Jeżeli $F_{T_{i,S_1}} > F_{T_{i,S_2}}$, to dla każdego bloku $j$ prowadzonego przez nauczyciela $i$:
                     \begin{enumerate}
@@ -767,8 +851,8 @@
             \noindent
             \textbf{Proces:}
             \begin{enumerate}
-                \item Inicjalizacja macierzy potomka: $S_{\text{child}} = \mathbf{0}_{5 \times \mathfrak{N}}$
-                \item Dla każdej klasy $i \in {1, 2, \dots, \left|\mathcal{C}\right|}$:
+                \item Inicjalizacja macierzy potomka: $S_{\text{child}} = \mathbf{0}_{5 \times \left|\mathcal{L}\right|}$
+                \item Dla każdej klasy $i \in \left\{1, 2, \dots, \left|\mathcal{C}\right|\right\}$:
                 \begin{enumerate}
                     \item Jeżeli $F_{G_{i,S_1}} > F_{G_{i,S_2}}$, to dla każdego bloku $j$ prowadzonego dla klasy $i$:
                     \begin{enumerate}
@@ -809,133 +893,163 @@
     \subsection{Przykładowe rezultaty}
         \textit{Przykładowe macierze z opisami}
 
-\section{Solver liniowy}
-    \textit{Wyjaśnienie czym jest solver liniowy}
+\section{Solver programowania liniowego z ograniczeniami}
+    W trzecim etapie algorytmu wykorzystuję solver programowania liniowego z ograniczeniami (Constraint Programming --- CP), konkretnie implementację CP-SAT z pakietu \textit{Google OR-Tools}.
+    W odróżnieniu od czystego programowania liniowego (MIP), solver CP operuje na szerszej klasie ograniczeń, w tym na zmiennych interwałowych, co czyni go idealnym narzędziem do problemów harmonogramowania.
+    W odpowiedzi na wyzwania napotkane w podejściu opisanym w podrozdziale~\ref{subsection:podejscie_zerojedynkowe} zdecydowałem się na wykorzystanie zmiennych interwałowych opisanych w dokumentacji OR-Tools~\cite{googleortoolsintervalvar}. 
 
-    Opisany poniżej proces jest wykonywany niezależnie dla każdego dnia tygodnia, reprezentowanego przez wiersze macierzy $S_{\text{best}}$.
-    Takie podejście umożliwia dekompozycję problemu na pięć mniejszych, niezależnych podproblemów, co znacząco redukuje wymagania obliczeniowe i zużycie pamięci RAM.
-
-    \begin{samepage}
-        \subsection{Czym są interwały}
-            W odpowiedzi na wyzwania napotkane w podejściu opisanym w podrozdziale~\ref{subsection:podejscie_zerojedynkowe} zdecydowałem się na eksplorację innych sposobów reprezentacji lekcji niż zmienne binarne.
-            W tym procesie napotkałem się na opisane przez Google \verb|Interval Variables|~\cite{googleortoolsintervalvar}.
-            Są one sposobem reprezentacji interwałów poprzez trzy powiązane zmienne, z fundamentalnym ograniczeniem:
-            \vspace*{1em}
-
-            \noindent
-            \begin{minipage}[t]{.48\textwidth}
-                \textbf{Zmienne:}
-                \begin{itemize}
-                    \item $s$ --- czas rozpoczęcia
-                    \item $d$ --- czas trwania
-                    \item $e$ --- czas zakończenia
-                \end{itemize}
-            \end{minipage}\hfill
-            \begin{minipage}[t]{.48\textwidth}
-                \textbf{Ograniczenie:}
-                \[ e - s = d \]
-            \end{minipage}
-
-            \vspace*{1em}
-            OR-Tools oferuje także \verb|OptionalIntervals|, które które reprezentuje interwał z dodatkową zmienna \verb|is_present|, która decyduje o tym czy interwał jest aktywny przy sprawdzaniu ogarniczeń. Traktowana jest jako zmienna zerojedynkowa przy dodawaniu:
-            \vspace*{1em}
-
-            \noindent
-            \begin{minipage}[t]{.48\textwidth}
-                \textbf{Zmienne:}
-                \begin{itemize}
-                    \item $s$ --- czas rozpoczęcia
-                    \item $d$ --- czas trwania
-                    \item $e$ --- czas zakończenia
-                    \item \verb|is_present| --- zmienna logiczna
-                \end{itemize}
-            \end{minipage}\hfill
-            \begin{minipage}[t]{.48\textwidth}
-                \textbf{Ograniczenie:}
-                \[ \verb|is_present| \implies e - s = d \]
-            \end{minipage}
-    \end{samepage}
-
-    \subsection{Zmienne decyzyjne oraz wymagania ilościowe sal}
-        Dla każdego bloku lekcyjnego $b_i$ dla którego $v_i > 0$ definiujemy:
-        \begin{enumerate}
-            \item $s_i \gets \verb|NewIntVar(0, horizon)|$
-            \item $e_i \gets \verb|NewIntVar(0, horizon)|$
-            \item $\verb|Interval|_i \gets \verb|NewIntervalVar(|s_i\verb|, |s_{\text{best}_{d, i}}\verb|, |e_i\verb|)|$
-        \end{enumerate}
-
-        Dla każdego przedmiotu $z$ oraz liczby nauczycieli $\left|\mathcal{T}\right|_{i,z}$ prowadzących ten przedmiot w bloku $b_i$ definiujemy:
-        \begin{enumerate}
-            \item $\forall r \in \left\{1, 2, \dots, \mathfrak{R}_z\right\}$:
-            \begin{enumerate}
-                \item $\verb|is_present|_{i,j,r} \gets \verb|NewBoolVar()|$
-                \item $\verb|OptionalInterval|_{i,j,r} \gets \verb|NewOptionalIntervalVar(|s_i\verb|, |s_{\text{best}_{d, i}}\verb|, |e_i\verb|, is_present|_{i,j}\verb|)|$\\
-            \end{enumerate}
-            gdzie $j \in \left\{1, 2, \dots, \left|\mathcal{T}\right|_{i, z}\right\}$, oraz $\mathfrak{R}_z$ to liczba sal obsługujących przedmiot $z$.
-            \item Na tym etapie dodajemy także ograniczenie do modelu:
-            \[ \sum_{r=1}^{\mathfrak{R}_z}\sum_{j=1}^{\left|\mathcal{T}\right|_{i,z}}\verb|is_present|_{i,j,r} = \left|\mathcal{T}\right|_{i,z} \]
-        \end{enumerate}
-        Wszystkie zdefiniowane ograniczenia w tens posób możemy wyrazić językiem naturalnym jako:\\ ``Liczba sal przypisanych do bloku musi być równa liczbie nauczycieli w bloku $b_i$ oraz przypisane sale muszą obsługiwać przedmioty prowadzone w ramach bloku $b_i$''.
-
-    \subsection{Ograniczenia}
-        \subsubsection{Dwa takie same przedmioty muszą być obok siebie}
-            Jedną z licznych zalet stosowania interwałów do reprezentacji bloków lekcyjnych jest fakt, że sama ich definicja gwarantuje nam następstwo takich samych bloków.
-            Tworzymy bloki o długości $s_{d, i}$, co za tym idzie jeśli dwie godziny są przypisane do danego dnia
-
-        \subsubsection{Nienakładanie się lekcji dla każdej klasy i brak okienek dla uczniów}
-            Dla każdej klasy $g$ wykonujemy następującą procedurę:
-            \begin{enumerate}
-                \item Tworzymy listę indeksów bloków/interwałów $D_g$, których bloki obejmują rozpatrywaną klasę $g$.
-                \item Dodajemy ograniczenie $\verb|model.AddNoOverlap([Interval|_i \verb| for | i \verb| in | D_g \verb|])|$
-                \item Tworzymy dwie zmienne pomocnicze:
-                \begin{itemize}
-                    \item $\verb|day_start| \gets \verb|model.NewIntVar(0, horizon)|$
-                    \item $\verb|day_end| \gets \verb|model.NewIntVar(0, horizon)|$
-                \end{itemize}
-                \item Dodajemy następujące ograniczenia:
-                \begin{enumerate}
-                    \item $\verb|day_start| = \underset{i \in D_g}{\min}\left\{s_i\right\}$
-                    \item $\verb|day_end  | = \underset{i \in D_g}{\max}\left\{e_i\right\}$
-                    \item $\verb|day_end| - \verb|day_start| = \mathlarger\sum_{i \in D_g} v_i$
-                \end{enumerate}
-            \end{enumerate}
-            
-        \subsubsection{Nienakładanie się lekcji dla każdego nauczyciela}
-            Dla każdego nauczyciela $t$ wykonujemy:
-            \begin{enumerate}
-                \item Tworzymy listę indeksów bloków/interwałów $D_t$, których bloki obejmują rozpatrywanego nauczyciela $t$.
-                \item Dodajemy ograniczenie $\verb|model.AddNoOverlap([Interval|_i \verb| for | i \verb| in | D_t \verb|])|$
-            \end{enumerate}
-        
-        \subsubsection{Nienakładanie się lekcji w jednej sali}
-            Dla każdej sali $r$ wykonujemy:
-            \begin{enumerate}
-                \item Tworzymy listę wszystkich istniejących opcjonalnych interwałów 
-                \[ \verb|room_intervals|_r = \left[\verb|OptionalInterval|_{i,j,r}\right], \quad \forall i \in \left\{1, 2, \dots, \mathfrak{N}\right\}, \forall j \in \left\{1, 2, \dots, \left|\mathcal{T}\right|\right\} \]
-                \item Dodajemy ograniczenie $\verb|model.AddNoOverlap(room_intervals|_r\verb|)|$
-            \end{enumerate}
-
-    \subsection{Funkcja celu}
-        Funkcja celu ma na celu minimalizację czasu spędzanego przez nauczycieli w szkole, co pośrednio redukuje liczbę okienek.
-        Możemy w tym celu użyć bardzo podobnej architektury jak w ograniczeniu, które gwarantuje ciągłość lekcji dla każdej klasy.
-
-        Stwórzymy zmienne dla każdego nauczyciela $t$:
+    \textbf{Zalety podejścia CP:}
         \begin{itemize}
-            \item $\verb|day_start| \gets \verb|model.NewIntVar(0, horizon)|$
-            \item $\verb|day_end| \gets \verb|model.NewIntVar(0, horizon)|$
-            \item $\verb|day_duration|_t = \verb|day_end| - \verb|day_start|$
+            \item \textbf{Naturalne modelowanie}: Zmienne interwałowe bezpośrednio reprezentują zajęcia o określonym czasie rozpoczęcia i zakończenia.
+            \item \textbf{Efektywność pamięciowa}: W porównaniu z reprezentacją binarną z podrozdziału~\ref{subsection:podejscie_zerojedynkowe}, podejście interwałowe redukuje liczbę zmiennych decyzyjnych.
+            \item \textbf{Specjalizowane ograniczenia}: Solver oferuje gotowe implementacje ograniczeń typowych dla harmonogramów --- nakładanie się.
+            \item \textbf{Szybkość rozwiązywania}: Algorytmy propagacji ograniczeń efektywnie zawężają przestrzeń poszukiwań.
         \end{itemize}
 
-        Dodajmy następujące ograniczenia:
-        \begin{enumerate}
-            \item $\verb|day_start| = \underset{i \in D_t}{\min}\left\{s_i\right\}$
-            \item $\verb|day_end  | = \underset{i \in D_t}{\max}\left\{e_i\right\}$
-        \end{enumerate}
+    Proces jest wykonywany niezależnie dla każdego dnia tygodnia $d \in \{1,2,3,4,5\}$, reprezentowanego przez wiersze macierzy $S_{\text{best}}$.
+    Dla każdego dnia rozwiązujemy podproblem zawierający tylko te bloki $L_i$, dla których $S_{\text{best}_{d,i}}> 0$. \\
+    Takie podejście:
+    \begin{itemize}
+        \item Redukuje wymagania pamięciowe o $\approx 5$.
+        \item Umożliwia równoległe przetwarzanie dni, jeśli nie ogranicza nas pamięć.
+        \item Upraszcza strukturę ograniczeń.
+    \end{itemize}
 
-        Funkcja celu ma postać:
-        \[ F_c = \sum_{t=1}^{\left|\mathcal{T}\right|} \verb|day_duration|_t \]
+    \subsection{Reprezentacja interwałów}
+        Dla modelowania zajęć używamy zmiennych interwałowych, które reprezentują bloki czasowe o określonej długości:
+        \begin{itemize}
+            \item \textbf{Interwał podstawowy} dla bloku lekcyjnego $L_i \in \mathcal{L}$:
+                \[
+                    \begin{cases}
+                        s_i &\in \left[0, H\right] \\
+                        d_i &= v_i \\
+                        e_i &\in \left[0, H\right] \\
+                        e_i &= s_i + d_i    
+                    \end{cases}
+                \]
+                gdzie $s_i$ to czas rozpoczęcia, $e_i$ to czas zakończenia, a $d_i$ to czas trwania.
+            
+            \item \textbf{Interwał opcjonalny} dla przypisania sali:
+                \[
+                    \begin{cases}
+                        p_{i,j,r} &\in \left\{0, 1\right\}\\
+                        p_{i,j,r} &\implies e_i = s_i + d_i
+                    \end{cases}
+                \]
+        \end{itemize}
+
+    \subsection{Zmienne decyzyjne}
+        \subsubsection{Interwały bloków lekcyjnych}
+            Dla każdego bloku $L_i \in \mathcal{L}$ z liczbą godzin $v_i > 0$ definiujemy:
+            \[ I_i = (s_i, v_i, e_i) \]
+
+        \subsubsection{Przypisania sal}
+            Dla każdej możliwej kombinacji (blok, nauczyciel, sala) definiujemy interwał opcjonalny:
+            \[ O_{L_i,t,r} = (s_i, v_i, e_i, p_{L_i,t,r}), \quad \begin{cases}
+                L_i &\in \mathcal{L} \\
+                t &\in \mathcal{T} \\
+                r &\in \mathcal{R}
+            \end{cases} \]
+            gdzie brane pod uwagę są tylko mozliwe kombinacje. Przykładowo blok lekcyjny z jednym wymaganiem głównym matematyki, nauczyciel matematyki oraz sala do matematyki.
+
+    \subsection{Ograniczenia}
+        \subsubsection{Ograniczenie przypisania sal}
+            Dla każdego bloku $L_i$ musi być przypisana odpowiednia liczba sal:
+            \[ \forall L_i \in \mathcal{L}: \sum_{r \in \mathcal{R}, t \in \mathcal{T}} p_{L_i,t,r} = |T_i| \]
+
+        \subsubsection{Ciągłość zajęć dla klas}
+            Dla każdej klasy $c \in \mathcal{C}$ i dnia $d \in \{1, 2, \dots,5\}$:
+            \[ \mathcal{L}_{c,d} = \{L_i \in \mathcal{L}: \exists w \in L_i \text{ takie, że } c_w = c \land s_{\text{best}_{d,i}} > 0\} \]
+            \textbf{Nienakładanie się zajęć}~\cite{googleortoolsoverlap}\textbf{:}
+            \[ \text{AddNoOverlap}(\{I_i : L_i \in \mathcal{L}_{c,d}\}) \]
+            \textbf{Brak okienek:}
+            \[
+                \begin{cases}
+                    \text{start}_c = \min\{s_i : L_i \in \mathcal{L}_{c,d}\} \\
+                    \text{end}_c = \max\{e_i : L_i \in \mathcal{L}_{c,d}\} \\
+                    \text{end}_c - \text{start}_c = \sum_{L_i \in \mathcal{L}_{c,d}} v_i
+                \end{cases}
+            \]
+
+        \subsubsection{Nakładanie się nauczycieli}
+            Dla każdego nauczyciela $t \in \mathcal{T}$ i dnia $d \in \{1, 2, \dots,5\}$:
+            \[ \mathcal{L}_{t,d} = \{L_i \in \mathcal{L}: t \in T_i \land s_{\text{best}_{d,i}} > 0\} \]
+            \[ \text{AddNoOverlap}(\{I_i : L_i \in \mathcal{L}_{t,d}\}) \]
+
+        \subsubsection{Kolizje sal}
+            Dla każdej sali $r \in \mathcal{R}$ i dnia $d \in \{1, 2, \dots,5\}$:
+            \[ \mathcal{O}_{r,d} = \{O_{L_i,t,r} : L_i \in \mathcal{L}, t \in \mathcal{T}, s_{\text{best}_{d,i}} > 0\} \]
+            \[ \text{AddNoOverlap}(\mathcal{O}_{r,d}) \]
+        
+        \subsubsection{Sekwencjonowanie przedmiotów}
+            Ograniczenie dotyczące dwuch takich samych przedmiotów jednego dnia jest łatwo rozwiązywane poprzez zastosowanie interwałów, gdyż z definicji mamy zagwarantowane, że:
+            \[ \forall i \in \left\{1, 2, \dots, \left|\mathcal{L}\right|\right\}: v_i = 2 \implies e_i - s_i = 2 \]
+            W ten sposób jeśli do danego dnia są przypisane dwie godziny $i$-tego bloku, to mamy gwarancję, że następują one po sobie.
+
+    \subsection{Funkcja celu}
+        Minimalizujemy całkowity czas przebywania nauczycieli w szkole:
+        \[
+            \forall t \in \mathcal{T}, d \in \{1,2,\dots,5\}:
+            \begin{cases}
+                \text{start}_{t,d} &= \min\{s_i : L_i \in \mathcal{L}_{t,d}\} \\
+                \text{end}_{t,d} &= \max\{e_i : L_i \in \mathcal{L}_{t,d}\} \\
+                \text{duration}_{t,d} &= \text{end}_{t,d} - \text{start}_{t,d}
+            \end{cases}
+        \]
+
+        \[ F_c = \sum_{t \in \mathcal{T}} \sum_{d=1}^{5} \text{duration}_{t,d} \]
+
         Minimalizacja tej funkcji prowadzi do kompaktowego układania zajęć, redukując okienka w planach nauczycieli.
 
+    \subsection{Transformacja interwałów na przypisania końcowe}
+        Po znalezieniu rozwiązania przez solver CP-SAT, konieczne jest przekształcenie zmiennych interwałowych na ostateczne przypisania w zbiorze $\mathcal{Z}$.
+        Proces ten obejmuje ekstrakcję wartości zmiennych decyzyjnych i mapowanie na strukturę danych planu lekcji.
+        
+        \subsubsection{Ekstrakcja rozwiązań z solvera}
+            Dla każdego interwału $I_i$ w rozwiązaniu zapisujemy następujące wartości:
+            \begin{itemize}
+                \item $L_i$
+                \item $s_i$
+                \item $e_i$
+                \item $v_i$
+                \item $d$ --- aktualnie przetwarzany dzień tygodnia
+                \item $\mathcal{R}_i = \left\{r \in \mathcal{R}: \exists t \in \mathcal{T} \text{ takie, że } p_{i,t,r} = 1 \right\}$ --- zbiór aktywnych sal, które zostały przypisane do bloku $L_i$.
+            \end{itemize}
+        
+        \subsubsection{Mapowanie na strukturę lekcji}
+            Dla każdych takich wartości tworzymy konkretne lekcje w zbiorze $\mathcal{Z}$.
+            Wpierw tworzymy funkcję, która będzie przypisywać nauczycieli i prowadzone przez nich przedmioty $s$ do odpowiednich sal.
+            \begin{align*}
+                f: T_i &\to \mathcal{R}_i \\
+                \forall t \in T_i: f(t) &= r \in \mathcal{R}_i \text{ takie, że } r \text{ obsługuje przedmiot } s \in \vec{S}_{L_i}
+            \end{align*}
+            Konieczne jest użycie takiej funkcji, ponieważ każdy nauczyciel w jednym bloku może mieć przypisane wiele klas.
+            Musimy stworzyć wiele przypisań, które będą miały taką samą salę $r$ dla każdej klasy.
+
+            Dla każdego wymagania $w \in L_i$ i każdego slotu czasowego $h \in \left[1, e_i-s_i\right]$:
+            \begin{align*}
+                z &= (d, h, c_w, t_w, s_w, f(t_w)) \\
+                \mathcal{Z}_d &\gets \mathcal{Z}_d \cup \{z\}
+            \end{align*}
+        
+        \subsubsection{Przykład transformacji}
+            Rozważmy blok $L_i = \{w_1, w_2\}$ z $v_i = 2$, gdzie:
+            \begin{itemize}
+                \item $w_1 = (t_1, c_1, s_1, 3)$ --- nauczyciel $t_1$, klasa $c_1$, wychowanie fizyczne
+                \item $w_2 = (t_2, c_1, s_2, 3)$ --- nauczyciel $t_2$, klasa $c_1$, wychowanie fizyczne
+            \end{itemize}
+            
+            Po rozwiązaniu otrzymujemy przypisania:
+            \begin{align*}
+                z_1 &= (1, 2, c_A, t_1, s_1, r_1) \\
+                z_2 &= (1, 3, c_A, t_1, s_1, r_1) \\
+                z_3 &= (1, 2, c_A, t_2, s_2, r_2) \\
+                z_4 &= (1, 3, c_A, t_2, s_2, r_2)
+            \end{align*}
+
+            Jest to równoznaczne z leckją wychowania fizycznego podzieloną na dwie grupy, które odbywają się w tym samym czasie.
+        
+        Proces ten powtarzamy dla wszystkich dni tygodnia, tworząc kompletny plan lekcji $\mathcal{Z} = \bigcup_{d=1}^5 \mathcal{Z}_d$ spełniający wszystkie ograniczenia i optymalizujący funkcję celu.
 
 \section{Wyniki}
     \begin{itemize}

@@ -22,62 +22,79 @@
 \contentsline {subsubsection}{Ograniczenia fizyczne}{9}{subsubsection*.8}%
 \contentsline {subsubsection}{Ograniczenia prawne}{10}{subsubsection*.9}%
 \contentsline {subsubsection}{Ograniczenia jakościowe}{10}{subsubsection*.10}%
+\contentsline {subsubsection}{Ograniczenie główne}{10}{subsubsection*.11}%
 \contentsline {section}{\numberline {3.2}Poprzednie podejścia}{10}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Programowanie zero-jedynkowe}{10}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.1}Programowanie zero-jedynkowe}{11}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Grafowe sieci neuronowe}{12}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3}Struktura algorytmu i wybór technologii}{12}{section.3.3}%
+\contentsline {section}{\numberline {3.3}Struktura algorytmu i wybór technologii}{13}{section.3.3}%
 \contentsline {section}{\numberline {3.4}Algorytm zachłanny}{13}{section.3.4}%
 \contentsline {subsection}{\numberline {3.4.1}Bloki lekcyjne}{14}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Działanie}{14}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Przykładowe rezultaty}{16}{subsection.3.4.3}%
-\contentsline {section}{\numberline {3.5}Algorytm ewolucyjny}{16}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Cel algorytmu}{17}{subsection.3.5.1}%
-\contentsline {subsubsection}{Dane wejściowe}{18}{subsubsection*.11}%
-\contentsline {subsubsection}{Dane wyjściowe}{18}{subsubsection*.12}%
-\contentsline {subsection}{\numberline {3.5.2}Kodowanie i ograniczenia twarde}{18}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}Generowanie populacji początkowej}{19}{subsection.3.5.3}%
-\contentsline {subsection}{\numberline {3.5.4}Przystosowanie}{20}{subsection.3.5.4}%
-\contentsline {subsubsection}{Ocena względem nauczycieli}{21}{subsubsection*.14}%
-\contentsline {subsubsection}{Ocena względem klas}{22}{subsubsection*.15}%
-\contentsline {subsubsection}{Normalizacja i wagi}{22}{subsubsection*.16}%
-\contentsline {subsection}{\numberline {3.5.5}Selekcja}{22}{subsection.3.5.5}%
-\contentsline {subsection}{\numberline {3.5.6}Krzyżowanie}{23}{subsection.3.5.6}%
-\contentsline {subsubsection}{Względem oceny nauczycieli}{23}{subsubsection*.17}%
-\contentsline {subsubsection}{Względem oceny klas}{23}{subsubsection*.18}%
-\contentsline {subsection}{\numberline {3.5.7}Mutacja}{24}{subsection.3.5.7}%
-\contentsline {subsection}{\numberline {3.5.8}Przykładowe rezultaty}{25}{subsection.3.5.8}%
-\contentsline {section}{\numberline {3.6}Solver liniowy}{25}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Czym są interwały}{25}{subsection.3.6.1}%
-\contentsline {subsection}{\numberline {3.6.2}Zmienne decyzyjne oraz wymagania ilościowe sal}{25}{subsection.3.6.2}%
-\contentsline {subsection}{\numberline {3.6.3}Ograniczenia}{26}{subsection.3.6.3}%
-\contentsline {subsubsection}{Dwa takie same przedmioty muszą być obok siebie}{26}{subsubsection*.19}%
-\contentsline {subsubsection}{Nienakładanie się lekcji dla każdej klasy i brak okienek dla uczniów}{26}{subsubsection*.20}%
-\contentsline {subsubsection}{Nienakładanie się lekcji dla każdego nauczyciela}{27}{subsubsection*.21}%
-\contentsline {subsubsection}{Nienakładanie się lekcji w jednej sali}{27}{subsubsection*.22}%
-\contentsline {subsection}{\numberline {3.6.4}Funkcja celu}{27}{subsection.3.6.4}%
-\contentsline {section}{\numberline {3.7}Wyniki}{27}{section.3.7}%
-\contentsline {subsection}{\numberline {3.7.1}Statystyki planu}{28}{subsection.3.7.1}%
-\contentsline {subsection}{\numberline {3.7.2}Porównanie z ręcznie ułożonym planem}{28}{subsection.3.7.2}%
-\contentsline {chapter}{\numberline {4}Aplikacja}{29}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Specyfikacja wymagań}{29}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Wymagania funkcjonalne}{29}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Wymagania niefunkcjonalne}{29}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Przypadki użycia}{29}{subsection.4.1.3}%
-\contentsline {section}{\numberline {4.2}Projekt}{29}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Projekt bazy danych}{29}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Projekt interfejsu}{29}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Sposób integracji z algorytmem}{29}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}Implementacja}{29}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Wybór narzędzi}{29}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Implementacja bazy danych w Django}{29}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Implementacja API w Django}{29}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Implementacja interfejsu w React}{29}{subsection.4.3.4}%
-\contentsline {subsection}{\numberline {4.3.5}Integracja z algorytmem}{29}{subsection.4.3.5}%
-\contentsline {chapter}{\numberline {5}Testowanie i ewaluacja rozwiązania}{31}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Scenariusze testowe}{31}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Scenariusz 1}{31}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Scenariusz 2}{31}{subsection.5.1.2}%
-\contentsline {section}{\numberline {5.2}Testowanie aplikacji}{31}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Funkcjonalność 1}{31}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Funkcjonalność 2}{31}{subsection.5.2.2}%
-\contentsline {chapter}{\numberline {6}Wnioski i perspektywy rozwoju}{33}{chapter.6}%
+\contentsline {subsection}{\numberline {3.4.2}Działanie}{15}{subsection.3.4.2}%
+\contentsline {subsubsection}{Dane wejściowe}{15}{subsubsection*.12}%
+\contentsline {subsubsection}{Klasyfikacja bloków}{15}{subsubsection*.13}%
+\contentsline {subsubsection}{Inicjalizacja}{15}{subsubsection*.14}%
+\contentsline {subsubsection}{Tworzenie grup wieloklasowych}{15}{subsubsection*.15}%
+\contentsline {subsubsection}{Agregacja bloków}{16}{subsubsection*.16}%
+\contentsline {subsubsection}{Przetwarzanie bloków wieloklasowych}{16}{subsubsection*.17}%
+\contentsline {subsubsection}{Generowanie bloków pojedynczych}{16}{subsubsection*.18}%
+\contentsline {subsubsection}{Iteracyjna alokacja pozostałych godzin}{16}{subsubsection*.19}%
+\contentsline {subsubsection}{Finalizacja}{17}{subsubsection*.20}%
+\contentsline {subsection}{\numberline {3.4.3}Przykładowe rezultaty}{17}{subsection.3.4.3}%
+\contentsline {section}{\numberline {3.5}Algorytm ewolucyjny}{17}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Cel algorytmu}{18}{subsection.3.5.1}%
+\contentsline {subsubsection}{Dane wejściowe}{19}{subsubsection*.21}%
+\contentsline {subsubsection}{Dane wyjściowe}{19}{subsubsection*.22}%
+\contentsline {subsection}{\numberline {3.5.2}Kodowanie i ograniczenia twarde}{19}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Generowanie populacji początkowej}{20}{subsection.3.5.3}%
+\contentsline {subsection}{\numberline {3.5.4}Przystosowanie}{21}{subsection.3.5.4}%
+\contentsline {subsubsection}{Ocena względem nauczycieli}{22}{subsubsection*.24}%
+\contentsline {subsubsection}{Ocena względem klas}{23}{subsubsection*.25}%
+\contentsline {subsubsection}{Normalizacja i wagi}{23}{subsubsection*.26}%
+\contentsline {subsection}{\numberline {3.5.5}Selekcja}{23}{subsection.3.5.5}%
+\contentsline {subsection}{\numberline {3.5.6}Krzyżowanie}{24}{subsection.3.5.6}%
+\contentsline {subsubsection}{Względem oceny nauczycieli}{24}{subsubsection*.27}%
+\contentsline {subsubsection}{Względem oceny klas}{24}{subsubsection*.28}%
+\contentsline {subsection}{\numberline {3.5.7}Mutacja}{25}{subsection.3.5.7}%
+\contentsline {subsection}{\numberline {3.5.8}Przykładowe rezultaty}{26}{subsection.3.5.8}%
+\contentsline {section}{\numberline {3.6}Solver programowania liniowego z ograniczeniami}{26}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Reprezentacja interwałów}{26}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Zmienne decyzyjne}{27}{subsection.3.6.2}%
+\contentsline {subsubsection}{Interwały bloków lekcyjnych}{27}{subsubsection*.29}%
+\contentsline {subsubsection}{Przypisania sal}{27}{subsubsection*.30}%
+\contentsline {subsection}{\numberline {3.6.3}Ograniczenia}{27}{subsection.3.6.3}%
+\contentsline {subsubsection}{Ograniczenie przypisania sal}{27}{subsubsection*.31}%
+\contentsline {subsubsection}{Ciągłość zajęć dla klas}{27}{subsubsection*.32}%
+\contentsline {subsubsection}{Nakładanie się nauczycieli}{28}{subsubsection*.33}%
+\contentsline {subsubsection}{Kolizje sal}{28}{subsubsection*.34}%
+\contentsline {subsubsection}{Sekwencjonowanie przedmiotów}{28}{subsubsection*.35}%
+\contentsline {subsection}{\numberline {3.6.4}Funkcja celu}{28}{subsection.3.6.4}%
+\contentsline {subsection}{\numberline {3.6.5}Transformacja interwałów na przypisania końcowe}{28}{subsection.3.6.5}%
+\contentsline {subsubsection}{Ekstrakcja rozwiązań z solvera}{29}{subsubsection*.36}%
+\contentsline {subsubsection}{Mapowanie na strukturę lekcji}{29}{subsubsection*.37}%
+\contentsline {subsubsection}{Przykład transformacji}{29}{subsubsection*.38}%
+\contentsline {section}{\numberline {3.7}Wyniki}{30}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Statystyki planu}{30}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Porównanie z ręcznie ułożonym planem}{30}{subsection.3.7.2}%
+\contentsline {chapter}{\numberline {4}Aplikacja}{31}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Specyfikacja wymagań}{31}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Wymagania funkcjonalne}{31}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Wymagania niefunkcjonalne}{31}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Przypadki użycia}{31}{subsection.4.1.3}%
+\contentsline {section}{\numberline {4.2}Projekt}{31}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Projekt bazy danych}{31}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Projekt interfejsu}{31}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Sposób integracji z algorytmem}{31}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Implementacja}{31}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Wybór narzędzi}{31}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Implementacja bazy danych w Django}{31}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Implementacja API w Django}{31}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Implementacja interfejsu w React}{31}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}Integracja z algorytmem}{31}{subsection.4.3.5}%
+\contentsline {chapter}{\numberline {5}Testowanie i ewaluacja rozwiązania}{33}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Scenariusze testowe}{33}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Scenariusz 1}{33}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Scenariusz 2}{33}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2}Testowanie aplikacji}{33}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Funkcjonalność 1}{33}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Funkcjonalność 2}{33}{subsection.5.2.2}%
+\contentsline {chapter}{\numberline {6}Wnioski i perspektywy rozwoju}{35}{chapter.6}%

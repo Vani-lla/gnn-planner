@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.11.11)  25 NOV 2025 01:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.11.11)  25 NOV 2025 13:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1369,12 +1369,12 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
-<title_page/pd_inz_pl.pdf, id=252, 597.4822pt x 844.90656pt>
+<title_page/pd_inz_pl.pdf, id=256, 597.4822pt x 844.90656pt>
 File: title_page/pd_inz_pl.pdf Graphic file (type pdf)
 <use title_page/pd_inz_pl.pdf>
 Package pdftex.def Info: title_page/pd_inz_pl.pdf  used on input line 10.
 (pdftex.def)             Requested size: 597.48073pt x 844.90448pt.
-<title_page/pd_inz_pl.pdf, id=254, page=1, 597.4822pt x 844.90656pt>
+<title_page/pd_inz_pl.pdf, id=258, page=1, 597.4822pt x 844.90656pt>
 File: title_page/pd_inz_pl.pdf Graphic file (type pdf)
 <use title_page/pd_inz_pl.pdf, page 1>
 Package pdftex.def Info: title_page/pd_inz_pl.pdf , page1 used on input line 10.
@@ -1511,12 +1511,18 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 
 ]
+LaTeX Font Info:    Trying to load font information for U+euf on input line 36.
+ (/usr/share/texmf-dist/tex/latex/amsfonts/ueuf.fd
+File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
+) (/usr/share/texmf-dist/tex/latex/microtype/mt-euf.cfg
+File: mt-euf.cfg 2006/07/03 v1.1 microtype config. file: AMS Euler Fraktur (RS)
+)
 
 [6{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
-<images/excel_wymagania.png, id=430, 479.54156pt x 294.34969pt>
+<images/excel_wymagania.png, id=436, 479.54156pt x 294.34969pt>
 File: images/excel_wymagania.png Graphic file (type png)
 <use images/excel_wymagania.png>
-Package pdftex.def Info: images/excel_wymagania.png  used on input line 78.
+Package pdftex.def Info: images/excel_wymagania.png  used on input line 80.
 (pdftex.def)             Requested size: 424.82523pt x 260.76668pt.
 
 
@@ -1527,16 +1533,10 @@ Package pdftex.def Info: images/excel_wymagania.png  used on input line 78.
 [9]
 
 [10]
-LaTeX Font Info:    Trying to load font information for U+euf on input line 200.
- (/usr/share/texmf-dist/tex/latex/amsfonts/ueuf.fd
-File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
-) (/usr/share/texmf-dist/tex/latex/microtype/mt-euf.cfg
-File: mt-euf.cfg 2006/07/03 v1.1 microtype config. file: AMS Euler Fraktur (RS)
-)
 
 [11]
 
-LaTeX Warning: Reference `subsubsection:ograniczenie_glowne' on page 12 undefined on input line 244.
+LaTeX Warning: Reference `subsubsection:ograniczenie_glowne' on page 12 undefined on input line 256.
 
 
 
@@ -1556,10 +1556,6 @@ LaTeX Warning: Reference `subsubsection:ograniczenie_glowne' on page 12 undefine
 
 [19]
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-
 [20]
 
 [21]
@@ -1571,78 +1567,61 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [24]
 
 [25]
-Overfull \hbox (21.43239pt too wide) in paragraph at lines 872--873
-[]$[][] \OMS/lmsy/m/n/12   []\OML/lmm/m/it/12 s[][]s[][]e[][][][]$ 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 872--873
-
- []
-
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 899.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 899.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 899.
-
 
 [26]
-Overfull \hbox (3.42206pt too wide) detected at line 914
-[][] \OT1/lmr/m/n/12 = [] \OML/lmm/m/it/12 ;  \OMS/lmsy/m/n/12 8\OML/lmm/m/it/12 i \OMS/lmsy/m/n/12 2 [] \OML/lmm/m/it/12 ; \OMS/lmsy/m/n/12 8\OML/lmm/m/it/12 j \OMS/lmsy/m/n/12 2 []
- []
 
-
-
-[27]) (./chapters/website.tex
+[27]
 
 [28]
+
+[29]) (./chapters/website.tex
+
+[30]
 Rozdzia\l  4.
 ) (./chapters/testy.tex
 
-[29
+[31
 
 
 ]
 
-[30
+[32
 
 
 ]
 Rozdzia\l  5.
 ) (./chapters/conclusions.tex
 
-[31]
+[33]
 
-[32
+[34
 
 
 ]
 Rozdzia\l  6.
 ) (./main.bbl
 
-[33]
+[35]
 
-[34
+[36
 
 
 ])
 
-[35] (./main.lof)
+[37] (./main.lof)
 \tf@lof=\write8
 \openout8 = `main.lof'.
 
 
 
-[36] (./main.lot)
+[38] (./main.lot)
 \tf@lot=\write9
 \openout9 = `main.lot'.
 
 
 
-[37]
-runsystem(latexminted cleantemp  --timestamp 20251125011041 FAD58DE7366495DB4650CFEFAC2FCD61)...executed safely (allowed).
+[39]
+runsystem(latexminted cleantemp  --timestamp 20251125133456 FAD58DE7366495DB4650CFEFAC2FCD61)...executed safely (allowed).
 
  (./main.aux)
  ***********
@@ -1654,21 +1633,21 @@ L3 programming layer <2025-01-18>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 7DD90E64C7E2573032DDD53747A52ADF;10288.
+(rerunfilecheck)             Checksum: 7F09F1E8B73067A9E337A9894F0DA9A5;10652.
  ) 
 Here is how much of TeX's memory you used:
- 50108 strings out of 475136
- 1096978 string characters out of 5766290
- 1781784 words of memory out of 5000000
- 71765 multiletter control sequences out of 15000+600000
- 664865 words of font info for 215 fonts, out of 8000000 for 9000
+ 50043 strings out of 475136
+ 1096057 string characters out of 5766290
+ 1782084 words of memory out of 5000000
+ 71714 multiletter control sequences out of 15000+600000
+ 642017 words of font info for 182 fonts, out of 8000000 for 9000
  34 hyphenation exceptions out of 8191
  104i,17n,104p,1045b,2020s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eufm7.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (43 pages, 554302 bytes).
+Output written on main.pdf (45 pages, 562542 bytes).
 PDF statistics:
- 860 PDF objects out of 1000 (max. 8388607)
- 755 compressed objects within 8 object streams
- 230 named destinations out of 1000 (max. 500000)
- 58377 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 887 PDF objects out of 1000 (max. 8388607)
+ 780 compressed objects within 8 object streams
+ 242 named destinations out of 1000 (max. 500000)
+ 46097 words of extra memory for PDF output out of 51595 (max. 10000000)
 
