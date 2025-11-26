@@ -78,10 +78,10 @@
         Każde zadanie (job) $J_i$ składa się z liniowo uporządkowanej sekwencji operacji:
         \[ O_i = \{ O_{i1}, O_{i2}, \dots, O_{i n_i} \} \]
         które muszą zostać wykonane w ściśle określonej kolejności:
-        \[ O_{i1} \prec O_{i2} \prec \dots \prec O_{i n_i}. \]
+        \[ O_{i1} \prec O_{i2} \prec \dots \prec O_{i n_i} \]
     
         Każda operacja $O_{ij}$ jest przypisana do dokładnie jednej maszyny oraz posiada znany czas przetwarzania:
-        \[ p_{ij} \in \mathbb{N}^+. \]
+        \[ p_{ij} \in \mathbb{N}^+ \]
     
         Celem jest wyznaczenie kolejności (szeregowania) i czasów rozpoczęcia wszystkich operacji na maszynach tak, aby zminimalizować maksymalny czas zakończenia dowolnego zadania (ang. \textit{makespan}):
         \[ C_{\max} = \max_{i} C_i \]
@@ -90,13 +90,13 @@
         a $S_{ij}$ oznacza czas rozpoczęcia operacji $O_{ij}$.
     
         Zmienne decyzyjne:
-        \[ S_{ij} \in \mathbb{N}_{0} \quad \forall i=1,\dots,n,\ \forall j=1,\dots,n_i. \]
+        \[ S_{ij} \in \mathbb{N}_{0} \quad \forall i=1,\dots,n,\ \forall j=1,\dots,n_i \]
     
         Ograniczenia precedencji:
-        \[ S_{i,j+1} \ge S_{ij} + p_{ij} \quad \forall i,j = 1,\dots,n_i-1. \]
+        \[ S_{i,j+1} \ge S_{ij} + p_{ij} \quad \forall i,j = 1,\dots,n_i-1 \]
     
         Dla każdej pary różnych operacji $(O_{ij}, O_{kl})$ przypisanych do tej samej maszyny zachodzi jedno z dwóch:
-        \[ S_{ij} + p_{ij} \le S_{kl} \ \lor\ S_{kl} + p_{kl} \le S_{ij}. \]
+        \[ S_{ij} + p_{ij} \le S_{kl} \ \lor\ S_{kl} + p_{kl} \le S_{ij} \]
     
         Funkcja celu:
         \[ F_c = \min C_{\max} \quad \text{przy} \quad C_{\max} \ge S_{i n_i} + p_{i n_i} \ \forall i \]

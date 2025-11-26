@@ -6,9 +6,9 @@
 
         \begin{itemize}
             \item \textbf{Obsługa wielu planów i konfiguracji} --- możliwość pracy z wieloma zestawami zasobów i ograniczeń oraz wieloma planami równolegle.
-            \item \textbf{Wprowadzanie danych} --- import plików \verb|txt| i \verb|csv| oraz ręczna edycja nauczycieli, klas, przedmiotów, sal, wymagań głównych i bloków przedmiotów
-            \item \textbf{Generowanie planu} --- automatyczne tworzenie planów z możliwością kontroli parametrów algorytmu ewolucyjnego
-            \item \textbf{Przeglądanie planów} --- wizualizacja planów z perspektywy nauczycieli i klas dla wielu wariantów
+            \item \textbf{Wprowadzanie danych} --- import plików txt i csv oraz ręczna edycja nauczycieli, klas, przedmiotów, sal, wymagań głównych i bloków przedmiotów.
+            \item \textbf{Generowanie planu} --- automatyczne tworzenie planów z możliwością kontroli parametrów algorytmu ewolucyjnego.
+            \item \textbf{Przeglądanie planów} --- wizualizacja planów z perspektywy nauczycieli i klas dla wielu wariantów.
         \end{itemize}
 
     \subsection{Wymagania niefunkcjonalne}
@@ -100,7 +100,7 @@
 
     \subsection{Przypadki użycia}
         Diagram przypadków użycia pozwala na zwizualizowanie wcześniej omawianych wymagań funkcjonalnych w formie graficznej, ukazując interakcje między użytkownikami a systemem.
-        Diagram służy jako most pomiędzy specyfikacją wymagań a projektem technicznym, stanowiąc punkt wyjścia do dalszej analizy i implementacji.
+        Diagram pomaga połączyć specyfikację wymagań z projektem technicznym, stanowiąc punkt wyjścia do dalszej analizy i implementacji.
         W niniejszej sekcji omawiam kluczowe przypadki użycia zilustrowane na diagramie.
 
         \begin{figure}[!h]
@@ -113,7 +113,7 @@
 
     \subsection{Diagramy sekwencji}
         Diagramy sekwencji stanowią kluczowy element modelowania systemu, ukazując sekwencyjny przepływ komunikatów między obiektami w czasie.
-        Pozwalają prześledzić pełny cykl życia żądań użytkownika --- od inicjacji akcji w interfejsie, poprzez przetwarzanie w backendzie, aż do generowania planu przez specjalistyczne algorytmy.
+        Pozwalają prześledzić interakcje między obiektami w systemie --- od inicjacji akcji w interfejsie, poprzez przetwarzanie w backendzie, aż do generowania planu przez algorytmy.
         W niniejszej sekcji przedstawiam scenariusze współpracy pomiędzy głównymi komponentami aplikacji: interfejsem, warstwą serwerową oraz algorytmem.
 
         \begin{figure}[!t]
@@ -227,8 +227,8 @@
                 \caption{Tabele zbiorów zasobów z uzasadnieniem relacji}
             \end{table}
 
-            Dla nauczycieli i przedmiotów zastosowałem relację wiele-do-wielu, ponieważ zasoby te charakteryzują się względną stabilnością pomiędzy latami szkolnymi --- większość nauczycieli i przedmiotów pozostaje niezmieniona, a jedynie dodawane są nowe rekordy dla nowo zatrudnionych pedagogów lub wprowadzanych przedmiotów.
-            
+            Dla nauczycieli i przedmiotów zastosowałem relację wiele-do-wielu, ponieważ zasoby te charakteryzują się względną stabilnością pomiędzy latami szkolnymi --- większość nauczycieli i przedmiotów pozostaje niezmienna, a jedynie dodawane są nowe rekordy dla nowo zatrudnionych pedagogów lub wprowadzanych przedmiotów.
+
             W przypadku sal przyjęto relację jeden-do-wielu, co wynika z całkowitej niezmienności tej puli zasobów pomiędzy okresami szkolnymi.
             Natomiast dla klas zastosowałem relację jeden-do-wielu, odzwierciedlającą coroczną całkowitą wymianę składu grup uczniowskich --- klasy z poprzedniego roku nie są ponownie wykorzystywane w kolejnych okresach, co eliminuje potrzebę stosowania relacji wiele-do-wielu.
 
@@ -340,11 +340,54 @@
     \clearpage
 
     \subsection{Projekt interfejsu}
-        abc
+        Projekt interfejsu użytkownika opracowałem z uwzględnieniem wymagań funkcjonalnych oraz heurystyk Nilsena~\cite{nielsenheuristics}.
+        Architektura nawigacji opiera się na logicznym przepływie pracy charakterystycznym dla procesu układania planu lekcji, zapewniając intuicyjne środowisko dla użytkowników zaznajomionych z arkuszami kalkulacyjnymi.
 
-    \subsection{Sposób integracji z algorytmem}
-        abc
-        
+        \subsubsection{Nawigacja}
+            System nawigacji został zaprojektowany jako hierarchiczny, z głównym menu umożliwiającym dostęp do wszystkich kluczowych funkcjonalności.
+            Nawigacja górnego poziomu obejmuje przejście między głównymi modułami aplikacji, podczas gdy niższe poziomy zapewniają dostęp do szczegółowych funkcji w obrębie modułu wprowadzania danych.
+
+        \subsubsection{Strona główna}
+            Strona główna pełni funkcję centralnego hubu aplikacji. 
+            Umożliwia bezpośrednie przejście do trzech kluczowych sekcji: 
+            \begin{enumerate}
+                \item Podglądu istniejących planów lekcji.
+                \item Wprowadzania i edycji ograniczeń głównych.
+                \item Modułu generowania nowych planów.
+            \end{enumerate}
+            
+        \subsubsection{Podgląd planów lekcji}
+            Sekcja podglądu planów lekcji realizuje wymagania dotyczące wieloperspektywicznego wglądu w wygenerowane plany.
+            Umożliwia przeglądanie wielu wariantów planów, z możliwością przełączania między widokami:
+            \begin{itemize}
+                \item Nauczycieli --- prezentujący indywidualne plany zajęć każdego pedagoga.
+                \item Klas --- ukazujący rozkład zajęć dla poszczególnych grup uczniowskich.
+            \end{itemize}
+
+        \subsubsection{Moduły wprowadzania danych}
+            Aplikacja zawiera kompleksowy zestaw stron do wprowadzania wszystkich typów danych wymaganych do generowania planu:
+            \begin{itemize}
+                \item \textbf{Strony zasobów podstawowych} umożliwiają zarządzanie czterema fundamentalnymi zasobami: przedmiotami, nauczycielami, klasami oraz salami.
+                Interfejs powinien zapewniać możliwość ręcznego wprowadzania, edycji i usuwania rekordów, a także importu danych z plików tekstowych w ustalonych formatach.
+                \item \textbf{Strona ograniczeń głównych} dedykowana jest definiowaniu wymagań głównych, czyli przypisań godzinowych nauczycieli do klas dla konkretnych przedmiotów.
+                Interfejs powinien nawiązywać wyglądem i funkcjonalnością do arkuszy kalkulacyjnych, co ułatwia migrację z dotychczas używanych narzędzi.
+                \item \textbf{Strona dostępności nauczycieli} zapewnia graficzny interfejs do określania dni, w których poszczególni nauczyciele są dostępni do prowadzenia zajęć.
+                Wykorzystanie intuicyjnych checkboxów z możliwością blokowania i preferowania konkretnych dni.
+                \item \textbf{Strona bloków przedmiotów} umożliwia konfigurację zaawansowanych struktur grupujących zajęcia, zgodnie z koncepcją przedstawioną w rozdziale~\ref{chapter:algorytm}.
+                Interfejs powinien pozwalać na definiowanie składu bloków, klas objętych blokiem, ograniczeń liczbowych oraz flagi agregacji.
+            \end{itemize}
+
+        \subsubsection{Moduł generowania planu}
+            Strona generowania planu lekcji powinna integrować wszystkie wprowadzone dane i ograniczenia, oferując proste dla użytkownika sterowanie procesem optymalizacji.
+            Docelowi użytkownicy nie są osobami zaznajomionymi z technologią, a tym bardziej algorytmami ewolucyjnymi --- nie powinni mieć pełnej kontroli nad wszystkimi parametrami.
+            Jedyny parametr, który jest ważny z ich punktu widzenia to liczba generacji algorytmu genetycznego, która jest proporcjonalna do czasu oczekiwania na generację planu.
+
+        \subsubsection{Spójność i ergonomia}
+            Wszystkie strony aplikacji powinny utrzymywać spójny schemat wizualny oparty na zasadach minimalizmu i przejrzystości.
+            Projekt interfejsu prioritetyzuje wygodę użytkowania poprzez ograniczenie liczby koniecznych kliknięć do wykonania kluczowych operacji oraz zapewnienie natychmiastowego dostępu do najczęściej używanych funkcjonalności.
+            
+            Wszystkie strony powinny również oferować powiadomienia o wszystkich wykonanych działaniach, tak aby użytkownik wiedział czy jego działania kończą się sukcesem.
+
 \section{Implementacja}
     \subsection{Wybór narzędzi}
         Dlaczego React+Django. Dlaczego PostgreSQL
