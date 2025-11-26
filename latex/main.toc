@@ -91,23 +91,28 @@
 \contentsline {chapter}{\numberline {4}Aplikacja}{41}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Specyfikacja wymagań}{41}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}Wymagania funkcjonalne}{41}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Wymagania niefunkcjonalne}{42}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Przypadki użycia}{42}{subsection.4.1.3}%
-\contentsline {section}{\numberline {4.2}Projekt}{42}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Projekt bazy danych}{42}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Projekt interfejsu}{42}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Sposób integracji z algorytmem}{42}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}Implementacja}{42}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Wybór narzędzi}{42}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Implementacja bazy danych w Django}{43}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Implementacja API w Django}{43}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Implementacja interfejsu w React}{43}{subsection.4.3.4}%
-\contentsline {subsection}{\numberline {4.3.5}Integracja z algorytmem}{43}{subsection.4.3.5}%
-\contentsline {chapter}{\numberline {5}Testowanie i ewaluacja rozwiązania}{45}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Scenariusze testowe}{45}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Scenariusz 1}{45}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Scenariusz 2}{45}{subsection.5.1.2}%
-\contentsline {section}{\numberline {5.2}Testowanie aplikacji}{45}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Funkcjonalność 1}{45}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Funkcjonalność 2}{45}{subsection.5.2.2}%
-\contentsline {chapter}{\numberline {6}Wnioski i perspektywy rozwoju}{47}{chapter.6}%
+\contentsline {subsection}{\numberline {4.1.2}Wymagania niefunkcjonalne}{41}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Przypadki użycia}{43}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}Diagramy sekwencji}{43}{subsection.4.1.4}%
+\contentsline {section}{\numberline {4.2}Projekt}{46}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Projekt struktury bazy danych}{46}{subsection.4.2.1}%
+\contentsline {subsubsection}{Tabele podstawowe}{46}{subsubsection*.62}%
+\contentsline {subsubsection}{Tabele wymagań}{47}{subsubsection*.65}%
+\contentsline {subsubsection}{Tabele agregujące}{48}{subsubsection*.68}%
+\contentsline {subsubsection}{Tabele wyników}{49}{subsubsection*.70}%
+\contentsline {subsection}{\numberline {4.2.2}Projekt interfejsu}{52}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Sposób integracji z algorytmem}{52}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Implementacja}{52}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Wybór narzędzi}{52}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Implementacja bazy danych w Django}{52}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Implementacja API w Django}{52}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Implementacja interfejsu w React}{52}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}Integracja z algorytmem}{52}{subsection.4.3.5}%
+\contentsline {chapter}{\numberline {5}Testowanie i ewaluacja rozwiązania}{53}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Scenariusze testowe}{53}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Scenariusz 1}{53}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Scenariusz 2}{53}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2}Testowanie aplikacji}{53}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Funkcjonalność 1}{53}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Funkcjonalność 2}{53}{subsection.5.2.2}%
+\contentsline {chapter}{\numberline {6}Wnioski i perspektywy rozwoju}{55}{chapter.6}%

@@ -1,0 +1,33 @@
+Table student_group {
+    id int [pk]
+    name varchar
+    desc text
+}
+
+Table room {
+    id int [pk]
+    name varchar
+}
+
+Table subject {
+    id int [pk]
+    name varchar
+    max_number int
+}
+
+Table teacher {
+    id int [pk]
+    name varchar
+}
+
+Table teacher_subject {
+    id int [pk]
+    subject_id int [ref: > subject.id]
+    teacher_id int [ref: > teacher.id]
+}
+
+Table room_compatible_subjects {
+    id int [pk]
+    room_id int [ref: > room.id]
+    subject_id int [ref: > subject.id]
+}

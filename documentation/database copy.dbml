@@ -1,0 +1,130 @@
+Table student_group_pool {
+    id int [pk]
+    name varchar
+}
+
+Table student_group {
+    id int [pk]
+    pool_id int [ref: > student_group_pool.id]
+    name varchar
+    desc text
+}
+
+Table room_pool {
+    id int [pk]
+    name varchar
+}
+
+Table room {
+    id int [pk]
+    pool_id int [ref: > room_pool.id]
+    name varchar
+}
+
+Table subject_pool {
+    id int [pk]
+    name varchar
+}
+
+Table subject {
+    id int [pk]
+    name varchar
+    border boolean
+    max_number int
+}
+
+Table subject_pool_subject {
+    id int [pk]
+    subject_id int [ref: > subject.id]
+    subject_pool_id int [ref: > subject_pool.id]
+}
+
+Table teacher_pool {
+    id int [pk]
+    name varchar
+}
+
+Table teacher {
+    id int [pk]
+    name varchar
+}
+
+Table teacher_pool_teacher {
+    id int [pk]
+    teacher_id int [ref: > teacher.id]
+    teacher_pool_id int [ref: > teacher_pool.id]
+}
+
+Table teacher_subject {
+    id int [pk]
+    teacher_id int [ref: > teacher.id]
+    subject_id int [ref: > subject.id]
+}
+
+Table room_compatible_subjects {
+    id int [pk]
+    room_id int [ref: > room.id]
+    subject_id int [ref: > subject.id]
+}
+
+Table requirement_set {
+    id int [pk]
+    teacher_pool_id int [ref: > teacher_pool.id]
+    room_pool_id int [ref: > room_pool.id]
+    group_pool_id int [ref: > student_group_pool.id]
+    subject_pool_id int [ref: > subject_pool.id]
+    name varchar
+}
+
+Table subject_block {
+    id int [pk]
+    req_set_id int [ref: > requirement_set.id]
+    numbers json
+    power_block boolean
+    max_number int
+}
+
+Table subject_block_subjects {
+    id int [pk]
+    subject_block_id int [ref: > subject_block.id]
+    subject_id int [ref: > subject.id]
+}
+
+Table subject_block_groups {
+    id int [pk]
+    subject_block_id int [ref: > subject_block.id]
+    group_id int [ref: > student_group.id]
+}
+
+Table teacher_availability {
+    id int [pk]
+    teacher_id int [ref: > teacher.id]
+    req_set_id int [ref: > requirement_set.id]
+    availability json
+}
+
+Table requirement {
+    id int [pk]
+    req_set_id int [ref: > requirement_set.id]
+    teacher_id int [ref: > teacher.id]
+    group_id int [ref: > student_group.id]
+    subject_id int [ref: > subject.id]
+    hours int
+}
+
+Table plan {
+    id int [pk]
+    req_set_id int [ref: > requirement_set.id]
+    name varchar
+}
+
+Table lesson {
+    id int [pk]
+    plan_id int [ref: > plan.id]
+    teacher_id int [ref: > teacher.id]
+    subject_id int [ref: > subject.id]
+    room_id int [ref: > room.id]
+    student_group_id int [ref: > student_group.id]
+    day int
+    hour int
+}

@@ -140,7 +140,10 @@
             \subsubsection{Ograniczenia fizyczne}
                 \begin{itemize}
                     \item Żaden nauczyciel nie może być w 2 miejscach na raz.
-                    \[ \forall i, j \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}: t_{z_i} \neq t_{z_j} \implies \left(d_{z_i} = d_{z_j} \land h_{z_i} = h_{z_j} \land r_{z_i} \neq r_{z_j} \land i \neq j\right) \]
+                    \begin{align*}
+                        \forall i, j \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}:\\
+                        t_{z_i} = t_{z_j} \implies \left(i = j \lor d_{z_i} \neq d_{z_j} \lor h_{z_i} \neq h_{z_j} \lor \left(d_{z_i} = d_{z_j} \land h_{z_i} = h_{z_j} \land r_{z_i} = r_{z_j}\right)\right)
+                    \end{align*}
                     \item Nauczyciel musi być dostępny.
                     \[ \forall i \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}: a_{t_{z_i},d_{z_i}} = 1 \]
                     Ze względu na charakter pracy nauczyciele często są zmuszeni do pracy w wielu miastach w wielu szkołach.

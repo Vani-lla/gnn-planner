@@ -1,0 +1,630 @@
+%% Creator: Inkscape 1.4.2 (ebf0e940d0, 2025-05-08), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'Requirement Diagram1_svg-tex.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{2495.53179932bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.99966424)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.13339568,0.53945755){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Grupa Wymagań Funkcjonalnych>>\end{tabular}}}}%
+    \put(0.13099139,0.53464895){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Obsługa wielu planów lekcji i konfiguracji}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.26412934,0.53915701){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Grupa Wymagań Funkcjonalnych>>\end{tabular}}}}%
+    \put(0.27585029,0.53434841){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Wprowadzanie danych}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.39426192,0.53945755){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Grupa Wymagań Funkcjonalnych>>\end{tabular}}}}%
+    \put(0.40387911,0.53464895){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Generowanie planu lekcji}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.52439451,0.53915701){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Grupa Wymagań Funkcjonalnych>>\end{tabular}}}}%
+    \put(0.53851975,0.53434841){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Widok planów lekcji}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.15653704,0.50369363){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Text = "Aplikacja musi umożliwić \end{tabular}}}}%
+    \put(0.15653704,0.49888503){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}użytkownikowi na przechowywanie wielu\end{tabular}}}}%
+    \put(0.15653704,0.49407644){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l} planów lekcji, które będzie mógł oglądać\end{tabular}}}}%
+    \put(0.15653704,0.48926784){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l} i porównywać"\end{tabular}}}}%
+    \put(0.16405047,0.51571511){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Wymaganie Funkcjonalne>>\end{tabular}}}}%
+    \put(0.15984295,0.51090652){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Przechowywanie wielu planów lekcji}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.15653704,0.44148244){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Text = "Przykładowo użytkownik może \end{tabular}}}}%
+    \put(0.15653704,0.43667384){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}mieć zdefiniowane ograniczenia dla \end{tabular}}}}%
+    \put(0.15653704,0.43186525){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}obecnego rokusz szkolenego 2025/2026, \end{tabular}}}}%
+    \put(0.15653704,0.42705665){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}ale dla następnego ma zupełnie nowe \end{tabular}}}}%
+    \put(0.15653704,0.42224806){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}ograniczenia główne"\end{tabular}}}}%
+    \put(0.16405047,0.45831252){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Wymaganie Funkcjonalne>>\end{tabular}}}}%
+    \put(0.15803973,0.45350392){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Możliwość pracy z wieloma zestawami}\end{tabular}}}}%
+    \put(0.18088055,0.44869533){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{zasobów}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.28005781,0.44568996){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Text = "Aplikacja musi pozwalać \end{tabular}}}}%
+    \put(0.28005781,0.44088136){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}użytkownikowi na import plików txt oraz \end{tabular}}}}%
+    \put(0.28005781,0.43607277){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}csv, z informacjami na temat zasobów i \end{tabular}}}}%
+    \put(0.28005781,0.43126417){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}ograniczeń głównych, w formacie, który jest\end{tabular}}}}%
+    \put(0.28005781,0.42645558){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l} używany przez placówkę, która dostarczyła \end{tabular}}}}%
+    \put(0.28005781,0.42164698){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}dane na potrzeby tej pracy"\end{tabular}}}}%
+    \put(0.289675,0.45771144){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Wymaganie Funkcjonalne>>\end{tabular}}}}%
+    \put(0.29298091,0.45290285){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Możliwość importu plików}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.28005781,0.50399416){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Text = "Mozliwość ręcznego wprowadzenia i\end{tabular}}}}%
+    \put(0.28005781,0.49918557){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l} edycji wszystkich danych:\end{tabular}}}}%
+    \put(0.28005781,0.49437697){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}- Zasoby: Nauczyciele, klasy, przedmioty, \end{tabular}}}}%
+    \put(0.28005781,0.48956838){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}sale i ich przedmioty\end{tabular}}}}%
+    \put(0.28005781,0.48475979){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}- Wymagania główne\end{tabular}}}}%
+    \put(0.28005781,0.47995119){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}- Bloki przedmiotów\end{tabular}}}}%
+    \put(0.28005781,0.4751426){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}- Dostępności nauczycieli"\end{tabular}}}}%
+    \put(0.289675,0.51601565){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Wymaganie Funkcjonalne>>\end{tabular}}}}%
+    \put(0.28366426,0.51120705){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Ręczne wprowadzanie i edycja danych}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.40748556,0.50038772){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Text = "Aplikacja musi pozwalać na \end{tabular}}}}%
+    \put(0.40748556,0.49557912){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}automatyczne generowanie kompletnych \end{tabular}}}}%
+    \put(0.40748556,0.49077053){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}planów na podstawie zdefiniowanych \end{tabular}}}}%
+    \put(0.40748556,0.48596193){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}ograniczeń"\end{tabular}}}}%
+    \put(0.41890597,0.5124092){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Wymaganie Funkcjonalne>>\end{tabular}}}}%
+    \put(0.42702047,0.50760061){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Generowanie planu}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.4077861,0.44568996){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Text = "Aplikacja musi pozwalać na sterowanie\end{tabular}}}}%
+    \put(0.4077861,0.44088136){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l} czasem działania algorytmu poprzez \end{tabular}}}}%
+    \put(0.4077861,0.43607277){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}wprowadzenie przez użytkownika liczby \end{tabular}}}}%
+    \put(0.4077861,0.43126417){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}generacji, przez którą będzie działał algorytm \end{tabular}}}}%
+    \put(0.4077861,0.42645558){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}ewolucyjny"\end{tabular}}}}%
+    \put(0.41920651,0.45771144){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Wymaganie Funkcjonalne>>\end{tabular}}}}%
+    \put(0.42371456,0.45290285){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Sterowanie parametrem}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.53912083,0.50008718){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Text = "Wymagany jest wgląda na plan z \end{tabular}}}}%
+    \put(0.53912083,0.49527859){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}dwóch perspektyw:\end{tabular}}}}%
+    \put(0.53912083,0.49046999){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}- Nauczyciela\end{tabular}}}}%
+    \put(0.53912083,0.4856614){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}- Klas"\end{tabular}}}}%
+    \put(0.54963963,0.51210867){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Wymaganie Funkcjonalne>>\end{tabular}}}}%
+    \put(0.55595091,0.50730007){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Perspektywy widoków}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.53942137,0.44568996){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Text = "Wymagana jest możliwość wyboru \end{tabular}}}}%
+    \put(0.53942137,0.44088136){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}jednego z wielu przechowywanych planów"\end{tabular}}}}%
+    \put(0.54994017,0.45771144){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Wymaganie Funkcjonalne>>\end{tabular}}}}%
+    \put(0.56346434,0.45290285){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Wybór planu}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.65302441,0.53945755){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Grupa Wymagań Niefunkcjonalnych>>\end{tabular}}}}%
+    \put(0.66474535,0.53464895){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Wydajność i skalowalność}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=14]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.78375806,0.53945755){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Grupa Wymagań Niefunkcjonalnych>>\end{tabular}}}}%
+    \put(0.80870265,0.53464895){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Interfejs}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=15]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.66474535,0.50038772){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Text = "Czas generowania kompletnego \end{tabular}}}}%
+    \put(0.66474535,0.49557912){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}planu nie powinien przekraczać 10 minut dla\end{tabular}}}}%
+    \put(0.66474535,0.49077053){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}typowych przypadków"\end{tabular}}}}%
+    \put(0.67255932,0.5124092){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Wymaganie Niefunkcjonalne>>\end{tabular}}}}%
+    \put(0.67947167,0.50760061){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Czas działania algorytmu}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=16]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.66474535,0.44538942){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Text = "Aplikacja musi obsługiwać \end{tabular}}}}%
+    \put(0.66474535,0.44058082){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}realistyczne rozmiary danych: do 1000 \end{tabular}}}}%
+    \put(0.66474535,0.43577223){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}wymagań głównych, 100 nauczycieli, 50 klas \end{tabular}}}}%
+    \put(0.66474535,0.43096364){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}i 100 sal."\end{tabular}}}}%
+    \put(0.67255932,0.4574109){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Wymaganie Niefunkcjonalne>>\end{tabular}}}}%
+    \put(0.68818725,0.45260231){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Skalowalność}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=17]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.66474535,0.38798682){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Text = "Aplikacja musi obsługiwać \end{tabular}}}}%
+    \put(0.66474535,0.38317823){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}realistyczne rozmiary danych: do 1000 \end{tabular}}}}%
+    \put(0.66474535,0.37836964){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}wymagań głównych, 100 nauczycieli, 50 klas \end{tabular}}}}%
+    \put(0.66474535,0.37356104){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}i 100 sal"\end{tabular}}}}%
+    \put(0.67255932,0.40000831){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Wymaganie Niefunkcjonalne>>\end{tabular}}}}%
+    \put(0.68397973,0.39519972){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Pamięć operacyjna}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=18]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.79968653,0.49918557){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Text = "Interfejs powinien być intuicyjny dla \end{tabular}}}}%
+    \put(0.79968653,0.49437697){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}użytkowników zaznajomionych z arkuszami\end{tabular}}}}%
+    \put(0.79968653,0.48956838){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}kalkulacyjnymi"\end{tabular}}}}%
+    \put(0.80780103,0.51601565){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Wymaganie Niefunkcjonalne>>\end{tabular}}}}%
+    \put(0.80870265,0.51120705){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Zgodność pomiędzy systemem a}\end{tabular}}}}%
+    \put(0.82222682,0.50639846){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{rzeczywistością}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=19]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.79968653,0.44568996){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Text = "Spójność interfejsu we wszystkich \end{tabular}}}}%
+    \put(0.79968653,0.44088136){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}modułach aplikacji"\end{tabular}}}}%
+    \put(0.8075005,0.45771144){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Wymaganie Niefunkcjonalne>>\end{tabular}}}}%
+    \put(0.82583326,0.45290285){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Standardy}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=20]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.79968653,0.38828736){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Text = "Przejrzystość, minimalizm, wygoda i \end{tabular}}}}%
+    \put(0.79968653,0.38347877){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}prostota w użytkowaniu interfejsu"\end{tabular}}}}%
+    \put(0.8075005,0.40030885){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Wymaganie Niefunkcjonalne>>\end{tabular}}}}%
+    \put(0.82763649,0.39550025){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Wygląd}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=21]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.4393425,0.5860408){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Aplikacja webowa\end{tabular}}}}%
+    \put(0.44144626,0.58123221){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}wspomagająca\end{tabular}}}}%
+    \put(0.43633712,0.57642361){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}układanie planu lekcji\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=22]{Requirement Diagram1_svg-tex.pdf}}%
+    \put(0.00151734,0.47602653){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.04848246,0.52299165){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.09544758,0.56995677){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.14241269,0.61692189){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.18937781,0.66388701){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.23634293,0.71085213){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.28330805,0.75781725){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.33027317,0.80478237){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.37723829,0.85174749){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.42420341,0.89871261){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.47116853,0.94567773){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.03466919,0.48537705){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.08163431,0.53234217){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.12859942,0.57930729){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.17556454,0.62627241){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.22252966,0.67323753){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.26949478,0.72020265){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.3164599,0.76716777){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.36342502,0.81413289){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.41039014,0.86109801){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.45735526,0.90806313){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.50432038,0.95502825){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.02531866,0.45222521){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.07228378,0.49919032){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.1192489,0.54615544){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.16621402,0.59312056){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.21317914,0.64008568){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.26014426,0.6870508){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.30710938,0.73401592){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.3540745,0.78098104){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.40103962,0.82794616){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.44800474,0.87491128){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.49496986,0.9218764){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.05847051,0.46157573){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.10543563,0.50854085){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.15240075,0.55550597){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.19936587,0.60247108){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.24633099,0.6494362){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.29329611,0.69640132){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.34026123,0.74336644){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.38722635,0.79033156){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.43419147,0.83729668){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.48115659,0.8842618){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.52812171,0.93122692){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.04911999,0.42842388){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.09608511,0.475389){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.14305023,0.52235412){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.19001535,0.56931924){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.23698047,0.61628436){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.28394559,0.66324947){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.33091071,0.71021459){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.37787583,0.75717971){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.42484095,0.80414483){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.47180607,0.85110995){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.51877119,0.89807507){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.08227184,0.4377744){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.12923696,0.48473952){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.17620208,0.53170464){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.2231672,0.57866976){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.27013232,0.62563488){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.31709744,0.6726){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.36406256,0.71956512){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.41102768,0.76653024){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.4579928,0.81349535){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.50495792,0.86046047){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.55192303,0.90742559){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.07292132,0.40462255){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.11988644,0.45158767){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.16685156,0.49855279){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.21381668,0.54551791){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.2607818,0.59248303){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.30774692,0.63944815){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.35471204,0.68641327){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.40167716,0.73337839){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.44864227,0.78034351){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.49560739,0.82730862){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.54257251,0.87427374){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.10607317,0.41397307){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.15303829,0.46093819){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.20000341,0.50790331){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.24696853,0.55486843){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.29393365,0.60183355){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.34089877,0.64879867){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.38786388,0.69576379){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.434829,0.74272891){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.48179412,0.78969403){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.52875924,0.83665915){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.57572436,0.88362427){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.09672265,0.38082122){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.14368777,0.42778634){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.19065289,0.47475146){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.237618,0.52171658){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.28458312,0.5686817){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.33154824,0.61564682){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.37851336,0.66261194){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.42547848,0.70957706){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.4724436,0.75654218){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.51940872,0.8035073){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.56637384,0.85047242){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.1298745,0.39017174){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.17683961,0.43713686){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.22380473,0.48410198){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.27076985,0.5310671){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.31773497,0.57803222){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.36470009,0.62499734){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.41166521,0.67196246){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.45863033,0.71892758){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.50559545,0.7658927){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.55256057,0.81285782){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.59952569,0.85982294){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.12052397,0.3570199){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.16748909,0.40398501){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.21445421,0.45095013){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.26141933,0.49791525){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.30838445,0.54488037){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.35534957,0.59184549){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.40231469,0.63881061){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.44927981,0.68577573){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.49624493,0.73274085){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.54321005,0.77970597){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.59017517,0.82667109){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.15367582,0.36637042){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.20064094,0.41333554){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.24760606,0.46030066){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.29457118,0.50726577){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.3415363,0.55423089){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.38850142,0.60119601){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.43546654,0.64816113){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.48243166,0.69512625){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.52939678,0.74209137){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.5763619,0.78905649){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.62332702,0.83602161){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.1443253,0.33321857){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.19129042,0.38018369){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.23825554,0.42714881){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.28522066,0.47411393){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.33218578,0.52107905){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.3791509,0.56804416){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.42611602,0.61500928){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.47308114,0.6619744){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.52004626,0.70893952){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.56701138,0.75590464){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.6139765,0.80286976){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.17747715,0.34256909){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.22444227,0.38953421){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.27140739,0.43649933){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.31837251,0.48346445){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.36533763,0.53042957){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.41230275,0.57739469){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.45926787,0.62435981){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.50623299,0.67132493){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.55319811,0.71829004){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.60016323,0.76525516){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.64712834,0.81222028){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.16812663,0.30941724){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.21509175,0.35638236){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.26205687,0.40334748){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.30902199,0.4503126){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.35598711,0.49727772){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.40295223,0.54424284){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.44991735,0.59120796){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.49688246,0.63817308){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.54384758,0.6851382){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.5908127,0.73210331){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.63777782,0.77906843){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.20127848,0.31876776){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.2482436,0.36573288){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.29520872,0.412698){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.34217384,0.45966312){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.38913896,0.50662824){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.43610408,0.55359336){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.48306919,0.60055848){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.53003431,0.6475236){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.57699943,0.69448872){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.62396455,0.74145384){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.67092967,0.78841896){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.19192796,0.28561591){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.23889308,0.33258103){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.2858582,0.37954615){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.33282331,0.42651127){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.37978843,0.47347639){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.42675355,0.52044151){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.47371867,0.56740663){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.52068379,0.61437175){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.56764891,0.66133687){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.61461403,0.70830199){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.66157915,0.75526711){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.22507981,0.29496643){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.27204492,0.34193155){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.31901004,0.38889667){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.36597516,0.43586179){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.41294028,0.48282691){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.4599054,0.52979203){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.50687052,0.57675715){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.55383564,0.62372227){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.60080076,0.67068739){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.64776588,0.71765251){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.694731,0.76461763){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.21572928,0.26181459){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.2626944,0.3087797){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.30965952,0.35574482){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.35662464,0.40270994){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.40358976,0.44967506){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.45055488,0.49664018){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.49752,0.5436053){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.54448512,0.59057042){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.59145024,0.63753554){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.63841536,0.68450066){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.68538048,0.73146578){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.24888113,0.27116511){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.29584625,0.31813023){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.34281137,0.36509535){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.38977649,0.41206046){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.43674161,0.45902558){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.48370673,0.5059907){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.53067185,0.55295582){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.57763697,0.59992094){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.62460209,0.64688606){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.67156721,0.69385118){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.71853233,0.7408163){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.23953061,0.23801326){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.28649573,0.28497838){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.33346085,0.3319435){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.38042597,0.37890862){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.42739109,0.42587374){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.47435621,0.47283885){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.52132133,0.51980397){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.56828645,0.56676909){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.61525157,0.61373421){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.66221669,0.66069933){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.70918181,0.70766445){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.27268246,0.24736378){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.31964758,0.2943289){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.3666127,0.34129402){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.41357782,0.38825914){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.46054294,0.43522426){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.50750806,0.48218938){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.55447318,0.5291545){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.6014383,0.57611962){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.64840342,0.62308473){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.69536854,0.67004985){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.74233365,0.71701497){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.26333194,0.21421193){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.31029706,0.26117705){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.35726218,0.30814217){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.4042273,0.35510729){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.45119242,0.40207241){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.49815754,0.44903753){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.54512266,0.49600265){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.59208777,0.54296777){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.63905289,0.58993289){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.68601801,0.636898){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.73298313,0.68386312){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.29648379,0.22356245){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.34344891,0.27052757){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.39041403,0.31749269){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.43737915,0.36445781){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.48434427,0.41142293){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.53130939,0.45838805){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.5782745,0.50535317){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.62523962,0.55231829){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.67220474,0.59928341){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.71916986,0.64624853){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.76613498,0.69321365){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.28713327,0.1904106){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.33409839,0.23737572){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.38106351,0.28434084){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.42802862,0.33130596){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.47499374,0.37827108){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.52195886,0.4252362){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.56892398,0.47220132){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.6158891,0.51916644){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.66285422,0.56613156){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.70981934,0.61309668){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.75678446,0.6600618){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.32028512,0.19976112){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.36725023,0.24672624){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.41421535,0.29369136){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.46118047,0.34065648){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.50814559,0.3876216){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.55511071,0.43458672){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.60207583,0.48155184){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.64904095,0.52851696){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.69600607,0.57548208){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.74297119,0.6224472){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.78993631,0.66941232){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.31093459,0.16660928){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.35789971,0.21357439){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.40486483,0.26053951){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.45182995,0.30750463){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.49879507,0.35446975){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.54576019,0.40143487){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.59272531,0.44839999){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.63969043,0.49536511){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.68665555,0.54233023){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.73362067,0.58929535){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.78058579,0.63626047){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.34408644,0.1759598){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.39105156,0.22292492){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.43801668,0.26989004){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.4849818,0.31685515){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.53194692,0.36382027){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.57891204,0.41078539){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.62587716,0.45775051){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.67284228,0.50471563){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.7198074,0.55168075){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.76677252,0.59864587){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.81373764,0.64561099){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.33473592,0.14280795){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.38170104,0.18977307){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.42866616,0.23673819){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.47563128,0.28370331){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.5225964,0.33066843){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.56956152,0.37763354){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.61652664,0.42459866){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.66349176,0.47156378){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.71045688,0.5185289){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.757422,0.56549402){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.80438712,0.61245914){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.36788777,0.15215847){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.41485289,0.19912359){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.46181801,0.24608871){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.50878313,0.29305383){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.55574825,0.34001895){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.60271337,0.38698407){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.64967849,0.43394919){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.69664361,0.48091431){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.74360873,0.52787942){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.79057385,0.57484454){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.83753896,0.62180966){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.35853725,0.11900662){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.40550237,0.16597174){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.45246749,0.21293686){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.49943261,0.25990198){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.54639773,0.3068671){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.59336285,0.35383222){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.64032797,0.40079734){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.68729308,0.44776246){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.7342582,0.49472758){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.78122332,0.54169269){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.82818844,0.58865781){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.3916891,0.12835714){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.43865422,0.17532226){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.48561934,0.22228738){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.53258446,0.2692525){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.57954958,0.31621762){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.6265147,0.36318274){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.67347981,0.41014786){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.72044493,0.45711298){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.76741005,0.5040781){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.81437517,0.55104322){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.86134029,0.59800834){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.38233858,0.09520529){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.4293037,0.14217041){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.47626882,0.18913553){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.52323393,0.23610065){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.57019905,0.28306577){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.61716417,0.33003089){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.66412929,0.37699601){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.71109441,0.42396113){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.75805953,0.47092625){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.80502465,0.51789137){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.85198977,0.56485649){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.41549043,0.10455581){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.46245554,0.15152093){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.50942066,0.19848605){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.55638578,0.24545117){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.6033509,0.29241629){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.65031602,0.33938141){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.69728114,0.38634653){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.74424626,0.43331165){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.79121138,0.48027677){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.8381765,0.52724189){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.88514162,0.57420701){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.4061399,0.07140397){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.45310502,0.11836908){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.50007014,0.1653342){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.54703526,0.21229932){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.59400038,0.25926444){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.6409655,0.30622956){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.68793062,0.35319468){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.73489574,0.4001598){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.78186086,0.44712492){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.82882598,0.49409004){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.8757911,0.54105516){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.43929175,0.08075449){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.48625687,0.12771961){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.53322199,0.17468473){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.58018711,0.22164984){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.62715223,0.26861496){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.67411735,0.31558008){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.72108247,0.3625452){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.76804759,0.40951032){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.81501271,0.45647544){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.86197783,0.50344056){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.90894295,0.55040568){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.42994123,0.04760264){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.47690635,0.09456776){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.52387147,0.14153288){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.57083659,0.188498){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.61780171,0.23546312){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.66476683,0.28242823){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.71173195,0.32939335){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.75869707,0.37635847){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.80566219,0.42332359){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.85262731,0.47028871){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.89959243,0.51725383){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.46309308,0.05695316){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.5100582,0.10391828){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.55702332,0.1508834){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.60398844,0.19784852){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.65095356,0.24481364){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.69791868,0.29177876){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.7448838,0.33874388){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.79184892,0.385709){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.83881404,0.43267411){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.88577916,0.47963923){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.93274427,0.52660435){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.45374256,0.02380131){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.50070768,0.07076643){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.5476728,0.11773155){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.59463792,0.16469667){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.64160304,0.21166179){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.68856816,0.25862691){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.73553328,0.30559203){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.78249839,0.35255715){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.82946351,0.39952227){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.87642863,0.44648739){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.92339375,0.4934525){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.48689441,0.03315183){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.53385953,0.08011695){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.58082465,0.12708207){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.62778977,0.17404719){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.67475489,0.22101231){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.72172001,0.26797743){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.76868512,0.31494255){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.81565024,0.36190767){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.86261536,0.40887279){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.90958048,0.45583791){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.9565456,0.50280303){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.47754389,-0.00000002){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.52450901,0.0469651){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.57147413,0.09393022){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.61843924,0.14089534){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.66540436,0.18786046){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.71236948,0.23482558){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.7593346,0.2817907){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.80629972,0.32875582){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.85326484,0.37572094){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.90022996,0.42268606){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+    \put(0.94719508,0.46965118){\rotatebox{45}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard [evaluation copy] \end{tabular}}}}}%
+  \end{picture}%
+\endgroup%
