@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.11.11)  28 NOV 2025 14:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.11.13)  28 NOV 2025 16:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/vanilla/new-projects/inzynierka/latex/main.tex
-(/home/vanilla/new-projects/inzynierka/latex/main.tex
+**/home/igorz/Studia/gnn-planner/latex/main.tex
+(/home/igorz/Studia/gnn-planner/latex/main.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
 (/usr/share/texmf-dist/tex/latex/base/book.cls
@@ -1371,12 +1371,12 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
-<title_page/pd_inz_pl.pdf, id=268, 597.4822pt x 844.90656pt>
+<title_page/pd_inz_pl.pdf, id=276, 597.4822pt x 844.90656pt>
 File: title_page/pd_inz_pl.pdf Graphic file (type pdf)
 <use title_page/pd_inz_pl.pdf>
 Package pdftex.def Info: title_page/pd_inz_pl.pdf  used on input line 10.
 (pdftex.def)             Requested size: 597.48073pt x 844.90448pt.
-<title_page/pd_inz_pl.pdf, id=270, page=1, 597.4822pt x 844.90656pt>
+<title_page/pd_inz_pl.pdf, id=278, page=1, 597.4822pt x 844.90656pt>
 File: title_page/pd_inz_pl.pdf Graphic file (type pdf)
 <use title_page/pd_inz_pl.pdf, page 1>
 Package pdftex.def Info: title_page/pd_inz_pl.pdf , page1 used on input line 10.
@@ -1499,7 +1499,7 @@ Rozdzia\l  2.
 [4]
 
 [5]
-<images/interval_vars.png, id=446, 981.6675pt x 153.57375pt>
+<images/interval_vars.png, id=456, 981.6675pt x 153.57375pt>
 File: images/interval_vars.png Graphic file (type png)
 <use images/interval_vars.png>
 Package pdftex.def Info: images/interval_vars.png  used on input line 111.
@@ -1515,7 +1515,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 
 [6 <./images/interval_vars.png>]
-<images/vulcan/import_arkusz.png, id=466, 551.05875pt x 487.06969pt>
+<images/vulcan/import_arkusz.png, id=476, 551.05875pt x 487.06969pt>
 File: images/vulcan/import_arkusz.png Graphic file (type png)
 <use images/vulcan/import_arkusz.png>
 Package pdftex.def Info: images/vulcan/import_arkusz.png  used on input line 167.
@@ -1524,7 +1524,7 @@ Package pdftex.def Info: images/vulcan/import_arkusz.png  used on input line 167
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/vulcan/sale.png, id=469, 755.07094pt x 374.90062pt>
+<images/vulcan/sale.png, id=479, 755.07094pt x 374.90062pt>
 File: images/vulcan/sale.png Graphic file (type png)
 <use images/vulcan/sale.png>
 Package pdftex.def Info: images/vulcan/sale.png  used on input line 178.
@@ -1532,7 +1532,7 @@ Package pdftex.def Info: images/vulcan/sale.png  used on input line 178.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/vulcan/sale_pref2.png, id=472, 659.46375pt x 242.40562pt>
+<images/vulcan/sale_pref2.png, id=482, 659.46375pt x 242.40562pt>
 File: images/vulcan/sale_pref2.png Graphic file (type png)
 <use images/vulcan/sale_pref2.png>
 Package pdftex.def Info: images/vulcan/sale_pref2.png  used on input line 184.
@@ -1540,7 +1540,7 @@ Package pdftex.def Info: images/vulcan/sale_pref2.png  used on input line 184.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/vulcan/sale_pref1.png, id=475, 582.67688pt x 438.13687pt>
+<images/vulcan/sale_pref1.png, id=485, 582.67688pt x 438.13687pt>
 File: images/vulcan/sale_pref1.png Graphic file (type png)
 <use images/vulcan/sale_pref1.png>
 Package pdftex.def Info: images/vulcan/sale_pref1.png  used on input line 190.
@@ -1551,7 +1551,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 [7]
-<images/vulcan/bloki.png, id=485, 954.56625pt x 313.17pt>
+<images/vulcan/bloki.png, id=496, 954.56625pt x 313.17pt>
 File: images/vulcan/bloki.png Graphic file (type png)
 <use images/vulcan/bloki.png>
 Package pdftex.def Info: images/vulcan/bloki.png  used on input line 201.
@@ -1560,7 +1560,7 @@ Package pdftex.def Info: images/vulcan/bloki.png  used on input line 201.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/vulcan/horyzont.png, id=488, 894.34125pt x 642.90187pt>
+<images/vulcan/horyzont.png, id=499, 894.34125pt x 642.90187pt>
 File: images/vulcan/horyzont.png Graphic file (type png)
 <use images/vulcan/horyzont.png>
 Package pdftex.def Info: images/vulcan/horyzont.png  used on input line 211.
@@ -1568,7 +1568,7 @@ Package pdftex.def Info: images/vulcan/horyzont.png  used on input line 211.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/vulcan/dostepnosc_nauczycieli.png, id=491, 895.09406pt x 498.36188pt>
+<images/vulcan/dostepnosc_nauczycieli.png, id=502, 895.09406pt x 498.36188pt>
 File: images/vulcan/dostepnosc_nauczycieli.png Graphic file (type png)
 <use images/vulcan/dostepnosc_nauczycieli.png>
 Package pdftex.def Info: images/vulcan/dostepnosc_nauczycieli.png  used on input line 220.
@@ -1579,7 +1579,7 @@ Package pdftex.def Info: images/vulcan/dostepnosc_nauczycieli.png  used on input
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/vulcan/plan_trudne.png, id=501, 1239.88219pt x 779.91376pt>
+<images/vulcan/plan_trudne.png, id=511, 1239.88219pt x 779.91376pt>
 File: images/vulcan/plan_trudne.png Graphic file (type png)
 <use images/vulcan/plan_trudne.png>
 Package pdftex.def Info: images/vulcan/plan_trudne.png  used on input line 228.
@@ -1604,7 +1604,7 @@ Rozdzia\l  3.
 
 
 [13]
-<images/excel_wymagania.png, id=532, 479.54156pt x 294.34969pt>
+<images/excel_wymagania.png, id=542, 479.54156pt x 294.34969pt>
 File: images/excel_wymagania.png Graphic file (type png)
 <use images/excel_wymagania.png>
 Package pdftex.def Info: images/excel_wymagania.png  used on input line 65.
@@ -1627,7 +1627,7 @@ Underfull \vbox (badness 1314) has occurred while \output is active []
 [19]
 
 [20]
-LaTeX Font Info:    Trying to load font information for U+euf on input line 293.
+LaTeX Font Info:    Trying to load font information for U+euf on input line 303.
  (/usr/share/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 ) (/usr/share/texmf-dist/tex/latex/microtype/mt-euf.cfg
@@ -1672,41 +1672,41 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [37]
 
-[38]) (./chapters/website.tex
+[38]
 
-[39]
+[39]) (./chapters/website.tex
 
-[40
-
-
-]
+[40]
 Rozdzia\l  4.
-<images/diagramy/Requirement Diagram1.png, id=815, 1225.6992pt x 804.8469pt>
+<images/diagramy/Requirement Diagram1.png, id=827, 1225.6992pt x 804.8469pt>
 File: images/diagramy/Requirement Diagram1.png Graphic file (type png)
 <use images/diagramy/Requirement Diagram1.png>
 Package pdftex.def Info: images/diagramy/Requirement Diagram1.png  used on input line 36.
 (pdftex.def)             Requested size: 652.70343pt x 428.59319pt.
 
 
-[41]
+[41
+
+
+]
 
 [42 <./images/diagramy/Requirement Diagram1.png>]
-<images/diagramy/Use Case Diagram1.png, id=827, 764.1348pt x 409.53pt>
+<images/diagramy/Use Case Diagram1.png, id=838, 764.1348pt x 409.53pt>
 File: images/diagramy/Use Case Diagram1.png Graphic file (type png)
 <use images/diagramy/Use Case Diagram1.png>
 Package pdftex.def Info: images/diagramy/Use Case Diagram1.png  used on input line 108.
 (pdftex.def)             Requested size: 472.03123pt x 252.98112pt.
-<images/diagramy/Sequence Diagram1.png, id=828, 948.6642pt x 300.4023pt>
+<images/diagramy/Sequence Diagram1.png, id=839, 948.6642pt x 300.4023pt>
 File: images/diagramy/Sequence Diagram1.png Graphic file (type png)
 <use images/diagramy/Sequence Diagram1.png>
 Package pdftex.def Info: images/diagramy/Sequence Diagram1.png  used on input line 121.
 (pdftex.def)             Requested size: 472.03123pt x 149.47195pt.
-<images/diagramy/Sequence Diagram2.png, id=829, 557.9244pt x 325.215pt>
+<images/diagramy/Sequence Diagram2.png, id=840, 557.9244pt x 325.215pt>
 File: images/diagramy/Sequence Diagram2.png Graphic file (type png)
 <use images/diagramy/Sequence Diagram2.png>
 Package pdftex.def Info: images/diagramy/Sequence Diagram2.png  used on input line 127.
 (pdftex.def)             Requested size: 472.03123pt x 275.15376pt.
-<images/diagramy/Sequence Diagram3.png, id=830, 726.5544pt x 343.2825pt>
+<images/diagramy/Sequence Diagram3.png, id=841, 726.5544pt x 343.2825pt>
 File: images/diagramy/Sequence Diagram3.png Graphic file (type png)
 <use images/diagramy/Sequence Diagram3.png>
 Package pdftex.def Info: images/diagramy/Sequence Diagram3.png  used on input line 133.
@@ -1718,246 +1718,10 @@ Package pdftex.def Info: images/diagramy/Sequence Diagram3.png  used on input li
 [44 <./images/diagramy/Sequence Diagram1.png> <./images/diagramy/Sequence Diagram2.png>]
 
 [45 <./images/diagramy/Sequence Diagram3.png>]
-<images/diagramy/diagram_db_podstawowe.png, id=852, 1110.1475pt x 1110.1475pt>
+<images/diagramy/diagram_db_podstawowe.png, id=863, 1110.1475pt x 1110.1475pt>
 File: images/diagramy/diagram_db_podstawowe.png Graphic file (type png)
 <use images/diagramy/diagram_db_podstawowe.png>
 Package pdftex.def Info: images/diagramy/diagram_db_podstawowe.png  used on input line 177.
 (pdftex.def)             Requested size: 236.01561pt x 236.00063pt.
 
-Underfull \vbox (badness 2343) has occurred while \output is active []
-
-
-
-[46
-
-]
-<images/diagramy/diagram_db_wymagan.png, id=859, 2076.75874pt x 2076.75874pt>
-File: images/diagramy/diagram_db_wymagan.png Graphic file (type png)
-<use images/diagramy/diagram_db_wymagan.png>
-Package pdftex.def Info: images/diagramy/diagram_db_wymagan.png  used on input line 208.
-(pdftex.def)             Requested size: 377.62642pt x 377.6031pt.
-
-Underfull \vbox (badness 5316) has occurred while \output is active []
-
-
-
-[47 <./images/diagramy/diagram_db_podstawowe.png>]
-
-[48 <./images/diagramy/diagram_db_wymagan.png>]
-<images/diagramy/diagram_db.png, id=876, 3958.79pt x 3958.79pt>
-File: images/diagramy/diagram_db.png Graphic file (type png)
-<use images/diagramy/diagram_db.png>
-Package pdftex.def Info: images/diagramy/diagram_db.png  used on input line 274.
-(pdftex.def)             Requested size: 472.03123pt x 472.014pt.
-
-Overfull \hbox (4.39525pt too wide) in paragraph at lines 333--333
-[]|\T1/lmtt/m/n/12 student_group_id| 
- []
-
-
-LaTeX Warning: Float too large for page by 14.59302pt on input line 339.
-
-
-
-[49]
-
-[50 <./images/diagramy/diagram_db.png>]
-
-[51]
-
-[52
-
-]
-
-[53] (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2024/09/23 1.10c listings language file
-)
-
-[54]
-<images/django_api_overview.png, id=931, 1220.30907pt x 647.41875pt>
-File: images/django_api_overview.png Graphic file (type png)
-<use images/django_api_overview.png>
-Package pdftex.def Info: images/django_api_overview.png  used on input line 468.
-(pdftex.def)             Requested size: 472.03123pt x 250.42763pt.
-
-Underfull \vbox (badness 5475) has occurred while \output is active []
-
-
-
-[55]
-
-[56 <./images/django_api_overview.png (PNG copy)>]
-<images/strona/nawigacja.png, id=964, 1917.1625pt x 933.4875pt>
-File: images/strona/nawigacja.png Graphic file (type png)
-<use images/strona/nawigacja.png>
-Package pdftex.def Info: images/strona/nawigacja.png  used on input line 482.
-(pdftex.def)             Requested size: 424.82523pt x 206.84924pt.
-<images/strona/strona_glowna.png, id=965, 1917.1625pt x 933.4875pt>
-File: images/strona/strona_glowna.png Graphic file (type png)
-<use images/strona/strona_glowna.png>
-Package pdftex.def Info: images/strona/strona_glowna.png  used on input line 492.
-(pdftex.def)             Requested size: 424.82523pt x 206.84924pt.
-<images/strona/plan_nauczyciel.png, id=966, 1917.1625pt x 933.4875pt>
-File: images/strona/plan_nauczyciel.png Graphic file (type png)
-<use images/strona/plan_nauczyciel.png>
-Package pdftex.def Info: images/strona/plan_nauczyciel.png  used on input line 501.
-(pdftex.def)             Requested size: 424.82523pt x 206.84924pt.
-
-
-[57 <./images/strona/nawigacja.png> <./images/strona/strona_glowna.png>]
-<images/strona/plan_klasa.png, id=977, 1917.1625pt x 962.59625pt>
-File: images/strona/plan_klasa.png Graphic file (type png)
-<use images/strona/plan_klasa.png>
-Package pdftex.def Info: images/strona/plan_klasa.png  used on input line 506.
-(pdftex.def)             Requested size: 424.82523pt x 213.29938pt.
-<images/strona/generowanie.png, id=978, 1917.1625pt x 933.4875pt>
-File: images/strona/generowanie.png Graphic file (type png)
-<use images/strona/generowanie.png>
-Package pdftex.def Info: images/strona/generowanie.png  used on input line 515.
-(pdftex.def)             Requested size: 424.82523pt x 206.84924pt.
-
-
-[58 <./images/strona/plan_nauczyciel.png> <./images/strona/plan_klasa.png>]
-<images/strona/przedmioty.png, id=989, 1917.1625pt x 933.4875pt>
-File: images/strona/przedmioty.png Graphic file (type png)
-<use images/strona/przedmioty.png>
-Package pdftex.def Info: images/strona/przedmioty.png  used on input line 522.
-(pdftex.def)             Requested size: 424.82523pt x 206.84924pt.
-<images/strona/nauczyciele.png, id=990, 1917.1625pt x 933.4875pt>
-File: images/strona/nauczyciele.png Graphic file (type png)
-<use images/strona/nauczyciele.png>
-Package pdftex.def Info: images/strona/nauczyciele.png  used on input line 527.
-(pdftex.def)             Requested size: 424.82523pt x 206.84924pt.
-<images/strona/sale.png, id=991, 1917.1625pt x 933.4875pt>
-File: images/strona/sale.png Graphic file (type png)
-<use images/strona/sale.png>
-Package pdftex.def Info: images/strona/sale.png  used on input line 532.
-(pdftex.def)             Requested size: 424.82523pt x 206.84924pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-[59 <./images/strona/generowanie.png> <./images/strona/przedmioty.png>]
-<images/strona/klasy.png, id=1001, 1917.1625pt x 933.4875pt>
-File: images/strona/klasy.png Graphic file (type png)
-<use images/strona/klasy.png>
-Package pdftex.def Info: images/strona/klasy.png  used on input line 537.
-(pdftex.def)             Requested size: 424.82523pt x 206.84924pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-[60 <./images/strona/nauczyciele.png> <./images/strona/sale.png>]
-<images/strona/wymagania_glowne_1.png, id=1011, 1917.1625pt x 933.4875pt>
-File: images/strona/wymagania_glowne_1.png Graphic file (type png)
-<use images/strona/wymagania_glowne_1.png>
-Package pdftex.def Info: images/strona/wymagania_glowne_1.png  used on input line 547.
-(pdftex.def)             Requested size: 424.82523pt x 206.84924pt.
-<images/strona/wymagania_glowne_2.png, id=1012, 1917.1625pt x 933.4875pt>
-File: images/strona/wymagania_glowne_2.png Graphic file (type png)
-<use images/strona/wymagania_glowne_2.png>
-Package pdftex.def Info: images/strona/wymagania_glowne_2.png  used on input line 549.
-(pdftex.def)             Requested size: 424.82523pt x 206.84924pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-[61 <./images/strona/klasy.png>]
-<images/strona/dostepnosc.png, id=1021, 1917.1625pt x 933.4875pt>
-File: images/strona/dostepnosc.png Graphic file (type png)
-<use images/strona/dostepnosc.png>
-Package pdftex.def Info: images/strona/dostepnosc.png  used on input line 556.
-(pdftex.def)             Requested size: 424.82523pt x 206.84924pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-[62 <./images/strona/wymagania_glowne_1.png> <./images/strona/wymagania_glowne_2.png>]
-<images/strona/bloki.png, id=1029, 1917.1625pt x 933.4875pt>
-File: images/strona/bloki.png Graphic file (type png)
-<use images/strona/bloki.png>
-Package pdftex.def Info: images/strona/bloki.png  used on input line 563.
-(pdftex.def)             Requested size: 424.82523pt x 206.84924pt.
-
-
-[63 <./images/strona/dostepnosc.png> <./images/strona/bloki.png>]) (./chapters/testy.tex
-
-[64]
-Rozdzia\l  5.
-) (./chapters/conclusions.tex
-
-[65
-
-
-]
-
-[66
-
-
-]
-Rozdzia\l  6.
-) (./main.bbl
-
-[67]
-
-[68
-
-
-]
-
-[69])
-
-[70] (./main.lof
-Overfull \hbox (25.08662pt too wide) in paragraph at lines 26--26
- [][] [][][]\T1/lmr/m/n/12 (-20) Automatycznie wy-ge-ne-ro-wana li-sta end-po-in-tów stwo-rzo-nych przy u»y-ciu [][][] []  
- []
-
-
-
-[71])
-\tf@lof=\write8
-\openout8 = `main.lof'.
-
-
-
-[72] (./main.lot)
-\tf@lot=\write9
-\openout9 = `main.lot'.
-
-
-
-[73]
-runsystem(latexminted cleantemp  --timestamp 20251128142228 FAD58DE7366495DB4650CFEFAC2FCD61)...executed safely (allowed).
-
- (./main.aux)
- ***********
-LaTeX2e <2024-11-01> patch level 2
-L3 programming layer <2025-01-18>
- ***********
-
-
-LaTeX Warning: There were undefined references.
-
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: CCCC98D4D34DF34172A238BE786EE8EC;11219.
- ) 
-Here is how much of TeX's memory you used:
- 50892 strings out of 475136
- 1111337 string characters out of 5766290
- 1949596 words of memory out of 5000000
- 72413 multiletter control sequences out of 15000+600000
- 633218 words of font info for 179 fonts, out of 8000000 for 9000
- 34 hyphenation exceptions out of 8191
- 100i,17n,104p,1045b,2177s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eufm7.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (79 pages, 5887731 bytes).
-PDF statistics:
- 1328 PDF objects out of 1440 (max. 8388607)
- 1121 compressed objects within 12 object streams
- 390 named destinations out of 1000 (max. 500000)
- 42180 words of extra memory for PDF output out of 42996 (max. 10000000)
-
+Underfull

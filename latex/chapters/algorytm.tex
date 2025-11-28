@@ -201,7 +201,7 @@
                 \[ \forall w \in \mathcal{W}: \left|\left\{z \in \mathcal{Z}: c_w = c_z \land t_w = t_z \land s_w = s_z\right\}\right| = g_w \]
 
         \subsection{Dekompozycja problemu}
-            Proces tworzenia takich przypisań można rozbić na 3 etapy:
+            Proces tworzenia takich przypisań można rozbić na 3 etapy:adap
             \begin{enumerate}
                 \item \textbf{Tworzenie bloków lekcyjnych} $\mathcal{L}$ z ograniczeń głównych $\mathcal{W}$ na podstawie $\mathcal{B}$:
                 \begin{itemize}
@@ -220,12 +220,15 @@
             W mojej pracy zaadaptowałem i rozwinąłem tę fundamentalną ideę przedstawioną w podrozdziale~\ref{section:podejscie_iteracyjne}, dostosowując ją do specyfiki problemu układania planu lekcji.
 
             \subsubsection{Dekompozycja problemu}
-                Podobnie jak w pracy źródłowej, gdzie autorzy rozbijają problem na warstwy ograniczeń, w moim rozwiązaniu zastosowałem trójetapową dekompozycję:
-                \[ \text{Problem pełny} \longrightarrow \text{Etap 1} \longrightarrow \text{Etap 2} \longrightarrow \text{Etap 3} \]
-                gdzie każdy etap rozwiązuje wyraźnie wydzielony podproblem o mniejszej złożoności.
+                Pełny problem harmonogramowania wymagałby liczby zmiennych decyzyjnych proporcjonalnych do:
+                \[ |\mathcal{T}| \times |\mathcal{C}| \times |\mathcal{S}| \times 5 \times H \times |\mathcal{R}| \]
+                co dla typowej szkoły daje miliony potencjalnych zmiennych.
 
-            \subsubsection{Rozwiązanie początkowe z prostymi ograniczeniami}
-                Analogicznie do podejścia z tej pracy, gdzie zaczynają od podstawowych ograniczeń równościowych, w moim algorytmie:
+                Pamięć operacyjna jest zawsze problemem w takich rozwiązaniach.
+                Inspirując się podejściem przedstawionym w rozdziale 2~\ref{section:podejscie_iteracyjne}, zdecydowałem się na rozbiecie problemu na 3 mniejsze podproblemy gdzie każdy etap rozwiązuje wyraźnie wydzielony podproblem o mniejszej złożoności.
+                % \[ \text{Problem pełny} \longrightarrow \text{Etap 1} \longrightarrow \text{Etap 2} \longrightarrow \text{Etap 3} \]
+
+                gdzie:
                 \begin{itemize}
                     \item \textbf{Etap 1 (algorytm zachłanny)}: Koncentruje się wyłącznie na ograniczeniach głównych i strukturalnych bloków lekcyjnych~(\ref{slownik_oznaczen}):
                     \[ \mathcal{L} = \text{Greedy}(\mathcal{W}, \mathcal{B}) \]
@@ -233,7 +236,14 @@
                     \item \textbf{Etap 2 (algorytm ewolucyjny)}: Dodaje ograniczenia dostępności nauczycieli i równomierności rozkładu:
                     \[ S_{\text{best}} = \text{Evolutionary}(\mathcal{L}, V, A) \]
                     ale wciąż operuje na poziomie dni, a nie konkretnych slotów czasowych.
+                    \item \textbf{Etap 3 (solver do problemów programowania z ograniczeniami)}: Przypisuje bloki lekcyjne do konkretnych slotów czasowych i sal:
+                    \[ \mathcal{Z} = \text{Solver}(S_{\text{best}}, \mathcal{L}, \mathcal{R}) \]
+                    procedura optymalizacyjna jest wykonywana niezależnie dla każdego dani.
                 \end{itemize}
+                
+
+            \subsubsection{Rozwiązanie początkowe z prostymi ograniczeniami}
+                Analogicznie do podejścia z tej pracy, gdzie zaczynają od podstawowych ograniczeń równościowych, w moim algorytmie:
 
             \subsubsection{Hierarchiczna dekompozycja problemu}
                 Podczas gdy w pracy~\cite{rappos2022mixed} dekompozycja dotyczy głównie warstw ograniczeń, w moim rozwiązaniu wprowadziłem dekompozycję całego problemu:
@@ -255,9 +265,9 @@
 
             \subsubsection{Redukcja złożoności obliczeniowej}
                 Pełny problem harmonogramowania wymagałby liczby zmiennych decyzyjnych proporcjonalnych do:
-                \[ |\mathcal{T}| \times |\mathcal{C}| \times |\mathcal{S}| \times 5 \times H \times |\mathcal{R}| \]
-                co dla typowej szkoły daje setki milionów potencjalnych zmiennych.
-
+                \[ |\mathcal{T}| \times |\mathcal{C}| \times |\mathcal{S}| \times 5 \times H \times |\mathcal{R}| \]milionów
+                co dla typowej szkoły daje miliony potencjalnych zmiennych.
+            
                 W podejściu dekompozycyjnym:
                 \begin{itemize}
                     \item \textbf{Etap 1}: Operuje na $|\mathcal{W}|$ wymaganiach

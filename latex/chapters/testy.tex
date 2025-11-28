@@ -1,8 +1,74 @@
 \Chapter{Testowanie i ewaluacja rozwiązania}\label{chapter:tests}
 
 \section{Scenariusze testowe}
-    \subsection{Scenariusz 1}
-    \subsection{Scenariusz 2}
+
+    \subsection{Scenariusz testowy generowania planu lakcji z określonymi parametrami}
+        Widok początkowy: strona główna
+
+        Setup:
+        \begin{itemize}
+            \item Wprowadzone zasoby
+            \item Wprowadzone wymagania główne
+            \item Wprowadzone dostępności nauczycieli
+            \item Wprowadzone bloki przedmiotów
+        \end{itemize}
+
+        Kroki:
+        \begin{enumerate}
+            \item Przejdź do widoku generowania planów lekcji
+            \item Wprowadź odpowiednią liczbę generacji
+            \item Wygeneruj plan lekji
+        \end{enumerate}
+
+    \subsection{Scenariusz przeglądu planów lekcji}
+        Widok początkowy: strona główna
+
+        Setup:
+        \begin{itemize}
+            \item Wprowadzone zasoby
+            \item Więcej niż jeden plan lekcji możliwy do przeglądania
+        \end{itemize}
+
+        Kroki:
+        \begin{enumerate}
+            \item Przejdź do widoku przeglądania planów lekcji
+            \item Wybierz plan najnowszy plan lekcji
+            \item Wybierz widok konkretnej klasy
+            \item Wybierz widok konkretnego nauczyciela
+        \end{enumerate}
+
+    \subsection{Scenariusz importowania i edytowania wymagań głównych}
+        Widok początkowy: strona główna
+
+        Setup:
+        \begin{itemize}
+            \item 
+        \end{itemize}
+
+        Kroki:
+        \begin{enumerate}
+            \item Przejdź do widoku dodawania wymagań głównych
+            \item Przeciągnij plik csv z wymaganiami do aplikacji
+            \item Edytuj wymaganie godzinowe danego nauczyciela i klasy
+            \item Zapisz wyniki
+        \end{enumerate}
+
+    \subsection{Scenariusz edytowania dostępności nauczycieli}
+        Widok początkowy: widok wprowadzania wymagań głównych
+
+        Setup:
+        \begin{itemize}
+            \item Wprowadzone zasoby
+            \item Wprowadzone wymagania główne
+        \end{itemize}
+
+        Kroki:
+        \begin{enumerate}
+            \item Rozwiń wstążkę nawigacji
+            \item Przejdź do strony wprowadzania dostępności nauczycieli
+            \item Edytuj dostępność danego nauczyciela
+            \item Zapisz wyniki
+        \end{enumerate}
 
 \section{Testowanie aplikacji}
     \subsection{Funkcjonalność 1}
