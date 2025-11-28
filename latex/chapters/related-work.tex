@@ -2,14 +2,63 @@
     Struktura rozdziału?
 
     \section{Inspiracja podejściem iteracyjnym}\label{section:podejscie_iteracyjne}
-        Praca ,,A mixed-integer programming approach for solving university course timetabling problems''~\cite{rappos2022mixed} przedstawia innowacyjne podejście do rozwiązywania problemów harmonogramowania poprzez dekompozycję na prostsze podproblemy i iteracyjne dodawanie ograniczeń. 
+        Praca ,,A mixed-integer programming approach for solving university course timetabling problems''~\cite{rappos2022mixed} przedstawia innowacyjne podejście do rozwiązywania problemów harmonogramowania poprzez dekompozycję na prostsze podproblemy i iteracyjne dodawanie ograniczeń.
         Autorzy wykorzystują strategię polegającą na:
         \begin{enumerate}
-            \item Uzyskaniu rozwiązania początkowego z podstawowym zestawem ograniczeń
-            \item Iteracyjnym ,,wstrzykiwaniu'' kolejnych ograniczeń z wykorzystaniem zmiennych sztucznych
-            \item Stosowaniu heurystyk redukcji zmiennych dla kontroli złożoności obliczeniowej
-            \item Utrzymywaniu wykonalności rozwiązania na każdym etapie
+            \item Uzyskaniu rozwiązania początkowego z podstawowym zestawem ograniczeń.
+            \item Iteracyjnym ,,wstrzykiwaniu'' kolejnych ograniczeń z wykorzystaniem zmiennych sztucznych.
+            \item Stosowaniu heurystyk redukcji zmiennych dla kontroli złożoności obliczeniowej.
         \end{enumerate}
+        
+        \subsection{Definicja problemu harmonogramowania}
+            W przedstawionym podejściu problem harmonogramowania zajęć uniwersyteckich definiowany jest jako zadanie przydzielenia zajęć do dostępnych sal i terminów oraz przypisania studentów do odpowiednich grup zajęciowych, z uwzględnieniem złożonych ograniczeń i preferencji.
+            Głównymi komponentami problemu są:
+            
+            \begin{itemize}
+                \item \textbf{Zajęcia}: Reprezentują pojedyncze wydarzenia dydaktyczne, które muszą zostać zaplanowane. Każde zajęcie $c$ musi otrzymać unikalne przypisanie czasowe $t$ z listy dopuszczalnych terminów $T_c$ oraz, w wymaganych przypadkach, przypisanie sali $r$ z listy dostępnych pomieszczeń $R_c$.
+                \item \textbf{Ograniczenia dystrybucyjne}: Stanowią zbiór reguł określających relacje pomiędzy różnymi zajęciami. 
+                Wyróżnia się ograniczenia twarde, które muszą być bezwzględnie spełnione, oraz miękkie, których naruszenie generuje kary w funkcji celu. Przykłady obejmują wymóg rozpoczynania zajęć w tym samym czasie, zakaz nakładania się terminów czy wymóg zachowania minimalnego odstępu czasowego.
+                \item \textbf{Struktura kursów i konfiguracji}: Każdy kurs posiada hierarchiczną strukturę, w ramach której student musi wybrać jedną konfigurację $f$, a następnie po jednym zajęciu z każdej części składowej $P_f$ danej konfiguracji.
+                \item \textbf{Konflikty studentów}: Powstają gdy student jest przypisany do zajęć zachodzących na siebie w czasie lub gdy czas pomiędzy zajęciami jest niewystarczający na przemieszczenie się między salami.
+            \end{itemize}
+        
+        Celem optymalizacyjnym jest znalezienie rozwiązania spełniającego wszystkie twarde ograniczenia przy minimalizacji łącznej kary, uwzględniającej naruszenia ograniczeń miękkich oraz konflikty studentów.
+
+        Kluczowym elementem przedstawionej metody jest dekompozycja oryginalnego, złożonego problemu na szereg prostszych podproblemów, rozwiązywanych sekwencyjnie w procesie iteracyjnym.
+        
+            \subsubsection{Podstawowy model MIP}
+                Podstawę stanowi sformułowanie problemu mieszanocałkowitoliczbowego (MIP) z czterema typami zmiennych decyzyjnych:
+                \begin{itemize}
+                    \item Zmienne $x_{c,t}$ określają czy zajęcia $c$ są przypisane do terminu $t$.
+                    \item Zmienne $y_{c,r}$ określają czy zajęcia $c$ są przypisane do sali $r$.
+                    \item Zmienne $z_{s,c}$ określają czy student $s$ jest przypisany do zajęć $c$.
+                    \item Zmienne $Z_{s,f}$ określają czy student $s$ wybiera konfigurację $f$.
+                \end{itemize}
+            
+            Model obejmuje fundamentalne ograniczenia zapewniające poprawność podstawowej struktury rozwiązania, takie jak wymóg przypisania każdych zajęć do dokładnie jednego terminu i sali, spełnienie limitów liczby studentów w grupach oraz zakaz równoczesnego użytkowania tej samej sali przez różne zajęcia.
+            
+            \subsubsection{Iteracyjne wstrzykiwanie ograniczeń}
+                Ze względu na bardzo dużą złożoność pełnego modelu, autorzy stosują podejście inkrementalne:
+                
+                \begin{enumerate}
+                    \item \textbf{Rozwiązanie początkowe}: Optymalizacja rozpoczyna się od uproszczonego modelu zawierającego jedynie fundamentalne ograniczenia oraz podstawowe składniki funkcji celu.
+                    \item \textbf{Dodawanie ograniczeń dystrybucyjnych}: Twarde ograniczenia dystrybucyjne są dodawane do modelu w formie ograniczeń wykluczających niedopuszczalne kombinacje przypisań czasowych i salowych. 
+                    Dla większości typów ograniczeń generowane są odpowiednie warunki na etapie preprocessingu.
+                    \item \textbf{Obsługa ograniczeń specjalnych}: Dla czterech szczególnie złożonych typów ograniczeń (,,MaxDays'', ,,MaxDayLoad'', ,,MaxBreaks'', ,,MaxBlock'') stosowane jest podejście z użyciem ,,leniwych'' ograniczeń (ang. \textit{lazy constraints}). 
+                    Ograniczenia te są dodawane dopiero gdy zostanie znalezione rozwiązanie całkowitoliczbowe, które je narusza.
+                    \item \textbf{Iteracyjne uwzględnianie konfliktów studentów}: Podobne podejście stosowane jest dla uwzględnienia w funkcji celu kar za konflikty studentów.
+                    Początkowo pomija się najbardziej złożone składowe związane z konfliktami, a następnie iteracyjnie dodaje się do modelu te ograniczenia, które okazały się istotne w poprzednich uruchomieniach.
+                \end{enumerate}
+            
+            \subsubsection{Strategie redukcji złożoności}
+                Aby utrzymać złożoność obliczeniową na akceptowalnym poziomie, autorzy stosują zaawansowane strategie redukcji modelu:
+                \begin{itemize}
+                    \item \textbf{Eliminacja zmiennych}: Identyfikacja i usuwanie zmiennych, których wartości można ustalić z góry na podstawie analizy struktury problemu.
+                    \item \textbf{Agregacja ograniczeń}: Grupowanie podobnych ograniczeń w pojedyncze, bardziej zwarte warunki, co znacząco redukuje rozmiar modelu.
+                    \item \textbf{Selektywne uwzględnianie składowych funkcji celu}: Najbardziej złożone składowe funkcji celu (dotyczące specjalnych ograniczeń dystrybucyjnych i konfliktów studentów) są początkowo pomijane, a następnie dodawane tylko w odniesieniu do tych kombinacji, które okazały się problematyczne w poprzednich iteracjach.
+                \end{itemize}
+            
+                Podejście to pozwala na stopniowe poprawianie jakości rozwiązania przy kontrolowanym wzroście złożoności obliczeniowej, zachowując wykonalność rozwiązania na każdym etapie procesu optymalizacji.
 
     \section{Job-Shop Problem}
         Problem harmonogramowania typu \textit{Job-Shop} (JSSP) jest jednym z najbardziej klasycznych i istotnych problemów optymalizacji kombinatorycznej w badaniach operacyjnych i zarządzaniu produkcją.
@@ -41,7 +90,9 @@
         \[ S_{i,j+1} \ge S_{ij} + p_{ij} \quad \forall i,j = 1,\dots,n_i-1 \]
     
         Dla każdej pary różnych operacji $(O_{ij}, O_{kl})$ przypisanych do tej samej maszyny zachodzi jedno z dwóch:
-        \[ S_{ij} + p_{ij} \le S_{kl} \ \lor\ S_{kl} + p_{kl} \le S_{ij} \]
+        \begin{equation}
+            S_{ij} + p_{ij} \le S_{kl} \ \lor\ S_{kl} + p_{kl} \le S_{ij}
+        \end{equation}\label{eq:ograniczenie_nakladania}
     
         Funkcja celu:
         \[ F_c = \min C_{\max} \quad \text{przy} \quad C_{\max} \ge S_{i n_i} + p_{i n_i} \ \forall i \]
@@ -61,28 +112,27 @@
                 \end{itemize}
     
             \subsubsection{Struktura zadań}
-            W klasycznym JSSP zadania $J_i$ składają się z operacji $O_{ij}$. W problemie planu lekcji:
-            \[ \text{Lekcja } z_i = (d_i, h_i, c_i, t_i, s_i, r_i) \]
-            można traktować jako operację wymagającą jednoczesnego dostępu do trzech zasobów: nauczyciela, klasy i sali.
-            gdzie $d_i$ to dzień lekcji, $h_i$ to godzina rozpoczęcia lekcji, $c_i$ to klasa, $t_i$ to nauczyciel, $s_i$ to przedmiot, a $r_i$ to sala.
+                W klasycznym JSSP zadania $J_i$ składają się z operacji $O_{ij}$ i wymagają dostępu do jednego zasobu --- maszyn. 
+                W problemie układania planu zajęć lekcje można traktować jako operację wymagającą jednoczesnego dostępu do trzech zasobów: nauczyciela, klasy i sali.
+                \[ \text{Lekcja } z_i = (d_i, h_i, c_i, t_i, s_i, r_i) \]
+                gdzie $d_i$ to dzień lekcji, $h_i$ to stot czasowy lekcji, $c_i$ to klasa, $t_i$ to nauczyciel, $s_i$ to przedmiot, a $r_i$ to sala.
     
             \subsubsection{Ograniczenia nakładania się}
-            Analogia do ograniczenia w JSSP:
-            \[ \forall \text{pary lekcji } (z_i, z_j) \text{ współdzielących zasób } \mathcal{R}: \]
-            \[ h_i \neq h_j \ \lor \ d_i \neq d_j \ \lor \ r_i \neq r_j \]
-            co odpowiada warunkowi w JSSP:
-            \[ S_{ij} + p_{ij} \le S_{kl} \ \lor\ S_{kl} + p_{kl} \le S_{ij} \]
+                Dla każdej pary lekcji $(z_i, z_j)$ współdzielącej zasób $\mathcal{R}$:
+                \[ h_i \neq h_j \ \lor \ d_i \neq d_j \ \lor \ r_i \neq r_j \]
+                co odpowiada warunkowi~\ref{eq:ograniczenie_nakladania} w JSSP.
 
-            Analogiczne ograniczenia należałoby definiować dla pozostałych zasobów $\mathcal{T}$ i $\mathcal{C}$.
+                Analogiczne ograniczenia należałoby definiować dla pozostałych zasobów $\mathcal{T}$ i $\mathcal{C}$.
     
             \subsubsection{Reprezentacja interwałowa}
-            Kluczowym podobieństwem jest wykorzystanie zmiennych interwałowych. W JSSP operację $O_{ij}$ reprezentujemy jako interwał:
-            \[ I_{ij} = (S_{ij}, p_{ij}, C_{ij}) \]
-            gdzie $C_{ij} = S_{ij} + p_{ij}$.
-    
-            W problemie planu lekcji, lekcję $z_i$ reprezentujemy jako:
-            \[ I_i = (h_i, v_i, h_i + v_i) \]
-            gdzie $v_i$ to liczba godzin (czas trwania), a $h_i$ to slot rozpoczęcia.
+                Kluczowym podobieństwem jest wykorzystanie zmiennych interwałowych. 
+                W JSSP operację $O_{ij}$ reprezentujemy jako interwał:
+                \[ I_{ij} = (S_{ij}, p_{ij}, C_{ij}) \]
+                gdzie $C_{ij} = S_{ij} + p_{ij}$.
+        
+                W problemie planu lekcji, lekcję $z_i$ reprezentujemy jako:
+                \[ I_i = (h_i, v_i, h_i + v_i) \]
+                gdzie $v_i$ to liczba godzin (czas trwania), a $h_i$ to slot rozpoczęcia.
     
         \subsection{Różnice i specyfika problemu szkolnego}
             Pomimo strukturalnych podobieństw, problem układania planu lekcji wprowadza istotne modyfikacje:
@@ -91,58 +141,17 @@
                 Podczas gdy w klasycznym JSSP każda operacja wymaga jednej maszyny, lekcja wymaga \textbf{jednoczesnego} dostępu do trzech zasobów:
                 \[ \text{Lekcja } z_i \text{ wymaga: } (t_i, c_i, r_i) \in \mathcal{T} \times \mathcal{C} \times \mathcal{R} \]
     
-            \subsubsection{Ograniczenia miękkie i jakościowe}
+            \subsubsection{Ograniczenia}
                 Problem szkolny wprowadza bogaty zestaw ograniczeń jakościowych niewystępujących w klasycznym JSSP:
                 \begin{itemize}
-                    \item Brak okienek dla uczniów (ciągłość zajęć)
-                    \item Równomierny rozkład godzin lekcyjnych w tygodniu
-                    \item Ograniczenia prawne (max 2 godziny tego samego przedmiotu dziennie)
-                    \item Dostępność nauczycieli
+                    \item Brak okienek dla uczniów (ciągłość zajęć).
+                    \item Równomierny rozkład zajęć na przestrzeni tygodnia.
+                    \item Ograniczenia prawne (max 2 godziny tego samego przedmiotu dziennie).
+                    \item Dostępność nauczycieli.
                 \end{itemize}
     
             Innowacją w podejściu jest wprowadzenie bloków lekcyjnych $\mathcal{L}$, które grupują lekcje $z_i$ odbywające się równocześnie, co stanowi rozszerzenie klasycznej koncepcji operacji w JSSP.
             Umożliwia to znacznie łatwiejsze definiowanie ograniczeń.
-
-        \subsection{Gotowe rozwiązania}
-            Istnieje wiele istniejących rozwiązań JSSP, jednak szczególnie inspirujące okazało się podejście zaprezentowane w dokumentacji Google OR-Tools~\cite{googleortoolsjssp}, które wykorzystuje zmienne interwałowe do modelowania operacji.
-            
-            \begin{figure}[ht]
-                \centering
-                \includegraphics[width=0.9\textwidth]{images/interval_vars.png}
-                \caption{Wizualizacja rozwiązania klasycznego problemu JSSP z wykorzystaniem zmiennych interwałowych~\cite{googleortoolsjssp}}\label{fig:intervals}
-            \end{figure}
-            Wyraźnie widać te inspiracje w sekcji trzeciej algorytmu dotyczącej solvera CP~(\ref{section:solver}), gdzie zastosowano:
-            \begin{itemize}
-                \item Reprezentację lekcji jako interwałów czasowych
-                \item Ograniczenia NoOverlap dla zasobów (nauczyciele, klasy, sale)
-                \item Optional intervals dla przypisań sal
-                \item Specjalistyczne ograniczenia ciągłości czasowej
-            \end{itemize}
-
-            Kluczowe koncepcje zaadaptowane w mojej pracy:
-    
-            \subsubsection{Zmienne interwałowe}
-                \begin{itemize}
-                    \item W JSSP: $\text{IntervalVar}(start, duration, end)$.
-                    \item W planie lekcji: $\text{IntervalVar}(h_i, v_i, h_i + v_i)$, gdzie $h_i$ to slot czasowy~(\ref{slownik_oznaczen}), a $v_i$ to długość trwania lekcji.
-                \end{itemize}
-    
-            \subsubsection{Ograniczenie NoOverlap}
-                \begin{itemize}
-                    \item W JSSP: $\text{AddNoOverlap}([\verb|interval|_1, \dots, \verb|interval|_n])$ dla operacji na tej samej maszynie~\cite{googleortoolsoverlap}.
-                    \item W planie lekcji: $\text{AddNoOverlap}$ zastosowane dla:
-                    \begin{itemize}
-                        \item Wszystkich lekcji tej samej klasy
-                        \item Wszystkich lekcji tego samego nauczyciela  
-                        \item Wszystkich lekcji w tej samej sali
-                    \end{itemize}
-                \end{itemize}
-    
-            \subsubsection{Optional Intervals}
-                Rozszerzenie o interwały opcjonalne pozwala na modelowanie przypisań sal do nauczycieli w blokach lekcyjnych:
-                \[ \text{OptionalIntervalVar}(start, duration, end, presence) \]
-                Takie interwały są brane pod uwagę w ograniczeniach tylko i wyłącznie, jeśli $presence = 1$;
-                Oznaczna to, że interwał jest ,,aktywny''.
 
 \section{Istniejące kompleksowe rozwiązania}
     Zadanie układania planu lekcji jest powszechnym wyzwaniem dla placówek edukacyjnych na całym świecie, w tym Polsce, co zaowocowało rozwojem komercyjnych rozwiązań tego problemu. 

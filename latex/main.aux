@@ -17,7 +17,6 @@
 \@writefile{toc}{\contentsline {section}{\numberline {1.1}Cel i zakres pracy}{1}{section.1.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {1.2}Układ pracy}{2}{section.1.2}\protected@file@percent }
 \citation{rappos2022mixed}
-\citation{xiong2022survey}
 \@writefile{toc}{\contentsline {chapter}{\numberline {2}Powiązane prace}{3}{chapter.2}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -25,25 +24,21 @@
 \newlabel{chapter:related}{{2}{3}{Powiązane prace}{chapter.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2.1}Inspiracja podejściem iteracyjnym}{3}{section.2.1}\protected@file@percent }
 \newlabel{section:podejscie_iteracyjne}{{2.1}{3}{Inspiracja podejściem iteracyjnym}{section.2.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}Job-Shop Problem}{3}{section.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Podobieństwa do problemu układania planu lekcji}{4}{subsection.2.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Struktura zasobów}{4}{subsubsection*.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Struktura zadań}{4}{subsubsection*.2}\protected@file@percent }
-\citation{googleortoolsjssp}
-\@writefile{toc}{\contentsline {subsubsection}{Ograniczenia nakładania się}{5}{subsubsection*.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Reprezentacja interwałowa}{5}{subsubsection*.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Różnice i specyfika problemu szkolnego}{5}{subsection.2.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Wielozasobowość}{5}{subsubsection*.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Ograniczenia miękkie i jakościowe}{5}{subsubsection*.6}\protected@file@percent }
-\citation{googleortoolsjssp}
-\citation{googleortoolsjssp}
-\citation{googleortoolsoverlap}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Gotowe rozwiązania}{6}{subsection.2.2.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Wizualizacja rozwiązania klasycznego problemu JSSP z wykorzystaniem zmiennych interwałowych~\cite  {googleortoolsjssp}}}{6}{figure.caption.7}\protected@file@percent }
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:intervals}{{2.1}{6}{Wizualizacja rozwiązania klasycznego problemu JSSP z wykorzystaniem zmiennych interwałowych~\cite {googleortoolsjssp}}{figure.caption.7}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Zmienne interwałowe}{6}{subsubsection*.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Ograniczenie NoOverlap}{6}{subsubsection*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Definicja problemu harmonogramowania}{3}{subsection.2.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Podstawowy model MIP}{4}{subsubsection*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Iteracyjne wstrzykiwanie ograniczeń}{4}{subsubsection*.2}\protected@file@percent }
+\citation{xiong2022survey}
+\@writefile{toc}{\contentsline {subsubsection}{Strategie redukcji złożoności}{5}{subsubsection*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Job-Shop Problem}{5}{section.2.2}\protected@file@percent }
+\newlabel{eq:ograniczenie_nakladania}{{2.2}{6}{Job-Shop Problem}{equation.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Podobieństwa do problemu układania planu lekcji}{6}{subsection.2.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Struktura zasobów}{6}{subsubsection*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Struktura zadań}{6}{subsubsection*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Ograniczenia nakładania się}{7}{subsubsection*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Reprezentacja interwałowa}{7}{subsubsection*.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Różnice i specyfika problemu szkolnego}{7}{subsection.2.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Wielozasobowość}{7}{subsubsection*.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Ograniczenia}{7}{subsubsection*.9}\protected@file@percent }
 \citation{vulcanprzewodnik}
 \citation{vulcanprzewodnik}
 \citation{vulcanprzewodnik}
@@ -53,125 +48,125 @@
 \citation{vulcanprzewodnik}
 \citation{vulcanprzewodnik}
 \citation{vulcanprzewodnik}
-\@writefile{toc}{\contentsline {subsubsection}{Optional Intervals}{7}{subsubsection*.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.3}Istniejące kompleksowe rozwiązania}{7}{section.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Plan lekcji Optivum}{7}{subsection.2.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Istniejące kompleksowe rozwiązania}{8}{section.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Plan lekcji Optivum}{8}{subsection.2.3.1}\protected@file@percent }
 \citation{vulcanprzewodnik}
 \citation{vulcanprzewodnik}
 \citation{vulcanprzewodnik}
 \citation{vulcanprzewodnik}
 \citation{vulcanprzewodnik}
 \citation{vulcanprzewodnik}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Zrzut ekranu importowania arkusza organizacyjnego do programu ,,Plan lekcji Optivum''~\cite  {vulcanprzewodnik}}}{8}{figure.caption.11}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Zrzut ekranu wprowadzania sal do programu ,,Plan lekcji Optivum''~\cite  {vulcanprzewodnik}}}{8}{figure.caption.12}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Zrzut ekranu importowania arkusza organizacyjnego do programu ,,Plan lekcji Optivum''~\cite  {vulcanprzewodnik}}}{9}{figure.caption.10}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Zrzut ekranu wprowadzania sal do programu ,,Plan lekcji Optivum''~\cite  {vulcanprzewodnik}}}{9}{figure.caption.11}\protected@file@percent }
 \citation{vulcanprzewodnik}
 \citation{vulcanprzewodnik}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Zrzut ekranu wprowadzania preferencji sal względem przedmiotów do programu ,,Plan lekcji Optivum''~\cite  {vulcanprzewodnik}}}{9}{figure.caption.13}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Zrzut ekranu wprowadzania preferencji sal względem nauczycieli do programu ,,Plan lekcji Optivum''~\cite  {vulcanprzewodnik}}}{9}{figure.caption.14}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Zrzut ekranu wprowadzania bloków przedmiotów do programu ,,Plan lekcji Optivum''~\cite  {vulcanprzewodnik}}}{9}{figure.caption.15}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Zrzut ekranu wprowadzania terminów zajęć dla poszczególnych klas do programu ,,Plan lekcji Optivum''~\cite  {vulcanprzewodnik}}}{10}{figure.caption.16}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Zrzut ekranu wprowadzania dostępności nauczycieli do programu ,,Plan lekcji Optivum''~\cite  {vulcanprzewodnik}}}{10}{figure.caption.17}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.9}{\ignorespaces Zrzut ekranu wprowadzania ,,trudnych'' lekcji do programu ,,Plan lekcji Optivum''~\cite  {vulcanprzewodnik}}}{11}{figure.caption.18}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Zrzut ekranu wprowadzania preferencji sal względem przedmiotów do programu ,,Plan lekcji Optivum''~\cite  {vulcanprzewodnik}}}{10}{figure.caption.12}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Zrzut ekranu wprowadzania preferencji sal względem nauczycieli do programu ,,Plan lekcji Optivum''~\cite  {vulcanprzewodnik}}}{10}{figure.caption.13}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Zrzut ekranu wprowadzania bloków przedmiotów do programu ,,Plan lekcji Optivum''~\cite  {vulcanprzewodnik}}}{10}{figure.caption.14}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Zrzut ekranu wprowadzania terminów zajęć dla poszczególnych klas do programu ,,Plan lekcji Optivum''~\cite  {vulcanprzewodnik}}}{11}{figure.caption.15}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Zrzut ekranu wprowadzania dostępności nauczycieli do programu ,,Plan lekcji Optivum''~\cite  {vulcanprzewodnik}}}{11}{figure.caption.16}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Zrzut ekranu wprowadzania ,,trudnych'' lekcji do programu ,,Plan lekcji Optivum''~\cite  {vulcanprzewodnik}}}{12}{figure.caption.17}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{\numberline {3}Problem układania planu lekcji i algorytm jego rozwiązania}{13}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
 \newlabel{chapter:algorytm}{{3}{13}{Problem układania planu lekcji i algorytm jego rozwiązania}{chapter.3}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.1}Sformułowanie problemu optymalizacyjnego}{13}{section.3.1}\protected@file@percent }
-\newlabel{fragment:przypisania}{{3.1}{14}{Sformułowanie problemu optymalizacyjnego}{section.3.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Dane i szukane}{14}{subsection.3.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Słownik podstawowych oznaczeń}{14}{subsubsection*.19}\protected@file@percent }
-\newlabel{slownik_oznaczen}{{3.1.1}{14}{Słownik podstawowych oznaczeń}{subsubsection*.19}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Wymagania główne}{14}{subsubsection*.20}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Zrzut ekranu z arkusza kalkulacyjnego przedstawiąjący przypisanie godzinowe nauczycieli dla każdej klasy.}}{15}{figure.caption.21}\protected@file@percent }
-\newlabel{fig:excel_wymagania}{{3.1}{15}{Zrzut ekranu z arkusza kalkulacyjnego przedstawiąjący przypisanie godzinowe nauczycieli dla każdej klasy}{figure.caption.21}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Słownik podstawowych oznaczeń}{14}{subsubsection*.18}\protected@file@percent }
+\newlabel{slownik_oznaczen}{{3.1.1}{14}{Słownik podstawowych oznaczeń}{subsubsection*.18}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Wymagania główne}{14}{subsubsection*.19}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Zrzut ekranu z arkusza kalkulacyjnego przedstawiąjący przypisanie godzinowe nauczycieli dla każdej klasy.}}{14}{figure.caption.20}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:excel_wymagania}{{3.1}{14}{Zrzut ekranu z arkusza kalkulacyjnego przedstawiąjący przypisanie godzinowe nauczycieli dla każdej klasy}{figure.caption.20}{}}
 \newlabel{eq:wymaganie_glowne}{{3.1}{15}{Wymagania główne}{equation.3.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Dostępnośc nauczycieli}{15}{subsubsection*.22}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Bloki przedmiotów}{16}{subsubsection*.23}\protected@file@percent }
-\newlabel{subject_blocks}{{3.1.1}{16}{Bloki przedmiotów}{subsubsection*.23}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Dostępnośc nauczycieli}{15}{subsubsection*.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Bloki przedmiotów}{15}{subsubsection*.22}\protected@file@percent }
+\newlabel{subject_blocks}{{3.1.1}{15}{Bloki przedmiotów}{subsubsection*.22}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Bloki lekcyjne}{16}{subsubsection*.23}\protected@file@percent }
 \citation{karta_nauczyciela,prawo_oswiatowe,obwieszczenie}
-\@writefile{toc}{\contentsline {subsubsection}{Bloki lekcyjne}{17}{subsubsection*.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Szukane}{17}{subsubsection*.24}\protected@file@percent }
+\newlabel{fragment:przypisania}{{3.1.1}{17}{Szukane}{subsubsection*.24}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Ograniczenia}{17}{subsection.3.1.2}\protected@file@percent }
 \newlabel{subsection:ograniczenia}{{3.1.2}{17}{Ograniczenia}{subsection.3.1.2}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Ograniczenia fizyczne}{17}{subsubsection*.25}\protected@file@percent }
+\citation{rappos2022mixed}
 \@writefile{toc}{\contentsline {subsubsection}{Ograniczenia jakościowe}{18}{subsubsection*.26}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{Ograniczenie główne}{18}{subsubsection*.27}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Dekompozycja problemu}{18}{subsection.3.1.3}\protected@file@percent }
-\citation{rappos2022mixed}
-\@writefile{toc}{\contentsline {subsubsection}{Dekompozycja problemu}{19}{subsubsection*.28}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Rozwiązanie początkowe z prostymi ograniczeniami}{19}{subsubsection*.29}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Hierarchiczna dekompozycja problemu}{20}{subsubsection*.30}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Kombinacja metod optymalizacyjnych}{20}{subsubsection*.31}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Redukcja złożoności obliczeniowej}{20}{subsubsection*.32}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Poprzednie podejścia}{20}{section.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Programowanie zero-jedynkowe}{21}{subsection.3.2.1}\protected@file@percent }
-\newlabel{subsection:podejscie_zerojedynkowe}{{3.2.1}{21}{Programowanie zero-jedynkowe}{subsection.3.2.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Hierarchiczna dekompozycja problemu}{18}{subsubsection*.28}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Kombinacja metod optymalizacyjnych}{19}{subsubsection*.29}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Redukcja złożoności obliczeniowej}{19}{subsubsection*.30}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Poprzednie podejścia}{19}{section.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Programowanie mieszanocałkowitoliczbowe}{19}{subsection.3.2.1}\protected@file@percent }
+\newlabel{subsection:podejscie_zerojedynkowe}{{3.2.1}{19}{Programowanie mieszanocałkowitoliczbowe}{subsection.3.2.1}{}}
 \citation{schlichtkrull2018modeling}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Grafowe sieci neuronowe}{22}{subsection.3.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Grafowe sieci neuronowe}{21}{subsection.3.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Dekompozycja problemu i wybór technik}{22}{section.3.3}\protected@file@percent }
 \citation{cormen2022introduction}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Struktura algorytmu i wybór technologii}{23}{section.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Struktura algorytmu}}{23}{figure.caption.31}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Dobór technik algorytmicznych}{23}{subsection.3.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3.4}Algorytm zachłanny}{23}{section.3.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Bloki lekcyjne}{24}{subsection.3.4.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4.2}Działanie}{25}{subsection.3.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Dane wejściowe}{25}{subsubsection*.33}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Klasyfikacja bloków}{25}{subsubsection*.34}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Inicjalizacja}{25}{subsubsection*.35}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Tworzenie grup wieloklasowych}{25}{subsubsection*.36}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Agregacja bloków}{26}{subsubsection*.37}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Przetwarzanie bloków wieloklasowych}{26}{subsubsection*.38}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Generowanie bloków pojedynczych}{26}{subsubsection*.39}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Iteracyjna alokacja pozostałych godzin}{26}{subsubsection*.40}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Dane wejściowe}{25}{subsubsection*.32}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Klasyfikacja bloków}{25}{subsubsection*.33}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Inicjalizacja}{25}{subsubsection*.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Tworzenie grup wieloklasowych}{26}{subsubsection*.35}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Agregacja bloków}{26}{subsubsection*.36}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Przetwarzanie bloków wieloklasowych}{26}{subsubsection*.37}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Generowanie bloków pojedynczych}{26}{subsubsection*.38}\protected@file@percent }
 \citation{holland1992genetic}
-\@writefile{toc}{\contentsline {subsubsection}{Finalizacja}{27}{subsubsection*.41}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Iteracyjna alokacja pozostałych godzin}{27}{subsubsection*.39}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Finalizacja}{27}{subsubsection*.40}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4.3}Przykładowe rezultaty}{27}{subsection.3.4.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3.5}Algorytm ewolucyjny}{27}{section.3.5}\protected@file@percent }
 \citation{eiben2015evolutionary}
 \@writefile{loa}{\contentsline {algocf}{\numberline {3.1}{\ignorespaces ,,The general scheme of an evolutionary algorithm in pseudocode''\cite  {eiben2015evolutionary}}}{28}{algocf.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Cel algorytmu}{28}{subsection.3.5.1}\protected@file@percent }
-\citation{feller1971introduction}
-\@writefile{toc}{\contentsline {subsubsection}{Dane wejściowe}{29}{subsubsection*.42}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Dane wyjściowe}{29}{subsubsection*.43}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Cel algorytmu}{29}{subsection.3.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Dane wejściowe}{29}{subsubsection*.41}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Dane wyjściowe}{29}{subsubsection*.42}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.5.2}Kodowanie i ograniczenia twarde}{29}{subsection.3.5.2}\protected@file@percent }
 \newlabel{subsection:kodowanie}{{3.5.2}{29}{Kodowanie i ograniczenia twarde}{subsection.3.5.2}{}}
 \newlabel{specimen}{{3.2}{29}{Kodowanie i ograniczenia twarde}{equation.3.2}{}}
+\citation{feller1971introduction}
 \citation{numpymultinomialdocs}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.5.3}Generowanie populacji początkowej}{30}{subsection.3.5.3}\protected@file@percent }
 \newlabel{subsection:generowanie_populacji}{{3.5.3}{30}{Generowanie populacji początkowej}{subsection.3.5.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.5.4}Przystosowanie}{31}{subsection.3.5.4}\protected@file@percent }
 \newlabel{subsection:przystosowanie}{{3.5.4}{31}{Przystosowanie}{subsection.3.5.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Wykres funkcji użytej do ewaluacji rozkładu godzin nauczycieli i klas na przestrzeni tygodnia.}}{32}{figure.caption.44}\protected@file@percent }
-\newlabel{fig:funkcja_rownomiernosc}{{3.2}{32}{Wykres funkcji użytej do ewaluacji rozkładu godzin nauczycieli i klas na przestrzeni tygodnia}{figure.caption.44}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Ocena względem nauczycieli}{32}{subsubsection*.45}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Ocena względem klas}{33}{subsubsection*.46}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Normalizacja i wagi}{33}{subsubsection*.47}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.5}Selekcja}{33}{subsection.3.5.5}\protected@file@percent }
-\newlabel{subsection:selekcja}{{3.5.5}{33}{Selekcja}{subsection.3.5.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Wykres funkcji użytej do ewaluacji rozkładu godzin nauczycieli i klas na przestrzeni tygodnia.}}{32}{figure.caption.43}\protected@file@percent }
+\newlabel{fig:funkcja_rownomiernosc}{{3.3}{32}{Wykres funkcji użytej do ewaluacji rozkładu godzin nauczycieli i klas na przestrzeni tygodnia}{figure.caption.43}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Ocena względem nauczycieli}{32}{subsubsection*.44}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Ocena względem klas}{33}{subsubsection*.45}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Normalizacja i wagi}{33}{subsubsection*.46}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.5}Selekcja}{34}{subsection.3.5.5}\protected@file@percent }
+\newlabel{subsection:selekcja}{{3.5.5}{34}{Selekcja}{subsection.3.5.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.5.6}Krzyżowanie}{34}{subsection.3.5.6}\protected@file@percent }
 \newlabel{subsection:krzyzowanie}{{3.5.6}{34}{Krzyżowanie}{subsection.3.5.6}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Względem oceny nauczycieli}{34}{subsubsection*.48}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Względem oceny klas}{34}{subsubsection*.49}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Względem oceny nauczycieli}{34}{subsubsection*.47}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Względem oceny klas}{35}{subsubsection*.48}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.5.7}Mutacja}{35}{subsection.3.5.7}\protected@file@percent }
 \newlabel{subsection:mutacja}{{3.5.7}{35}{Mutacja}{subsection.3.5.7}{}}
 \citation{googleortoolsintervalvar}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.5.8}Przykładowe rezultaty}{36}{subsection.3.5.8}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3.6}Solver programowania liniowego z ograniczeniami}{36}{section.3.6}\protected@file@percent }
 \newlabel{section:solver}{{3.6}{36}{Solver programowania liniowego z ograniczeniami}{section.3.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.1}Reprezentacja interwałów}{36}{subsection.3.6.1}\protected@file@percent }
-\citation{googleortoolsoverlap}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.1}Reprezentacja interwałów}{37}{subsection.3.6.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.6.2}Zmienne decyzyjne}{37}{subsection.3.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Interwały bloków lekcyjnych}{37}{subsubsection*.50}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Przypisania sal}{37}{subsubsection*.51}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.3}Ograniczenia}{37}{subsection.3.6.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Ograniczenie przypisania sal}{37}{subsubsection*.52}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Ciągłość zajęć dla klas}{37}{subsubsection*.53}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Nakładanie się nauczycieli}{38}{subsubsection*.54}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Kolizje sal}{38}{subsubsection*.55}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Sekwencjonowanie przedmiotów}{38}{subsubsection*.56}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.4}Funkcja celu}{38}{subsection.3.6.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.5}Transformacja interwałów na przypisania końcowe}{38}{subsection.3.6.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Ekstrakcja rozwiązań z solvera}{39}{subsubsection*.57}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Mapowanie na strukturę lekcji}{39}{subsubsection*.58}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Przykład transformacji}{39}{subsubsection*.59}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Interwały bloków lekcyjnych}{37}{subsubsection*.49}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Przypisania sal}{37}{subsubsection*.50}\protected@file@percent }
+\citation{googleortoolsoverlap}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.3}Ograniczenia}{38}{subsection.3.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Ograniczenie przypisania sal}{38}{subsubsection*.51}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Ciągłość zajęć dla klas}{38}{subsubsection*.52}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Nakładanie się nauczycieli}{38}{subsubsection*.53}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Kolizje sal}{38}{subsubsection*.54}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Sekwencjonowanie przedmiotów}{38}{subsubsection*.55}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.4}Funkcja celu}{39}{subsection.3.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.5}Transformacja interwałów na przypisania końcowe}{39}{subsection.3.6.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Ekstrakcja rozwiązań z solvera}{39}{subsubsection*.56}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Mapowanie na strukturę lekcji}{39}{subsubsection*.57}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Przykład transformacji}{40}{subsubsection*.58}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3.7}Wyniki}{40}{section.3.7}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.7.1}Statystyki planu}{40}{subsection.3.7.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.7.2}Porównanie z ręcznie ułożonym planem}{40}{subsection.3.7.2}\protected@file@percent }
@@ -185,16 +180,134 @@
 \newlabel{subsection:wymagania_funkcjonalne}{{4.1.1}{41}{Wymagania funkcjonalne}{subsection.4.1.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Wymagania niefunkcjonalne}{41}{subsection.4.1.2}\protected@file@percent }
 \newlabel{RF1}{42}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagram wymagań}}{42}{figure.caption.60}\protected@file@percent }
-\newlabel{fig:diagram_wymagan}{{4.1}{42}{Diagram wymagań}{figure.caption.60}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagram wymagań}}{42}{figure.caption.59}\protected@file@percent }
+\newlabel{fig:diagram_wymagan}{{4.1}{42}{Diagram wymagań}{figure.caption.59}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}Przypadki użycia}{43}{subsection.4.1.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Diagram przypadków użycia}}{43}{figure.caption.61}\protected@file@percent }
-\newlabel{fig:usecases}{{4.2}{43}{Diagram przypadków użycia}{figure.caption.61}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Diagram przypadków użycia}}{43}{figure.caption.60}\protected@file@percent }
+\newlabel{fig:usecases}{{4.2}{43}{Diagram przypadków użycia}{figure.caption.60}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1.4}Diagramy sekwencji}{43}{subsection.4.1.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Diagram sekwencji dla przypadku użycia generowania planu lekcji}}{44}{figure.caption.62}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Diagram sekwencji dla przypadku użycia oglądania planu lekcji}}{44}{figure.caption.63}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces Diagram sekwencji dla przypadku użycia edycji bądź wprowadzania wymagań głównych}}{45}{figure.caption.64}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Diagram sekwencji dla przypadku użycia generowania planu lekcji}}{44}{figure.caption.61}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Diagram sekwencji dla przypadku użycia oglądania planu lekcji}}{44}{figure.caption.62}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces Diagram sekwencji dla przypadku użycia edycji bądź wprowadzania wymagań głównych}}{45}{figure.caption.63}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {4.2}Projekt}{46}{section.4.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Projekt struktury bazy danych}{46}{subsection.4.2.1}\protected@file@percent }
 \newlabel{subsection:projekt_bazy_danych}{{4.2.1}{46}{Projekt struktury bazy danych}{subsection.4.2.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Tabel
+\@writefile{toc}{\contentsline {subsubsection}{Tabele podstawowe}{46}{subsubsection*.64}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Tabele podstawowe zasobów szkolnych}}{46}{table.caption.65}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces Diagram tabel podstawowych w bazie danych}}{47}{figure.caption.66}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Tabele wymagań}{47}{subsubsection*.67}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Tabele definiujące wymagania i ograniczenia}}{47}{table.caption.68}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces Diagram tabel podstawowych i wymagań w bazie danych}}{48}{figure.caption.69}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Tabele agregujące}{48}{subsubsection*.70}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Tabele zbiorów zasobów z uzasadnieniem relacji}}{48}{table.caption.71}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Tabele wyników}{49}{subsubsection*.72}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.4}{\ignorespaces Tabele przechowujące wygenerowane plany lekcji}}{49}{table.caption.73}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces Diagram pełnego projektu bazy danych}}{50}{figure.caption.74}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.5}{\ignorespaces Struktura wszystkich tabel}}{51}{table.caption.75}\protected@file@percent }
+\citation{nielsenheuristics}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Projekt interfejsu}{52}{subsection.4.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Nawigacja}{52}{subsubsection*.76}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Strona główna}{52}{subsubsection*.77}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Podgląd planów lekcji}{52}{subsubsection*.78}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Moduły wprowadzania danych}{52}{subsubsection*.79}\protected@file@percent }
+\citation{react}
+\@writefile{toc}{\contentsline {subsubsection}{Moduł generowania planu}{53}{subsubsection*.80}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Spójność i ergonomia}{53}{subsubsection*.81}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Implementacja}{53}{section.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Wybór narzędzi}{53}{subsection.4.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Interfejs webowy}{53}{subsubsection*.82}\protected@file@percent }
+\citation{django}
+\citation{djangotenants}
+\citation{googleortoolsjssp}
+\citation{googleortoolsjssp}
+\citation{googleortoolsjssp}
+\@writefile{toc}{\contentsline {subsubsection}{Warstwa serwerowa}{54}{subsubsection*.83}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Baza danych}{54}{subsubsection*.84}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Moduł optymalizacyjny}{54}{subsubsection*.85}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Gotowe rozwiązania}{54}{subsection.4.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces Wizualizacja rozwiązania klasycznego problemu JSSP z wykorzystaniem zmiennych interwałowych~\cite  {googleortoolsjssp}}}{54}{figure.caption.86}\protected@file@percent }
+\newlabel{fig:intervals}{{4.9}{54}{Wizualizacja rozwiązania klasycznego problemu JSSP z wykorzystaniem zmiennych interwałowych~\cite {googleortoolsjssp}}{figure.caption.86}{}}
+\citation{googleortoolsoverlap}
+\@writefile{toc}{\contentsline {subsubsection}{Zmienne interwałowe}{55}{subsubsection*.87}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Ograniczenie NoOverlap}{55}{subsubsection*.88}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Optional Intervals}{55}{subsubsection*.89}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}Implementacja bazy danych w Django}{55}{subsection.4.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Tabela sal}{56}{subsubsection*.90}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Tabela zbiorów sal}{56}{subsubsection*.91}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Tabela wymagań głównych}{56}{subsubsection*.92}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.4}Implementacja API}{56}{subsection.4.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.10}{\ignorespaces Automatycznie wygenerowana lista endpointów stworzonych przy użyciu \mbox  {ModelViewSet}}}{57}{figure.caption.93}\protected@file@percent }
+\newlabel{fig:api_default_router}{{4.10}{57}{Automatycznie wygenerowana lista endpointów stworzonych przy użyciu \mbox {ModelViewSet}}{figure.caption.93}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.5}Implementacja interfejsu webowego}{57}{subsection.4.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Nawigacja}{58}{subsubsection*.94}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.11}{\ignorespaces Nawigacja interfejsu webowego}}{58}{figure.caption.95}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Strona główna}{58}{subsubsection*.96}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.12}{\ignorespaces Strona główna interfejsu webowego}}{58}{figure.caption.97}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Podgląd planów lekcji}{59}{subsubsection*.98}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.13}{\ignorespaces Podgląd planu z perspektywy nauczyciela}}{59}{figure.caption.99}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.14}{\ignorespaces Podgląd planu z perspektywy klasy}}{59}{figure.caption.100}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Widok generowania planów lekcji}{59}{subsubsection*.101}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.15}{\ignorespaces Widok generowania planu lekcji}}{60}{figure.caption.102}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Widoki wprowadzania zasobów}{60}{subsubsection*.103}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.16}{\ignorespaces Widok dodawania przedmiotów}}{60}{figure.caption.104}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.17}{\ignorespaces Widok dodawania nauczycieli}}{61}{figure.caption.105}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.18}{\ignorespaces Widok dodawania sal}}{61}{figure.caption.106}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.19}{\ignorespaces Widok dodawania klas}}{62}{figure.caption.107}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Widok wprowadzania wymagań głównych}{62}{subsubsection*.108}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.20}{\ignorespaces Widok dodawania wymagań głównych}}{63}{figure.caption.109}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Widok wprowadzania dostępności nauczycieli}{64}{subsubsection*.110}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.21}{\ignorespaces Widok wprowadzania dostępności nauczycieli}}{64}{figure.caption.111}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Widok wprowadzania bloków przedmiotów}{64}{subsubsection*.112}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.22}{\ignorespaces Widok dodawania bloków przedmiotów}}{64}{figure.caption.113}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.6}Integracja z algorytmem}{65}{subsection.4.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Testowanie i ewaluacja rozwiązania}{67}{chapter.5}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{loa}{\addvspace {10\p@ }}
+\newlabel{chapter:tests}{{5}{67}{Testowanie i ewaluacja rozwiązania}{chapter.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Scenariusze testowe}{67}{section.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Scenariusz testowy generowania planu lakcji z określonymi parametrami}{67}{subsection.5.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Scenariusz przeglądu planów lekcji}{67}{subsection.5.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Scenariusz importowania i edytowania wymagań głównych}{68}{subsection.5.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.4}Scenariusz edytowania dostępności nauczycieli}{68}{subsection.5.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Testowanie aplikacji}{68}{section.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Funkcjonalność 1}{68}{subsection.5.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}Funkcjonalność 2}{68}{subsection.5.2.2}\protected@file@percent }
+\bibstyle{abbrv}
+\bibdata{bibliography}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Wnioski i perspektywy rozwoju}{69}{chapter.6}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{loa}{\addvspace {10\p@ }}
+\newlabel{chapter:conclusions}{{6}{69}{Wnioski i perspektywy rozwoju}{chapter.6}{}}
+\bibcite{karta_nauczyciela}{1}
+\bibcite{prawo_oswiatowe}{2}
+\bibcite{obwieszczenie}{3}
+\bibcite{djangotenants}{4}
+\bibcite{cormen2022introduction}{5}
+\bibcite{numpymultinomialdocs}{6}
+\bibcite{eiben2015evolutionary}{7}
+\bibcite{feller1971introduction}{8}
+\bibcite{django}{9}
+\bibcite{googleortoolsoverlap}{10}
+\bibcite{googleortoolsintervalvar}{11}
+\bibcite{googleortoolsjssp}{12}
+\bibcite{holland1992genetic}{13}
+\bibcite{react}{14}
+\bibcite{nielsenheuristics}{15}
+\bibcite{rappos2022mixed}{16}
+\bibcite{schlichtkrull2018modeling}{17}
+\bibcite{vulcanprzewodnik}{18}
+\bibcite{xiong2022survey}{19}
+\citation{vulcanprzewodnik}
+\citation{vulcanprzewodnik}
+\citation{vulcanprzewodnik}
+\citation{vulcanprzewodnik}
+\citation{vulcanprzewodnik}
+\citation{vulcanprzewodnik}
+\citation{vulcanprzewodnik}
+\citation{vulcanprzewodnik}
+\citation{googleortoolsjssp}
+\gdef\svg@ink@ver@settings{{\m@ne }{inkscape}{\m@ne }}
+\xdef \mintedoldcachechecksum{\detokenize{\minted@cachechecksum }}
+\gdef \@abspage@last{81}

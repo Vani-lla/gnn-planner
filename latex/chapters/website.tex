@@ -416,7 +416,49 @@
 
         \subsubsection{Moduł optymalizacyjny}
             Ze względu na prostotę integracji z backendem aplikacji użyłem języka programowania Python.
-            Otwarta natura narzędzia Google OR-Tools oraz jego wygodne API w Pythonie skłoniło mnie do decyzji przeciwko CPLEX i Gurobi.
+            
+            \subsection{Gotowe rozwiązania}
+                Istnieje wiele istniejących rozwiązań JSSP, jednak szczególnie inspirujące okazało się podejście zaprezentowane w dokumentacji Google OR-Tools~\cite{googleortoolsjssp}, które wykorzystuje zmienne interwałowe do modelowania operacji.
+                
+                \begin{figure}[ht]
+                    \centering
+                    \includegraphics[width=0.9\textwidth]{images/interval_vars.png}
+                    \caption{Wizualizacja rozwiązania klasycznego problemu JSSP z wykorzystaniem zmiennych interwałowych~\cite{googleortoolsjssp}}\label{fig:intervals}
+                \end{figure}
+                Wyraźnie widać te inspiracje w sekcji trzeciej algorytmu dotyczącej solvera CP~(\ref{section:solver}), gdzie zastosowano:
+                \begin{itemize}
+                    \item Reprezentację lekcji jako interwałów czasowych
+                    \item Ograniczenia NoOverlap dla zasobów (nauczyciele, klasy, sale)
+                    \item Optional intervals dla przypisań sal
+                    \item Specjalistyczne ograniczenia ciągłości czasowej
+                \end{itemize}
+
+                Kluczowe koncepcje zaadaptowane w mojej pracy:
+        
+                \subsubsection{Zmienne interwałowe}
+                    \begin{itemize}
+                        \item W JSSP: $\text{IntervalVar}(start, duration, end)$.
+                        \item W planie lekcji: $\text{IntervalVar}(h_i, v_i, h_i + v_i)$, gdzie $h_i$ to slot czasowy~(\ref{slownik_oznaczen}), a $v_i$ to długość trwania lekcji.
+                    \end{itemize}
+        
+                \subsubsection{Ograniczenie NoOverlap}
+                    \begin{itemize}
+                        \item W JSSP: $\text{AddNoOverlap}([\verb|interval|_1, \dots, \verb|interval|_n])$ dla operacji na tej samej maszynie~\cite{googleortoolsoverlap}.
+                        \item W planie lekcji: $\text{AddNoOverlap}$ zastosowane dla:
+                        \begin{itemize}
+                            \item Wszystkich lekcji tej samej klasy
+                            \item Wszystkich lekcji tego samego nauczyciela  
+                            \item Wszystkich lekcji w tej samej sali
+                        \end{itemize}
+                    \end{itemize}
+        
+                \subsubsection{Optional Intervals}
+                    Rozszerzenie o interwały opcjonalne pozwala na modelowanie przypisań sal do nauczycieli w blokach lekcyjnych:
+                    \[ \text{OptionalIntervalVar}(start, duration, end, presence) \]
+                    Takie interwały są brane pod uwagę w ograniczeniach tylko i wyłącznie, jeśli $presence = 1$;
+                    Oznaczna to, że interwał jest ,,aktywny''.
+
+
 
     \subsection{Implementacja bazy danych w Django}
         Technika ORM stosowana w Django oferuje intuicyjny sposób definiowania relacji między modelami.
