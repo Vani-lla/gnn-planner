@@ -10,7 +10,7 @@ export default function WelcomePage() {
             <div className="welcome-buttons">
                 <Link to="/plan" className="welcome-button">View Plans</Link>
                 <Link to="/add/generation" className="welcome-button">Generate a New Plan</Link>
-                <Link to="/add/upload-requirements" className="welcome-button">Upload Requirements</Link>
+                <Link to="/add/requirements" className="welcome-button">Upload Hour Requirements</Link>
             </div>
         </div>
     );

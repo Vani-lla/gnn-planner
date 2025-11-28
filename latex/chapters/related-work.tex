@@ -1,7 +1,7 @@
 \Chapter{Powiązane prace}\label{chapter:related}
     Struktura rozdziału?
 
-    \section{Inspiracja podejściem iteracyjnym}
+    \section{Inspiracja podejściem iteracyjnym}\label{section:podejscie_iteracyjne}
         Praca ,,A mixed-integer programming approach for solving university course timetabling problems''~\cite{rappos2022mixed} przedstawia innowacyjne podejście do rozwiązywania problemów harmonogramowania poprzez dekompozycję na prostsze podproblemy i iteracyjne dodawanie ograniczeń. 
         Autorzy wykorzystują strategię polegającą na:
         \begin{enumerate}
@@ -10,61 +10,6 @@
             \item Stosowaniu heurystyk redukcji zmiennych dla kontroli złożoności obliczeniowej
             \item Utrzymywaniu wykonalności rozwiązania na każdym etapie
         \end{enumerate}
-
-        \subsection{Adaptacja}
-            W mojej pracy zaadaptowałem i rozwinąłem tę fundamentalną ideę, dostosowując ją do specyfiki problemu układania planu lekcji.
-
-            \subsubsection{Dekompozycja problemu}
-                Podobnie jak w pracy źródłowej, gdzie autorzy rozbijają problem na warstwy ograniczeń, w moim rozwiązaniu zastosowałem trójetapową dekompozycję:
-                \[ \text{Problem pełny} \longrightarrow \text{Etap 1} \longrightarrow \text{Etap 2} \longrightarrow \text{Etap 3} \]
-                gdzie każdy etap rozwiązuje wyraźnie wydzielony podproblem o mniejszej złożoności.
-
-            \subsubsection{Rozwiązanie początkowe z prostymi ograniczeniami}
-                Analogicznie do podejścia z tej pracy, gdzie zaczynają od podstawowych ograniczeń równościowych, w moim algorytmie:
-                \begin{itemize}
-                    \item \textbf{Etap 1 (algorytm zachłanny)}: Koncentruje się wyłącznie na ograniczeniach głównych i strukturalnych bloków lekcyjnych~(\ref{slownik_oznaczen}):
-                    \[ \mathcal{L} = \text{Greedy}(\mathcal{W}, \mathcal{B}) \]
-                    pomijając tymczasowo ograniczenia czasowe i przestrzenne.
-                    \item \textbf{Etap 2 (algorytm ewolucyjny)}: Dodaje ograniczenia dostępności nauczycieli i równomierności rozkładu:
-                    \[ S_{\text{best}} = \text{Evolutionary}(\mathcal{L}, V, A) \]
-                    ale wciąż operuje na poziomie dni, a nie konkretnych slotów czasowych.
-                \end{itemize}
-
-            \subsubsection{Hierarchiczna dekompozycja problemu}
-                Podczas gdy w pracy~\cite{rappos2022mixed} dekompozycja dotyczy głównie warstw ograniczeń, w moim rozwiązaniu wprowadziłem dekompozycję całego problemu:
-                \begin{align*}
-                    \text{Poziom 1:} & \quad \text{Struktura bloków lekcyjnych } \mathcal{L} \\
-                    \text{Poziom 2:} & \quad \text{Rozkład tygodniowy } S_{\text{best}} \\
-                    \text{Poziom 3:} & \quad \text{Przypisania szczegółowe } \mathcal{Z}
-                \end{align*}
-
-            Każdy poziom rozwiązuje inny problem i wykorzystuje odpowiednie do tego celu algorytmy.
-
-            \subsubsection{Kombinacja metod optymalizacyjnych}
-                W odróżnieniu od pracy źródłowej, która wykorzystuje wyłącznie solver MIP z heurystykami, w moim podejściu zastosowałem wiele technik:
-                \begin{itemize}
-                    \item \textbf{Algorytm zachłanny} --- dla problemów konstrukcyjnych (tworzenie bloków)
-                    \item \textbf{Algorytm ewolucyjny} --- dla dyskretnego przydziału bloków do dni
-                    \item \textbf{Solver CP} --- dla problemów szeregowania
-                \end{itemize}
-
-        \subsection{Korzyści z podejścia iteracyjnego}
-            \subsubsection{Redukcja złożoności obliczeniowej}
-                Pełny problem harmonogramowania wymagałby liczby zmiennych decyzyjnych proporcjonalnych do:
-                \[ |\mathcal{T}| \times |\mathcal{C}| \times |\mathcal{S}| \times 5 \times H \times |\mathcal{R}| \]
-                co dla typowej szkoły daje setki milionów potencjalnych zmiennych.
-
-                W podejściu dekompozycyjnym:
-                \begin{itemize}
-                    \item \textbf{Etap 1}: Operuje na $|\mathcal{W}|$ wymaganiach
-                    \item \textbf{Etap 2}: Operuje na $5 \times |\mathcal{L}|$ zmiennych
-                    \item \textbf{Etap 3}: Rozwiązuje 5 niezależnych podproblemów o rozmiarze 20\% oryginalnego problemu
-                \end{itemize}
-
-                Każdy etap można modyfikować lub wymieniać niezależnie. Jest to ważna zaleta podczas rozwijania oprogramowania.
-                W szczególności jeśli takie oprogramowanie może być w przyszłości rozwijane przez więcej niż jednego dewelopera.
-
-                Podejście dekompozycyjne zaprezentowane zarówno w pracy \cite{rappos2022mixed}, jak i w mojej pracy, demonstruje fundamentalną zasadę inżynierii oprogramowania: ,,dziel i zwyciężaj''.
 
     \section{Job-Shop Problem}
         Problem harmonogramowania typu \textit{Job-Shop} (JSSP) jest jednym z najbardziej klasycznych i istotnych problemów optymalizacji kombinatorycznej w badaniach operacyjnych i zarządzaniu produkcją.
@@ -83,7 +28,7 @@
         Każda operacja $O_{ij}$ jest przypisana do dokładnie jednej maszyny oraz posiada znany czas przetwarzania:
         \[ p_{ij} \in \mathbb{N}^+ \]
     
-        Celem jest wyznaczenie kolejności (szeregowania) i czasów rozpoczęcia wszystkich operacji na maszynach tak, aby zminimalizować maksymalny czas zakończenia dowolnego zadania (ang. \textit{makespan}):
+        Celem jest wyznaczenie kolejności (uszeregowania) i czasów rozpoczęcia wszystkich operacji na maszynach tak, aby zminimalizować maksymalny czas zakończenia dowolnego zadania (ang. \textit{makespan}):
         \[ C_{\max} = \max_{i} C_i \]
         gdzie
         \[ C_i = S_{i n_i} + p_{i n_i} \]
@@ -92,7 +37,7 @@
         Zmienne decyzyjne:
         \[ S_{ij} \in \mathbb{N}_{0} \quad \forall i=1,\dots,n,\ \forall j=1,\dots,n_i \]
     
-        Ograniczenia precedencji:
+        Ograniczenia kolejnościowe:
         \[ S_{i,j+1} \ge S_{ij} + p_{ij} \quad \forall i,j = 1,\dots,n_i-1 \]
     
         Dla każdej pary różnych operacji $(O_{ij}, O_{kl})$ przypisanych do tej samej maszyny zachodzi jedno z dwóch:
@@ -150,7 +95,7 @@
                 Problem szkolny wprowadza bogaty zestaw ograniczeń jakościowych niewystępujących w klasycznym JSSP:
                 \begin{itemize}
                     \item Brak okienek dla uczniów (ciągłość zajęć)
-                    \item Równomierny rozkład godzin w tygodniu
+                    \item Równomierny rozkład godzin lekcyjnych w tygodniu
                     \item Ograniczenia prawne (max 2 godziny tego samego przedmiotu dziennie)
                     \item Dostępność nauczycieli
                 \end{itemize}
@@ -284,7 +229,7 @@
             \caption{Zrzut ekranu wprowadzania ,,trudnych'' lekcji do programu ,,Plan lekcji Optivum''~\cite{vulcanprzewodnik}}
         \end{figure}
 
-        Po ułożeniu ,,trudnych'' lekcji uruchamia się automat dla całego planu.        
+        Po ułożeniu ,,trudnych'' lekcji uruchamia się automat dla całego planu.
         Jeśli automat nie poradzi sobie z ułożeniem wszystkich lekcji (przykładowo z powodu zbyt restrykcyjnych warunków dla grup), należy analizować nieułożone lekcje i łagodzić parametry.
         Czasami pomaga kilkakrotne wykonanie minimalizacji okienek i układania całego planu.
 

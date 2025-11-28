@@ -12,45 +12,45 @@ Warning--entry type for "obwieszczenie" isn't style-file defined
 Warning--to sort, need author or key in karta_nauczyciela
 Warning--to sort, need author or key in prawo_oswiatowe
 Warning--to sort, need author or key in obwieszczenie
-You've used 16 entries,
+You've used 19 entries,
             2118 wiz_defined-function locations,
-            575 strings with 5963 characters,
-and the built_in function-call counts, 4384 in all, are:
-= -- 421
-> -- 180
+            585 strings with 6161 characters,
+and the built_in function-call counts, 5004 in all, are:
+= -- 478
+> -- 201
 < -- 3
-+ -- 77
-- -- 58
-* -- 241
-:= -- 699
-add.period$ -- 47
-call.type$ -- 16
-change.case$ -- 74
++ -- 87
+- -- 64
+* -- 259
+:= -- 801
+add.period$ -- 56
+call.type$ -- 19
+change.case$ -- 86
 chr.to.int$ -- 0
-cite$ -- 19
-duplicate$ -- 165
-empty$ -- 402
-format.name$ -- 58
-if$ -- 952
+cite$ -- 22
+duplicate$ -- 186
+empty$ -- 468
+format.name$ -- 64
+if$ -- 1087
 int.to.chr$ -- 0
-int.to.str$ -- 16
+int.to.str$ -- 19
 missing$ -- 9
-newline$ -- 80
-num.names$ -- 26
-pop$ -- 128
+newline$ -- 95
+num.names$ -- 32
+pop$ -- 155
 preamble$ -- 1
-purify$ -- 60
+purify$ -- 69
 quote$ -- 0
-skip$ -- 132
+skip$ -- 153
 stack$ -- 0
-substring$ -- 201
-swap$ -- 34
+substring$ -- 217
+swap$ -- 37
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 60
+type$ -- 72
 warning$ -- 3
-while$ -- 37
-width$ -- 18
-write$ -- 164
+while$ -- 43
+width$ -- 21
+write$ -- 194
 (There were 6 warnings)

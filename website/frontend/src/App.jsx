@@ -20,6 +20,7 @@ function App() {
             <div className='global-bg-pattern' />
             <Routes>
                 <Route path="/" element={<WelcomePage />} />
+                <Route path="nawigacja" element={<Navigation />} />
                 <Route
                     path="*"
                     element={

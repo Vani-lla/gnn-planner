@@ -138,7 +138,7 @@
 
 \newpage
 \section{Projekt}
-    \subsection{Projekt struktury bazy danych}
+    \subsection{Projekt struktury bazy danych}\label{subsection:projekt_bazy_danych}
         Projekt bazy danych stanowi kluczowy element architektury aplikacji webowej, determinujący jej skalowalność i funkcjonalność. 
         Głównym wyzwaniem projektowym było opracowanie modelu umożliwiającego wielokrotne wykorzystanie tych samych zasobów przy jednoczesnej obsłudze zmieniających się wymagań głównych pomiędzy generowaniami planów lekcji. 
         W odpowiedzi na to wymaganie wprowadziłem mechanizm grupowania zasobów i ograniczeń w zbiory, co zapewnia elastyczność niezbędną w środowisku szkolnym.
@@ -373,7 +373,7 @@
                 Interfejs powinien nawiązywać wyglądem i funkcjonalnością do arkuszy kalkulacyjnych, co ułatwia migrację z dotychczas używanych narzędzi.
                 \item \textbf{Strona dostępności nauczycieli} zapewnia graficzny interfejs do określania dni, w których poszczególni nauczyciele są dostępni do prowadzenia zajęć.
                 Wykorzystanie intuicyjnych checkboxów z możliwością blokowania i preferowania konkretnych dni.
-                \item \textbf{Strona bloków przedmiotów} umożliwia konfigurację zaawansowanych struktur grupujących zajęcia, zgodnie z koncepcją przedstawioną w rozdziale~\ref{chapter:algorytm}.
+                \item \textbf{Strona bloków przedmiotów} umożliwia konfigurację bloków przedmiotów, zgodnie z koncepcją przedstawioną w rozdziale~\ref{chapter:algorytm}.
                 Interfejs powinien pozwalać na definiowanie składu bloków, klas objętych blokiem, ograniczeń liczbowych oraz flagi agregacji.
             \end{itemize}
 
@@ -390,8 +390,204 @@
 
 \section{Implementacja}
     \subsection{Wybór narzędzi}
-        Dlaczego React+Django. Dlaczego PostgreSQL
+        W wyborze stosu technologicznego kierowałem się produktywnością rozwoju aplikacji, skalowalnością rozwiązania oraz integracją z innymi komponentami systemu.
+
+        \subsubsection{Interfejs webowy}
+            Decyzja o wykorzystaniu Reacta~\cite{react} jako frameworka frontendowego wynika z kilku kluczowych czynników.
+            Po pierwsze, posiadam znaczące doświadczenie w rozwoju aplikacji przy użyciu tej technologii, co pozwoliło na efektywną implementację interfejsu użytkownika.
+            Po drugie, React jest jednym z najbardziej popularnych i dojrzałych frameworków frontendowych, co gwarantuje obszerną dokumentację oraz aktywną społeczność wspierającą rozwój.
+            Po trzecie, React oferuje responsywne zarządzanie stanem aplikacji, co umożliwia dynamiczną aktualizację widoków planów lekcji bez konieczności przeładowywania strony, zapewniając płynne doświadczenie użytkownika podczas przeglądania planów lekcji.
+            Komponentowa architektura Reacta idealnie odpowiada modularnej strukturze aplikacji do układania planu lekcji, umożliwiając tworzenie reużywalnych elementów takich jak nawigacja.
+
+        \subsubsection{Warstwa serwerowa}
+            Wybór Pythona jako głównego języka programowania dla całego systemu był decyzją, podyktowaną koniecznością sprawnej integracji modułu optymalizacyjnego z warstwą aplikacji webowej.
+            Implementacja algorytmu generowania planu lekcji w Pythonie umożliwiła wykorzystanie pakietów optymalizacyjnych Google OR-Tools oraz biblioteki NumPy, eliminując potrzebę tworzenia skomplikowanych interfejsów międzyjęzykowych.
+            
+            Wybór Django~\cite{django} jako frameworka backendowego został dokonany po analizie alternatywnego rozwiązania w Pythonie --- FastAPI.
+            Pomimo że FastAPI oferuje wydajność i nowoczesne funkcje, Django zapewnia kompleksowe podejście, które jest lepiej dostosowane do złożonych aplikacji webowych.
+            Moje wcześniejsze doświadczenie z Django pozwoliło na efektywną pracę oraz sprawne wykorzystanie technik ORM (ang. \textit{Object-relational mapping}).
+            Dodatkowo, skalowalność Django i jego bezpieczeństo zapewniają solidne fundamenty dla aplikacji, która może ewoluować w przyszłości.
+
+        \subsubsection{Baza danych}
+            PostgreSQL został wybrany jako system zarządzania bazą danych ze względu na jego wsparcie oraz doskonałą integrację z Django.
+            Kluczowym czynnikiem była kompatybilność z biblioteką django-tenants, która umożliwia przyszłą implementację architektury opisanej w dokumentacji~\cite{djangotenants}.
+            Ta funkcjonalność pozwoli w przyszłości na łatwe dodanie obsługi wielu niezależnych użytkowników lub instytucji w obrębie pojedynczej instancji aplikacji.
+            Dodatkowo, wsparcie dla niestandardowych typów danych, między innymi JSON, w PostgreSQL idealnie odpowiada potrzebom przechowywania skomplikowanych struktur danych, takich jak macierze dostępności nauczycieli czy konfiguracje bloków przedmiotów.
+
+        \subsubsection{Moduł optymalizacyjny}
+            Ze względu na prostotę integracji z backendem aplikacji użyłem języka programowania Python.
+            Otwarta natura narzędzia Google OR-Tools oraz jego wygodne API w Pythonie skłoniło mnie do decyzji przeciwko CPLEX i Gurobi.
+
     \subsection{Implementacja bazy danych w Django}
-    \subsection{Implementacja API w Django}
-    \subsection{Implementacja interfejsu w React}
+        Technika ORM stosowana w Django oferuje intuicyjny sposób definiowania relacji między modelami.
+        
+        Relacje wiele-do-jednego są definiowanę klasą \verb|ForeignKey(to, on_delete, **options)|, gdzie parametr \verb|on_delete| określa zachowanie przy usuwaniu powiązanych rekordów.
+        Relacje wiele-do-wielu implementuje się za pomocą klasy \verb|ManyToManyField|, która automatycznie generuje niezbędne tabele pośredniczące w bazie danych.
+
+        Każda tabela w systemie, z wyjątkiem automatycznie generowanych tabel dla relacji wiele-do-wielu, jest definiowana przez dedykowaną klasę w pliku \verb|models.py|. 
+        Poniżej przedstawiłem przykładowe implementacje wybranych modeli.
+
+        \subsubsection{Tabela sal}
+            \begin{lstlisting}[language=Python]
+class Room(models.Model):
+    pool = models.ForeignKey(RoomPool, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    compatible_subjects = models.ManyToManyField(Subject)
+            \end{lstlisting}
+
+        \subsubsection{Tabela zbiorów sal}
+            \begin{lstlisting}[language=Python]
+class RoomPool(models.Model):
+    name = models.CharField(max_length=255)
+            \end{lstlisting}
+        
+        \subsubsection{Tabela wymagań głównych}
+            \begin{lstlisting}[language=Python]
+class Requirement(models.Model):
+    req_set = models.ForeignKey(
+        RequirementSet, on_delete=models.CASCADE
+    )
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    group = models.ForeignKey(
+        StudentGroup, on_delete=models.CASCADE
+    )
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    hours = models.PositiveIntegerField()
+            \end{lstlisting}
+
+        Analogiczna implementacja dla reszty tabel opisanych w~\ref{subsection:projekt_bazy_danych}.
+
+    \subsection{Implementacja API}
+        Warstwa API została zaimplementowana z wykorzystaniem Django REST Framework --- elastycznego zestawu narzędzi do budowy interfejsów REST w Django.
+        Znacząco przyspieszyło to proces rozwijania aplikacji poprzez dostarczenie gotowych komponentów do obsługi operacji CRUD, walidacji danych, autentykacji i serializacji.
+        Jedną z kluczowych zalet frameworka są automatyczne widoki \verb|ModelViewSet|, które generują kompletny zestaw endpointów dla modelu na podstawie minimalnej konfiguracji, eliminując konieczność ręcznego implementowania rutynowych operacji.
+        Takie widoki są również modyfikowalne, co pozwala na uwzględnienie niestandardowych przypadków, takich jak tworzenie wielu wymagań głównych na raz w celu poprawienia wydajności, z relatywną łatwością.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1.0\textwidth]{images/django_api_overview.png}
+            \caption{Automatycznie wygenerowana lista endpointów stworzonych przy użyciu \mbox{ModelViewSet}}\label{fig:api_default_router}
+        \end{figure}
+
+    \subsection{Implementacja interfejsu webowego}
+        Komponentowa architektura Reacta pozwoliła na zbudowanie modularnego interfejsu, gdzie poszczególne widoki (takie jak edycja wymagań, konfiguracja zasobów czy podgląd planów) zostały wydzielone jako niezależne komponenty, które w połączeniu z komponentem nawigacji tworzą konkretne strony.
+        Połączenie z backendem realizowane jest poprzez zdefiniowane powyżej API, zapewniając płynną komunikację między warstwą interfejsu a warstwą serwerową.
+
+        \newpage
+        \subsubsection{Nawigacja}
+            Po lewej widzimy nazwę aplikacji, na środku nazwę strony na której znajduje się użytkownik (w celach pokazowych ,,Page''), a po prawej widzimy różne podstrony aplikacji, gdzie ,,Upload Requirements'' rozwija się, pozwalając użytkownikowi na przejście do konkretnej strony wprowadzania wymagań.
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.9\textwidth]{images/strona/nawigacja.png}
+                \caption{Nawigacja interfejsu webowego}
+            \end{figure}
+
+        \subsubsection{Strona główna}
+            Strona główna pozwala na bezpośrednie przejście do widoku przeglądania planów lekcji, generowania nowych planów, bądź wprowadzania wymagań głównych.
+            W widoku klas widać nauczyciela z którym jest lekcja, a w widoku nauczyciela widać klasę.
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.9\textwidth]{images/strona/strona_glowna.png}
+                \caption{Strona główna interfejsu webowego}
+            \end{figure}
+
+        \subsubsection{Podgląd planów lekcji}
+            Widok planów lekcji z perspektywy klas oraz nauczyciela.
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.9\textwidth]{images/strona/plan_nauczyciel.png}
+                \caption{Podgląd planu z perspektywy nauczyciela}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.9\textwidth]{images/strona/plan_klasa.png}
+                \caption{Podgląd planu z perspektywy klasy}
+            \end{figure}
+
+        \subsubsection{Widok generowania planów lekcji}
+            Widok pozwalający użytkownikowi na wpisanie liczby generacji do wygenerowania planu lekcji.
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.9\textwidth]{images/strona/generowanie.png}
+                \caption{Widok generowania planu lekcji}
+            \end{figure}
+
+        \subsubsection{Widoki wprowadzania zasobów}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.9\textwidth]{images/strona/przedmioty.png}
+                \caption{Widok dodawania przedmiotów}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.9\textwidth]{images/strona/nauczyciele.png}
+                \caption{Widok dodawania nauczycieli}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.9\textwidth]{images/strona/sale.png}
+                \caption{Widok dodawania sal}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.9\textwidth]{images/strona/klasy.png}
+                \caption{Widok dodawania klas}
+            \end{figure}
+
+        \subsubsection{Widok wprowadzania wymagań głównych}
+            Widok wprowadzania wymagań głównych, który przypomina arkusz kalkulacyjny pokazany w~\ref{fig:excel_wymagania}.
+            Górny wiersz przewija się razem ze stroną.
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.9\textwidth]{images/strona/wymagania_glowne_1.png}
+                \vspace{1em}
+                \includegraphics[width=0.9\textwidth]{images/strona/wymagania_glowne_2.png}
+                \caption{Widok dodawania wymagań głównych}
+            \end{figure}
+
+        \subsubsection{Widok wprowadzania dostępności nauczycieli}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.9\textwidth]{images/strona/dostepnosc.png}
+                \caption{Widok wprowadzania dostępności nauczycieli}
+            \end{figure}
+
+        \subsubsection{Widok wprowadzania bloków przedmiotów}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.9\textwidth]{images/strona/bloki.png}
+                \caption{Widok dodawania bloków przedmiotów}
+            \end{figure}
+
+    \newpage
     \subsection{Integracja z algorytmem}
+        Dzięki adekwatnemu wyborowi technologii, proces integracji modułu optymalizacyjnego z warstwą serwerową został znacząco uproszczony.
+        Zaimplementowałem dedykowany endpoint, który przyjmuje żądania typu POST zawierające parametry konfiguracyjne algorytmu, w tym liczbę generacji dla algorytmu ewolucyjnego oraz ID zbioru wymagań.\\
+        Proces generowania planu lekcji przebiega według następującego schematu:
+        \begin{enumerate}
+            \item Pobranie i walidacja danych wejściowych z żądania.
+            \item Wczytanie odpowiedniego zestawu ograniczeń i wymagań z bazy danych.
+            \item Uruchomienie trójetapowego algorytmu optymalizacyjnego z przekazanymi parametrami.
+            \item Transformacja wyników algorytmu do przypisań lekcyjnych.
+            \item Utworzenie nowego rekordu planu lekcji w bazie danych.
+            \item Zapisanie wygenerowanych przypisań (lekcji) w powiązaniu z utworzonym planem.
+            \item Zwrócenie odpowiedzi zawierającej status operacji.
+        \end{enumerate}
+
+
+        % Dzięki adekwatnemu wyborze technologii proces integracji modułu optymalizacyjnego z warstwą serwerową był prosty.
+        % Stworzyłem endpoint do którego interfejs webowy może wysyłać zapytanie typu POST z wartością liczbową mówiącą i liczbie generacji.
+        % Cały proces można opisać w następujących krokach:
+        % \begin{enumerate}
+        %     \item Uruchom algorytm z odpowiednimi ograniczeniami podanymi w zapytaniu
+        %     \item Przetwórz wynik algorytmu na przypisania
+        %     \item Stwój nowy plan lekcji
+        %     \item Zapisz przypisania w stworzonym planie lekcji
+        %     \item Zapisz plan lekcji i przypisania (lekcje) w bazie danych
+        %     \item Zwróć wiadomość o sukcesie bądź ewentualnych błędach
+        % \end{enumerate}

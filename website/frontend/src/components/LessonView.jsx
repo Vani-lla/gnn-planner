@@ -10,6 +10,7 @@ export default function LessonView() {
     const [filteredLessons, setFilteredLessons] = useState([]);
     const [selectedGroup, setSelectedGroup] = useState("");
     const [selectedTeacher, setSelectedTeacher] = useState("");
+    const [showTeacher, setshowTeacher] = useState(true);
 
     // Mapping of day names to integers
     const dayMapping = {
@@ -94,6 +95,7 @@ export default function LessonView() {
         console.log(`Selected Group: ${groupId}`); // Log group selection
         setSelectedGroup(groupId);
         setSelectedTeacher(""); // Deselect teacher
+        setshowTeacher(true);
     };
 
     // Handle teacher selection
@@ -101,6 +103,7 @@ export default function LessonView() {
         console.log(`Selected Teacher: ${teacherId}`); // Log teacher selection
         setSelectedTeacher(teacherId);
         setSelectedGroup(""); // Deselect group
+        setshowTeacher(false);
     };
 
     return (
@@ -182,7 +185,7 @@ export default function LessonView() {
                                                 <div key={index} className={styles.lessonCard}>
                                                     <div className={styles.lessonTitle}>{lesson.subject.name}</div>
                                                     <div className={styles.lessonMeta}>
-                                                        <span>{lesson.teacher.name}</span>
+                                                        <span>{showTeacher ? lesson.teacher.name: lesson.group.name}</span>
                                                         <span>{lesson.room.name}</span>
                                                     </div>
                                                 </div>

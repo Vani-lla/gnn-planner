@@ -37,7 +37,7 @@
     border: 2px solid rgba(252, 163, 17, 0.5); /* Semi-transparent orange border */
     border-radius: 10px; /* Slightly rounded corners for a modern look */
     transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
-    width: 200px; /* Fixed width for uniform button size */
+    width: 250px; /* Fixed width for uniform button size */
     text-align: center; /* Center text inside the button */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
