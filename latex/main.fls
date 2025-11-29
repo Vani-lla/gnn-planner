@@ -152,6 +152,8 @@ INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlib
 INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
 INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
 INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
+INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
+INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
 INPUT /usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
 INPUT /usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
 INPUT /usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty
@@ -581,7 +583,6 @@ INPUT /usr/share/texmf-dist/tex/latex/lm/ts1lmr.fd
 INPUT /usr/share/texmf-dist/tex/latex/lm/ts1lmr.fd
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ts1-lmr12.tfm
 INPUT /usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc
-INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmri12.tfm
 INPUT ./chapters/related-work.tex
 INPUT ./chapters/related-work.tex
 INPUT chapters/related-work.tex
@@ -590,6 +591,7 @@ INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmr10.tfm
 INPUT /usr/share/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmbx12.tfm
 INPUT /usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc
+INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmri12.tfm
 INPUT /usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmr8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmr6.tfm
@@ -655,6 +657,11 @@ INPUT /usr/share/texmf-dist/tex/latex/microtype/mt-euf.cfg
 INPUT /usr/share/texmf-dist/tex/latex/microtype/mt-euf.cfg
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm7.tfm
+INPUT ./images/interval_vars.png
+INPUT ./images/interval_vars.png
+INPUT ./images/interval_vars.png
+INPUT ./images/interval_vars.png
+INPUT ./images/interval_vars.png
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmbx8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/rm-lmbx12.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/rm-lmbx8.tfm
@@ -702,11 +709,6 @@ INPUT ./images/diagramy/diagram_db.png
 INPUT ./images/diagramy/diagram_db.png
 INPUT ./images/diagramy/diagram_db.png
 INPUT ./images/diagramy/diagram_db.png
-INPUT ./images/interval_vars.png
-INPUT ./images/interval_vars.png
-INPUT ./images/interval_vars.png
-INPUT ./images/interval_vars.png
-INPUT ./images/interval_vars.png
 INPUT /usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texmf-dist/tex/latex/listings/lstlang1.sty

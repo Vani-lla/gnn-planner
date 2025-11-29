@@ -1,6 +1,70 @@
 \Chapter{Wnioski i perspektywy rozwoju}\label{chapter:conclusions}
-Zakończenie, podsumowuje najważniejsze wnioski, podaje możliwości dalszego rozwinięcia wykonanych prac i wskazuje obszar potencjalnego zastosowania pracy. Rezultaty pracy mają charakter poznawczy, mogą mieć charakter użytkowy. Należy dokonać analizy uzyskanych wyników. Rezultaty powinny charakteryzować się oryginalnością, a nawet w pewnym stopniu nowatorstwem. Praca zawiera (\dots). Zostało pokazane (\dots). Eksperymenty wykazały (\dots). Tu piszemy wnioski i obserwacje.
+    \section{Problemy rozwiązania}
+        Choć system realizuje wszystkie cele, które założyłem w tej pracy, jego obecna wersja posiada ograniczenia, które mogą utrudniać wykorzystanie w realnej szkole.
+
+        Pierwszym problemem jest obsługa bloków lekcyjnych obejmujących tylko część klasy.
+        W praktyce takie zajęcia powinny być umieszczane wyłącznie na początku lub końcu dnia, aby uniknąć powstawania okienek dla uczniów.
+        System nie narzuca jeszcze tego warunku, co może prowadzić do niepożądanych okienek.
+
+        Uproszczony jest również mechanizm przypisywania sal.
+        Obecnie wykorzystuje on tzw. białe listy obsługiwanych przedmiotów, co jest rozwiązaniem poprawnym, ale mało elastycznym.
+        W wielu sytuacjach potrzebne jest rozróżnienie między salą ,,dozwoloną'' a ,,preferowaną''.
+        Przykładowo nic nie stoi na przeszkodzie, aby w sytuacji w której brakuje sal zajęcia języka polskiego odbyły się w sali do matematyki; natomiast zajęcia wychowania fizycznego mogą odbyć się tylko i wyłącznie w dedykowanych salach.
+
+        Kolejne ograniczenie dotyczy dostępności nauczycieli, które są definiowane w skali dnia.
+        W rzeczywistości dostępności powinny być opisane per slot czasowy.
+
+        Ograniczenia dotyczą również samego procesu generowania planów. 
+        Algorytm ewolucyjny stosowany do alokacji bloków lekcyjnych pomiędzy dniami działa poprawnie, jednak jego natura heurystyczna powoduje, że nie gwarantuje optymalności.
+
+        Ponadto generowanie planów lekcji jest realizowane lokalnie (niezależnie dla każdego dnia) co redukuje złożoność obliczeniową, ale może prowadzić do utraty globalnej (tygodniowej) optymalności.
+    
+    \section{Perspektywy rozwoju}
+        Dalszy rozwój aplikacji powinien w pierwszej kolejności skoncentrować się na rozwiązaniu problemów zidentyfikowanych w poprzedniej sekcji.
+        Ich eliminacja jest kluczowa, aby system mógł zostać wykorzystany w realnych warunkach szkolnych.
+        
+        Jednym z naturalnych kierunków rozbudowy jest ponowna analiza sposobu przydzielania lekcji do dni tygodnia.
+        Obecne podejście heurystyczne jest szybkie, jednak zastosowanie metod programowania całkowitoliczbowego mogłoby zapewnić rozwiązania bliższe optymalnym, szczególnie przy bardziej wymagających konfiguracjach danych.
+
+        Warto również rozszerzyć model sal lekcyjnych poprzez wprowadzenie funkcji kar i nagród. Pozwoliłoby to nie tylko uwzględniać twarde ograniczenia, ale też modelować preferencje.
+        Przykładowo ograniczyć korzystanie z nieoptymalnych pomieszczeń lub promować nowoczesne sale.
+
+        Kolejnym istotnym elementem jest zmiana sposobu reprezentacji dostępności nauczycieli. Zamiast ograniczeń na poziomie dni, powinny być one definiowane w skali slotów czasowych.
+        Integracja takich informacji w ostatnim etapie algorytmu umożliwi bardziej realistyczne planowanie.
+
+        Wartym analizy kierunkiem rozwoju jest również dodanie czwartego etapu generowania planu lekcji.
+        Mógłby on polegać na zebraniu dziennych harmonogramów i potraktowaniu ich jako punktu wyjścia dla solwera programowania liniowego z ograniczeniami.
+        Ponieważ bazowe rozwiązanie jest już poprawne, dodatkowa optymalizacja nie powinna znacząco zwiększyć czasu obliczeń, a może wyraźnie poprawić globalną jakość tygodniowego planu.
+        
+        Poza stroną algorytmiczną, dalsze prace wymagają rozbudowy warstwy użytkowej.
+        System powinien obsługiwać wielu użytkowników, co wymaga implementacji kont opartych o przykładowo adresy e-mail i hasła.
+        Pozwoliłoby to na wdrożenie aplikacji na rynku.
+        
+        Interfejs aplikacji również powinien zostać znacząco rozwinięty.
+        Obecna wersja skupia się na funkcjonalności, natomiast pełnoprawne wdrożenie wymaga bardziej intuicyjnego, przejrzystego i przyjaznego użytkownikowi UI.
+        W szczególności konieczne jest zapewnienie narzędzi do ręcznej edycji wygenerowanego planu --- poprawy sal, wymiany pojedynczych lekcji czy reorganizacji fragmentów tygodnia.
+        Tego typu funkcjonalność jest niezbędna, ponieważ nawet najlepszy algorytm nie jest w stanie uwzględnić wszystkich specyficznych preferencji i wyjątków charakterystycznych dla danej szkoły.
+
+    \section{Wnioski}
+        Zastosowany algorytm zachłanny do generowania bloków lekcyjnych okazał się trafnym wyborem.
+        Jego prostota znacząco ułatwia konstrukcję ograniczeń i eliminuje potrzebę stosowania bardziej złożonych metod.
+        Pozwala również na pojedyncze wywołanie funkcji \verb|NoOverlap| dla danej klasy, ponieważ bloki lekcyjne, w przeciwieństwie do pojedynczych zajęć, nie mogą na siebie zachodzić (przykłądowo francuski i niemiecki).
+        Dzięki temu proces tworzenia harmonogramu jest bardziej przejrzysty i obliczeniowo efektywny.
+
+        Uzyskany plan lekcji, choć wymagałby pewnych ręcznych korekt, jest wystarczająco bliski rozwiązaniu praktycznemu. 
+        Podejście które przedstawiłem, oparte na podziale problemu na trzy mniejsze podproblemy, okazało się efektywne przy dostępnej strukturze danych wejściowych. 
+        Koncepcja ta jest na tyle dobrze uzasadniona i elastyczna, że z powodzeniem może być stosowana również w przyszłych działaniach i projektach.
+
+        Praca zawiera propozycję wieloetapowego modelu generowania planu lekcji, opartego na łączeniu metod zachłannych oraz heurystycznych.
+        Zostało pokazane, że takie połączenie umożliwia uzyskanie poprawnych rozwiązań mimo złożonych zależności między zajęciami.
+        Eksperymenty wykazały, że rozdzielenie problemu na trzy podproblemy znacząco poprawia efektywność obliczeń i upraszcza formułowanie ograniczeń.
+        
+
+Zakończenie, podsumowuje najważniejsze wnioski, podaje możliwości dalszego rozwinięcia wykonanych prac i wskazuje obszar potencjalnego zastosowania pracy.
+Rezultaty pracy mają charakter poznawczy, mogą mieć charakter użytkowy.
+Należy dokonać analizy uzyskanych wyników.
+Rezultaty powinny charakteryzować się oryginalnością, a nawet w pewnym stopniu nowatorstwem.
+Praca zawiera (\dots). Zostało pokazane (\dots). Eksperymenty wykazały (\dots). 
+Tu piszemy wnioski i obserwacje.
 
 Widzimy, że (\dots). Z tego powodu przyszła praca powinna obejmować (\dots). 
-
-\textbf{Na pewno będę miał sporo rzeczy, które wiem, że będę chciał poprawić w przyszłości.}

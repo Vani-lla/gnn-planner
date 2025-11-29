@@ -307,6 +307,40 @@
         Eksperymenty wykazały, że przy zastosowaniu zbyt wysokich współczynników kary, proces uczenia nie przynosił rezultatów. 
         Zbyt niskie natomiast powodowały, że model preferował optymalizację nagrody za grupowanie lekcji kosztem naruszenia ograniczeń.
 
+    \subsection{JSSP}
+        Kolejnym podejściem było wykorzystanie metod opisanych w~\ref{section:jssp}.
+        Spośród istniejących rozwiązań szczególnie inspirujące okazało się podejście zaprezentowane w dokumentacji Google OR-Tools~\cite{googleortoolsjssp}, w którym operacje reprezentowane są za pomocą zmiennych interwałowych.
+        Mechanizm ten oferuje znacznie większą elastyczność niż model binarny przedstawiony w podrozdziale~\ref{subsection:podejscie_zerojedynkowe}, a równocześnie pozwala zachować przejrzystość definicji ograniczeń.
+                    
+        \begin{figure}[ht]
+            \centering
+            \includegraphics[width=0.9\textwidth]{images/interval_vars.png}
+            \caption{Wizualizacja rozwiązania klasycznego problemu JSSP z wykorzystaniem zmiennych interwałowych~\cite{googleortoolsjssp}}\label{fig:intervals}
+        \end{figure}
+
+        \subsubsection{Zmienne interwałowe}
+            \begin{itemize}
+                \item W JSSP: $\text{IntervalVar}(start, duration, end)$.
+                \item W planie lekcji: $\text{IntervalVar}(h_i, v_i, h_i + v_i)$, gdzie $h_i$ to slot czasowy, a $v_i$ to długość trwania lekcji.
+            \end{itemize}
+
+        \subsubsection{Ograniczenie NoOverlap}
+            \begin{itemize}
+                \item W JSSP: $\text{AddNoOverlap}([\verb|interval|_1, \dots, \verb|interval|_n])$ dla operacji na tej samej maszynie~\cite{googleortoolsoverlap}.
+                \item W planie lekcji: $\text{AddNoOverlap}$ zastosowane dla:
+                \begin{itemize}
+                    \item Wszystkich lekcji tej samej klasy
+                    \item Wszystkich lekcji tego samego nauczyciela  
+                    \item Wszystkich lekcji w tej samej sali
+                \end{itemize}
+            \end{itemize}
+
+        \subsubsection{Optional Intervals}
+            Rozszerzenie o interwały opcjonalne pozwala na modelowanie przypisań sal do nauczycieli w blokach lekcyjnych:
+            \[ \text{OptionalIntervalVar}(start, duration, end, presence) \]
+            Takie interwały są brane pod uwagę w ograniczeniach tylko i wyłącznie, jeśli $presence = 1$;
+            Oznaczna to, że interwał jest ,,aktywny''.
+
 \section{Dekompozycja problemu i wybór technik}
     W niniejszej pracy zaadaptowałem oraz rozwinąłem fundamentalną ideę przedstawioną w podrozdziale~\ref{section:podejscie_iteracyjne}, dostosowując ją do specyfiki problemu układania planu lekcji.
     Zdecydowałem się na podział zadania na trzy mniejsze, kolejno realizowane etapy, z których każdy rozwiązuje wyraźnie wydzielony podproblem o niższej złożoności obliczeniowej.
@@ -1173,19 +1207,5 @@
         
         Proces ten powtarzamy dla wszystkich dni tygodnia, tworząc kompletny plan lekcji $\mathcal{Z} = \bigcup_{d=1}^5 \mathcal{Z}_d$ spełniający wszystkie ograniczenia i optymalizujący funkcję celu.
 
-\section{Wyniki}
-    \begin{itemize}
-        \item Dlaczego moje wyniki są wspaniałe
-        \item Średni czas potrzebny na generację planu
-    \end{itemize}
-
-    \subsection{Statystyki planu}
-        \begin{itemize}
-            \item Ilość okienek
-            \item Rozkład lekcji w tygodniu
-            \item Lekcje początkujące/kończące
-            \item Statystyki nauczycieli, godziny w szkole do godzin lekcyjnych (płatnych)
-        \end{itemize}
-
-    \subsection{Porównanie z ręcznie ułożonym planem}
-        Porównanie z planem, który szkoła ułożyła ręcznie.
+    \subsection{Przykładowe wyniki}
+        abc

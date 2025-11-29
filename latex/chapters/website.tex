@@ -109,7 +109,387 @@
             \caption{Diagram przypadków użycia}\label{fig:usecases}
         \end{figure}
 
-        \textit{Opis w tabelach}
+        \begin{table}[h!]
+            \centering
+            % \setlength{\tabcolsep}{8pt}
+            \renewcommand{\arraystretch}{1.4}
+            \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
+                \hline
+                \textbf{Identyfikator} & UC01 \\ \hline
+                
+                \textbf{Przypadek użycia} & Zobacz plan lekcji \\ \hline
+                
+                \textbf{Aktor} & Użytkownik \\ \hline
+                
+                \textbf{Cel} & Sprawdzenie wygenerowanych planów \\ \hline
+
+                \multirow{2}{*}{\textbf{\shortstack[l]{Składowe przypadki\\ użycia}}} 
+                & Wybierz widok \\
+                & Wybierz plan lekcji \\ \hline
+
+                \multirow{2}{*}{\textbf{Warunki wstępne}} 
+                & Wprowadzone zasoby: nauczyciele, sale, klasy, przedmioty \\
+                & Przynajmniej jeden wygenerowany plan \\ \hline
+
+                \multirow{1}{*}{\textbf{Stan końcowy}} 
+                & Wyświetlony plan lekcji \\ \hline
+                
+                \multirow{4}{*}{\textbf{Scenariusz}}
+                & 1. Użytkownik przechodzi w widok przeglądania planów lekcji \\
+                & 2. Użytkownik wybiera plan lekcji \\
+                & 3. Użytkownik wybiera widok \\
+                & 4. System wyświetla odpowiedni plan lekcji z danej perspektywy \\ \hline
+            \end{tabular}
+            \caption{Przypadek użycia UC01}
+        \end{table}
+
+        \begin{table}[h!]
+            \centering
+            % \setlength{\tabcolsep}{8pt}
+            \renewcommand{\arraystretch}{1.4}
+            \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
+                \hline
+                \textbf{Identyfikator} & UC02 \\ \hline
+                
+                \textbf{Przypadek użycia} & Wybierz widok \\ \hline
+                
+                \textbf{Aktor} & Użytkownik \\ \hline
+                
+                \textbf{Cel} & Wybranie perspektywy oglądania planu lekcji \\ \hline
+
+                \multirow{2}{*}{\textbf{Warunki wstępne}} 
+                & Wprowadzone zasoby: nauczyciele, sale, klasy, przedmioty \\
+                & Przynajmniej jeden wygenerowany plan \\ \hline
+
+                \multirow{2}{*}{\textbf{Stan końcowy}} 
+                & Wybrany nauczyciel bądź klasa \\
+                & Plan wyświetlony z perspektywy wygranej klasy bądź nauczyciela \\ \hline
+                
+                \multirow{6}{*}{\textbf{Scenariusze}}
+                & 1a. Użytkownik rozwija listę dostępnych nauczycieli \\
+                & 2a. Użytkownik wybiera konkretnego nauczyciela \\
+                & 3a. System wyświetla wybranego nauczyciela \\ \cline{2-2}
+                & 1b. Użytkownik rozwija listę dostępnych klas \\
+                & 2b. Użytkownik wybiera konkretną klasę \\
+                & 3b. System wyświetla wybraną klasę \\ \hline
+            \end{tabular}
+            \caption{Przypadek użycia UC02}
+        \end{table}
+
+        \begin{table}[h!]
+            \centering
+            % \setlength{\tabcolsep}{8pt}
+            \renewcommand{\arraystretch}{1.4}
+            \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
+                \hline
+                \textbf{Identyfikator} & UC03 \\ \hline
+                
+                \textbf{Przypadek użycia} & Wybierz plan lekcji \\ \hline
+                
+                \textbf{Aktor} & Użytkownik \\ \hline
+                
+                \textbf{Cel} & Wybranie planu lekcji do podglądu \\ \hline
+
+                \multirow{2}{*}{\textbf{\shortstack[l]{Składowe przypadki\\ użycia}}} 
+                & Wybierz zbiór ograniczeń \\
+                & Wybierz liczbę generacji \\ \hline
+
+                \multirow{2}{*}{\textbf{Warunki wstępne}} 
+                & Wprowadzone zasoby: nauczyciele, sale, klasy, przedmioty \\
+                & Przynajmniej jeden wygenerowany plan \\ \hline
+
+                \multirow{2}{*}{\textbf{Stan końcowy}} 
+                & Wybrany plan lekcji \\
+                & Możliwość wybrania w systemie widoku \\ \hline
+                
+                \multirow{4}{*}{\textbf{Scenariusz}}
+                & 1. Użytkownik rozwija listę dostępnych planów lekcji \\
+                & 2. Użytkownik wybiera konkretnego plan lekcji \\
+                & 3. System wyświetla nazwę wybranego planu lekcji \\
+                & 4. System umożliwia wybranie widoku \\ \hline
+            \end{tabular}
+            \caption{Przypadek użycia UC03}
+        \end{table}
+
+        \begin{table}[h!]
+            \centering
+            % \setlength{\tabcolsep}{8pt}
+            \renewcommand{\arraystretch}{1.4}
+            \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
+                \hline
+                \textbf{Identyfikator} & UC04 \\ \hline
+                
+                \textbf{Przypadek użycia} & Generuj nowy plan lekcji \\ \hline
+                
+                \textbf{Aktor} & Użytkownik \\ \hline
+                
+                \textbf{Cel} & Wygenerowanie nowego planu lekcji na podstawie wybranych ograniczeń \\ \hline
+
+                \multirow{4}{*}{\textbf{Warunki wstępne}} 
+                & Wprowadzone zasoby: nauczyciele, sale, klasy, przedmioty \\
+                & Wprowadzone wymagania główne \\
+                & Wprowadzone dostępności nauczycieli \\
+                & Wprowadzone bloki przedmiotów \\ \hline
+
+                \multirow{1}{*}{\textbf{Stan końcowy}}
+                & Wyświetlony komunikat o sukcesie operacji \\ \hline
+
+                \multirow{4}{*}{\textbf{Scenariusz}}
+                & 1. Użytkownik wybiera zestaw ograniczeń \\
+                & 2. Użytkownik wpisuje liczbę generacji \\
+                & 3. Użytkownik wybiera opcję generowania planu \\
+                & 4. System generuje plan \\
+                & 5. System wysyła powiadomienie o zakończeniu procesu \\ \hline
+            \end{tabular}
+            \caption{Przypadek użycia UC04}
+        \end{table}
+
+        \begin{table}[h!]
+            \centering
+            % \setlength{\tabcolsep}{8pt}
+            \renewcommand{\arraystretch}{1.4}
+            \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
+                \hline
+                \textbf{Identyfikator} & UC05 \\ \hline
+                
+                \textbf{Przypadek użycia} & Wybierz zbiór ograniczeń \\ \hline
+                
+                \textbf{Aktor} & Użytkownik \\ \hline
+                
+                \textbf{Cel} & Wybranie zbioru ograniczeń służącego do wygenerowania nowego planu lekcji \\ \hline
+
+                \multirow{1}{*}{\textbf{Warunki wstępne}} 
+                & Przynajmniej jeden istniejący zbiór ograniczeń \\ \hline
+
+                \multirow{1}{*}{\textbf{Stan końcowy}} 
+                & Wybrany zestaw ograniczeń \\ \hline
+                
+                \multirow{3}{*}{\textbf{Scenariusz}}
+                & 1. Użytkownik rozwija listę dostępnych zestawów ograniczeń \\
+                & 2. Użytkownik wybiera konkretny zestaw ogarniczeń \\
+                & 3. System wyświetla nazwę wybranego zestawu ograniczeń\\ \hline
+            \end{tabular}
+            \caption{Przypadek użycia UC05}
+        \end{table}
+
+        \begin{table}[h!]
+            \centering
+            % \setlength{\tabcolsep}{8pt}
+            \renewcommand{\arraystretch}{1.4}
+            \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
+                \hline
+                \textbf{Identyfikator} & UC06 \\ \hline
+                
+                \textbf{Przypadek użycia} & Wpisz liczbę generacji \\ \hline
+                
+                \textbf{Aktor} & Użytkownik \\ \hline
+                
+                \textbf{Cel} & Wpisanie liczby generacji służącej do wygenerowania planu lekcji \\ \hline
+
+                \multirow{1}{*}{\textbf{Warunki wstępne}} 
+                & Przynajmniej jeden istniejący zbiór ograniczeń \\ \hline
+
+                \multirow{1}{*}{\textbf{Stan końcowy}} 
+                & Widoczna wpisana liczba generacji \\
+                & Możliwa opcja wygenerowania planu lekcji \\ \hline
+                
+                \multirow{3}{*}{\textbf{Scenariusz}}
+                & 1. Użytkownik wpisuje liczbę generacji \\
+                & 2. System wyświetla wpisaną liczbę \\
+                & 3. System umożliwia wybranie opcji generowania planu lekcji \\ \hline
+            \end{tabular}
+            \caption{Przypadek użycia UC06}
+        \end{table}
+
+        \begin{table}[h!]
+            \centering
+            % \setlength{\tabcolsep}{8pt}
+            \renewcommand{\arraystretch}{1.4}
+            \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
+                \hline
+                \textbf{Identyfikator} & UC07 \\ \hline
+                
+                \textbf{Przypadek użycia} & Wybierz zasób bądź ograniczenie do przeglądania \\ \hline
+                
+                \textbf{Aktor} & Użytkownik \\ \hline
+                
+                \textbf{Cel} & Wybranie zasoby bądź ograniczenia do przeglądania, edytowania bądź wprowadzania \\ \hline
+
+                \multirow{2}{*}{\textbf{\shortstack[l]{Składowe przypadki\\ użycia}}} 
+                & Wybierz zbiór danego zasobu bądź ograniczenia \\
+                & Stwórzy nowy zbiór danego zasobu bądź ograniczenia \\ \hline
+
+                \multirow{1}{*}{\textbf{Warunki wstępne}} 
+                & --- \\ \hline
+
+                \multirow{1}{*}{\textbf{Stan końcowy}} 
+                & Widoczny widok zasobu bądź ograniczenia \\ \hline
+                
+                \multirow{7}{*}{\textbf{Scenariusz}}
+                & 1. Użytkownik rozwija listę dostępnych zasobów i ograniczeń \\
+                & 2. Użytkownik wybiera jeden z nich \\
+                & 3. System wyświetla widok danego zasobu \\
+                & 4a. Użytkownik wybiera zbiór danego zasobu bądź ograniczenia \\ \cline{2-2}
+                & 4b. Użytkownik tworzy nowy zbiór danego zasobu bądź ograniczenia \\ \cline{2-2}
+                & 5a. Użytkownik importuje dane z pliku \\ \cline{2-2} 
+                & 5b. Użytkownik edytuje dane \\ \cline{2-2}
+                & 5c. Użytkownik wprowadza dane ręcznie \\ \hline
+            \end{tabular}
+            \caption{Przypadek użycia UC07}
+        \end{table}
+
+        \begin{table}[h!]
+            \centering
+            % \setlength{\tabcolsep}{8pt}
+            \renewcommand{\arraystretch}{1.4}
+            \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
+                \hline
+                \textbf{Identyfikator} & UC08 \\ \hline
+                
+                \textbf{Przypadek użycia} & Wybierz zbiór danego zasobu bądź ograniczenia \\ \hline
+                
+                \textbf{Aktor} & Użytkownik \\ \hline
+                
+                \textbf{Cel} & Wybranie zbioru zasobu bądź ograniczenia do wglądu \\ \hline
+
+                \multirow{1}{*}{\textbf{Warunki wstępne}} 
+                & Przynajmniej jeden istniejący zbiór zasobu bądź ograniczenia \\ \hline
+
+                \multirow{2}{*}{\textbf{Stan końcowy}} 
+                & Widoczna nazwa zbioru \\
+                & Widoczny wybrany zbiór zasobów bądź ograniczeń \\ \hline
+                
+                \multirow{3}{*}{\textbf{Scenariusz}}
+                & 1. Użytkownik wpisuje liczbę generacji \\
+                & 2. System wyświetla wpisaną liczbę \\
+                & 3. System umożliwia wybranie opcji generowania planu lekcji \\ \hline
+            \end{tabular}
+            \caption{Przypadek użycia UC08}
+        \end{table}
+
+        \begin{table}[h!]
+            \centering
+            % \setlength{\tabcolsep}{8pt}
+            \renewcommand{\arraystretch}{1.4}
+            \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
+                \hline
+                \textbf{Identyfikator} & UC09 \\ \hline
+
+                \textbf{Przypadek użycia} & Wprowadź ręcznie dane \\ \hline
+
+                \textbf{Aktor} & Użytkownik \\ \hline
+
+                \textbf{Cel} & Ręczne wprowadzenie nowych zasobów bądź ograniczeń \\ \hline
+
+                \multirow{1}{*}{\textbf{Warunki wstępne}} 
+                & Przynajmniej jeden istniejący zbiór zasobu bądź ograniczenia \\ \hline
+
+                \multirow{2}{*}{\textbf{Stan końcowy}} 
+                & Widoczne nowe ograniczenie/zasób \\
+                & Nowe ograniczenie/zasów zapisany w bazie danych \\ \hline
+
+                \multirow{3}{*}{\textbf{Scenariusz}}
+                & 1. Użytkownik wybiera opcję dodania nowego zasobu bądź ograniczenia \\
+                & 2. Użytkownik wpisuje odpowiednie dane \\
+                & 3. Użytkownik zapisuje dane \\
+                & 3. System wyświetla powiadomienie o powodzeniu zapisu \\ \hline
+            \end{tabular}
+            \caption{Przypadek użycia UC09}
+        \end{table}
+
+        \begin{table}[h!]
+            \centering
+            % \setlength{\tabcolsep}{8pt}
+            \renewcommand{\arraystretch}{1.4}
+            \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
+                \hline
+                \textbf{Identyfikator} & UC10 \\ \hline
+
+                \textbf{Przypadek użycia} & Edytuj dane \\ \hline
+
+                \textbf{Aktor} & Użytkownik \\ \hline
+
+                \textbf{Cel} & Edytowanie istniejących danych \\ \hline
+
+                \multirow{1}{*}{\textbf{Warunki wstępne}} 
+                & Przynajmniej jeden istniejący zbiór zasobu bądź ograniczenia \\ \hline
+
+                \multirow{2}{*}{\textbf{Stan końcowy}} 
+                & Widoczne zmiany \\
+                & Zmiany zapisane w bazie danych \\ \hline
+
+                \multirow{3}{*}{\textbf{Scenariusz}}
+                & 1. Użytkownik edytuje wiersz zasobu bądź ograniczenia \\
+                & 2. Użytkownik zapisuje dane \\
+                & 3. System wyświetla powiadomienie o powodzeniu zapisu \\ \hline
+            \end{tabular}
+            \caption{Przypadek użycia UC10}
+        \end{table}
+
+        \begin{table}[h!]
+            \centering
+            % \setlength{\tabcolsep}{8pt}
+            \renewcommand{\arraystretch}{1.4}
+            \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
+                \hline
+                \textbf{Identyfikator} & UC11 \\ \hline
+
+                \textbf{Przypadek użycia} & Importuj dane z pliku \\ \hline
+
+                \textbf{Aktor} & Użytkownik \\ \hline
+
+                \textbf{Cel} & Import danych z pliku txt lub csv \\ \hline
+
+                \multirow{2}{*}{\textbf{Warunki wstępne}} 
+                & Przynajmniej jeden istniejący zbiór zasobu bądź ograniczenia \\ \cline{2-2}
+                & Użytkownik posiada plik we właściwym formacie \\ \hline
+
+                \multirow{2}{*}{\textbf{Stan końcowy}} 
+                & Widoczne dane, które były w pliku \\
+                & Dane zapisane w bazie danych \\ \hline
+
+                \multirow{7}{*}{\textbf{Scenariusz}}
+                & 1a. Użytkownik wybiera opcję wybrania pliku źródłowego  \\
+                & 2a. Użytkownik wybiera i zatwierdza wybrany plik źródłowy \\ \cline{2-2}
+                & 1b. Użytkownik otwiera eksplorator plików \\
+                & 2b. Użytkownik przeciąga i upuszcza wybrany plik źródłowy \\ \cline{2-2}
+                & 3. System wyświetla dane w pliku \\
+                & 4. Użytkownik zapisuje dane \\
+                & 5. System wyświetla powiadomienie o powodzeniu zapisu \\ \hline
+            \end{tabular}
+            \caption{Przypadek użycia UC11}
+        \end{table}
+
+        \begin{table}[h!]
+            \centering
+            % \setlength{\tabcolsep}{8pt}
+            \renewcommand{\arraystretch}{1.4}
+            \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
+                \hline
+                \textbf{Identyfikator} & UC12 \\ \hline
+
+                \textbf{Przypadek użycia} & Stwórz nowy zbiór zasobów bądź ograniczeń \\ \hline
+
+                \textbf{Aktor} & Użytkownik \\ \hline
+
+                \textbf{Cel} & Stworzenie nowego zbioru zasobów bądź ograniczeń \\ \hline
+
+                \multirow{1}{*}{\textbf{Warunki wstępne}} 
+                & --- \\ \hline
+
+                \multirow{2}{*}{\textbf{Stan końcowy}} 
+                & Wybrany zbiór zasobów bądź ograniczeń \\ 
+                & Widoczny nowy zbiór zasobów bądź ograniczeń \\ \hline
+
+                \multirow{5}{*}{\textbf{Scenariusz}}
+                & Użytkownik wpisuje nazwę nowego zbioru zasobów bądź ograniczeń \\
+                & Użytkownik wybiera opcję stworzenia nowego zbioru zasobów bądź ograniczeń \\
+                & System wyświetla powiadomienie o powodzeniu zapisu \\
+                & System wybiera nowy zbiór zasobów bądź ograniczeń \\ \hline
+            \end{tabular}
+            \caption{Przypadek użycia UC12}
+        \end{table}
+    \clearpage
 
     \subsection{Diagramy sekwencji}
         Diagramy sekwencji stanowią kluczowy element modelowania systemu, ukazując sekwencyjny przepływ komunikatów między obiektami w czasie.
@@ -138,6 +518,57 @@
 
 \newpage
 \section{Projekt}
+    \subsection{Architektura systemu}
+        Wybór poprawnej architektury stanowi jedno z pierwszych zadań, które stoi przed projektantem aplikacji.
+        Aby zagwarantować możliwość spełnienia wszystkich wymagań oraz umożliwić dalszy, łatwy rozwój rozwiązania, zdecydowałem się na podzielenie aplikacji na 4 oddzielne komponenty:
+        \begin{enumerate}
+            \item Interfejs użytkownika (\textit{ang.} Graphical User Interface GUI) --- odpowiada za komunikację z użytkownikiem, umożliwiając wygodną obsługę systemu bez konieczności znajomości szczegółów działania jego wewnętrznych mechanizmów.
+            \item Warstwę sewerową --- umożliwia sprawną integrację wszystkich komponentów poprzez interfejs programowania aplikacji (\textit{ang.} Application Programming Interface, API).
+            \item Bazę danych --- przechowywuje wszystkie zasoby, ograniczenia oraz plany lekcji w ustrukturyzowany sposób.
+            \item Moduł optymalizacyjny --- pozwala na generowanie planów lekcji.
+        \end{enumerate}
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[>=stealth, node distance=2cm]
+    
+                % Style of blocks
+                \tikzstyle{block} = [rectangle, draw, minimum width=3cm, minimum height=1.2cm, align=center]
+                \tikzstyle{bigblock} = [rectangle, draw, thick, minimum width=12cm, minimum height=7cm]
+            
+                % System outline
+                \node[bigblock, label=above:{\textbf{System}}] (system) {};
+            
+                % Blocks inside system
+                \node[block] (gui) at ([xshift=-3cm, yshift=1.5cm]system.center) {GUI};
+                \node[block] (api) at ([xshift=3cm, yshift=1.5cm]system.center) {API};
+            
+                \node[block] (db) at ([xshift=3cm, yshift=-1.5cm]system.center) {Baza danych};
+                \node[block] (opt) at ([xshift=-3cm, yshift=-1.5cm]system.center) {Moduł\\optymalizacyjny};
+            
+                % User actor
+                \node (user) [left=4cm of gui] {
+                    \begin{tikzpicture}
+                        \draw (0,0) circle (0.3);
+                        \draw (0,-0.3) -- (0,-1);
+                        \draw (-0.4,-0.6) -- (0.4,-0.6);
+                        \draw (0,-1) -- (-0.4,-1.6);
+                        \draw (0,-1) -- (0.4,-1.6);
+                    \end{tikzpicture}
+                };
+                \node[below=0.1cm of user] {Użytkownik};
+            
+                % Connections
+                \draw[<->, very thick, -latex] (user.east) -- (gui.west) node[midway, above]{};
+                \draw[<->, very thick, -latex] (gui.east) -- (api.west) node[midway, above]{};
+                \draw[<->, very thick, -latex] (api.south) -- (db.north) node[midway, right]{};
+                \draw[<->, very thick, -latex] (api.south west) -- (opt.north east) node[midway, above]{};
+            
+            \end{tikzpicture}
+            \caption{Architektura aplikacji}
+        \end{figure}
+
+
     \subsection{Projekt struktury bazy danych}\label{subsection:projekt_bazy_danych}
         Projekt bazy danych stanowi kluczowy element architektury aplikacji webowej, determinujący jej skalowalność i funkcjonalność. 
         Głównym wyzwaniem projektowym było opracowanie modelu umożliwiającego wielokrotne wykorzystanie tych samych zasobów przy jednoczesnej obsłudze zmieniających się wymagań głównych pomiędzy generowaniami planów lekcji. 
@@ -415,50 +846,12 @@
             Dodatkowo, wsparcie dla niestandardowych typów danych, między innymi JSON, w PostgreSQL idealnie odpowiada potrzebom przechowywania skomplikowanych struktur danych, takich jak macierze dostępności nauczycieli czy konfiguracje bloków przedmiotów.
 
         \subsubsection{Moduł optymalizacyjny}
-            Ze względu na prostotę integracji z backendem aplikacji użyłem języka programowania Python.
-            
-            \subsection{Gotowe rozwiązania}
-                Istnieje wiele istniejących rozwiązań JSSP, jednak szczególnie inspirujące okazało się podejście zaprezentowane w dokumentacji Google OR-Tools~\cite{googleortoolsjssp}, które wykorzystuje zmienne interwałowe do modelowania operacji.
-                
-                \begin{figure}[ht]
-                    \centering
-                    \includegraphics[width=0.9\textwidth]{images/interval_vars.png}
-                    \caption{Wizualizacja rozwiązania klasycznego problemu JSSP z wykorzystaniem zmiennych interwałowych~\cite{googleortoolsjssp}}\label{fig:intervals}
-                \end{figure}
-                Wyraźnie widać te inspiracje w sekcji trzeciej algorytmu dotyczącej solvera CP~(\ref{section:solver}), gdzie zastosowano:
-                \begin{itemize}
-                    \item Reprezentację lekcji jako interwałów czasowych
-                    \item Ograniczenia NoOverlap dla zasobów (nauczyciele, klasy, sale)
-                    \item Optional intervals dla przypisań sal
-                    \item Specjalistyczne ograniczenia ciągłości czasowej
-                \end{itemize}
+            Moduł optymalizacyjny został zaimplementowany w języku Python, co umożliwiło łatwą integrację z warstwą serwerową oraz szybkie prototypowanie rozwiązań.
+            W przypadku algorytmu ewolucyjnego wykorzystałem bibliotekę NumPy, która dzięki zoptymalizowanym operacjom macierzowym znacząco przyspiesza obliczenia i umożliwia efektywne przetwarzanie populacji rozwiązań.
 
-                Kluczowe koncepcje zaadaptowane w mojej pracy:
-        
-                \subsubsection{Zmienne interwałowe}
-                    \begin{itemize}
-                        \item W JSSP: $\text{IntervalVar}(start, duration, end)$.
-                        \item W planie lekcji: $\text{IntervalVar}(h_i, v_i, h_i + v_i)$, gdzie $h_i$ to slot czasowy~(\ref{slownik_oznaczen}), a $v_i$ to długość trwania lekcji.
-                    \end{itemize}
-        
-                \subsubsection{Ograniczenie NoOverlap}
-                    \begin{itemize}
-                        \item W JSSP: $\text{AddNoOverlap}([\verb|interval|_1, \dots, \verb|interval|_n])$ dla operacji na tej samej maszynie~\cite{googleortoolsoverlap}.
-                        \item W planie lekcji: $\text{AddNoOverlap}$ zastosowane dla:
-                        \begin{itemize}
-                            \item Wszystkich lekcji tej samej klasy
-                            \item Wszystkich lekcji tego samego nauczyciela  
-                            \item Wszystkich lekcji w tej samej sali
-                        \end{itemize}
-                    \end{itemize}
-        
-                \subsubsection{Optional Intervals}
-                    Rozszerzenie o interwały opcjonalne pozwala na modelowanie przypisań sal do nauczycieli w blokach lekcyjnych:
-                    \[ \text{OptionalIntervalVar}(start, duration, end, presence) \]
-                    Takie interwały są brane pod uwagę w ograniczeniach tylko i wyłącznie, jeśli $presence = 1$;
-                    Oznaczna to, że interwał jest ,,aktywny''.
-
-
+            Algorytm zachłanny oraz algorytm ewolucyjny zostały zaimplementowane od zera, przy użyciu wspomnianej wyżej biblioteki, co pozwoliło na pełną kontrolę nad ich działaniem.
+            W trzecim etapie użyłem pakietu Google OR-Tools, który oferuje bogaty zestaw narzędzi do modelowania problemów programowania z ograniczeniami, w tym zmienne interwałowe i ograniczenia typu \verb|NoOverlap|.
+            Jego dobra dokumentacja, wysoka wydajność oraz natywna integracja z Pythonem sprawiają, że stanowi on naturalny wybór w tego typu zastosowaniach.
 
     \subsection{Implementacja bazy danych w Django}
         Technika ORM stosowana w Django oferuje intuicyjny sposób definiowania relacji między modelami.
@@ -467,7 +860,7 @@
         Relacje wiele-do-wielu implementuje się za pomocą klasy \verb|ManyToManyField|, która automatycznie generuje niezbędne tabele pośredniczące w bazie danych.
 
         Każda tabela w systemie, z wyjątkiem automatycznie generowanych tabel dla relacji wiele-do-wielu, jest definiowana przez dedykowaną klasę w pliku \verb|models.py|. 
-        Poniżej przedstawiłem przykładowe implementacje wybranych modeli.
+        Poniżej przedstawiłem przykładową implementację modelu reprezentującego sale.
 
         \subsubsection{Tabela sal}
             \begin{lstlisting}[language=Python]
@@ -475,26 +868,6 @@ class Room(models.Model):
     pool = models.ForeignKey(RoomPool, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     compatible_subjects = models.ManyToManyField(Subject)
-            \end{lstlisting}
-
-        \subsubsection{Tabela zbiorów sal}
-            \begin{lstlisting}[language=Python]
-class RoomPool(models.Model):
-    name = models.CharField(max_length=255)
-            \end{lstlisting}
-        
-        \subsubsection{Tabela wymagań głównych}
-            \begin{lstlisting}[language=Python]
-class Requirement(models.Model):
-    req_set = models.ForeignKey(
-        RequirementSet, on_delete=models.CASCADE
-    )
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    group = models.ForeignKey(
-        StudentGroup, on_delete=models.CASCADE
-    )
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    hours = models.PositiveIntegerField()
             \end{lstlisting}
 
         Analogiczna implementacja dla reszty tabel opisanych w~\ref{subsection:projekt_bazy_danych}.
