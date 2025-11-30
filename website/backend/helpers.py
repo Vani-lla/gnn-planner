@@ -173,19 +173,18 @@ def generate_blocks(
 
     subject_blocks = SubjectBlock.objects.filter(req_set=req_set)
     student_groups = StudentGroup.objects.filter(pool=req_set.group_pool)
-    singular_blocks = [
-        block
-        for block in subject_blocks
-        if block.groups.count() == 1 or block.groups.count() > len(student_groups) // 2
-    ]
     multi_blocks = [
         block
         for block in subject_blocks
-        if block.groups.count() != 1
-        and block.groups.count() <= len(student_groups) // 2
-        and len([k for k, v in block.numbers.items() if v]) == 1
+        if len([k for k, v in block.numbers.items() if v]) == 1
+        and sum(block.numbers.values()) == 1
     ]
     combinatory_blocks = [block for block in subject_blocks if block.power_block]
+    singular_blocks = [
+        block
+        for block in subject_blocks
+        if block not in multi_blocks and block not in combinatory_blocks
+    ]
 
     multi_req_groups = []
     for block in multi_blocks:
@@ -195,6 +194,7 @@ def generate_blocks(
         )
         multi_req_groups.append(reqs)
         block_reqset[tuple(reqs)] = block
+        # print(block)
 
     power_blocks = []
     for block in combinatory_blocks:
@@ -222,20 +222,27 @@ def generate_blocks(
                 used_teachers.add(req.teacher)
 
         tmp = tuple(tmp)
-        power_blocks.append(tmp)
-        correction = min(req.hours for req in tmp)
-        for req in tmp:
-            requirement_corrections[req] = correction
-            return_blocks[tmp] = correction
-            block_reqset[tmp] = block
+        if tmp:
+            power_blocks.append(tmp)
+            print(tmp)
+            correction = min(req.hours for req in tmp)
+            for req in tmp:
+                requirement_corrections[req] = correction
+                return_blocks[tmp] = correction
+                block_reqset[tmp] = block
+        else:
+            print("xxx", block)
 
     for block in multi_req_groups:
+        # print(block)
         if all(req not in requirement_corrections for req in block):
             correction = min(req.hours for req in block)
             return_blocks[tuple(block)] = correction
 
             for req in block:
                 requirement_corrections[req] = correction
+
+            # print(block, "x")
 
     singular_req_groups = []
     for block in singular_blocks:
@@ -260,6 +267,8 @@ def generate_blocks(
                                 singular_req_groups.append(tuple(combination_querry))
                                 block_reqset[tuple(combination_querry)] = block
 
+    singular_req_groups = [r for r in singular_req_groups if len(r)]
+
     while any(
         all(req.hours - requirement_corrections[req] > 0 for req in requirements)
         or (
@@ -269,12 +278,22 @@ def generate_blocks(
         for requirements in singular_req_groups
     ):
         for requirements in singular_req_groups:
+            if "II_BG" in [r.group.name for r in requirements]:
+                print(
+                    requirements,
+                    all(
+                        req.hours - requirement_corrections[req] > 0
+                        for req in requirements
+                    ),
+                )
             if all(
                 req.hours - requirement_corrections[req] > 0 for req in requirements
             ) or (
                 block_reqset[requirements].max_number > 0
                 and return_blocks[requirements] < block_reqset[requirements].max_number
             ):
+                if "II_BG" in [r.group.name for r in requirements]:
+                    print(requirements, "xxxx")
                 # print(block_reqset[requirements].max_number)
                 # print(block_reqset[requirements].max_number - return_blocks[requirements], requirements)
                 # if block_reqset[requirements].max_number:
@@ -285,9 +304,7 @@ def generate_blocks(
                 return_blocks[requirements] += 1
 
     # for k, v in return_blocks.items():
-    #     # print(k)
-    #     if k[0].group.name == "II_DF":
-    #         print(v, end=" | ")
+    #     if len(k) > 1:
     #         for req in k:
     #             print(
     #                 req.subject,
@@ -784,7 +801,7 @@ def evolutionary_loop(
         # Select the top 50% of the population
         top_half = population[: population_size // 2]
         top_half_eval = evaluations[: population_size // 2]
-        p = np.exp(top_half_eval)/sum(np.exp(top_half_eval))
+        p = np.exp(top_half_eval) / sum(np.exp(top_half_eval))
 
         # Breed the top 50% to create the next generation
         new_population = []  # Start with the best specimen

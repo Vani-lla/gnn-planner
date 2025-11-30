@@ -2,9 +2,9 @@
 2,J.Polski,WOS,Filozofia,Historia,Biznes i zarządzanie,Zajęcia kreatywne,Civil Society,Creative Writing
 3,J.Polski,WOS,Filozofia,Historia,Biznes i zarządzanie,Zajęcia kreatywne,Civil Society,Creative Writing
 4,J.Polski,WOS,Filozofia,Historia,Biznes i zarządzanie,Zajęcia kreatywne,Civil Society,Creative Writing
-5,Religia
-6,Religia
-7,Religia
+5,Religia Kat,Religia Ew
+6,Religia Kat,Religia Ew
+7,Religia Kat,Religia Ew
 8,Etyka,WDŻ
 9,J.Angielski
 10,J.Angielski

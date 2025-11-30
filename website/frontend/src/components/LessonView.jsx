@@ -164,9 +164,9 @@ export default function LessonView() {
 
                 {/* Grid Body */}
                 <div className={styles.lessonGridBody}>
-                    {Array.from({ length: 12 }, (_, hour) => {
+                    {Array.from({ length: 13 }, (_, hour) => {
                         const lessonsInRow = filteredLessons.filter(
-                            (lesson) => lesson.hour === hour + 1
+                            (lesson) => lesson.hour === hour
                         );
 
                         if (lessonsInRow.length === 0) return null;
@@ -174,7 +174,7 @@ export default function LessonView() {
                         return (
                             <div className={styles.lessonGridRow} key={hour}>
                                 {/* Time Slot Column */}
-                                <div className={styles.lessonGridCell}>{hour + 1}</div>
+                                <div className={styles.lessonGridCell}>{hour+1}</div>
 
                                 {/* Days Columns */}
                                 {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].map((day) => (
