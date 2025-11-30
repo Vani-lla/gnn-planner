@@ -278,14 +278,14 @@ def generate_blocks(
         for requirements in singular_req_groups
     ):
         for requirements in singular_req_groups:
-            if "II_BG" in [r.group.name for r in requirements]:
-                print(
-                    requirements,
-                    all(
-                        req.hours - requirement_corrections[req] > 0
-                        for req in requirements
-                    ),
-                )
+            # if "II_BG" in [r.group.name for r in requirements]:
+            #     print(
+            #         requirements,
+            #         all(
+            #             req.hours - requirement_corrections[req] > 0
+            #             for req in requirements
+            #         ),
+            #     )
             if all(
                 req.hours - requirement_corrections[req] > 0 for req in requirements
             ) or (

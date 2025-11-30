@@ -58,40 +58,40 @@
 \contentsline {subsubsection}{Generowanie bloków pojedynczych}{27}{subsubsection*.42}%
 \contentsline {subsubsection}{Iteracyjna alokacja pozostałych godzin}{28}{subsubsection*.43}%
 \contentsline {subsubsection}{Finalizacja}{28}{subsubsection*.44}%
-\contentsline {subsection}{\numberline {3.4.3}Przykładowe rezultaty}{28}{subsection.3.4.3}%
-\contentsline {section}{\numberline {3.5}Algorytm ewolucyjny}{28}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Cel algorytmu}{30}{subsection.3.5.1}%
-\contentsline {subsubsection}{Dane wejściowe}{30}{subsubsection*.45}%
-\contentsline {subsubsection}{Dane wyjściowe}{30}{subsubsection*.46}%
-\contentsline {subsection}{\numberline {3.5.2}Kodowanie i ograniczenia twarde}{30}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}Generowanie populacji początkowej}{31}{subsection.3.5.3}%
-\contentsline {subsection}{\numberline {3.5.4}Przystosowanie}{32}{subsection.3.5.4}%
-\contentsline {subsubsection}{Ocena względem nauczycieli}{33}{subsubsection*.48}%
-\contentsline {subsubsection}{Ocena względem klas}{34}{subsubsection*.49}%
-\contentsline {subsubsection}{Normalizacja i wagi}{34}{subsubsection*.50}%
-\contentsline {subsection}{\numberline {3.5.5}Selekcja}{35}{subsection.3.5.5}%
-\contentsline {subsection}{\numberline {3.5.6}Krzyżowanie}{35}{subsection.3.5.6}%
-\contentsline {subsubsection}{Względem oceny nauczycieli}{35}{subsubsection*.51}%
-\contentsline {subsubsection}{Względem oceny klas}{36}{subsubsection*.52}%
-\contentsline {subsection}{\numberline {3.5.7}Mutacja}{36}{subsection.3.5.7}%
-\contentsline {subsection}{\numberline {3.5.8}Przykładowe rezultaty}{37}{subsection.3.5.8}%
-\contentsline {section}{\numberline {3.6}Solver programowania liniowego z ograniczeniami}{37}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Reprezentacja interwałów}{38}{subsection.3.6.1}%
-\contentsline {subsection}{\numberline {3.6.2}Zmienne decyzyjne}{38}{subsection.3.6.2}%
-\contentsline {subsubsection}{Interwały bloków lekcyjnych}{38}{subsubsection*.53}%
-\contentsline {subsubsection}{Przypisania sal}{38}{subsubsection*.54}%
-\contentsline {subsection}{\numberline {3.6.3}Ograniczenia}{39}{subsection.3.6.3}%
-\contentsline {subsubsection}{Ograniczenie przypisania sal}{39}{subsubsection*.55}%
-\contentsline {subsubsection}{Ciągłość zajęć dla klas}{39}{subsubsection*.56}%
-\contentsline {subsubsection}{Nakładanie się nauczycieli}{39}{subsubsection*.57}%
-\contentsline {subsubsection}{Kolizje sal}{39}{subsubsection*.58}%
-\contentsline {subsubsection}{Sekwencjonowanie przedmiotów}{39}{subsubsection*.59}%
-\contentsline {subsection}{\numberline {3.6.4}Funkcja celu}{40}{subsection.3.6.4}%
-\contentsline {subsection}{\numberline {3.6.5}Transformacja interwałów na przypisania końcowe}{40}{subsection.3.6.5}%
-\contentsline {subsubsection}{Ekstrakcja rozwiązań z solvera}{40}{subsubsection*.60}%
-\contentsline {subsubsection}{Mapowanie na strukturę lekcji}{40}{subsubsection*.61}%
-\contentsline {subsubsection}{Przykład transformacji}{41}{subsubsection*.62}%
-\contentsline {subsection}{\numberline {3.6.6}Przykładowe wyniki}{41}{subsection.3.6.6}%
+\contentsline {subsection}{\numberline {3.4.3}Rezultaty}{28}{subsection.3.4.3}%
+\contentsline {section}{\numberline {3.5}Algorytm ewolucyjny}{29}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Cel algorytmu}{31}{subsection.3.5.1}%
+\contentsline {subsubsection}{Dane wejściowe}{31}{subsubsection*.45}%
+\contentsline {subsubsection}{Dane wyjściowe}{31}{subsubsection*.46}%
+\contentsline {subsection}{\numberline {3.5.2}Kodowanie i ograniczenia twarde}{31}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Generowanie populacji początkowej}{32}{subsection.3.5.3}%
+\contentsline {subsection}{\numberline {3.5.4}Przystosowanie}{33}{subsection.3.5.4}%
+\contentsline {subsubsection}{Ocena względem nauczycieli}{34}{subsubsection*.48}%
+\contentsline {subsubsection}{Ocena względem klas}{35}{subsubsection*.49}%
+\contentsline {subsubsection}{Normalizacja i wagi}{35}{subsubsection*.50}%
+\contentsline {subsection}{\numberline {3.5.5}Selekcja}{36}{subsection.3.5.5}%
+\contentsline {subsection}{\numberline {3.5.6}Krzyżowanie}{36}{subsection.3.5.6}%
+\contentsline {subsubsection}{Względem oceny nauczycieli}{36}{subsubsection*.51}%
+\contentsline {subsubsection}{Względem oceny klas}{37}{subsubsection*.52}%
+\contentsline {subsection}{\numberline {3.5.7}Mutacja}{37}{subsection.3.5.7}%
+\contentsline {subsection}{\numberline {3.5.8}Przykładowe rezultaty}{38}{subsection.3.5.8}%
+\contentsline {section}{\numberline {3.6}Solver programowania liniowego z ograniczeniami}{38}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Reprezentacja interwałów}{39}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Zmienne decyzyjne}{39}{subsection.3.6.2}%
+\contentsline {subsubsection}{Interwały bloków lekcyjnych}{39}{subsubsection*.53}%
+\contentsline {subsubsection}{Przypisania sal}{39}{subsubsection*.54}%
+\contentsline {subsection}{\numberline {3.6.3}Ograniczenia}{40}{subsection.3.6.3}%
+\contentsline {subsubsection}{Ograniczenie przypisania sal}{40}{subsubsection*.55}%
+\contentsline {subsubsection}{Ciągłość zajęć dla klas}{40}{subsubsection*.56}%
+\contentsline {subsubsection}{Nakładanie się nauczycieli}{40}{subsubsection*.57}%
+\contentsline {subsubsection}{Kolizje sal}{40}{subsubsection*.58}%
+\contentsline {subsubsection}{Sekwencjonowanie przedmiotów}{40}{subsubsection*.59}%
+\contentsline {subsection}{\numberline {3.6.4}Funkcja celu}{41}{subsection.3.6.4}%
+\contentsline {subsection}{\numberline {3.6.5}Transformacja interwałów na przypisania końcowe}{41}{subsection.3.6.5}%
+\contentsline {subsubsection}{Ekstrakcja rozwiązań z solvera}{41}{subsubsection*.60}%
+\contentsline {subsubsection}{Mapowanie na strukturę lekcji}{41}{subsubsection*.61}%
+\contentsline {subsubsection}{Przykład transformacji}{42}{subsubsection*.62}%
+\contentsline {subsection}{\numberline {3.6.6}Przykładowe wyniki}{42}{subsection.3.6.6}%
 \contentsline {chapter}{\numberline {4}Aplikacja}{43}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Specyfikacja wymagań}{43}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}Wymagania funkcjonalne}{43}{subsection.4.1.1}%

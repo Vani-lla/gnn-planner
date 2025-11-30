@@ -518,7 +518,7 @@
             \]
             Grupy te stanowią podstawę do tworzenia bloków lekcyjnych międzyklasowych.
 
-        \subsubsection{Agregacja bloków}
+        \subsubsection{Agregacja bloków}~\label{agregacja_blokow}
             Dla każdego bloku $b \in \mathcal{B}_{\text{agg}}$:
             \begin{enumerate}
                 \item Wybieramy maksymalnie duży zbiór wymagań $\mathcal{W}_{\text{agg}} \subseteq \mathcal{W}$ spełniający:
@@ -698,7 +698,67 @@
         Przy czym gwarantowane jest spełnienie wymagania głównego:
         \[ \forall w \in \mathcal{W}: \sum_{i: w \in L_i} v_i = g_w \]
         
-    \subsection{Przykładowe rezultaty}
+    \subsection{Rezultaty}
+        Dla danych udostępnionych przez szkołę liczba wymagań głównych wynosi $\left|\mathcal{W}\right| = 378$,
+        natomiast liczba zdefiniowanych bloków przedmiotów $\left|\mathcal{B}\right| = 47$.
+        Zastosowany algorytm zachłanny wygenerował $\left|302\right|$ bloków lekcyjnych.
+        Średni czas wykonywania dla pięcu niezależnych uruchomień wyniósł 0.84s, przy czym pomiar czasu obejmował również czas pobierania danych z bazy.
+
+        Poniżej fragment otrzymanego zbioru bloków oraz odpowiadających wartości macierzy $V$:
+        \[
+            \mathcal{L} = 
+            \left\{
+            \begin{aligned}
+            &( 
+                \text{<Req: J.Niem 2h - Jn1 / IV\_A>},\,
+                \text{<Req: J.Niem 2h - Jn1 / IV\_F>},\,
+                \dots \\
+            &\qquad
+                \text{<Req: J.Ros 2h - Jr1 / IV\_A>},\,
+                \text{<Req: J.Ros 2h - Jr1 / IV\_G>},\,
+                \dots \\
+            &\qquad
+                \text{<Req: J.Fran 2h - Jf2 / IV\_D>},\,
+                \text{<Req: J.Fran 2h - Jf1 / IV\_F>},\,
+                \dots
+            ),\; \dots, \\
+            &( 
+                \text{<Req: J.Ang 6h - Ja5 / I\_A>},\,
+                \text{<Req: Informatyka 2h - Inf2 / I\_A>}
+            ),\; \dots, \\
+            &( 
+                \text{<Req: Chemia 1h - Chem1 / I\_G>}
+            ),\; \dots \\
+            \end{aligned}
+            \right\}
+        \]
+        \[ V = \begin{bmatrix} 2 & \cdots & 1 & \cdots & 1 & \cdots \end{bmatrix} \]
+
+        W wynikach możemy zaobserwować działanie algorytmu. 
+        Pierwszym elementem w $\mathcal{L}$ jest komparatywnie duży, wieloklasowy blok lekcyjny powstały w fazie agregacji (opisanej w~\ref{agregacja_blokow}).
+        Obejmuje on między innymi:
+        \begin{itemize}
+            \item Lekcję j.\ niemieckiego z klasami IVA oraz IVF prowadzoną przez nauczyciela Jn1,
+            \item Lekcję j.\ niemieckiego z klasami IVC oraz IVG prowadzoną przez nauczyciela Jn2,
+            \item Lekcję j.\ rosyjskiego z klasami IVA, IVC, IVD, IVF oraz IVG przez nauczyciela Jr1,
+            \item Lekcję j.\ francuskiego z klasą IVA oraz IVF prowadzoną przez nauczyciela Jf1,
+            \item Lekcję j.\ francuskiego z klasą IVD prowadzoną przez nauczyciela Jf2.
+        \end{itemize}
+        Dla tego bloku wartość $v_1$ wynosi:
+        \[ v_1 = \min_{\forall w \in L_1} g_{w} - U(w) = 2 \]
+        ponieważ na początku wszystkie wymagania mają $U(w) = 0$.
+
+        Drugim typem bloków są bloki pojedyncze. 
+        Jeden z przykładów widocznych w wynikach obejmuje:
+        \begin{itemize}
+            \item Lekcję j.\ angielskiego z klasą IA prowadzoną przez nauczyciela Ja5
+            \item Lekcję informatyki z klasą IA prowadzoną przez nauczyciela Inf2
+        \end{itemize}
+        W tym przypadku $v=1$, ponieważ klasa posiada dwie grupy języka angielskiego oraz dwie grupy informatyki, 
+        a pełne wymaganie informatyki musi zostać rozdzielone między odpowiadające mu bloki.
+        Obrazuje to konieczność iteracyjnego przydzielania wymaganych godzin do bloków --- gdybyśmy chcieli przypisać obie godziny do pierwszego bloku to druga grupa informatyki nie miałaby możliwości odbycia lekcji.
+
+        Ostatnią kategorię stanowią bloki jednostkowe, przykładowo lekcja chemii dla klasy IG. Bloki takie pojawiają się w przypadku wymagań, które nie mogą być dołączone do żadnego większego bloku.
 
 \section{Algorytm ewolucyjny}
     Algorytm ewolucyjny jest populacyjną metodą przeszukiwania inspirowaną mechanizmami doboru naturalnego: selekcją, krzyżowaniem i mutacją.
