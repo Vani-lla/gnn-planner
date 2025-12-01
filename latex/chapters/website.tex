@@ -492,22 +492,31 @@
     \clearpage
 
     \subsection{Diagramy sekwencji}
-        Diagramy sekwencji stanowią kluczowy element modelowania systemu, ukazując sekwencyjny przepływ komunikatów między obiektami w czasie.
+        Diagramy sekwencji stanowią kolejny element modelowania systemu, ukazując sekwencyjny przepływ komunikatów między obiektami w czasie.
         Pozwalają prześledzić interakcje między obiektami w systemie --- od inicjacji akcji w interfejsie, poprzez przetwarzanie w backendzie, aż do generowania planu przez algorytmy.
         W niniejszej sekcji przedstawiam scenariusze współpracy pomiędzy głównymi komponentami aplikacji: interfejsem, warstwą serwerową oraz algorytmem.
 
+        Najważniejszym do zaprojektowania jest diagram sekwencji generowania planu lekcji.
+        Jest ważny ponieważ niepotrzebne zwiększanie komunikacji ponad to co jest minimalnie potrzebne może niepotrzebnie zwiększyć czas oczekiwania użytkownika.
         \begin{figure}[!t]
             \centering
             \includegraphics[width=1.0\textwidth]{images/diagramy/Sequence Diagram1.png}
             \caption{Diagram sekwencji dla przypadku użycia generowania planu lekcji}
         \end{figure}
         
+        Kolejny przypadek warty zamodelowania to przeglądanie planów lekcji.
+        Tutaj system powinien oferować maksymalną reksonsywność  --- minimalne czasy oczekiwań.
+        Wysyłanie zapytać GET do warstwy serwerowej przy każdej zmianie widoku nie wchodzi w grę.
+        Dlatego zdecydowałem się na wykonanie jednego większego requesta do bazy danych przy wybraniu planu lekcji, i następne filtrowanie wynikó już po stronie klienta.
+        W ten sposób kosztem małego zwiększenia oczekiwania na początkowe zapytanie osiągamy pełną płynność w późniejszym użytkowaniu.
         \begin{figure}[!t]
             \centering
             \includegraphics[width=1.0\textwidth]{images/diagramy/Sequence Diagram2.png}
             \caption{Diagram sekwencji dla przypadku użycia oglądania planu lekcji}
         \end{figure}
 
+        Ostatni przypadek, które jest warty zaprojektowania jest wprowadzanie bądź edycja danych.
+        Należy to zaprojektować optymalnie, tak aby warstwa serwerowa otrzymywała możliwie jak najmniej zapytań, a użytkownik otrzymywał komunikaty o potwierdzeniu operacji.
         \begin{figure}[!t]
             \centering
             \includegraphics[width=1.0\textwidth]{images/diagramy/Sequence Diagram3.png}

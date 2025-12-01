@@ -19,24 +19,24 @@
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Diagram wymagań}}{44}{figure.caption.63}%
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Diagram przypadków użycia}}{45}{figure.caption.64}%
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Diagram sekwencji dla przypadku użycia generowania planu lekcji}}{52}{figure.caption.77}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Diagram sekwencji dla przypadku użycia oglądania planu lekcji}}{52}{figure.caption.78}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Diagram sekwencji dla przypadku użycia oglądania planu lekcji}}{53}{figure.caption.78}%
 \contentsline {figure}{\numberline {4.5}{\ignorespaces Diagram sekwencji dla przypadku użycia edycji bądź wprowadzania wymagań głównych}}{53}{figure.caption.79}%
 \contentsline {figure}{\numberline {4.6}{\ignorespaces Architektura aplikacji}}{54}{figure.caption.80}%
 \contentsline {figure}{\numberline {4.7}{\ignorespaces Diagram tabel podstawowych w bazie danych}}{55}{figure.caption.83}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Diagram tabel podstawowych i wymagań w bazie danych}}{56}{figure.caption.86}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Diagram pełnego projektu bazy danych}}{58}{figure.caption.91}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Automatycznie wygenerowana lista endpointów stworzonych przy użyciu \mbox {ModelViewSet}}}{64}{figure.caption.104}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Nawigacja interfejsu webowego}}{65}{figure.caption.106}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Strona główna interfejsu webowego}}{65}{figure.caption.108}%
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Podgląd planu z perspektywy nauczyciela}}{66}{figure.caption.110}%
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Podgląd planu z perspektywy klasy}}{66}{figure.caption.111}%
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Widok generowania planu lekcji}}{67}{figure.caption.113}%
-\contentsline {figure}{\numberline {4.16}{\ignorespaces Widok dodawania przedmiotów}}{67}{figure.caption.115}%
-\contentsline {figure}{\numberline {4.17}{\ignorespaces Widok dodawania nauczycieli}}{68}{figure.caption.116}%
-\contentsline {figure}{\numberline {4.18}{\ignorespaces Widok dodawania sal}}{68}{figure.caption.117}%
-\contentsline {figure}{\numberline {4.19}{\ignorespaces Widok dodawania klas}}{69}{figure.caption.118}%
-\contentsline {figure}{\numberline {4.20}{\ignorespaces Widok dodawania wymagań głównych}}{70}{figure.caption.120}%
-\contentsline {figure}{\numberline {4.21}{\ignorespaces Widok wprowadzania dostępności nauczycieli}}{71}{figure.caption.122}%
-\contentsline {figure}{\numberline {4.22}{\ignorespaces Widok dodawania bloków przedmiotów}}{71}{figure.caption.124}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Diagram tabel podstawowych i wymagań w bazie danych}}{57}{figure.caption.86}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Diagram pełnego projektu bazy danych}}{59}{figure.caption.91}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Automatycznie wygenerowana lista endpointów stworzonych przy użyciu \mbox {ModelViewSet}}}{65}{figure.caption.104}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Nawigacja interfejsu webowego}}{66}{figure.caption.106}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Strona główna interfejsu webowego}}{66}{figure.caption.108}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Podgląd planu z perspektywy nauczyciela}}{67}{figure.caption.110}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Podgląd planu z perspektywy klasy}}{67}{figure.caption.111}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Widok generowania planu lekcji}}{68}{figure.caption.113}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Widok dodawania przedmiotów}}{68}{figure.caption.115}%
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Widok dodawania nauczycieli}}{69}{figure.caption.116}%
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Widok dodawania sal}}{69}{figure.caption.117}%
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Widok dodawania klas}}{70}{figure.caption.118}%
+\contentsline {figure}{\numberline {4.20}{\ignorespaces Widok dodawania wymagań głównych}}{71}{figure.caption.120}%
+\contentsline {figure}{\numberline {4.21}{\ignorespaces Widok wprowadzania dostępności nauczycieli}}{72}{figure.caption.122}%
+\contentsline {figure}{\numberline {4.22}{\ignorespaces Widok dodawania bloków przedmiotów}}{72}{figure.caption.124}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }

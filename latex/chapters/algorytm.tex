@@ -1108,7 +1108,25 @@
         \[ S_{\text{best}} = S_i, \quad i = \underset{j \in \left\{1, 2, \dots \mathfrak{P}\right\}}{\arg\max} F_{c_j} \]
 
     \subsection{Przykładowe rezultaty}
-        \textit{Przykładowe macierze z opisami}
+        Dla danych udostępnionych przez szkołę jak pokazano wcześniej liczba bloków lekcyjnych wynosi $\left|L\right| = 302$, więc macierz najlepszego osobnika prezentuje się następująco:
+        \[ S_{\text{best}} = \begin{bmatrix}
+            1 & \cdots \\
+            0 & \cdots \\
+            0 & \cdots \\
+            0 & \cdots \\
+            1 & \cdots
+        \end{bmatrix} \]
+
+        \begin{itemize}
+            \item Sumy się zgadzają
+            \item Czasy działania algorytmu 
+            \item Wartości funkcji celu
+            \begin{itemize}
+                \item interpretacja, czyli dlaczego nie otrzymujemy dodatnej wartości
+            \end{itemize}
+            \item wyjaśnienei hiperparametrów
+            \item Histogramy dla nauczycieli i uczniów
+        \end{itemize}
 
 \section{Solver programowania liniowego z ograniczeniami}\label{section:solver}
     W trzecim etapie algorytmu wykorzystuję solver programowania liniowego z ograniczeniami (Constraint Programming --- CP).
@@ -1135,7 +1153,7 @@
         Dla modelowania zajęć używamy zmiennych interwałowych, które reprezentują bloki czasowe o określonej długości:
         \begin{itemize}
             \item \textbf{Interwał podstawowy} dla bloku lekcyjnego $L_i \in \mathcal{L}$:
-                \[
+                \[  I_i = (s_i, v_i, e_i):
                     \begin{cases}
                         s_i &\in \left[0, H\right] \\
                         d_i &= v_i \\
@@ -1146,7 +1164,7 @@
                 gdzie $s_i$ to czas rozpoczęcia, $e_i$ to czas zakończenia, a $d_i$ to czas trwania.
             
             \item \textbf{Interwał opcjonalny} dla przypisania sali:
-                \[
+                \[ O_{i,t,r} =
                     \begin{cases}
                         p_{i,j,r} &\in \left\{0, 1\right\}\\
                         p_{i,j,r} &\implies e_i = s_i + d_i
@@ -1267,5 +1285,11 @@
         
         Proces ten powtarzamy dla wszystkich dni tygodnia, tworząc kompletny plan lekcji $\mathcal{Z} = \bigcup_{d=1}^5 \mathcal{Z}_d$ spełniający wszystkie ograniczenia i optymalizujący funkcję celu.
 
-    \subsection{Przykładowe wyniki}
-        abc
+    \subsection{Rezultaty}
+        \begin{itemize}
+            \item Przykładowe przypisania
+            \item Czas obliczeń dla rozwiązań optymalnych i nieoptymalnych, podania parametrów kompa
+            \item Liczba okienek i porównanie
+            \item Liczba zmiennych decyzyzjnych
+            \item Liczba ograniczeń
+        \end{itemize}

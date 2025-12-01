@@ -25,5 +25,20 @@
 - Dodać opis do diagramów sekwencji
 - Sprawdzenie pierwszej pracy z bibliografii
 - Zrobić coś z potężną ilością stron
+- Poprawienie indeksów, nie może być 3 stopniowe - t_{wi} a nie t_w_i
+- Poprawienie strunktury rozdziału trzeciego
+    - 3.3 Dekompozycja problemu i wybór technik
+        - Dekompozycja
+        - Techniki
+        - 3.3.1 Problem z etapu 1
+            - Wprowadzenie konkretnych oznaczeń
+            - Uzasadnienie wyboru techniki
+        - 3.3.2 Problem z etapu 2
+        - 3.3.3 Problem z etapu 3
+- obciazenia dydaktyczne
+- Wywalenie oznaczeń pośrednich ze sformułowania problemu
+- Rezultaty -> Przykładowyw wynik
+- Funkcja celu dla całości problemu
+- Przydział =/= rozkład
 
 ### Wszelkie inne poprawki :|
