@@ -100,8 +100,8 @@
 
     \subsection{Przypadki użycia}
         Diagram przypadków użycia pozwala na zwizualizowanie wcześniej omawianych wymagań funkcjonalnych w formie graficznej, ukazując interakcje między użytkownikami a systemem.
-        Diagram pomaga połączyć specyfikację wymagań z projektem technicznym, stanowiąc punkt wyjścia do dalszej analizy i implementacji.
-        W niniejszej sekcji omawiam kluczowe przypadki użycia zilustrowane na diagramie.
+        Ułatwia on powiązanie specyfikacji wymagań z projektem architektury, stanowiąc punkt wyjścia do dalszych etapów analizy i implementacji.
+        W niniejszej sekcji omawiam kluczowe przypadki użycia zilustrowane na diagramie, obejmujące zarówno generowanie planów lekcji, ich przeglądanie, jak i zarządzanie danymi wejściowymi systemu.
 
         \begin{figure}[!h]
             \centering
@@ -163,7 +163,7 @@
 
                 \multirow{2}{*}{\textbf{Stan końcowy}} 
                 & Wybrany nauczyciel bądź klasa \\
-                & Plan wyświetlony z perspektywy wygranej klasy bądź nauczyciela \\ \hline
+                & Plan wyświetlony z perspektywy wybranej klasy bądź nauczyciela \\ \hline
                 
                 \multirow{6}{*}{\textbf{Scenariusze}}
                 & 1a. Użytkownik rozwija listę dostępnych nauczycieli \\
@@ -266,7 +266,7 @@
                 
                 \multirow{3}{*}{\textbf{Scenariusz}}
                 & 1. Użytkownik rozwija listę dostępnych zestawów ograniczeń \\
-                & 2. Użytkownik wybiera konkretny zestaw ogarniczeń \\
+                & 2. Użytkownik wybiera konkretny zestaw ograniczeń \\
                 & 3. System wyświetla nazwę wybranego zestawu ograniczeń\\ \hline
             \end{tabular}
             \caption{Przypadek użycia UC05}
@@ -317,7 +317,7 @@
 
                 \multirow{2}{*}{\textbf{\shortstack[l]{Składowe przypadki\\ użycia}}} 
                 & Wybierz zbiór danego zasobu bądź ograniczenia \\
-                & Stwórzy nowy zbiór danego zasobu bądź ograniczenia \\ \hline
+                & Stworzy nowy zbiór danego zasobu bądź ograniczenia \\ \hline
 
                 \multirow{1}{*}{\textbf{Warunki wstępne}} 
                 & --- \\ \hline
@@ -359,10 +359,11 @@
                 & Widoczna nazwa zbioru \\
                 & Widoczny wybrany zbiór zasobów bądź ograniczeń \\ \hline
                 
-                \multirow{3}{*}{\textbf{Scenariusz}}
-                & 1. Użytkownik wpisuje liczbę generacji \\
-                & 2. System wyświetla wpisaną liczbę \\
-                & 3. System umożliwia wybranie opcji generowania planu lekcji \\ \hline
+                \multirow{4}{*}{\textbf{Scenariusz}}
+                & 1. Użytkownik rozwija listę dostępnych zbiorów \\
+                & 2. Użytkownik wybiera konkretny zbiór \\
+                & 3. System wyświetla nazwę wybranego zbioru \\
+                & 4. System wyświetla dany zapisane w bazie danych \\ \hline
             \end{tabular}
             \caption{Przypadek użycia UC08}
         \end{table}
@@ -386,7 +387,7 @@
 
                 \multirow{2}{*}{\textbf{Stan końcowy}} 
                 & Widoczne nowe ograniczenie/zasób \\
-                & Nowe ograniczenie/zasów zapisany w bazie danych \\ \hline
+                & Nowe ograniczenie/zasób zapisany w bazie danych \\ \hline
 
                 \multirow{3}{*}{\textbf{Scenariusz}}
                 & 1. Użytkownik wybiera opcję dodania nowego zasobu bądź ograniczenia \\
@@ -496,45 +497,50 @@
         Pozwalają prześledzić interakcje między obiektami w systemie --- od inicjacji akcji w interfejsie, poprzez przetwarzanie w backendzie, aż do generowania planu przez algorytmy.
         W niniejszej sekcji przedstawiam scenariusze współpracy pomiędzy głównymi komponentami aplikacji: interfejsem, warstwą serwerową oraz algorytmem.
 
-        Najważniejszym do zaprojektowania jest diagram sekwencji generowania planu lekcji.
-        Jest ważny ponieważ niepotrzebne zwiększanie komunikacji ponad to co jest minimalnie potrzebne może niepotrzebnie zwiększyć czas oczekiwania użytkownika.
-        \begin{figure}[!t]
-            \centering
-            \includegraphics[width=1.0\textwidth]{images/diagramy/Sequence Diagram1.png}
-            \caption{Diagram sekwencji dla przypadku użycia generowania planu lekcji}
-        \end{figure}
+        \subsubsection{Diagram sekwencji generowania planu lekcji}
+            Najważniejszym do zaprojektowania jest diagram sekwencji generowania planu lekcji.
+            Jego poprawne zaprojektowanie ma istotny wpływ na czas oczekiwania użytkownika, ponieważ nadmiarowa komunikacja między interfejsem a backendem może znacząco wydłużyć proces.
+            Diagram przedstawia minimalny, konieczny zestaw komunikatów prowadzących do wywołania algorytmu optymalizacyjnego i zwrócenia użytkownikowi gotowego planu.
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=1.0\textwidth]{images/diagramy/Sequence Diagram1.png}
+                \caption{Diagram sekwencji generowania planu lekcji}
+            \end{figure}
         
-        Kolejny przypadek warty zamodelowania to przeglądanie planów lekcji.
-        Tutaj system powinien oferować maksymalną reksonsywność  --- minimalne czasy oczekiwań.
-        Wysyłanie zapytać GET do warstwy serwerowej przy każdej zmianie widoku nie wchodzi w grę.
-        Dlatego zdecydowałem się na wykonanie jednego większego requesta do bazy danych przy wybraniu planu lekcji, i następne filtrowanie wynikó już po stronie klienta.
-        W ten sposób kosztem małego zwiększenia oczekiwania na początkowe zapytanie osiągamy pełną płynność w późniejszym użytkowaniu.
-        \begin{figure}[!t]
-            \centering
-            \includegraphics[width=1.0\textwidth]{images/diagramy/Sequence Diagram2.png}
-            \caption{Diagram sekwencji dla przypadku użycia oglądania planu lekcji}
-        \end{figure}
+        \subsubsection{Diagram sekwencji przeglądania planów lekcji}
+            Drugim istotnym scenariuszem jest przeglądanie wygenerowanych planów.
+            W tym przypadku kluczowym wymaganiem jest zapewnienie maksymalnej responsywności interfejsu.
+            Ciągłe ponawianie zapytań GET przy każdej zmianie widoku byłoby nieefektywne i prowadziłoby do zauważalnych opóźnień.
+            
+            Z tego powodu zastosowałem inne rozwiązanie --- po wybraniu konkretnego planu aplikacja wykonuje jedno większe zapytanie do bazy danych, a następnie cała dalsza filtracja odbywa się po stronie klienta.
+            Minimalnie wydłuża to czas pierwszego ładowania, ale zapewnia pełną płynność późniejszej interakcji.
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=1.0\textwidth]{images/diagramy/Sequence Diagram2.png}
+                \caption{Diagram sekwencji dla przypadku użycia oglądania planu lekcji}
+            \end{figure}
 
-        Ostatni przypadek, które jest warty zaprojektowania jest wprowadzanie bądź edycja danych.
-        Należy to zaprojektować optymalnie, tak aby warstwa serwerowa otrzymywała możliwie jak najmniej zapytań, a użytkownik otrzymywał komunikaty o potwierdzeniu operacji.
-        \begin{figure}[!t]
-            \centering
-            \includegraphics[width=1.0\textwidth]{images/diagramy/Sequence Diagram3.png}
-            \caption{Diagram sekwencji dla przypadku użycia edycji bądź wprowadzania wymagań głównych}
-        \end{figure}
+        \subsubsection{Diagram sekwencji wprowadzania i edycji danych}
+            Trzeci scenariusz obejmuje wprowadzanie lub edycję danych, takich jak wymagania główne.
+            Kluczowym założeniem było ograniczenie liczby zapytań do serwera przy jednoczesnym zapewnieniu użytkownikowi informacji zwrotnej o powodzeniu operacji.
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=1.0\textwidth]{images/diagramy/Sequence Diagram3.png}
+                \caption{Diagram sekwencji edycji bądź wprowadzania wymagań głównych}
+            \end{figure}
 
-        \FloatBarrier
+        \clearpage
 
 \newpage
 \section{Projekt}
     \subsection{Architektura systemu}
-        Wybór poprawnej architektury stanowi jedno z pierwszych zadań, które stoi przed projektantem aplikacji.
-        Aby zagwarantować możliwość spełnienia wszystkich wymagań oraz umożliwić dalszy, łatwy rozwój rozwiązania, zdecydowałem się na podzielenie aplikacji na 4 oddzielne komponenty:
+        Wybór odpowiedniej architektury systemu jest kluczowy dla zapewnienia jego skalowalności, elastyczności i możliwości dalszego rozwoju.
+        W celu spełnienia wszystkich wymagań projektowych podzieliłem aplikację na cztery główne komponenty:
         \begin{enumerate}
-            \item Interfejs użytkownika (\textit{ang.} Graphical User Interface GUI) --- odpowiada za komunikację z użytkownikiem, umożliwiając wygodną obsługę systemu bez konieczności znajomości szczegółów działania jego wewnętrznych mechanizmów.
-            \item Warstwę sewerową --- umożliwia sprawną integrację wszystkich komponentów poprzez interfejs programowania aplikacji (\textit{ang.} Application Programming Interface, API).
-            \item Bazę danych --- przechowywuje wszystkie zasoby, ograniczenia oraz plany lekcji w ustrukturyzowany sposób.
-            \item Moduł optymalizacyjny --- pozwala na generowanie planów lekcji.
+            \item \textbf{Interfejs użytkownika} (ang. \textit{Graphical User Interface}, GUI) --- odpowiada za komunikację z użytkownikiem, umożliwiając wygodną obsługę systemu bez konieczności znajomości szczegółów działania jego wewnętrznych mechanizmów.
+            \item \textbf{Warstwę sewerową} --- umożliwia sprawną integrację wszystkich komponentów poprzez interfejs programowania aplikacji (ang. \textit{Application Programming Interface}, API).
+            \item \textbf{Baza danych} --- przechowywuje wszystkie zasoby, ograniczenia oraz plany lekcji w ustrukturyzowany sposób.
+            \item \textbf{Moduł optymalizacyjny} --- realizuje algorytmy generowania planów lekcji, przetwarzając dane z bazy i uwzględniając wszystkie wymagania i ograniczenia.
         \end{enumerate}
 
         \begin{figure}[H]
@@ -551,10 +557,10 @@
                 % Blocks inside system
                 \node[block] (gui) at ([xshift=-3cm, yshift=1.5cm]system.center) {GUI};
                 \node[block] (api) at ([xshift=3cm, yshift=1.5cm]system.center) {API};
-            
+
                 \node[block] (db) at ([xshift=3cm, yshift=-1.5cm]system.center) {Baza danych};
                 \node[block] (opt) at ([xshift=-3cm, yshift=-1.5cm]system.center) {Moduł\\optymalizacyjny};
-            
+
                 % User actor
                 \node (user) [left=4cm of gui] {
                     \begin{tikzpicture}
@@ -566,7 +572,7 @@
                     \end{tikzpicture}
                 };
                 \node[below=0.1cm of user] {Użytkownik};
-            
+
                 % Connections
                 \draw[<->, very thick, -latex] (user.east) -- (gui.west) node[midway, above]{};
                 \draw[<->, very thick, -latex] (gui.east) -- (api.west) node[midway, above]{};
@@ -577,12 +583,16 @@
             \caption{Architektura aplikacji}
         \end{figure}
 
+        Taki podział umożliwia niezależny rozwój każdego z komponentów, ułatwia testowanie i utrzymanie systemu, a także pozwala na łatwe skalowanie oraz integrację dodatkowych funkcjonalności w przyszłości.
 
     \subsection{Projekt struktury bazy danych}\label{subsection:projekt_bazy_danych}
-        Projekt bazy danych stanowi kluczowy element architektury aplikacji webowej, determinujący jej skalowalność i funkcjonalność. 
-        Głównym wyzwaniem projektowym było opracowanie modelu umożliwiającego wielokrotne wykorzystanie tych samych zasobów przy jednoczesnej obsłudze zmieniających się wymagań głównych pomiędzy generowaniami planów lekcji. 
-        W odpowiedzi na to wymaganie wprowadziłem mechanizm grupowania zasobów i ograniczeń w zbiory, co zapewnia elastyczność niezbędną w środowisku szkolnym.
-        W celu wyjaśnienia tej skomplikowanej struktury bazy danych warto podzielić tabele na parę kategorii.
+        Projekt bazy danych stanowi kluczowy element architektury aplikacji.
+        Jego celem jest umożliwienie wielokrotnego wykorzystania zasobów szkolnych przy jednoczesnej obsłudze zmieniających się wymagań w kolejnych generacjach planów lekcji.
+
+        Aby zapewnić elastyczność, zastosowałem mechanizm zbiorów zasobów oraz zbiorów wymagań, dzięki czemu każdy wygenerowany plan odwołuje się do spójnej konfiguracji danych.
+
+        Poniżej opisałem strukturę bazy danych, dzieląc ją na cztery grupy tabel:
+        tabele podstawowe, tabele wymagań, tabele agregujące, oraz tabele wyników.
 
         \subsubsection{Tabele podstawowe}
             Tabele podstawowe definiują fundamentalne zasoby szkoły, stanowiąc punkt odniesienia dla całego systemu:
@@ -604,13 +614,17 @@
             \noindent
             gdzie:
             \begin{itemize}
-                \item \texttt{subject} przychowuje przedmioty.
-                \item \texttt{student\_group} przechowuje przedmioty.
-                \item \texttt{teacher} przechowuje nauczycieli.
-                \item \texttt{room} przechowuje sale.
+                \item \texttt{subject} przychowuje informacje o przedmiotach.
+                \item \texttt{student\_group} przechowuje informacje o klasach.
+                \item \texttt{teacher} przechowuje informacje o nauczycielach.
+                \begin{itemize}
+                    \item Relacja M:N z nauczycielami określa jakich przedmiotów może uczyć dany nauczyciel.
+                \end{itemize}
+                \item \texttt{room} przechowuje informacje o salach.
+                \begin{itemize}
+                    \item Relacja M:N z przedmiotami określa jakie przedmioty mogą być prowadzone w danej sali.
+                \end{itemize}
             \end{itemize}
-
-            Relacja między nauczycielami a przedmiotami reprezentuje prowadzone przez nich przedmioty, a relacja między salami a przedmiotami reprezentuje przedmioty, które są przez nie obsługiwane.
 
             \begin{figure}[H]
                 \centering
@@ -619,7 +633,8 @@
             \end{figure}
 
         \subsubsection{Tabele wymagań}
-            Tabele wymagań przechowują ograniczenia i reguły generowania planu, powiązane z zasobami podstawowymi:
+            Tabele wymagań definiują, co dokładnie należy umieścić w planie lekcji.
+            W przeciwieństwie do tabel zasobów nie opisują one tego, co istnieje w szkole, lecz to, jakie lekcji muszą zostać wygenerowane.
 
             \begin{table}[H]
                 \centering
@@ -628,7 +643,7 @@
                     \textbf{Tabela} & \textbf{Relacje} \\
                     \hline
                     \texttt{requirement} & N:1 z \texttt{teacher}, \texttt{student\_group}, \texttt{subject} \\
-                    \texttt{subject\_block} & M:N z \texttt{subject} \\
+                    \texttt{subject\_block} & M:N z \texttt{subject}, M:N z \texttt{student\_group} \\
                     \texttt{teacher\_availability} & N:1 z \texttt{teacher} \\
                     \hline
                 \end{tabular}
@@ -638,9 +653,19 @@
             \noindent
             gdzie:
             \begin{itemize}
-                \item \texttt{requirement} przychowuje wymagania główne.
+                \item \texttt{requirement} każdy rekord opisuje jedno wymaganie główne.
+                \begin{itemize}
+                    \item Zawiera klucze obce do tabel przedmiotów, klas, nauczycieli.
+                \end{itemize}
                 \item \texttt{subject\_block} przechowuje informacje na temat bloków przedmiotów.
-                \item \texttt{teacher\_availability} przechowuje dostępności nauczycieli.
+                \begin{itemize}
+                    \item Relacja M:N z przedmiotami określa jakie przedmioty powinny być w bloku lekcyjnym.
+                    \item Relacja M:N z klasami określa jakie klasy powinny być w bloku lekcyjnym.
+                \end{itemize}
+                \item \texttt{teacher\_availability} przechowuje dostępności nauczycieli. Każdy rekord dotyczy innego nauczyciela.
+                \begin{itemize}
+                    \item Zawiera klucz obcy do tabeli nauczycieli.
+                \end{itemize}
             \end{itemize}
 
             \begin{figure}[H]
@@ -649,7 +674,7 @@
                 \caption{Diagram tabel podstawowych i wymagań w bazie danych}
             \end{figure}
 
-        \subsubsection{Tabele agregujące}
+        \subsubsection{Zbiory danych}
             Mechanizm zbiorów umożliwia grupowanie zasobów i wymagań dla różnych kontekstów:
 
             \begin{table}[H]
@@ -664,7 +689,7 @@
                     \texttt{room\_pool} & 1:N z room \\
                     \hline
                 \end{tabular}
-                \caption{Tabele zbiorów zasobów z uzasadnieniem relacji}
+                \caption{Tabele zbiorów zasobów}
             \end{table}
 
             Dla nauczycieli i przedmiotów zastosowałem relację wiele-do-wielu, ponieważ zasoby te charakteryzują się względną stabilnością pomiędzy latami szkolnymi --- większość nauczycieli i przedmiotów pozostaje niezmienna, a jedynie dodawane są nowe rekordy dla nowo zatrudnionych pedagogów lub wprowadzanych przedmiotów.
@@ -672,17 +697,32 @@
             W przypadku sal przyjęto relację jeden-do-wielu, co wynika z całkowitej niezmienności tej puli zasobów pomiędzy okresami szkolnymi.
             Natomiast dla klas zastosowałem relację jeden-do-wielu, odzwierciedlającą coroczną całkowitą wymianę składu grup uczniowskich --- klasy z poprzedniego roku nie są ponownie wykorzystywane w kolejnych okresach, co eliminuje potrzebę stosowania relacji wiele-do-wielu.
 
-            Szczególną rolę pełni tabela \texttt{requirement\_set} (zbiór wymagań głównych), która agreguje wszystkie wymagania poprzez relacje 1:N z \texttt{requirement}, \texttt{teacher\_availability}, \texttt{subject\_block} oraz relacje N:1 z pozostałymi zbiorami.
+            Szczególną rolę pełni tabela \texttt{requirement\_set} (zbiór wymagań głównych), ponieważ agreguje wszystkie inne zasoby oraz ogarniczenia.
+
+            \begin{table}[H]
+                \centering
+                \begin{tabular}{|r|l|}
+                    \hline
+                    \textbf{Tabela} & \textbf{Relacja} \\
+                    \hline
+                    \multirow{2}{*}{\texttt{requirement\_set}} & 1:N z \texttt{requirement}, \texttt{teacher\_availability}, \texttt{subject\_block} \\
+                    & N:1 z \texttt{subject\_pool}, \texttt{student\_group\_pool}, \texttt{teacher\_pool}, \texttt{room\_pool} \\
+                    \hline
+                \end{tabular}
+                \caption{Tabela requirement\_set}
+            \end{table} 
+
+            \noindent
+            gdzie:
+            \begin{itemize}
+                \item \texttt{requirement\_set} każdy rekord opisuje jedno wymaganie główne.
+                \begin{itemize}
+                    \item Posiada relację 1:N z tabelą \texttt{requirement}, \texttt{teacher\_availability} oraz \texttt{subject\_block}. \\
+                    \item Zawiera klucze obce do tabel \texttt{subject\_pool}, \texttt{student\_group\_pool}, \texttt{teacher\_pool} oraz \texttt{room\_pool}.
+                \end{itemize}
+            \end{itemize}
+
             Ta struktura umożliwia generowanie kompletnego planu lekcji na podstawie pojedynczego rekordu zbioru wymagań.
-            % \begin{enumerate}
-            %     \item[5.] Tabela zbiorów \textbf{wymagań głównych} \verb|req_set|.
-            %     \begin{itemize}
-            %         \item Relacja jeden do wielu z tabelą wymagań głównych
-            %         \item Relacja jeden do wielu z tabelą dostępności nauczycieli
-            %         \item Relacja jeden do wielu z tabelą bloków przedmiotów
-            %         \item Relacja wiele do jeden z tabelą zbiorów klas, nauczycieli oraz sal
-            %     \end{itemize}
-            % \end{enumerate}
 
             Zaprezentowany model bazy danych zapewnia elastyczność niezbędną do obsługi zmieniających się wymagań szkolnych poprzez mechanizm zbiorów. Struktura umożliwia wielokrotne wykorzystanie zasobów pomiędzy różnymi konfiguracjami planów, zachowując przy tym prostotę i wydajność.
 
@@ -705,13 +745,13 @@
             \noindent
             gdzie:
             \begin{itemize}
-                \item \texttt{plan} przychowuje plany lekcji.
-                \item \texttt{lesson} przechowuje przypisania.
+                \item \texttt{plan} przychowuje plany lekcji dla konkretnego zbioru wymagań (klucz obcy do odpowiedniej tabeli).
+                \item \texttt{lesson} przechowuje przypisania. Posiada klucz obcy do wszystkich zasobów oraz planu lekcji.
             \end{itemize}
 
         \begin{figure}[p]
             \centering
-            \includegraphics[width=1.0\textwidth]{images/diagramy/diagram_db.png}
+            \includegraphics[width=1.0\textwidth]{images/diagramy/diagram_db_2.png}
             \caption{Diagram pełnego projektu bazy danych}
         \end{figure}
 
@@ -775,12 +815,12 @@
                 & \texttt{hour} & Slot czasowy \\
                 \hline
             \end{tabular}
-            \caption{Struktura wszystkich tabel}
+            \caption{Struktura wszystkich tabel w bazie danych}
         \end{table}
     \clearpage
 
     \subsection{Projekt interfejsu}
-        Projekt interfejsu użytkownika opracowałem z uwzględnieniem wymagań funkcjonalnych oraz heurystyk Nilsena~\cite{nielsenheuristics}.
+        Projekt interfejsu użytkownika opracowałem z uwzględnieniem wymagań funkcjonalnych.
         Architektura nawigacji opiera się na logicznym przepływie pracy charakterystycznym dla procesu układania planu lekcji, zapewniając intuicyjne środowisko dla użytkowników zaznajomionych z arkuszami kalkulacyjnymi.
 
         \subsubsection{Nawigacja}
@@ -837,7 +877,6 @@
             Po pierwsze, posiadam znaczące doświadczenie w rozwoju aplikacji przy użyciu tej technologii, co pozwoliło na efektywną implementację interfejsu użytkownika.
             Po drugie, React jest jednym z najbardziej popularnych i dojrzałych frameworków frontendowych, co gwarantuje obszerną dokumentację oraz aktywną społeczność wspierającą rozwój.
             Po trzecie, React oferuje responsywne zarządzanie stanem aplikacji, co umożliwia dynamiczną aktualizację widoków planów lekcji bez konieczności przeładowywania strony, zapewniając płynne doświadczenie użytkownika podczas przeglądania planów lekcji.
-            Komponentowa architektura Reacta idealnie odpowiada modularnej strukturze aplikacji do układania planu lekcji, umożliwiając tworzenie reużywalnych elementów takich jak nawigacja.
 
         \subsubsection{Warstwa serwerowa}
             Wybór Pythona jako głównego języka programowania dla całego systemu był decyzją, podyktowaną koniecznością sprawnej integracji modułu optymalizacyjnego z warstwą aplikacji webowej.
@@ -850,7 +889,7 @@
 
         \subsubsection{Baza danych}
             PostgreSQL został wybrany jako system zarządzania bazą danych ze względu na jego wsparcie oraz doskonałą integrację z Django.
-            Kluczowym czynnikiem była kompatybilność z biblioteką django-tenants, która umożliwia przyszłą implementację architektury opisanej w dokumentacji~\cite{djangotenants}.
+            Kluczowym czynnikiem była kompatybilność z biblioteką django-tenants, która umożliwia przyszłą implementację architektury opisanej w jej dokumentacji~\cite{djangotenants}.
             Ta funkcjonalność pozwoli w przyszłości na łatwe dodanie obsługi wielu niezależnych użytkowników lub instytucji w obrębie pojedynczej instancji aplikacji.
             Dodatkowo, wsparcie dla niestandardowych typów danych, między innymi JSON, w PostgreSQL idealnie odpowiada potrzebom przechowywania skomplikowanych struktur danych, takich jak macierze dostępności nauczycieli czy konfiguracje bloków przedmiotów.
 
@@ -865,19 +904,22 @@
     \subsection{Implementacja bazy danych w Django}
         Technika ORM stosowana w Django oferuje intuicyjny sposób definiowania relacji między modelami.
         
-        Relacje wiele-do-jednego są definiowanę klasą \verb|ForeignKey(to, on_delete, **options)|, gdzie parametr \verb|on_delete| określa zachowanie przy usuwaniu powiązanych rekordów.
+        Relacje wiele-do-jednego są definiowanę klasą \verb|ForeignKey|.
         Relacje wiele-do-wielu implementuje się za pomocą klasy \verb|ManyToManyField|, która automatycznie generuje niezbędne tabele pośredniczące w bazie danych.
 
         Każda tabela w systemie, z wyjątkiem automatycznie generowanych tabel dla relacji wiele-do-wielu, jest definiowana przez dedykowaną klasę w pliku \verb|models.py|. 
-        Poniżej przedstawiłem przykładową implementację modelu reprezentującego sale.
+        Na rysunku~\ref{fig:code1} przedstawiłem przykładową implementację modelu reprezentującego sale.
 
         \subsubsection{Tabela sal}
-            \begin{lstlisting}[language=Python]
+            \begin{figure}[H]
+                \begin{lstlisting}[language=Python]
 class Room(models.Model):
     pool = models.ForeignKey(RoomPool, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     compatible_subjects = models.ManyToManyField(Subject)
-            \end{lstlisting}
+                \end{lstlisting}
+                \caption{Fragment kodu służący do definicji tabeli sal}\label{fig:code1}
+            \end{figure}
 
         Analogiczna implementacja dla reszty tabel opisanych w~\ref{subsection:projekt_bazy_danych}.
 
@@ -893,102 +935,127 @@ class Room(models.Model):
             \caption{Automatycznie wygenerowana lista endpointów stworzonych przy użyciu \mbox{ModelViewSet}}\label{fig:api_default_router}
         \end{figure}
 
+        Na rysunku~\ref{fig:code2} przedstawiłem przykładową implementację endpointów dotyczących tabeli \verb|room_pool| używając klast \verb|ModelViewSet|.
+        \begin{figure}[H]
+            \begin{lstlisting}[language=Python]
+class RoomPoolSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RoomPool
+        fields = ["id", "name"]
+
+class RoomPoolViewSet(ModelViewSet):
+    queryset = RoomPool.objects.all()
+    serializer_class = RoomPoolSerializer
+            \end{lstlisting}
+            \caption{Fragment kodu służący do implementacji endpointów dla zbioru sal}\label{fig:code2}
+        \end{figure}
+
     \subsection{Implementacja interfejsu webowego}
         Komponentowa architektura Reacta pozwoliła na zbudowanie modularnego interfejsu, gdzie poszczególne widoki (takie jak edycja wymagań, konfiguracja zasobów czy podgląd planów) zostały wydzielone jako niezależne komponenty, które w połączeniu z komponentem nawigacji tworzą konkretne strony.
         Połączenie z backendem realizowane jest poprzez zdefiniowane powyżej API, zapewniając płynną komunikację między warstwą interfejsu a warstwą serwerową.
 
-        \newpage
         \subsubsection{Nawigacja}
-            Po lewej widzimy nazwę aplikacji, na środku nazwę strony na której znajduje się użytkownik (w celach pokazowych ,,Page''), a po prawej widzimy różne podstrony aplikacji, gdzie ,,Upload Requirements'' rozwija się, pozwalając użytkownikowi na przejście do konkretnej strony wprowadzania wymagań.
+            Nawigacja przedstawiona na rysunku~\ref{fig:nawigacja} składa się z trzech elementów:
+            \begin{itemize}
+                \item Po lewej stronie znajduje się nazwa aplikacji. 
+                \item Na środku wyświetlana jest aktualna nazwa podstrony, co pomaga użytkownikowi szybko zorientować się w kontekście.
+                \item Po prawej dostępne są główne sekcje aplikacji, w tym rozwijane menu ,,Upload Requirements'', umożliwiające przejście do konkretnych modułów wprowadzania danych.
+            \end{itemize}
 
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=0.9\textwidth]{images/strona/nawigacja.png}
-                \caption{Nawigacja interfejsu webowego}
+                \caption{Nawigacja interfejsu webowego}\label{fig:nawigacja}
             \end{figure}
 
         \subsubsection{Strona główna}
-            Strona główna pozwala na bezpośrednie przejście do widoku przeglądania planów lekcji, generowania nowych planów, bądź wprowadzania wymagań głównych.
-            W widoku klas widać nauczyciela z którym jest lekcja, a w widoku nauczyciela widać klasę.
-
+            Strona główna przedstawiona na rysunku~\ref{fig:glowna} zapewnia szybki dostęp do kluczowych funkcji aplikacji: przeglądania istniejących planów lekcji, generowania nowych oraz wprowadzania wymagań głównych.
+            
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=0.9\textwidth]{images/strona/strona_glowna.png}
-                \caption{Strona główna interfejsu webowego}
+                \caption{Strona główna interfejsu webowego}\label{fig:glowna}
             \end{figure}
+            
+            \subsubsection{Podgląd planów lekcji}
+                Widok planów lekcji można przeglądać zarówno z perspektywy klas, jak i nauczycieli.
+                W widoku klas każda lekcja prezentowana jest wraz z przypisanym nauczycielem, natomiast w widoku nauczyciela wyświetlane są klasy, z którymi prowadzi zajęcia.
 
-        \subsubsection{Podgląd planów lekcji}
-            Widok planów lekcji z perspektywy klas oraz nauczyciela.
+                Implementacja zaprezentowana na rysunku~\ref{fig:plan_nauczyciel} oraz~\ref{fig:plan_klasa} spełnia wymagania funkcjonalne co do przeglądania planów.
 
-            \begin{figure}[H]
-                \centering
-                \includegraphics[width=0.9\textwidth]{images/strona/plan_nauczyciel.png}
-                \caption{Podgląd planu z perspektywy nauczyciela}
-            \end{figure}
-            \begin{figure}[H]
-                \centering
-                \includegraphics[width=0.9\textwidth]{images/strona/plan_klasa.png}
-                \caption{Podgląd planu z perspektywy klasy}
-            \end{figure}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.9\textwidth]{images/strona/plan_nauczyciel.png}
+                    \caption{Podgląd planu z perspektywy nauczyciela}\label{fig:plan_nauczyciel}
+                \end{figure}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.9\textwidth]{images/strona/plan_klasa.png}
+                    \caption{Podgląd planu z perspektywy klasy}\label{fig:plan_klasa}
+                \end{figure}
 
         \subsubsection{Widok generowania planów lekcji}
-            Widok pozwalający użytkownikowi na wpisanie liczby generacji do wygenerowania planu lekcji.
+            Widok umożliwia użytkownikowi określenie liczby generacji, jakie algorytm powinien wykonać podczas tworzenia planu lekcji.
+            Dzięki temu można dostosować czas działania i potencjalną jakość rozwiązania do bieżących potrzeb.
+
+            Implementacja zaprezentowana na rysunku~\ref{fig:plan_generowanie} spełnia wymagania funkcjonalne co do generowania planu lekcji.
 
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=0.9\textwidth]{images/strona/generowanie.png}
-                \caption{Widok generowania planu lekcji}
+                \caption{Widok generowania planu lekcji}\label{fig:plan_generowanie}
             \end{figure}
 
         \subsubsection{Widoki wprowadzania zasobów}
+            Widoki wprowadzania zasobów pozwalają na tworzenie, i wybieranie ich zbiorów.
+            Implementacje przedstawione na rysunkach~\ref{fig:add_subject},~\ref{fig:add_teacher},~\ref{fig:add_room},~\ref{fig:add_class} spełniają wymagania funkcjonalne co do dodawania zasobów.
+
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=0.9\textwidth]{images/strona/przedmioty.png}
-                \caption{Widok dodawania przedmiotów}
+                \caption{Widok dodawania przedmiotów}\label{fig:add_subject}
             \end{figure}
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=0.9\textwidth]{images/strona/nauczyciele.png}
-                \caption{Widok dodawania nauczycieli}
+                \caption{Widok dodawania nauczycieli}\label{fig:add_teacher}
             \end{figure}
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=0.9\textwidth]{images/strona/sale.png}
-                \caption{Widok dodawania sal}
+                \caption{Widok dodawania sal}\label{fig:add_room}
             \end{figure}
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=0.9\textwidth]{images/strona/klasy.png}
-                \caption{Widok dodawania klas}
+                \caption{Widok dodawania klas}\label{fig:add_class}
             \end{figure}
 
-        \subsubsection{Widok wprowadzania wymagań głównych}
-            Widok wprowadzania wymagań głównych, który przypomina arkusz kalkulacyjny pokazany w~\ref{fig:excel_wymagania}.
-            Górny wiersz przewija się razem ze stroną.
+        \subsubsection{Widoki wprowadzania wymagań}
+            Widok wprowadzania wymagań głównych przedstawiony na rysunku~\ref{fig:wprowadzanie_glowne}, który przypomina arkusz kalkulacyjny pokazany na rysunku~\ref{fig:excel_wymagania}, co spełnia wymagania niefunkcjonalne.
+            Górny wiersz przewija się razem ze stroną ułatwiając nawikację i wpisywanie wymagań.
+            Podobnie jak widoki wprowadzania zasobów pozwala na wybranie zbioru wymagań głównych.
+
+            Na podobnej zasadzie działają widoki wprowadzania dostępności nauczycieli i bloków przedmiotów przedstawione odpowiednio na rysunkach~\ref{fig:dostepnosc_nauczycieli} i~\ref{fig:wprowadzenie_blokow}.
 
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=0.9\textwidth]{images/strona/wymagania_glowne_1.png}
                 \vspace{1em}
                 \includegraphics[width=0.9\textwidth]{images/strona/wymagania_glowne_2.png}
-                \caption{Widok dodawania wymagań głównych}
+                \caption{Widok dodawania wymagań głównych}\label{fig:wprowadzanie_glowne}
             \end{figure}
-
-        \subsubsection{Widok wprowadzania dostępności nauczycieli}
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=0.9\textwidth]{images/strona/dostepnosc.png}
-                \caption{Widok wprowadzania dostępności nauczycieli}
+                \caption{Widok wprowadzania dostępności nauczycieli}\label{fig:dostepnosc_nauczycieli}
             \end{figure}
-
-        \subsubsection{Widok wprowadzania bloków przedmiotów}
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=0.9\textwidth]{images/strona/bloki.png}
-                \caption{Widok dodawania bloków przedmiotów}
+                \caption{Widok dodawania bloków przedmiotów}\label{fig:wprowadzenie_blokow}
             \end{figure}
 
-    \newpage
     \subsection{Integracja z algorytmem}
         Dzięki adekwatnemu wyborowi technologii, proces integracji modułu optymalizacyjnego z warstwą serwerową został znacząco uproszczony.
         Zaimplementowałem dedykowany endpoint, który przyjmuje żądania typu POST zawierające parametry konfiguracyjne algorytmu, w tym liczbę generacji dla algorytmu ewolucyjnego oraz ID zbioru wymagań.\\

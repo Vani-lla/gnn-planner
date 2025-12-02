@@ -21,10 +21,13 @@
 ## Poprawy
 - Diagramy
     - &check; Use case wybierz widok -> include
-- Poprawienie opisu bazy danych
-- Dodać opis do diagramów sekwencji
+- &check; Poprawienie opisu bazy danych
+- &check; Dodać opis do diagramów sekwencji
+- &check; Opisy do interfejsu
+
 - Sprawdzenie pierwszej pracy z bibliografii
 - Zrobić coś z potężną ilością stron
+
 - Poprawienie indeksów, nie może być 3 stopniowe - t_{wi} a nie t_w_i
 - Poprawienie strunktury rozdziału trzeciego
     - 3.3 Dekompozycja problemu i wybór technik
@@ -42,7 +45,10 @@
 - Przydział =/= rozkład
 - Przykładowy zbiór bloków lekcyjnych powinien zawierać faktyczne zbiory jako wymagania główne
 
-- Poprawa widoczności bloku (skala)
+- &check; Kod jako rysunek
+
+- Poprawa widoczności bloków lekcyjnych w wynikach (wspólna oś / skala)
+- Poprawienie wyników
 
 ### Wszelkie inne poprawki :|
 95.43159103393555

@@ -57,23 +57,23 @@ Table teacher_pool_teacher {
 
 Table teacher_subject {
     id int [pk]
-    teacher_id int [ref: > teacher.id]
     subject_id int [ref: > subject.id]
+    teacher_id int [ref: > teacher.id]
 }
 
 Table room_compatible_subjects {
     id int [pk]
-    room_id int [ref: > room.id]
     subject_id int [ref: > subject.id]
+    room_id int [ref: > room.id]
 }
 
 Table requirement_set {
     id int [pk]
-    teacher_pool_id int [ref: > teacher_pool.id]
-    room_pool_id int [ref: > room_pool.id]
+    name varchar
     group_pool_id int [ref: > student_group_pool.id]
     subject_pool_id int [ref: > subject_pool.id]
-    name varchar
+    teacher_pool_id int [ref: > teacher_pool.id]
+    room_pool_id int [ref: > room_pool.id]
 }
 
 Table subject_block {
@@ -106,9 +106,9 @@ Table teacher_availability {
 Table requirement {
     id int [pk]
     req_set_id int [ref: > requirement_set.id]
-    teacher_id int [ref: > teacher.id]
     group_id int [ref: > student_group.id]
     subject_id int [ref: > subject.id]
+    teacher_id int [ref: > teacher.id]
     hours int
 }
 
@@ -121,10 +121,10 @@ Table plan {
 Table lesson {
     id int [pk]
     plan_id int [ref: > plan.id]
-    teacher_id int [ref: > teacher.id]
-    subject_id int [ref: > subject.id]
-    room_id int [ref: > room.id]
     student_group_id int [ref: > student_group.id]
+    subject_id int [ref: > subject.id]
+    teacher_id int [ref: > teacher.id]
+    room_id int [ref: > room.id]
     day int
     hour int
 }

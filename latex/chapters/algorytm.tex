@@ -15,8 +15,6 @@
             \item \textbf{Przedmiot}: Temat zajęć prowadzonych przez nauczyciela; przykładowo ,,Wychowanie Fizyczne'', ,,Matematyka'', \dots
             \item \textbf{Lekcja}: Zajęcia prowadzone przez jednego nauczyciela, w jednej sali, z jedną lub więcej klas, które są na temat jednego przedmiotu.
             \item \textbf{Slot czasowy}: Czas w którym odbywa się lekcja; przykładowo slot zerowy może odbywać się od 7:00 do 7:45.
-            \item \textbf{Blok lekcyjny}: Grupa dwóch lub więcej lekcji, które odbywają się w tym samym slocie czasowym.
-            Mogą one dotyczyć jednej klasy oraz wielu nauczycieli, jednego nauczyciela i wielu klas, lub też wielu klas i wielu nauczycieli.
             \item \textbf{Okienko}: Przerwa między dwoma lekcjami klasy lub nauczyciela. Występuje gdy zajęcia nie są przeprowadzane bezpośrednio po sobie.
         \end{itemize}
 
@@ -201,33 +199,36 @@
                 Zgodnie z definicją przyjętą w~\ref{eq:wymaganie_glowne} tygodniowa liczba godzin każdego przedmiotu musi być równa tej ustalonej w zbiorze wymagań:
                 \[ \forall w \in \mathcal{W}: \left|\left\{z \in \mathcal{Z}: c_w = c_z \land t_w = t_z \land s_w = s_z\right\}\right| = g_w \]
 
-            \subsubsection{Hierarchiczna dekompozycja problemu}
-                Podczas gdy w pracy~\cite{rappos2022mixed} dekompozycja dotyczy głównie warstw ograniczeń, w moim rozwiązaniu wprowadziłem dekompozycję całego problemu:
+            % \subsubsection{Hierarchiczna dekompozycja problemu}
+            %     Podczas gdy w pracy~\cite{rappos2022mixed} dekompozycja dotyczy głównie warstw ograniczeń, w moim rozwiązaniu wprowadziłem dekompozycję całego problemu:
 
-            Każdy poziom rozwiązuje inny problem i wykorzystuje odpowiednie do tego celu algorytmy.
+            % Każdy poziom rozwiązuje inny problem i wykorzystuje odpowiednie do tego celu algorytmy.
 
-            \subsubsection{Kombinacja metod optymalizacyjnych}
-                W odróżnieniu od pracy źródłowej, która wykorzystuje wyłącznie solver MIP z heurystykami, w moim podejściu zastosowałem wiele technik:
-                \begin{itemize}
-                    \item \textbf{Algorytm zachłanny} --- dla problemów konstrukcyjnych (tworzenie bloków)
-                    \item \textbf{Algorytm ewolucyjny} --- dla dyskretnego przydziału bloków do dni
-                    \item \textbf{Solver CP} --- dla problemów szeregowania
-                \end{itemize}
+            % \subsubsection{Kombinacja metod optymalizacyjnych}
+            %     W odróżnieniu od pracy źródłowej, która wykorzystuje wyłącznie solver MIP z heurystykami, w moim podejściu zastosowałem wiele technik:
+            %     \begin{itemize}
+            %         \item \textbf{Algorytm zachłanny} --- dla problemów konstrukcyjnych (tworzenie bloków)
+            %         \item \textbf{Algorytm ewolucyjny} --- dla dyskretnego przydziału bloków do dni
+            %         \item \textbf{Solver CP} --- dla problemów szeregowania
+            %     \end{itemize}
 
-            \subsubsection{Redukcja złożoności obliczeniowej}
-                Pełny problem harmonogramowania wymagałby liczby zmiennych decyzyjnych proporcjonalnych do:
-                \[ |\mathcal{T}| \times |\mathcal{C}| \times |\mathcal{S}| \times 5 \times H \times |\mathcal{R}| \]milionów
-                co dla typowej szkoły daje miliony potencjalnych zmiennych.
+            % \subsubsection{Redukcja złożoności obliczeniowej}
+            %     Pełny problem harmonogramowania wymagałby liczby zmiennych decyzyjnych proporcjonalnych do:
+            %     \[ |\mathcal{T}| \times |\mathcal{C}| \times |\mathcal{S}| \times 5 \times H \times |\mathcal{R}| \]milionów
+            %     co dla typowej szkoły daje miliony potencjalnych zmiennych.
             
-                W podejściu dekompozycyjnym:
-                \begin{itemize}
-                    \item \textbf{Etap 1}: Operuje na $|\mathcal{W}|$ wymaganiach
-                    \item \textbf{Etap 2}: Operuje na $5 \times |\mathcal{L}|$ zmiennych
-                    \item \textbf{Etap 3}: Rozwiązuje 5 niezależnych podproblemów o rozmiarze 20\% oryginalnego problemu
-                \end{itemize}
+            %     W podejściu dekompozycyjnym:
+            %     \begin{itemize}
+            %         \item \textbf{Etap 1}: Operuje na $|\mathcal{W}|$ wymaganiach
+            %         \item \textbf{Etap 2}: Operuje na $5 \times |\mathcal{L}|$ zmiennych
+            %         \item \textbf{Etap 3}: Rozwiązuje 5 niezależnych podproblemów o rozmiarze 20\% oryginalnego problemu
+            %     \end{itemize}
 
-                Każdy etap można modyfikować lub wymieniać niezależnie. Jest to ważna zaleta podczas rozwijania oprogramowania.
-                W szczególności jeśli takie oprogramowanie może być w przyszłości rozwijane przez więcej niż jednego dewelopera.
+            %     Każdy etap można modyfikować lub wymieniać niezależnie. Jest to ważna zaleta podczas rozwijania oprogramowania.
+            %     W szczególności jeśli takie oprogramowanie może być w przyszłości rozwijane przez więcej niż jednego dewelopera.
+
+        \subsection{Funkcja celu}
+            abc
 
 \section{Poprzednie podejścia}
     Aby w pełni zrozumieć mój wybór narzędzi warto szybko przetoczyć historię moich poprzednich podejść do rozwiązania tego problemu.
@@ -308,6 +309,8 @@
         Zbyt niskie natomiast powodowały, że model preferował optymalizację nagrody za grupowanie lekcji kosztem naruszenia ograniczeń.
 
     \subsection{JSSP}
+        DO PRZENIESIENIE A DO DEKOMPOZYCJI 
+
         Kolejnym podejściem było wykorzystanie metod opisanych w~\ref{section:jssp}.
         Spośród istniejących rozwiązań szczególnie inspirujące okazało się podejście zaprezentowane w dokumentacji Google OR-Tools~\cite{googleortoolsjssp}, w którym operacje reprezentowane są za pomocą zmiennych interwałowych.
         Mechanizm ten oferuje znacznie większą elastyczność niż model binarny przedstawiony w podrozdziale~\ref{subsection:podejscie_zerojedynkowe}, a równocześnie pozwala zachować przejrzystość definicji ograniczeń.
@@ -346,38 +349,42 @@
     Zdecydowałem się na podział zadania na trzy mniejsze, kolejno realizowane etapy, z których każdy rozwiązuje wyraźnie wydzielony podproblem o niższej złożoności obliczeniowej.
     
     Analiza moich wcześniejszych prób rozwiązania tego zagadnienia, wskazuje, że oparcie się wyłącznie na metodach inteligentnych bądź na MIP nie prowadzi do satysfakcjonujących rezultatów.
-    Zasadnicza innowacja przedstawionego podejścia polega na dekompozycji oryginalnego problemu na trzy sekwencyjne fazy, każda używająca adekwatnej techniki, co stanowi rozwinięcie względem moich wcześniejszych koncepcji.
+    Zasadnicza innowacja przedstawionego przeze mnie podejścia polega na dekompozycji oryginalnego problemu na trzy sekwencyjne fazy, każda używająca adekwatnej techniki, co stanowi rozwinięcie względem moich wcześniejszych koncepcji.
     
-    Pierwsze dwa etapy mają na celu stopniowe ograniczanie przestrzeni decyzyjnej, tak aby w trzeciej, końcowej fazie możliwe było efektywne sformułowanie i rozwiązanie problemu programowania z ograniczeniami.
-    Ostatecznym rezultatem takiej dekompozycji jest wyraźne zmniejszenie liczby zmiennych decyzyjnych niezbędnych do zdefiniowania ograniczeń w etapie końcowym, co bezpośrednio przekłada się na poprawę efektywności obliczeniowej całego procesu.
+    Aby móc przeprowadzić dekompozycję warto zdecydowałem się na wprowadzenie następujących pojęć:
+    \begin{itemize}
+        \item \textbf{Blok lekcyjny}: Grupa dwóch lub więcej lekcji, które odbywają się w tym samym slocie czasowym.
+        Mogą one dotyczyć jednej klasy oraz wielu nauczycieli, jednego nauczyciela i wielu klas, lub też wielu klas i wielu nauczycieli.
+        Na potrzeby tej pracy zbiory jednej lekcji też traktujemy jako pojedyncze bloki lekcyjne.
+        \item \textbf{Przydział godzinowy}: Posiadając już zbiór takich zbiorów lekcyjnych macierz ich przypisań nazywamy przydziałem godzinowym.
+        Każda kolumna takiej macierzy ma 5 wartości i reprezentuję liczbę godzin lekcyjnych przeprowadzoną każdego dnia.
+        Przykładowo kolumna $\begin{bmatrix} 0 & 1 & 0 & 0 & 0 \end{bmatrix}$ reprezentuję jedną godzinę bloku we wtorek.
+    \end{itemize}
 
+    Dekompozycja prezentuje się następująco:
     \begin{enumerate}
-        \item Etap 1 --- \textbf{Konstrukcja bloków lekcyjnych}: \\
+        \item Etap 1 --- \textbf{Problem kombinatoryki}: \\
         \textbf{Dane wejściowe:} Zbiór wymagań głównych $\mathcal{W}$, zbiór definicji bloków przedmiotów $\mathcal{B}$ oraz zasoby szkolne $\mathcal{T}$, $\mathcal{C}$, $\mathcal{S}$. \\
-        \textbf{Wynik:} Zbiór bloków lekcyjnych $\mathcal{L}$ i wektor godzin $V$. \\
-        \textbf{Cel:} Grupowanie pojedynczych wymagań w spójne jednostki dydaktyczne.
+        \textbf{Wynik:} Zbiór bloków lekcyjnych $\mathcal{L}$ i wektor ich wymaganych godzin tygodniowo $V$. \\
+        \textbf{Cel:} Grupowanie pojedynczych wymagań głównych w możliwe do zrealizowania bloki lekcyjne.
         
-        \item Etap 2 --- \textbf{Alokacja tygodniowa}: \\
+        \item Etap 2 --- \textbf{Problem alokacji}: \\
         \textbf{Dane wejściowe:} Bloki lekcyjne $\mathcal{L}$, wektor godzin $V$, macierz dostępności nauczycieli $A$ oraz zasoby szkolne $\mathcal{T}$ i $\mathcal{C}$. \\
-        \textbf{Wynik:} Macierz przydziału $S_{\text{best}}$ określająca liczbę godzin bloków każdego dnia. \\
-        \textbf{Cel:} Optymalny rozkład godzin bloków na pięć dni roboczych.
-        
-        \item Etap 3 --- \textbf{Harmonogramowanie}: \\
-        \textbf{Dane wejściowe:} Macierz $S_{\text{best}}$, bloki lekcyjne $\mathcal{L}$ oraz zasoby sal $\mathcal{R}$. \\
+        \textbf{Wynik:} Przydział godzinowy $S$ określający liczbę godzin bloków każdego dnia. \\
+        \textbf{Cel:} Optymalny przydział godzin bloków lekcyjnych na pięć dni roboczych.
+
+        \item Etap 3 --- \textbf{Problem harmonogramowania}: \\
+        \textbf{Dane wejściowe:} Macierz $S$, bloki lekcyjne $\mathcal{L}$ oraz zasoby sal $\mathcal{R}$. \\
         \textbf{Wynik:} Zbiór przypisań $\mathcal{Z}$ określających konkretne sloty czasowe i sale. \\
         \textbf{Cel:} Przypisanie terminów i pomieszczeń dla wszystkich zajęć.
     \end{enumerate}
-    gdzie $S_{\text{best}}$ to macierz reprezentująca najlepszego osobnika algorytmu ewolucyjnego, reprezentująca przypisania konkretnych bloków lekcyjnych $L$ do dni tygodnia.
 
     Pełne sformułowanie problemu harmonogramowania prowadziłoby do liczby zmiennych decyzyjnych proporcjonalnej do wyrażenia
     \[ |\mathcal{T}| \times |\mathcal{C}| \times |\mathcal{S}| \times 5 \times H \times |\mathcal{R}| \]
-    co w przypadku typowej szkoły skutkowałoby powstaniem nawet kilku milionów potencjalnych zmiennych. Tak duża skala zadania stanowi istotne wyzwanie obliczeniowe i uzasadnia konieczność zastosowania przedstawionego wcześniej, wieloetapowego podejścia. 
-    Dzięki dekompozycji problemu na trzy mniejsze etapy możliwe jest stopniowe ograniczanie przestrzeni decyzyjnej:
-    \begin{enumerate}
-        \item Tworzenie zmiennych operuje na $\left|\mathcal{W}\right|$ wymaganiach głównych.
-        \item Przydział bloków lekcyjnych operuje na $\left|\mathcal{L}\right|$ blokach lekcyjnych.
-        \item Liczba zmiennych decyzyjnych w solverze do zadań programowania z ograniczeniami jest proporcjonalna do $\left|\mathcal{L}\right|$.
-    \end{enumerate}
+    co w przypadku typowej szkoły skutkowałoby powstaniem nawet kilku milionów potencjalnych zmiennych.
+    Tak duża skala zadania stanowi istotne wyzwanie obliczeniowe i uzasadnia konieczność zastosowania wieloetapowego podejścia.
+    
+    Na rysunku~\ref{fig:struktura_algorytmu} przedstawiłem diagram struktury algorytmu:
 
     \begin{figure}[h]
         \centering
@@ -421,19 +428,95 @@
             
             \draw[->] (R3.south) -- (C.north);
         \end{tikzpicture}
-        \caption{Struktura algorytmu}
+        \caption{Struktura algorytmu}\label{fig:struktura_algorytmu}
     \end{figure}
 
-    \subsection{Dobór technik algorytmicznych}
-        Dla każdego etapu dobrano technikę optymalizacyjną dopasowaną do charakterystyki podproblemu:
+    Dla każdego etapu dobrałem technikę optymalizacyjną dopasowaną do charakterystyki problemu.
 
+    Etap pierwszy charakteryzuje się niewielką przestrzenią decyzyjną oraz prostymi regułami tworzenia kombinacji wymagań głównych.
+    Tworzenie bloków sprowadza się do grupowania wszystkich wymagań głównych, które spełniają kryteria opisane w blokach przedmiotów.
+    Z uwagi na niską złożoność problemu oraz prostotę implementacyjną zdecydowałem się na użycie algorytmu zachłannego.
+    Chociaż podejście to nie gwarantuje uzyskania optymalnych kombinacji, w kontekście niewielkiej przestrzeni decyzyjnej różnice w wynikach są minimalne.
+
+    Kontrastowo, drugi etap charakteryzuje się bardzo dużą przestrzenią decyzyjną --- liczba możliwych kombinacji jest ogromna.
+    Wymaga to zastosowania metody optymalizacyjnej zdolnej do równoległej ewaluacji wielu potencjalnych rozwiązań.
+    Biorąc pod uwagę tę potrzebę oraz naturalną reprezentację danych wyjściowych w postaci macierzy, zdecydowałem się na użycie algorytmu ewolucyjnego.
+    Podejście to upraszcza definiowanie funkcji celu (nie wymaga znajomości gradientu), zapewnia efektywne przeszukiwanie ogromnej liczby kombinacji i umożliwia bezpośrednie wykorzystanie formatu danych wyjściowych jako kodowania osobników.
+
+    Trzeci etap sprowadza się do problemu harmonogramowania, który jak omówiono wcześniej można przekształcić do postaci opisanej w rozdziale~\ref{section:jssp}.
+    Choć istnieje wiele podejść rozwiązujących tego typu zadania, zdecydowałem się na zastosowanie programowania liniowego z ograniczeniami.
+    Metoda ta nie wymaga ode mnie projektowania własnego algorytmu rozwiązującego, co znacząco upraszcza proces implementacji, a jednocześnie gwarantuje wysoką jakość otrzymanych harmonogramów.
+    W szczególności wykorzystałem zmienne interwałowe, które ułatwiają modelowanie złożonych zależności czasowych i ograniczeń między lekcjami.
+
+    Taki dobór technik tworzy hybrydowe podejście, które wykorzystuje mocne strony każdej metody, zapewniając kompromis między jakością rozwiązania a czasem obliczeń.
+    Na rysunku~\ref{fig:struktura_algorytmu_techniki} przedstawiono strukturę algorytmu z wpisanymi odpowiednimi nazwami technik.
+
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[node distance=5cm]
+            \tikzstyle{block} = [rectangle, draw, minimum width=3cm, minimum height=1.5cm]
+            \tikzstyle{every path} = [very thick, -latex]
+            
+            \node[block] (A) {\shortstack[c]{Algorytm\\zachłanny}};
+            \node[block, right of=A] (B) {\shortstack[c]{Algorytm\\ewolucyjny}};
+            \node[block, right of=B] (C) {\shortstack[c]{Programowanie\\liniowe}};
+            
+            \draw[->] ([yshift=8pt]$(A.west)+(-1,0)$) -- node[above]{$\mathcal{W}$} ([yshift=8pt]A.west);
+            \draw[->] ([yshift=-8pt]$(A.west)+(-1,0)$) -- node[above]{$\mathcal{B}$} ([yshift=-8pt]A.west);
+            
+            \draw[->] ([yshift=8pt]A.east) -- node[above]{$V$} ([yshift=8pt]B.west);
+            \draw[->] ([yshift=-8pt]A.east) -- node[above]{$\mathcal{L}$} ([yshift=-8pt]B.west);
+
+            \draw[->] ([yshift=-8pt]A.east) to[bend right=30] node[below]{$\mathcal{L}$} ([yshift=-8pt]C.west);
+            
+            \draw[->] ([yshift=8pt]B.east) -- node[above]{$S_{\text{best}}$} ([yshift=8pt]C.west);
+            
+            \draw[->] (C.east) -- node[above]{$\mathcal{Z}$} ++(1,0);
+
+            \node (T1) at ([yshift=30pt,xshift=-25pt]A.north) {$\mathcal{T}$};
+            \node (C1) at ([yshift=30pt]A.north) {$\mathcal{C}$};
+            \node (S1) at ([yshift=30pt,xshift=25pt]A.north) {$\mathcal{S}$};
+
+            \node (T2) at ([yshift=30pt,xshift=-25pt]B.north) {$\mathcal{T}$};
+            \node (C2) at ([yshift=30pt]B.north) {$\mathcal{C}$};
+            \node (A2) at ([yshift=30pt,xshift=25pt]B.north) {$A$};
+
+            \node (R3) at ([yshift=30pt]C.north) {$\mathcal{R}$};
+
+            \draw[->] (T1.south) -- ([xshift=-25pt]A.north);
+            \draw[->] (C1.south) -- (A.north);
+            \draw[->] (S1.south) -- ([xshift=25pt]A.north);
+
+            \draw[->] (T2.south) -- ([xshift=-25pt]B.north);
+            \draw[->] (C2.south) -- (B.north);
+            \draw[->] (A2.south) -- ([xshift=25pt]B.north);
+            
+            \draw[->] (R3.south) -- (C.north);
+        \end{tikzpicture}
+        \caption{Struktura algorytmu z doborem technik}\label{fig:struktura_algorytmu_techniki}
+    \end{figure}
+
+    \subsection{Problem kombinatoryki}
         \begin{itemize}
-            \item Etap 1 --- \textbf{Algorytm zachłanny}: Wybór podyktowany konstrukcyjnym charakterem problemu grupowania wymagań w maksymalne bloki przy spełnieniu ograniczeń strukturalnych.
-            \item Etap 2 --- \textbf{Algorytm ewolucyjny}: Idealny dla dyskretnych problemów alokacji z wieloma kryteriami jakości i bogatą przestrzenią rozwiązań.
-            \item Etap 3 --- \textbf{Programowanie z ograniczeniami}: Optymalne dla problemów harmonogramowania gdzie zależy nam na jakości rozwiązań.
+            \item Wprowadzenie formalnych oznaczeń
+            \item Głębsze uzasadnienie wyboru techniki na przykładzie
+            \item Funkcja celu
+            \item Jak algorytm osiąga funkcję celu i jak to się ma do oryginalnego problemu
         \end{itemize}
 
-        Taki dobór technik tworzy hybrydowe podejście, które wykorzystuje mocne strony każdej metody, zapewniając kompromis między jakością rozwiązania a czasem obliczeń.
+    \subsection{Problem alokacji}
+        \begin{itemize}
+            \item Formalne oznaczenia
+            \item Funkcja celu
+            \item Jak to się ma do oryginalnego problemu
+        \end{itemize}
+
+    \subsection{Problem harmonogramowania}
+        \begin{itemize}
+            \item Wyjaśnienie zmiennych interwałowych bardziej
+            \item Przeniesienie tego co jest w literaturze tutaj apropo jssp
+            \item wprowadzenie konkretnych oznaczeń
+        \end{itemize}
 
 \section{Algorytm zachłanny}
     Algorytm zachłanny (ang. \textit{greedy}) polega na iteracyjnym podejmowaniu lokalnie najlepszej decyzji bez cofania się i bez globalnego przeszukiwania przestrzeni rozwiązań~\cite{cormen2022introduction}.
