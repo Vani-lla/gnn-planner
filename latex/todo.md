@@ -5,14 +5,14 @@
 - Powiązane prace:
     - &check; Opisać lepiej podejście iteracyjne w pierwszej pracy
 - Problem układania planu lekcji i algorytm rozwiązania:
-    - Dodać wyniki
+    - &check; Dodać wyniki
 - Aplikacja:
     - &check; Dodać tabele przypadków użycia
     - &check; Dopisać wybór narzędzi dla modułu optymalizacyjnego
     - &check; Dodać diagram bloków i opisać strukturę całej aplikacji
 - Testowanie i ewaluacja rozwiązania:
     - &check; Lepiej sformułować scenariusze testowe
-    - Przeprowadzić testy i załączyć screeny
+    - &check; Przeprowadzić testy i załączyć screeny
 - Wnioski i perspektywy rozwoju:
     - &check; Problemy rozwiązania
     - &check; Wnioski
@@ -35,10 +35,14 @@
             - Uzasadnienie wyboru techniki
         - 3.3.2 Problem z etapu 2
         - 3.3.3 Problem z etapu 3
-- obciazenia dydaktyczne
+- Obciazenia dydaktyczne
 - Wywalenie oznaczeń pośrednich ze sformułowania problemu
-- Rezultaty -> Przykładowyw wynik
+- Rezultaty -> Przykładowy wynik
 - Funkcja celu dla całości problemu
 - Przydział =/= rozkład
+- Przykładowy zbiór bloków lekcyjnych powinien zawierać faktyczne zbiory jako wymagania główne
+
+- Poprawa widoczności bloku (skala)
 
 ### Wszelkie inne poprawki :|
+95.43159103393555

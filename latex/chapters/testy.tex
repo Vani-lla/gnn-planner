@@ -1,8 +1,8 @@
-\Chapter{Testowanie i ewaluacja rozwiązania}\label{chapter:tests}
+\Chapter{Weryfikacja i walidacja rozwiązania}\label{chapter:tests}
 
 \section{Scenariusze testowe}
 
-    \subsection{Scenariusz testowy generowania planu lakcji z określonymi parametrami}
+    \subsection{Scenariusz testowy generowania planu lekcji z określonymi parametrami}
         Poniższy scenariusz opisuje proces wygenerowania planu lekcji przy użyciu zaimplementowanego modułu optymalizacyjnego.
 
         \begin{table}[h!]
@@ -26,10 +26,11 @@
                     \multirow{3}{*}{\textbf{Kroki testowe}} 
                     & 1. Przejdź do widoku generowania planu lekcji \\
                     & 2. Wprowadź liczbę generacji \\
-                    & 3. Uruchom proces generowania planu \\ \hline
+                    & 3. Wybierz dostępny zestaw ograniczeń \\
+                    & 4. Uruchom proces generowania planu \\ \hline
                     
                     \textbf{Oczekiwany rezultat} &
-                    System generuje kompletny plan lekcji zgodny z ograniczeniami fizycznymi oraz wymaganiami głównymi. Użytkownik otrzymuje możliwość podglądu i walidacji wygenerowanego planu. \\ \hline
+                    System generuje kompletny plan lekcji zgodny ze wszystkimi ograniczeniami. System pokazuje użytkownikowi powiadomienie o zakończeniu procesu. \\ \hline
                 \end{tabular}
                 \caption{Generowanie planu lekcji z określonymi parametrami}
             \end{table}
@@ -119,45 +120,129 @@
                 \multirow{4}{*}{\textbf{Kroki testowe}}
                 & 1. Rozwiń wstążkę nawigacji \\
                 & 2. Przejdź do widoku dostępności nauczycieli \\
-                & 3. Edytuj dostępność wybranego nauczyciela \\
-                & 4. Zapisz zmiany \\ \hline
+                & 3. Wybierz dostępny zbiór ograniczeń \\
+                & 4. Edytuj dostępność wybranego nauczyciela \\
+                & 5. Zapisz zmiany \\ \hline
                 
                 \textbf{Oczekiwany rezultat} &
-                System zapisuje zmodyfikowane dane dostępności, a wprowadzone zmiany są widoczne po ponownym wczytaniu widoku. \\ \hline
+                System zapisuje zmodyfikowane dane dostępności. System pokazuje powiadomienie o powodzeniu operacji \\ \hline
             \end{tabular}
             \caption{Scenariusz edytowania dostępności nauczycieli}
         \end{table}
 
 \section{Testowanie aplikacji}
-    \subsection{Funkcjonalność 1}
-    \subsection{Funkcjonalność 2}
+    \subsection{Test generowania planu lekcji z określonymi parametrami}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.45\textwidth, height=4cm]{images/test1/krok1.png}
+            \includegraphics[width=0.45\textwidth, height=4cm]{images/test1/krok2.png}
+            \includegraphics[width=0.45\textwidth, height=4cm]{images/test1/krok3.png}
+            \includegraphics[width=0.45\textwidth, height=4cm]{images/test1/krok4.png}
+            \caption{Zrzuty ekranów wykonanych kroków dla scenariusza generowania planu lekcji}\label{fig:test_1}
+        \end{figure}
+
+    \subsection{Test przeglądania planów lekcji}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.45\textwidth, height=4cm]{images/test2/krok1.png}
+            \includegraphics[width=0.45\textwidth, height=4cm]{images/test2/krok2.png}
+            \includegraphics[width=0.45\textwidth, height=4cm]{images/test2/krok3.png}
+            \includegraphics[width=0.45\textwidth, height=4cm]{images/test2/krok4.png}
+            \caption{Zrzuty ekranów wykonanych kroków dla scenariusza generowania planu lekcji}\label{fig:test_2}
+        \end{figure}
+
+    \subsection{Test importowania i edytowania wymagań głównych}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.45\textwidth, height=4cm]{images/test3/krok1.png}
+            \includegraphics[width=0.45\textwidth, height=4cm]{images/test3/krok2.png}
+            \includegraphics[width=0.45\textwidth, height=4cm]{images/test3/krok3.png}
+            \includegraphics[width=0.45\textwidth, height=4cm]{images/test3/krok4.png}
+            \caption{Zrzuty ekranów wykonanych kroków dla scenariusza generowania planu lekcji}\label{fig:test_3}
+        \end{figure}
 
 
-\section{Wyniki i analiza skuteczności}
-    Dane które dostałem od placówki oświatowej są z początkowej fazy układania planu lekcji.
-    Uległy one małym, ale znaczącym zmianom w kontekście układania planu lekcji.
-    Kolejnym aspektem jest prywatność imień i nazwisk nauczycieli --- nie uzyskałem dostępu do tych chronionych danych.
-    Oznacza to, że w przypadku gdzie jeden nauczyciel uczy 2 różnych przedmiotów, to nie byłem w stanie tego zamodelować.
+\section{Analiza jakości wyników generowania planu lekcji}
+    Dane przekazane przez placówkę oświatową pochodzą z początkowej fazy procesu układania planu lekcji i uległy zmianom po uzyskaniu pełnych informacji o uczniach.
+    W szczególności nie obejmują one lekcji wychowawczych (LW) oraz zajęć dodanych na końcowym etapie tworzenia planu (np. EO, EZ, \dots).
+    W konsekwencji nie było możliwe pełne zamodelowanie tych elementów ani uwzględnienie ich podczas optymalizacji planu.
 
+    Istotnym ograniczeniem była również kwestia ochrony danych osobowych nauczycieli --- nie uzyskałem dostępu do imion i nazwisk, co uniemożliwiło identyfikację sytuacji, w których jeden nauczyciel prowadzi więcej niż jeden przedmiot.
+    Tym samym nie można było zamodelować potencjalnych konfliktów wynikających z równoległego prowadzenia zajęć w różnych klasach przez tego samego nauczyciela.
 
-    \begin{itemize}
-        \item Wyjaśnienie dlaczego nie powinno się porównywać wygenerowanego planu 1:1 z planem szkoły
-        \item Wyjaśnienie danych wejściowych
-        \begin{itemize}
-            \item Wyjaśnienie grup religii
-            \item Wyjaśnienie klas łączonych
-            \item Wyjaśnienei grup językowych
-        \end{itemize}
-        \item Średni czas potrzebny na generację planu
-    \end{itemize}
+    Uwzględniając powyższe ograniczenia, szczególnej analizie poddałem klasy o profilach łączonych, ponieważ to właśnie dla nich ręczne ułożenie planu jest najbardziej wymagające.
+    W moim zbiorze danych klasa IIAC łączy profil psychologiczny z prawnym, co oznacza konieczność równoległego prowadzenia bloków lekcyjnych dotyczących obu ścieżek kształcenia.
+    Wygenerowany plan lekcji dla tej klasy przedstawiłem na rysunku~\ref{fig:plan_IIBG}. 
+    Dla porównania, na rysunku~\ref{fig:plan_IIBG_koper} zaprezentowałem plan opracowany ręcznie przez szkołę.
 
-    \subsection{Statystyki planu}
-        \begin{itemize}
-            \item Liczba okienek
-        \end{itemize}
+    % Dane które dostałem od placówki oświatowej są z początkowej fazy układania planu lekcji.
+    % Uległy one zmianom kiedy szkoła dostała dokładne dane o uczniach.
+    % Przede wszystkim nie są zapisane lekcje wychowawcze (LW) oraz inne lekcje, które dostały dodane na samym końcu układania planu lekcji (EO, EZ, \dots).
+    % Przez to nie mogłem ich zamodelować i zabrać pod uwagę podczas układania planu lekcji.
+    % Kolejnym aspektem jest prywatność imień i nazwisk nauczycieli --- nie uzyskałem dostępu do tych chronionych danych.
+    % Oznacza to, że w przypadku gdzie jeden nauczyciel uczy 2 różnych przedmiotów, to nie byłem w stanie tego zamodelować.
 
-    \subsection{Porównanie z ręcznie ułożonym planem}
-        \begin{itemize}
-            \item Konkretne przykłady --- porównanie planów klas łączonych
-            \item Pokazanie bloków lekcyjnych row-franc-niem
-        \end{itemize}        
+    % Mając to na uwadze warto przyjrzeć się planom dla klas o łączonych profilach.
+    % Są to klasy dla których szczególnie trudno ułożyć ręcznie plan ze względu na niestandardowe bloki lekcyjne.
+    % Przykładowo w moich danych klasa IIBG jest klasą, która łączy profil językowy z profilem ekonomicznym.
+    % W praktyce oznacza to, że zajęcia z programu jednego profilu muszą odbywać się jednocześnie z zajęciami drugiego profilu.
+    % Plan lekcji wygenerowany przez algorytm przedstawiłem na rysunku~\ref{fig:plan_IIBG}, dla porównania plan stworzony ręcznie przez placówkę edukacyjną przedstawiono na rysunku~\ref{fig:plan_IIBG_koper}.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\textwidth]{images/plans/plan_IIBG.png}
+        \caption{Wygenerowany plan lekcji dla klasy IIAC}\label{fig:plan_IIBG}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\textwidth]{images/plans/plan_IIBG_koper.png}
+        \caption{Plan lekcji dla klasy IIAC stworzony przez szkołę}\label{fig:plan_IIBG_koper}
+    \end{figure}
+
+    Analizując wygenerowany plan można zauważyć, że algorytm poprawnie odwzorował wymagane bloki lekcyjne, takie jak jednoczesne prowadzenie języka biologii i wiedzy o społeczeństwie, a także prawidłowo przydzielił sale o specjalnym przeznaczeniu (sale gimnastyczne, pracownie informatyczne, \dots).
+    Plan charakteryzuje się również równomiernym rozkładem obciążeń dydaktycznych w ciągu tygodnia.
+
+    Kolejnym istotnym aspektem jest prawidłowe zaplanowanie zajęć prowadzonych jednocześnie dla wielu klas.
+    Najczęściej występują tu bloki językowe obejmujące język francuski, niemiecki oraz rosyjski.
+    Przykład takiego bloku, realizowanego w środy, przedstawiono na rysunku~\ref{fig:plan_blok}.
+
+    % Jak możemy zauważyć wygenerowany plan poprawnie wygenerował niestandardowe bloki lekcyjne, takie jak język niemiecki prowadzony razem z matematyką, oraz poprawnie przypisał odpowiednie sale do przedmiotów (Sale gimnastyczne, sale informatyczne, \dots).
+    % Widzimy także równomierny przydział obciążeń dydaktycznych dla każdego dnia.
+
+    % Kolejnym ważnym aspektem są także lekcje, które są prowadzone dla wielu klas.
+    % Najczęściej występującymi międzyklasowymi blokami lekcyjnymi są bloki językowe zawierające język francuski, język niemiecki oraz język rosyjski.
+    % Przykładowo na rysunku~\ref{fig:plan_blok} pokazany blok rosyjski, francuski, niemiecki odbywający się w środę.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.2\textwidth]{images/plans/IIIC_blok.png}
+        \includegraphics[width=0.2\textwidth]{images/plans/IIID_blok.png}
+        \includegraphics[width=0.2\textwidth]{images/plans/IIIF_blok.png}
+        \caption{Środowy plan lekcji dla klas IIIC, IIID oraz IIIF}\label{fig:plan_blok}
+    \end{figure}
+
+    Aby ocenić jakość wygenerowanych harmonogramów, przeanalizowałem liczbę okienek nauczycieli w planie zoptymalizowanym pod kątem minimalizacji ich liczby oraz w planie, który jedynie spełnia wszystkie ograniczenia, lecz nie został poddany optymalizacji.
+    Wyniki zestawiono w tabeli~\ref{tab:statystyki_planow}.
+    Ze względu na brak dostępu do szczegółowych danych dotyczących planu ułożonego ręcznie przez szkołę możliwe było jedynie porównanie wariantów wygenerowanych przez algorytm.
+    % Należy przeanalizować także liczbę okienek nauczycieli w wygenerowanym planie lekcji.
+    % Nie mam dostępu do danych z ręcznie ułozonego planu lekcji, ale mogę porównać liczbę okienek przy minimalizacji funkcji celu do liczby okienek przy zwyczajnych szukaniu rozwiązania, które jest wykonalne a nie optymalne.
+    % Najważniejsze statystyki przedstawiono w tabeli~\ref{tab:statystyki_planow}
+
+    \begin{table}[h!]
+        \centering
+        % \setlength{\tabcolsep}{8pt} % Default value: 6pt
+        \renewcommand{\arraystretch}{1.3} % 4efault value: 1
+        \begin{tabular}{|p{0.45\textwidth}|c|c|c|c|c|c|}
+            \hline
+            \textbf{Dzień tygodnia} & Pon & Wt & Śr & Czw & Pt & Całościowo \\ \hline
+            \textbf{Liczba bloków} & 132 & 133 & 133 & 135 & 140 & 673 \\ \hline
+            \textbf{Liczba okienek przy minimalizacji} & 65 & 41 & 68 & 59 & 72 & 305 \\ \hline
+            \textbf{Liczba okienek przy minimalizacji per nauczyciel} & 1.05 & 0.98 & 1.10 & 0.95 & 1.16 & 5.24 \\ \hline
+            \textbf{Liczba okienek bez minimalizacji} & 172 & 157 & 141 & 139 & 133 & 742 \\ \hline
+            \textbf{Liczba okienek bez minimalizacji per nauczyciel} & 2.77 & 2.53 & 2.27 & 2.24 & 2.15 & 11.96 \\ \hline
+        \end{tabular}
+        \caption{Statystyki dla generowanych planów}\label{tab:statystyki_planow}
+    \end{table}
+
+    Czas potrzebny na wygenerowanie planu zajęć z minimalizacją liczby okienek wyniósł 6 minut i 52 sekundy, co spełnia założenia projektowe.
+    Wyniki potwierdzają wysoką skuteczność algorytmu --- średnio około pięciu okienek w ciągu całego tygodnia na nauczyciela można uznać za wynik satysfakcjonujący.

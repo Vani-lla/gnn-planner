@@ -133,15 +133,17 @@ def solve_schedule(req_set: RequirementSet, block_list, specimen):
             )
 
         # --- Optimization target ---
-        # model.Minimize(sum(minimization_vars))
+        model.Minimize(sum(minimization_vars))
 
         # --- Solve ---
         solver = cp_model.CpSolver()
         # solver.parameters.log_search_progress = True
-        # solver.parameters.relative_gap_limit = 0.3
+        solver.parameters.relative_gap_limit = 1.0
         status = solver.Solve(model)
 
         if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+            print(np.sum(day))
+            print(solver.objective_value)
             print(f"constructed day {day}")
 
             for interval in task_intervals:

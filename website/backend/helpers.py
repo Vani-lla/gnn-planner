@@ -751,23 +751,6 @@ def evolutionary_loop(
     generations: int = 100,
     alphas=np.ones(3, dtype=np.float64),
 ):
-    """
-    Run the evolutionary algorithm.
-
-    Args:
-        block_list: List of requirement blocks.
-        req_set: The requirement set.
-        population: A 3D numpy array representing the population (shape: [n_population, 5, n_blocks]).
-        teachers: Preloaded list of Teacher objects.
-        student_groups: Preloaded list of StudentGroup objects.
-        block_val: Array of block values.
-        generations: Number of generations to run.
-        alphas: Weights for the evaluation components.
-
-    Returns:
-        np.ndarray: The best specimen after all generations.
-    """
-
     group_block_indexes = np.array(
         [student_groups.index(block[0].group) for block in block_list]
     )

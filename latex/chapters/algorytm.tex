@@ -698,7 +698,7 @@
         Przy czym gwarantowane jest spełnienie wymagania głównego:
         \[ \forall w \in \mathcal{W}: \sum_{i: w \in L_i} v_i = g_w \]
         
-    \subsection{Rezultaty}
+    \subsection{Przykładowy wynik}
         Dla danych udostępnionych przez szkołę liczba wymagań głównych wynosi $\left|\mathcal{W}\right| = 378$,
         natomiast liczba zdefiniowanych bloków przedmiotów $\left|\mathcal{B}\right| = 47$.
         Zastosowany algorytm zachłanny wygenerował $\left|302\right|$ bloków lekcyjnych.
@@ -1107,26 +1107,212 @@
         Jest to osobik o największej wartości funkcji przystosowania:
         \[ S_{\text{best}} = S_i, \quad i = \underset{j \in \left\{1, 2, \dots \mathfrak{P}\right\}}{\arg\max} F_{c_j} \]
 
-    \subsection{Przykładowe rezultaty}
-        Dla danych udostępnionych przez szkołę jak pokazano wcześniej liczba bloków lekcyjnych wynosi $\left|L\right| = 302$, więc macierz najlepszego osobnika prezentuje się następująco:
+    \subsection{Przykładowy wynik}
+        Dla danych wejściowych przedstawionych w poprzednim przykładzie algorytm wygenerował następującego najlepszego osobnika:
         \[ S_{\text{best}} = \begin{bmatrix}
-            1 & \cdots \\
-            0 & \cdots \\
-            0 & \cdots \\
-            0 & \cdots \\
-            1 & \cdots
+            1 & \cdots & 0 & \cdots & 0 & \cdots \\
+            0 & \cdots & 1 & \cdots & 0 & \cdots \\
+            0 & \cdots & 0 & \cdots & 1 & \cdots \\
+            0 & \cdots & 0 & \cdots & 0 & \cdots \\
+            1 & \cdots & 0 & \cdots & 0 & \cdots 
         \end{bmatrix} \]
-
+        Interpretacja macierzy przydziału jest następująca:
         \begin{itemize}
-            \item Sumy się zgadzają
-            \item Czasy działania algorytmu 
-            \item Wartości funkcji celu
-            \begin{itemize}
-                \item interpretacja, czyli dlaczego nie otrzymujemy dodatnej wartości
-            \end{itemize}
-            \item wyjaśnienei hiperparametrów
-            \item Histogramy dla nauczycieli i uczniów
+            \item blok językowy (niemiecki + francuski + rosyjski) został umieszczony po jednej godzinie w poniedziałek oraz piątek,
+            \item jedna godzina wspólnego bloku informatyki i języka angielskiego została przydzielona do wtorku,
+            \item jedna godzina chemii została przypisana do środy.
         \end{itemize}
+
+        Na rysunku~\ref{fig:wyniki_ewolucyjny} przedstawiono wartości funkcji celu dla pięciu niezależnych uruchomień algorytmu genetycznego dla 25 generacji, przy następujących parametrach:
+        \begin{itemize}
+            \item $\mathfrak{P} = 1000$,
+            \item $\alpha_T = 1$,
+            \item $\alpha_G = 2$.
+        \end{itemize}
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                    width=14cm,
+                    height=8cm,
+                    xlabel={Generacja},
+                    ylabel={Wartość funkcji celu dla $S_{\text{best}}$},
+                    grid=both,
+                    legend style={at={(1.02,1)}, anchor=north west},
+                    each nth point={1}, % rysuje wszystkie punkty
+                ]
+                
+                % --- Linia 1 ---
+                \addplot[
+                    thick,
+                    blue,
+                ] table[row sep=\\] {
+                    x y
+                    1 -70.54422604422604 \\
+                    2 -57.83538083538084 \\
+                    3 -54.86855036855037 \\
+                    4 -51.94226044226045 \\
+                    5 -49.32432432432432 \\
+                    6 -49.287469287469285 \\
+                    7 -47.1007371007371 \\
+                    8 -46.42628992628993 \\
+                    9 -45.38697788697789 \\
+                    10 -44.41769041769042 \\
+                    11 -43.36240786240786 \\
+                    12 -43.02579852579852 \\
+                    13 -42.298525798525795 \\
+                    14 -41.891891891891895 \\
+                    15 -41.891891891891895 \\
+                    16 -41.83783783783784 \\
+                    17 -41.83783783783784 \\
+                    18 -41.83783783783784 \\
+                    19 -41.83783783783784 \\
+                    20 -41.83783783783784 \\
+                    21 -41.83783783783784 \\
+                    22 -41.83783783783784 \\
+                    23 -41.83783783783784 \\
+                    24 -41.83783783783784 \\
+                    25 -41.83783783783784 \\
+                };
+                
+                % --- Linia 2 ---
+                \addplot[
+                    thick,
+                    red,
+                ] table[row sep=\\] {
+                    x y
+                    1 -72.02211302211302 \\
+                    2 -59.024570024570025 \\
+                    3 -52.671990171990174 \\
+                    4 -50.08968058968058 \\
+                    5 -47.14496314496314 \\
+                    6 -45.195331695331696 \\
+                    7 -43.937346437346434 \\
+                    8 -42.270270270270274 \\
+                    9 -41.42751842751842 \\
+                    10 -41.27272727272727 \\
+                    11 -41.21867321867321 \\
+                    12 -40.77272727272727 \\
+                    13 -40.77272727272727 \\
+                    14 -40.7002457002457 \\
+                    15 -40.4914004914005 \\
+                    16 -40.464373464373466 \\
+                    17 -40.32923832923833 \\
+                    18 -40.221130221130224 \\
+                    19 -40.221130221130224 \\
+                    20 -40.18550368550369 \\
+                    21 -40.13882063882063 \\
+                    22 -40.13882063882063 \\
+                    23 -40.13882063882063 \\
+                    24 -40.13882063882063 \\
+                    25 -40.13882063882063 \\
+                };
+
+                \addplot[
+                    thick,
+                    red,
+                ] table[row sep=\\] {
+                    x y
+                    1 -74.76781326781327 \\
+                    2 -59.492628992628994 \\
+                    3 -51.91523341523341 \\
+                    4 -48.27395577395577 \\
+                    5 -45.94594594594595 \\
+                    6 -43.47174447174448 \\
+                    7 -41.01105651105651 \\
+                    8 -40.073710073710075 \\
+                    9 -38.95208845208845 \\
+                    10 -37.64987714987715 \\
+                    11 -36.82678132678133 \\
+                    12 -36.74570024570025 \\
+                    13 -36.699017199017206 \\
+                    14 -36.218673218673224 \\
+                    15 -36.19164619164619 \\
+                    16 -36.07493857493858 \\
+                    17 -36.06388206388207 \\
+                    18 -36.001228501228496 \\
+                    19 -35.94717444717444 \\
+                    20 -35.87346437346437 \\
+                    21 -35.81941031941032 \\
+                    22 -35.81941031941032 \\
+                    23 -35.81941031941032 \\
+                    24 -35.81941031941032 \\
+                    25 -35.81941031941032 \\
+                };
+
+                \addplot[
+                    thick,
+                    red,
+                ] table[row sep=\\] {
+                    x y
+                    1 -73.96560196560198 \\
+                    2 -60.654791154791155 \\
+                    3 -54.882063882063875 \\
+                    4 -50.59582309582309 \\
+                    5 -47.749385749385745 \\
+                    6 -46.37469287469287 \\
+                    7 -44.13882063882063 \\
+                    8 -43.19410319410319 \\
+                    9 -42.02579852579852 \\
+                    10 -39.966830466830466 \\
+                    11 -38.42014742014743 \\
+                    12 -37.31203931203931 \\
+                    13 -35.971744471744465 \\
+                    14 -35.6007371007371 \\
+                    15 -35.5 \\
+                    16 -35.24447174447174 \\
+                    17 -35.09828009828009 \\
+                    18 -34.81449631449631 \\
+                    19 -34.57125307125307 \\
+                    20 -34.57125307125307 \\
+                    21 -34.57125307125307 \\
+                    22 -34.51719901719902 \\
+                    23 -34.51719901719902 \\
+                    24 -34.46314496314496 \\
+                    25 -34.40909090909091 \\
+                };
+
+                \addplot[
+                    thick,
+                    red,
+                ] table[row sep=\\] {
+                    x y
+                    1 -73.21990171990171 \\
+                    2 -60.035626535626534 \\
+                    3 -52.83660933660933 \\
+                    4 -50.20761670761671 \\
+                    5 -48.148648648648646 \\
+                    6 -46.26904176904176 \\
+                    7 -44.486486486486484 \\
+                    8 -43.550368550368546 \\
+                    9 -42.845208845208845 \\
+                    10 -41.79115479115479 \\
+                    11 -41.79115479115479 \\
+                    12 -41.065110565110565 \\
+                    13 -40.576167076167074 \\
+                    14 -40.07739557739558 \\
+                    15 -39.68673218673219 \\
+                    16 -39.68673218673219 \\
+                    17 -39.45085995085996 \\
+                    18 -39.36977886977887 \\
+                    19 -39.214987714987714 \\
+                    20 -39.13390663390663 \\
+                    21 -39.13390663390663 \\
+                    22 -39.13390663390663 \\
+                    23 -39.13390663390663 \\
+                    24 -39.13390663390663 \\
+                    25 -39.02579852579852 \\
+                };
+                
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Wykres wartości funkcji cely dla pięciu uruchomień algorytmu genetycznego}\label{fig:wyniki_ewolucyjny}
+        \end{figure}
+        Średni czas obliczeń dla pięciu prób wyniósł \textbf{95.88 s}.  
+        W żadnym przypadku funkcja celu nie osiągnęła wartości dodatnich.
+        Wynika to z faktu, że w danych wejściowych występują klasy oraz nauczyciele, którzy mają liczbę bloków znacząco mniejszą niż 35.
+        W praktyce uniemożliwia to uzyskiwanie dodatnich wartości funkcji celu, ponieważ algorytm nie ma wystarczającej liczby bloków, by spełnić wszystkie wymagania strukturalne konieczne do uzyskania pozytywnego wyniku.
 
 \section{Solver programowania liniowego z ograniczeniami}\label{section:solver}
     W trzecim etapie algorytmu wykorzystuję solver programowania liniowego z ograniczeniami (Constraint Programming --- CP).
@@ -1282,14 +1468,25 @@
             \end{align*}
 
             Jest to równoznaczne z leckją wychowania fizycznego podzieloną na dwie grupy, które odbywają się w tym samym czasie.
-        
+
         Proces ten powtarzamy dla wszystkich dni tygodnia, tworząc kompletny plan lekcji $\mathcal{Z} = \bigcup_{d=1}^5 \mathcal{Z}_d$ spełniający wszystkie ograniczenia i optymalizujący funkcję celu.
 
-    \subsection{Rezultaty}
-        \begin{itemize}
-            \item Przykładowe przypisania
-            \item Czas obliczeń dla rozwiązań optymalnych i nieoptymalnych, podania parametrów kompa
-            \item Liczba okienek i porównanie
-            \item Liczba zmiennych decyzyzjnych
-            \item Liczba ograniczeń
-        \end{itemize}
+    \subsection{Przykładowy wynik}
+        Dla danych wejściowych przedstawionych w poprzednim przykładzie mamy następujące przypisania:
+        \[
+            \mathcal{Z} = \left\{ 
+                \begin{aligned}
+                    &\left(1, 3, \text{IVA}, \text{Jn1}, \text{J.Niem}, 11\right), \\
+                    &\left(1, 3, \text{IVF}, \text{Jn1}, \text{J.Niem}, 11\right), \\
+                    &\left(1, 3, \text{IVA}, \text{Jr1}, \text{J.Ros}, 19\right), \\
+                    &\left(1, 3, \text{IVG}, \text{Jr1}, \text{J.Ros}, 19\right), \\
+                    &\left(1, 3, \text{IVD}, \text{Jf2}, \text{J.Fran}, 20\right), \\
+                    &\left(1, 3, \text{IVF}, \text{Jf2}, \text{J.Fran}, 20\right), \\
+                    &\vdots \\
+                    &\left(2, 7, \text{IA}, \text{Ja5}, \text{J.Ang}, 9\right) \\
+                    &\left(2, 7, \text{IA}, \text{Inf2}, \text{Informatyka}, \text{Sala Informatyczna 2}\right), \\
+                    &\vdots \\
+                    &\left(3, 7, \text{IG}, \text{Chem1}, \text{Chemia}, \text{Sala do Chemii 1}\right)          
+                \end{aligned}
+            \right\}
+        \]
