@@ -72,14 +72,15 @@
 
 % Udostępnia środowisko do konstruowania pseudokodów
 \usepackage[ruled,vlined,linesnumbered,longend,algochapter]{algorithm2e}
-
-% Zamiana nazwy środowiska z domyślnej "Algorithm X" na "Pseudokod X"
-\newenvironment{algorithm-custom}[1][htb]{
-	\renewcommand{\algorithmcfname}{Algorithm}
-	\begin{algorithm}[#1]%
-	}{
-\end{algorithm}
-}
+\SetKwInOut{Input}{Wejście}
+\SetKwInOut{Output}{Wyjście}
+\SetKwIF{Jesli}{Jesliwpp}{Wpp}{Jeśli}{to:}{Jeśli}{W przeciwnym przypadku:}{W przeciwnym przypadku:}
+% \SetKwIF{Jesli}{Else}{If}{to}{w przeciwnym razie}{koniec if}
+% \SetKw{Return}{zwróć}
+\SetKwFor{For}{Dla}{wykonaj:}{}
+\SetKwFor{While}{Dopóki}{wykonuj:}{}
+\SetKw{Return}{Zwróć}
+\renewcommand{\algorithmcfname}{Pseudokod}
 
 % Zmiana rozmiaru komentarzy
 \newcommand\algcomment[1]{

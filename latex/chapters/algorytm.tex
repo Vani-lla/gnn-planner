@@ -23,7 +23,7 @@
         Istnieją ograniczenia, które są różne dla każdej klasy, co utrudnia formułowanie problemu --- wiele lekcji jest realizowanych w blokach, które są definiowane każdy z osobna.
         Przez te wyjątki nie jest możliwym wykorzystanie prostych algorytmów.
         Nie jest także możliwym rozwiązanie jednego wielkiego problemu programowania całkowitoliczbowego w sensownym czasie przy użyciu komputera z przeciętną specyfikacją.
-        
+
         \subsection{Dane i szukane}
             \subsubsection{Słownik podstawowych oznaczeń}\label{slownik_oznaczen}
                 \begin{itemize}
@@ -106,28 +106,6 @@
                     \item $\vec{G_b} = \left(2\right)$,
                     \item $\verb|is_aggregating| = 0$,
                     \item $\verb|max_weekly| = 0$.
-                \end{itemize}
-
-            \subsubsection{Bloki lekcyjne}
-                Blok lekcyjny $L$ jest zbiorem wymagań głównych, które mogą być realizowane w ramach jednej bądź wielu lekcji jednocześnie.
-
-                Zbiór takich bloków lekcyjnych $\mathcal{L}$ definiujemy następująco:
-                \[ \mathcal{L} = \left\{L_1, L_2, \dots, L_{\left|\mathcal{L}\right|}\right\}, \quad \forall i \in \left\{1, 2, \dots, \left|\mathcal{L}\right|\right\}: L_i \subset \mathcal{W} \]
-
-                Przykładowe interpretacje bloków lekcyjnych:
-                \begin{itemize}
-                    \item 3 godziny języka angielskiego z klasą IA prowadzone przez nauczyciela angielskiego 1,
-                    \item 3 godziny języka angielskiego z klasą IA prowadzone przez nauczyciela angielskiego 2,
-                \end{itemize}
-                w przypadku różnych przedmiotów:
-                \begin{itemize}
-                    \item 3 godziny języka angielskiego z klasą IA prowadzone przez nauczyciela angielskiego 1,
-                    \item 2 godziny informatyki z klasą IA prowadzone przez nauczyciela informatyki 1,
-                \end{itemize}
-                lub dla różnych klas:
-                \begin{itemize}
-                    \item 1 godzina języka francuskiego z klasą IA prowadzona przez nauczyciela francuskiego 1,
-                    \item 1 godzina języka francuskiego z klasą IB prowadzona przez nauczyciela francuskiego 1,
                 \end{itemize}
 
             \subsubsection{Szukane}
@@ -449,7 +427,7 @@
     W szczególności wykorzystałem zmienne interwałowe, które ułatwiają modelowanie złożonych zależności czasowych i ograniczeń między lekcjami.
 
     Taki dobór technik tworzy hybrydowe podejście, które wykorzystuje mocne strony każdej metody, zapewniając kompromis między jakością rozwiązania a czasem obliczeń.
-    Na rysunku~\ref{fig:struktura_algorytmu_techniki} przedstawiono strukturę algorytmu z wpisanymi odpowiednimi nazwami technik.
+    Na rysunku~\ref{fig:struktura_algorytmu_techniki} przedstawiłem strukturę algorytmu z wpisanymi odpowiednimi nazwami technik.
 
     \begin{figure}[h]
         \centering
@@ -497,19 +475,125 @@
     \end{figure}
 
     \subsection{Problem kombinatoryki}
-        \begin{itemize}
-            \item Wprowadzenie formalnych oznaczeń
-            \item Głębsze uzasadnienie wyboru techniki na przykładzie
-            \item Funkcja celu
-            \item Jak algorytm osiąga funkcję celu i jak to się ma do oryginalnego problemu
-        \end{itemize}
+        \subsubsection{Bloki lekcyjne}
+            Operując na blokach lekcyjnych dużo łatwiej zdefiniować ograniczenia fizyczne.
+            Rozważmy trzy lekcje: język niemiecki, język francuski oraz język rosyjski.
+            Gdybyśmy chcieli zdefiniować dla nich ograniczenie mówiące, że żaden uczeń nie może mieć w tym samym czasie dwóch lekcji, musielibyśmy osobno zadbać o to, aby żadna z tych lekcji nie nakładała się na lekcje obowiązkowe danej klasy,
+            takie jak matematyka czy fizyka, a jednocześnie umożliwić nakładanie się lekcji między sobą, ponieważ każdy uczeń wybiera tylko jeden z tych trzech języków.
+            Grupując takie wymagania w jeden blok trzech lekcji, możemy traktować go jak pojedynczą lekcję przy definiowaniu ograniczeń: blok nie może pokrywać się czasowo z innymi lekcjami, ale jego wewnętrzna struktura nie wymaga dodatkowych wyjątków.
+
+            Drugą zaletą podejścia blokowego jest uproszczenie modelowania lekcji przeprowadzanych jednocześnie dla wielu klas. Sytuacje takie są częste, szczególnie w przypadku przedmiotów o małej liczbie uczniów.
+            Często w szkołach brakuje uczniów zapisanych na przykładowo język rosyjski, aby uzasadnić indywidualne lekcje prowadzone przez nauczyciela z tylko i wyłącznie jedną klasą.
+            Definiowanie ograniczeń dla każdej lekcji z osobna wymagałoby licznych wyjątków, natomiast połączenie wymagań głównych w jeden wspólny blok pozwala traktować taką lekcję jak każde inne zajęcia w systemie, bez potrzeby dodatkowych reguł.
+
+            Kolejną korzyścią jest możliwość łączenia bloków w struktury jeszcze wyższego poziomu. Wyobraźmy sobie trzy klasy:
+            IIIA, IIIB i IIIC oraz trzy przedmioty: język niemiecki, francuski i rosyjski.
+            Z powodu małej liczby uczniów zainteresowanych rosyjskim i francuskim, szkoła organizuje zajęcia w następujący sposób:
+            \begin{itemize}
+                \item trzy klasy uczestniczą wspólnie w lekcji języka rosyjskiego,
+                \item IIIA i IIIB mają lekcję języka francuskiego razem, a klasa IIIC osobno z innym nauczycielem,
+                \item każda klasa ma indywidualną lekcję języka niemieckiego, przy czym klasy IIIA i IIIC mają tego samego nauczyciela.
+            \end{itemize}
+            Po analizie widać, że wszystkie zajęcia poza jedną lekcją języka niemieckiego mogą być prowadzone równocześnie.
+            Tworząc wieloklasowe bloki lekcyjne, możemy je następnie łączyć w większe bloki: blok języka rosyjskiego można połączyć z blokiem języka francuskiego dla klas IIIA i IIIB oraz lekcją francuskiego klasy IIIC,
+            a następnie dodać do tego dwie lekcje języka niemieckiego, pozostawiając jedynie trzecią lekcję poza blokiem.
+
+            Istnieją również lekcje, z których nie da się zbudować większych bloków.
+            Przykładem są zajęcia, w których musi uczestniczyć cała klasa --- takie jak język polski.
+            W czasie ich trwania żadne inne grupowe lekcje nie mogą być prowadzone, ponieważ wszyscy uczniowie są obecni na tej samej lekcji.
+            Na potrzeby dalszego etapu dekompozycji traktujemy takie zajęcia jako bloki jednostkowe --- zbiory zawierające pojedyncze wymaganie główne.
+
+        \subsubsection{Przestrzeń decyzyjna}
+            Powyższe przykłady pokazują, jak niewielka jest przestrzeń decyzyjna w tym etapie. W praktyce jedyne decyzje, jakie muszą zostać podjęte, dotyczą sytuacji, w których możliwe jest łączenie bloków na różne sposoby.
+            Przykładowo, jeśli łączymy lekcje języka niemieckiego dla kilku klas, musimy zdecydować, którą z lekcji dodać do tworzonego bloku.
+
+            Są to decyzje o marginalnym wpływie na wynik --- potencjalny zysk z wyboru jednej opcji zamiast innej jest minimalny.
+            Z tego powodu zastosowałem algorytm zachłanny, który zawsze wybiera pierwszą możliwą opcję prowadzącą do utworzenia jak największego bloku lekcyjnego.
+            
+        \subsubsection{Oznaczenia}
+            Aby w pełni zrozumieć działanie algorytmu, należy formalnie zdefiniować pojęcie bloku lekcyjnego.
+            Blok lekcyjny $L$ to zbiór wymagań głównych realizowanych jednocześnie --- w ramach jednej lub kilku lekcji.
+            Zbiór takich bloków lekcyjnych $\mathcal{L}$ definiujemy następująco:
+            \[ \mathcal{L} = \left\{L_1, L_2, \dots, L_{\left|\mathcal{L}\right|}\right\}, \quad \forall i \in \left\{1, 2, \dots, \left|\mathcal{L}\right|\right\}: L_i \subset \mathcal{W} \]
+
+            Przykładowe interpretacje bloków lekcyjnych:
+            \begin{itemize}
+                \item 3 godziny języka angielskiego z klasą IA prowadzone przez nauczyciela angielskiego 1,
+                \item 3 godziny języka angielskiego z klasą IA prowadzone przez nauczyciela angielskiego 2,
+            \end{itemize}
+            w przypadku różnych przedmiotów:
+            \begin{itemize}
+                \item 3 godziny języka angielskiego z klasą IA prowadzone przez nauczyciela angielskiego 1,
+                \item 2 godziny informatyki z klasą IA prowadzone przez nauczyciela informatyki 1,
+            \end{itemize}
+            lub dla różnych klas:
+            \begin{itemize}
+                \item 1 godzina języka francuskiego z klasą IA prowadzona przez nauczyciela francuskiego 1,
+                \item 1 godzina języka francuskiego z klasą IB prowadzona przez nauczyciela francuskiego 1,
+            \end{itemize}
+
+            Aby poprawnie modelować pracę z blokami lekcyjnymi, konieczne jest określenie liczby godzin przypisanych do każdego bloku.
+            Każde wymaganie główne $w_i$ posiada tygodniową liczbę godzin $g_{wi}$, które należy rozdzielić pomiędzy bloki lekcyjne tak, aby suma godzin bloków pokrywających dane wymaganie była równa liczbie godzin wynikającej z wymagania głównego.
+            Macierz przydziałów godzin do bloków prezentuje się następująco:
+            \[ V = \begin{bmatrix} v_1 & v_2 & \cdots & v_{\left|\mathcal{L}\right|} \end{bmatrix}, \quad \forall i \in \left\{1, 2, \dots, \left|\mathcal{L}\right|\right\}: v_i \in \mathbb{N}^+ \]
+            gdzie $v_i$ oznacza liczbę godzin przypisanych do bloku $L_i$.
+            Aby przydział godzin był poprawny, musi zostać spełniony następujący warunek zgodności z wymaganiami głównymi:
+            \[ \forall w_i \in \mathcal{W}: \sum_{\substack{L_j \in \mathcal{L} \\ w_i \in L_j}} v_j = g_{wi} \]
+
+        \subsubsection{Funkcja celu}
+            Celem pierwszego etapu jest maksymalizacja liczby bloków składających się z więcej niż jednego wymagania głównego oraz równe przedzielenie godzin pomiędzy te bloki.
+            Jako że istnieje jeden równomierny przydział godzin, to nie uwzględniamy go w funkcji celu.
+            Odpowiada temu funkcja celu:
+            \[ F = \sum_{L \in \left\{L: \left|L\right| > 1 \land L \in \mathcal{L}\right\}} \left|L\right| \]
+
+            Algorytm zachłanny iteracyjnie przechodzi przez zbiór bloków przedmiotów $\mathcal{B}$ tworząc wszystkie możliwe bloki lekcyjne spełniające kryteria opisane w tych blokach.
+            W ten sposób gwarantujemy akceptowalny wynik funkcji celu.
 
     \subsection{Problem alokacji}
-        \begin{itemize}
-            \item Formalne oznaczenia
-            \item Funkcja celu
-            \item Jak to się ma do oryginalnego problemu
-        \end{itemize}
+        \subsubsection{Oznaczenia}
+            Algorytm ma na celu alokację godzin lekcyjnych z macierzy $V$ do pięciu roboczych dni tygodnia.
+            Dla każdego bloku lekcyjnego $L_i$ przydzielanych jest pięć wartości reprezentujących liczbę godzin lekcyjnych przydzielonych do poszczególnych dni, przy zachowaniu wymagań wynikających z poprzedniego etapu przetwarzania.
+            Końcowy przydział godzin $S$ definiujemy następująco:
+            \begin{equation}\label{eq:specimen}
+                S = \begin{bmatrix}
+                    s_{1,1} & s_{1,2} & s_{1,3} & \cdots & s_{1, \left|\mathcal{L}\right|} \\
+                    s_{2,1} & s_{2,2} & s_{2,3} & \cdots & s_{2, \left|\mathcal{L}\right|} \\
+                    s_{3,1} & s_{3,2} & s_{3,3} & \cdots & s_{3, \left|\mathcal{L}\right|} \\
+                    s_{4,1} & s_{4,2} & s_{4,3} & \cdots & s_{4, \left|\mathcal{L}\right|} \\
+                    s_{5,1} & s_{5,2} & s_{5,3} & \cdots & s_{5, \left|\mathcal{L}\right|} \\
+                \end{bmatrix}, \quad S \in \mathbb{N}^2 
+            \end{equation}
+            gdzie $s_{d,i}$ oznacza liczbę godzin $i$-tego bloku lekcyjnego $L_i$ przydzielonych do $d$-tego dnia tygodnia.
+
+            Najważniejszym wymaganiem jakie musi spełnić macierz $S$ jest wymaganie co do liczby godzin zdefiniowanej w macierzy $V$:
+            \begin{equation}\label{eq:specimen_wymaganie_glowne}
+                \forall i \in \left\{1, 2, \dots, \left|\mathcal{L}\right|\right\}: \sum_{d=1}^{5} s_{d,i} = v_i
+            \end{equation}
+
+        \subsubsection{Funkcja celu}
+            Poniżej przedstawiam jedynie intuicyjny sens funkcji celu.
+            Jej pełne omówienie zaprezentuję w sekcji dotyczącej funkcji przystosowania osobników w algorytmie ewolucyjnym.
+
+            Aby ocenić jakość wygenerowanego rozwiązania, wprowadzamy pojęcie obciążenia dydaktycznego dla klasy (lub analogicznie dla nauczyciela).
+            Obciążenie to opisuje liczbę godzin zajęć przypadających na każdy z dni tygodnia.
+            
+            Niech $s_{d,i}$ oznacza liczbę godzin bloku $L_i$ zaplanowaną w dniu $d$.
+            Wówczas obciążenie dydaktyczne klasy $c$ definiujemy jako wektor:
+            \[ \boldsymbol{\beta}_c = \begin{bmatrix}
+                \beta_{c,1} \\
+                \beta_{c,2} \\
+                \vdots \\
+                \beta_{c,5} \end{bmatrix},
+            \quad
+            \beta_{c,d} = \sum_{\substack{L_i \in \mathcal{L} \\ c\in\left\{c_{wj}:\ w_j \in L_i\right\}}} s_{d,i} \]
+            czyli sumę wszystkich godzin bloków, w których uczestniczy klasa $C$, przypadających na dzień $d$.
+
+            Celem jest równomierne rozłożenie zajęć między dni tygodnia, tak aby uniknąć bardzo krótkich oraz bardzo przeładowanych dni.
+            Miarą nierównomierności jest różnica między dniem najbardziej obciążonym a dniem najmniej obciążonym:
+            \begin{equation}\label{eq:funkcja_celu_roznica}
+                F = \max_{d \in \{1,2,\dots,5\}} \beta_{c,d} - \min_{d \in \{1,2,\dots,5\}} \beta_{c,d}
+            \end{equation}
+            Analogicznie można definiować funkcje celu dla nauczycieli.
 
     \subsection{Problem harmonogramowania}
         \begin{itemize}
@@ -520,59 +604,8 @@
 
 \section{Algorytm zachłanny}
     Algorytm zachłanny (ang. \textit{greedy}) polega na iteracyjnym podejmowaniu lokalnie najlepszej decyzji bez cofania się i bez globalnego przeszukiwania przestrzeni rozwiązań~\cite{cormen2022introduction}.
-    Choć w wielu problemach algorytm zachłanny daje rozwiązania przybliżone, w zadaniach konstrukcyjnych, w których celem jest wyłącznie znalezienie wszystkich maksymalnych (niedających się już powiększyć) struktur, jego prostota jest zaletą: eliminuje zbędną warstwę optymalizacji.
-
-    W etapie budowy bloków lekcyjnych nie maksymalizujemy funkcji celu ani nie porównujemy jakości wariantów --- każdy poprawny (zgodny z ograniczeniami) blok jest akceptowalny.
-    Celem jest:
-    \begin{enumerate}
-        \item Pokrycie wszystkich wymagań głównych.
-        \item Rozpatrzenie wszystkich bloków przedmiotów.
-        \item Utworzenie możliwie największych spójnych bloków (maksymalnych względem liczby składowych wymagań głównych).
-        \item Uniknięcie duplikacji i kolizji (spełnienie ograniczeń).
-    \end{enumerate}
-    
-    Problem sprowadza się do iterowania się po blokach przedmitów i tworzenia wszystkich, maksymalnie dużych, bloków lekcyjnych.
-    Próba użycia metod optymalizacyjnych (MIP, metaheurystyki) na tym etapie wprowadzałaby koszt obliczeniowy bez zysku jakościowego: już sam algorytm zachłanny pozwala na stworzenie maksymalnie dużych bloków.
-    Algorytm zachłanny pozwala szybko eksplorować przestrzeń lokalną: dla każdej potencjalnej konfiguracji rozszerzamy blok dopóki wszystkie warunki (brak konfliktu nauczycieli, zgodność klas, \dots) pozostają spełnione.
-    Po wyczerpaniu możliwości blok osiąga swoją maksymalną wielkość.
-    Wielkość innych bloków nie wpływa na ten wynik, co oznacza, że rozwiązanie optymalne lokalnie jest również optymalne globalnie.
-
-    \subsection{Bloki lekcyjne}
-        Operując na blokach lekcyjnych dużo łatwiej zdefiniować ograniczenia fizyczne.
-        Weźmy na przykład 3 lekcje: Język Niemiecki, Język Francuski oraz Język Rosyjski.
-        Gdybyśmy mieli definiować dla nich ograniczenie określające, że żaden uczeń nie może mieć przypisanych dwóch lub więcej lekcji w tym samym czasie, musielibyśmy zapewnić, że żadna z tych lekcji nie pokrywa się z innymi lekcjami tej klasy, takimi jak Matematyka czy Fizyka, 
-            przy jednoczesnym zapewnieniu, że te lekcji mogą się na siebie nałożyć.
-        Te zajęcia stanowią obowiązkowy język dodatkowy, który uczniowie wybierają każdy z osobna.
-        Każdy uczeń może wybrać tylko jeden język, co za tym idzie lekcje mogą odbywać się niezależnie od siebie.
-        Grupując takie ograniczenia główne w bloki 3 lekcji możemy potraktować taki blok jak każdą inną lekcję przy definiowaniu ograniczeń ---
-        nie może być przypisany do tego samego slotu czasowego z żadną inną lekcją.
-
-        Następną zaletą jest prostota w projektowaniu ograniczeń dla lekcji, które odbywają się dla więcej niż jednej klasy.
-        Często w szkołach brakuje uczniów zapisanych na przykładowo Język Rosyjski w jednej klasie, aby uzasadnić indywidualną lekcję prowadzoną przez nauczyciela z tylko i wyłącznie jedną klasą.
-        W takich przypadkach szkoła definiuje lekcje, które nauczyciel prowadzi dla wielu klas jednocześnie.
-        Podobnie jak w poprzednim przykładzie, definiowanie ograniczeń dla każdej lekcji z osobna wiąże się z wyjątkami.
-        Jeśli natomiast połączymy wymagania główne dla paru klas w jeden blok, możemy go traktować tak jak każdą inną lekcję.
-
-        Kolejną zaletą tego rozwiązania jest możliwość łączenia bloków w jeszcze większe bloki.
-        Wyobraźmy sobie sytuację, w której mamy trzy klasy: IIIA, IIIB i IIIC, oraz 3 przedmioty do przeprowadzenia: Język Niemiecki, Język Francuski i Język Rosyjski.
-        Z uwagi na niską liczbę uczniów zapisanych na rosyjski i francuski te zajęcia sa prowadzone w następujących grupach:
-        \begin{itemize}
-            \item wszystkie 3 klasy mają razem Język Rosyjski,
-            \item klasa IIIA i IIIB mają razem Język Francuski, a klasa IIIC ma indywidualnie z innym nauczycielem,
-            \item każda klasa ma indywidualnie Język Niemiecki, z czego klasa IIIA i IIIC mają tego samego nauczyciela.
-        \end{itemize}
-        Jak można łatwo zauważyć wszystkie te lekcji poza jedną lekcją języka niemieckiego mogą odbyć się jednocześnie.
-        Po stworzeniu wieloklasowych bloków lekcyjnych możemy je łączyć dalej.
-        Język Rosyjski może być połączony z blokiem Języka Francuskiego dla klas IIIA i IIIB oraz lekcją klasy IIIC.
-        Do tego możemy też dodać dwie lekcje języka Niemieckiego pozostawiając ostatnią lekcję poza blokiem ze względu na kolizję nauczycieli.
 
     \subsection{Działanie}
-        \subsubsection{Dane wejściowe}
-        \begin{itemize}
-            \item $\mathcal{B}$
-            \item $\mathcal{W}$
-        \end{itemize}
-
         \subsubsection{Klasyfikacja bloków}
             \begin{itemize}
                 \item \textbf{Bloki agregujące} --- tworzą wyższy poziom hierarchii, łącząc istniejące bloki i wymagania w jeszcze większe bloki
@@ -583,203 +616,144 @@
                 \[ \mathcal{B}_{\text{single}} = \mathcal{B} \cap \left(\mathcal{B}_{\text{multi}} \cup \mathcal{B}_{\text{multi}}\right) \]
             \end{itemize}
 
-        \subsubsection{Inicjalizacja}
-            \begin{align*}
-                \mathcal{L} &\gets \emptyset \quad \text{(zbiór bloków lekcyjnych)} \\
-                V &\gets \emptyset \quad \text{(wektor godzin bloków)} \\
-                U: \mathcal{W} &\to \mathbb{N} \quad \text{(funkcja wykorzystania godzin wymagań)} \\
-                U(w) &\gets 0 \quad \forall w \in \mathcal{W}
-            \end{align*}
+        
+        \begin{algorithm}[H]
+            \caption{Generowanie bloków lekcyjnych z wymagań}\label{alg:generowanie_blokow}
+            
+            \Input{Zbiory wymagań $\mathcal{W}$, bloków $\mathcal{B}_{\text{single}}$, $\mathcal{B}_{\text{multi}}$, $\mathcal{B}_{\text{agg}}$}
+            \Output{Zbiór bloków lekcyjnych $\mathcal{L}$, wektor godzin $V$}
+            
+            $\mathcal{L} \gets \emptyset, V \gets \emptyset, \forall w \in \mathcal{W}: U(w) \gets 0$\;
+            
+            \For{\textnormal{każdego bloku} $b \in \mathcal{B}_{\textnormal{multi}}$}{
+                $\mathcal{W}_b \gets \{w \in \mathcal{W} : s_w \in \vec{S_b} \land c_w \in \vec{C_b}\}, \quad \forall s \in \vec{S_b}:\ \left|\left\{w \in \mathcal{W}_b: s_w = s\right\}\right| = g_b$ \;
+            }
+            
+            \For{\textnormal{każdego bloku} $b \in \mathcal{B}_{\textnormal{agg}}$}{
+                Tworzymy maksymalnie duży zbiór $\mathcal{W}_\text{agg} \subset \mathcal{W}: \begin{cases}
+                    c_{wi} \in \vec{C_b} & \forall w_i \in \mathcal{W}_{\textnormal{agg}} \\
+                    s_{wi} \in \vec{S_b} & \forall w_i \in \mathcal{W}_{\textnormal{agg}} \\
+                    U(w) = 0 & \forall w \in \mathcal{W}_{\textnormal{agg}} \\
+                \end{cases} $ \newline oraz nie występują kolizje nauczycieli \;
+                $\mathcal{L} \gets \mathcal{L} \cup \{\mathcal{W}_{\text{agg}}\}$ \;
+                $V \gets V \cup \{\min\{g_w - U(w) : w \in \mathcal{W}_{\text{agg}}\}\}$ \;
+                \For{$w \in \mathcal{W}_{\text{agg}}$}{
+                    $U(w) \gets U(w) + v$ \;
+                }
+            }
+            
+            \For{\textnormal{każdego bloku} $b \in \mathcal{B}_{\textnormal{multi}}$}{
+                \Jesli{$\forall w \in \mathcal{W}_b: U(w) < g_w$}{
+                    $\mathcal{L} \gets \mathcal{L} \cup \{\mathcal{W}_b\}$ \;
+                    $V \gets V \cup \{\min\{g_w - U(w) : w \in \mathcal{W}_b\}\}$ \;
+                    \For{$w \in \mathcal{W}_b$}{
+                        $U(w) \gets U(w) + v$ \;
+                    }
+                }
+            }
+            
+            \For{\textnormal{każdego bloku} $b \in \mathcal{B}_{\text{single}}$}{
+                \For{\textnormal{każdej klasy} $c \in \vec{C_b}$}{
+                    $\mathcal{W}_c \gets \{w: c_w = c \land s_w \in \vec{S_b} \land w \in \mathcal{W}\}$ \;
+                    \Jesli{$\mathcal{W}_c$ \textnormal{spełnia warunki bloku co do liczby przedmiotów}}{
+                        $\mathcal{L} \gets \mathcal{L} \cup \{\mathcal{W}_c\}$ \;
+                    }
+                    \Wpp{
+                        \For{\textnormal{każdej poprawnej kombinacji} $\mathcal{W}'_c \subseteq \mathcal{W}_c$}{
+                            $\mathcal{L} \gets \mathcal{L} \cup \{\mathcal{W}'_c\}$ \;
+                        }
+                    }
+                }
+            }
+            
+            \While{$\exists$ \textnormal{nie w pełni wykorzystane wymagania w blokach pojedynczych}}{
+                \For{\textnormal{każdego bloku pojedynczego} $\mathcal{W}' \in \mathcal{L}$}{
+                    \If{można zwiększyć liczbę godzin}{
+                        Zwiększ wartość $v$ odpowiadającą blokowi $\mathcal{W}'$ o $1$ \;
+                        \ForEach{$w \in \mathcal{W}'$}{
+                            $U(w) \gets U(w) + 1$ \;
+                        }
+                    }
+                }
+            }
+            
+            \For{$w \in \mathcal{W}$}{
+                \If{$U(w) < g_w$}{
+                    $\mathcal{L} \gets \mathcal{L} \cup \{\{w\}\}, V \gets V \cup \{g_w - U(w)\}$ \;
+                }
+            }
+            
+            \Return $\mathcal{L}, V$
+        \end{algorithm}
 
-        \subsubsection{Tworzenie grup wieloklasowych}
-            Dla każdego bloku $b \in \mathcal{B}_{\text{multi}}$ tworzymy zbiór wymagań zgodnych z definicją bloku:
-            \[
-                \begin{cases}
-                    \mathcal{W}_b = \left\{w \in \mathcal{W}: s_w \in \vec{S_b} \land c_w \in \vec{C_b} \right\} & \\
-                    \left|\left\{w \in \mathcal{W}_b: s_w = s\right\}\right| = g_b & \forall s \in \vec{S_b}
-                \end{cases}
-            \]
-            Grupy te stanowią podstawę do tworzenia bloków lekcyjnych międzyklasowych.
+        % \subsubsection{Inicjalizacja}
+        %     \begin{align*}
+        %         \mathcal{L} &\gets \emptyset \quad \text{(zbiór bloków lekcyjnych)} \\
+        %         V &\gets \emptyset \quad \text{(wektor godzin bloków)} \\
+        %         U: \mathcal{W} &\to \mathbb{N} \quad \text{(funkcja wykorzystania godzin wymagań)} \\
+        %         U(w) &\gets 0 \quad \forall w \in \mathcal{W}
+        %     \end{align*}
 
-        \subsubsection{Agregacja bloków}~\label{agregacja_blokow}
-            Dla każdego bloku $b \in \mathcal{B}_{\text{agg}}$:
-            \begin{enumerate}
-                \item Wybieramy maksymalnie duży zbiór wymagań $\mathcal{W}_{\text{agg}} \subseteq \mathcal{W}$ spełniający:
-                    \[ \forall w \in \mathcal{W}_{\text{agg}}: c_w \in \vec{C_b} \land s_w \in \vec{S_b} \]
-                    \begin{itemize}
-                        \item Nauczyciele w $\mathcal{W}_{\text{agg}}$ są różni.
-                        \item Wymagania nie były wcześniej wykorzystane.
-                    \end{itemize}
-                    Robimy to poprzez łączenie odpowiednich bloków $\mathcal{W}_b$ dla $b \in \mathcal{B}_{\text{multi}}$.
-                \item Określamy liczbę godzin: $v = \min\{g_w - U(w) : w \in \mathcal{W}_{\text{agg}}\}$
-                \item Dodajemy do wyników: $\mathcal{L} \gets \mathcal{L} \cup \{\mathcal{W}_{\text{agg}}\}$, $V \gets V \cup \{v\}$
-                \item Aktualizujemy wykorzystanie: $U(w) \gets U(w) + v$ dla $w \in \mathcal{W}_{\text{agg}}$
-            \end{enumerate}
+        % \subsubsection{Tworzenie grup wieloklasowych}
+        %     Dla każdego bloku $b \in \mathcal{B}_{\text{multi}}$ tworzymy zbiór wymagań zgodnych z definicją bloku:
+        %     \[
+        %         \begin{cases}
+        %             \mathcal{W}_b = \left\{w \in \mathcal{W}: s_w \in \vec{S_b} \land c_w \in \vec{C_b} \right\} & \\
+        %             \left|\left\{w \in \mathcal{W}_b: s_w = s\right\}\right| = g_b & \forall s \in \vec{S_b}
+        %         \end{cases}
+        %     \]
+        %     Grupy te stanowią podstawę do tworzenia bloków lekcyjnych międzyklasowych.
 
-        \subsubsection{Przetwarzanie bloków wieloklasowych}
-            Dla każdej utworzonej wcześniej grupy $\mathcal{W}_b$:
-            \begin{enumerate}
-                \item Jeśli wymagania nie zostały w pełni wykorzystane, tworzymy blok
-                \item Liczba godzin: $v = \min\{g_w - U(w) : w \in \mathcal{W}_b\}$
-                \item Dodajemy do wyników i aktualizujemy wykorzystanie
-            \end{enumerate}
-
-        \subsubsection{Generowanie bloków pojedynczych}
-            Dla każdego bloku $b \in \mathcal{B}_{\text{single}}$ i klasy $c \in \vec{C_b}$:
-            \begin{enumerate}
-                \item Znajdujemy wymagania: $\mathcal{W}_c = \{w \in \mathcal{W}: c_w = c \land s_w \in \vec{S_b}\}$
-                \item Jeśli zbiór spełnia warunki bloku co do ilości przemiotów, tworzymy blok lekcyjny
-                \item W przeciwnym przypadku generujemy wszystkie poprawne kombinacje wymagań
-                \item Dla każdej poprawnej kombinacji $\mathcal{W}' \subseteq \mathcal{W}_c$ tworzymy blok
-            \end{enumerate}
-
-        \subsubsection{Iteracyjna alokacja pozostałych godzin}
-            \begin{enumerate}
-                \item Dopóki istnieją nie w pełni wykorzystane wymagania w blokach pojedynczych:
-                \begin{enumerate}
-                    \item Równomiernie zwiększamy liczbę godzin we wszystkich możliwych blokach. 
-                    Równomiernie oznacza, że iteruję się przez wszystkie bloki i ziększam ich przypisanie o 1, gwarantując tym samym, że wszystkie zostaną użyte. 
-                    \item Respektujemy ograniczenia maksymalnej liczby bloków tygodniowo
-                \end{enumerate}
-            \end{enumerate}
-
-        \subsubsection{Finalizacja}
-            \begin{enumerate}
-                \item Dla każdego wymagania $w \in \mathcal{W}$ z niewykorzystanymi godzinami:
-                \begin{enumerate}
-                    \item Tworzymy blok jednostkowy: $\mathcal{L} \gets \mathcal{L} \cup \{\{w\}\}$
-                    \item $V \gets V \cup \{g_w - U(w)\}$
-                \end{enumerate}
-            \end{enumerate}
-        % \textbf{Działanie}
-            % \begin{enumerate}
-            %     \item \textbf{Inicjalizacja struktur danych:}
-            %     \begin{itemize}
-            %         \item Słownik śledzący wykorzystanie godzin wymagań
-            %         \item Listy przechowujące pogrupowane wymagania
-            %     \end{itemize}
-            %     \item \textbf{Tworzenie bloków wieloklasowych:}
-            %     \begin{itemize}
-            %         \item Grupowanie wymagań według przedmiotów i klas zdefiniowanych w blokach wieloklasowych
-            %         \item Każda grupa tworzy potencjalny blok lekcyjny
-            %     \end{itemize}
-
-            %     \item \textbf{Agregacja bloków:}
-            %     \begin{itemize}
-            %         \item Łączenie bloków wieloklasowych w większe jednostki
-            %         \item Unikanie konfliktów nauczycieli poprzez śledzenie wykorzystanych pedagogów
-            %         \item Przydział godzin oparty na minimalnym wymaganiu w grupie
-            %     \end{itemize}
-
-            %     \item \textbf{Generowanie bloków pojedynczych:}
-            %     \begin{itemize}
-            %         \item Tworzenie kombinacji wymagań dla pojedynczych klas
-            %         \item Uwzględnienie przypadków z wieloma nauczycielami tego samego przedmiotu
-            %         \item Walidacja zgodności z definicjami bloków
-            %     \end{itemize}
-
-            %     \item \textbf{Iteracyjna alokacja godzin:}
-            %     \begin{itemize}
-            %         \item Równomierny przydział pozostałych godzin do bloków
-            %         \item Respektowanie maksymalnych limitów tygodniowych
-            %         \item Gwarancja wykorzystania wszystkich wymaganych godzin
-            %     \end{itemize}
-
-            %     \item \textbf{Finalizacja:}
-            %     \begin{itemize}
-            %         \item Dodanie pozostałych wymagań jako bloków jednostkowych
-            %         \item Zwrócenie listy bloków i odpowiadających im godzin
-            %     \end{itemize}
-            % \end{enumerate}
-
-        % \textbf{Procedura}\\
-        % Warto zwrócić uwagę na blok różnicę między ,,blokiem przedmiotów'' a ,,blokiem lekcyjnym''. Blok przedmiotów to byt, który jest definiowany przez uzytkownika w celu tworzenia przez algorytm bloków lekcyjnych.
-        % \begin{enumerate}
-        %     \item Podzielenie bloków na 3 grupy:
+        % \subsubsection{Agregacja bloków}~\label{agregacja_blokow}
+        %     Dla każdego bloku $b \in \mathcal{B}_{\text{agg}}$:
         %     \begin{enumerate}
-        %         \item Bloki, gdzie zbiór klas ma więcej niż $\frac{1}{2} \mathfrak{G}$ elementów, lub dokładnie 1 element, gdzie $\mathfrak{G}$ to liczba wszystkich klas. Na potrzeby dalszych rozważań nazwijmy je \textit{pojedynczymi blokami}.
-        %         \begin{itemize}
-        %             \item W praktyce te bloki służą definiowaniu bloków lekcyjnych, które zamykają się w obrębie jednej klasy, przykładowo wszystkie klasy w szkole moją używać bloków wychowanie fizyczne chłopaków + wychowanie fizyczne dziewczyn.
-        %         \end{itemize}
-        %         \item Bloki agregujące.
-        %         \begin{itemize}
-        %             \item Te bloki służa agregowaniu innych bloków, przykładowo dwóch \textit{multi-bloków} języka francuskiego dla klasy IIA, IIB i IIC oraz języka niemieckiego dla klasy IIA i IIB.
-        %         \end{itemize}
-        %         \item Pozostałe bloki. Na potrzeby dalszych rozważań nazwijmy je \textit{multi-blokami}.
-        %         \begin{itemize}
-        %             \item Jak opisałem powyżej te bloki służą tworzeniu międzyklasowych bloków lekcyjnych.
-        %         \end{itemize} 
+        %         \item Wybieramy maksymalnie duży zbiór wymagań $\mathcal{W}_{\text{agg}} \subseteq \mathcal{W}$ spełniający:
+        %             \[ \forall w \in \mathcal{W}_{\text{agg}}: c_w \in \vec{C_b} \land s_w \in \vec{S_b} \]
+        %             \begin{itemize}
+        %                 \item Nauczyciele w $\mathcal{W}_{\text{agg}}$ są różni.
+        %                 \item Wymagania nie były wcześniej wykorzystane.
+        %             \end{itemize}
+        %             Robimy to poprzez łączenie odpowiednich bloków $\mathcal{W}_b$ dla $b \in \mathcal{B}_{\text{multi}}$.
+        %         \item Określamy liczbę godzin: $v = \min\{g_w - U(w) : w \in \mathcal{W}_{\text{agg}}\}$
+        %         \item Dodajemy do wyników: $\mathcal{L} \gets \mathcal{L} \cup \{\mathcal{W}_{\text{agg}}\}$, $V \gets V \cup \{v\}$
+        %         \item Aktualizujemy wykorzystanie: $U(w) \gets U(w) + v$ dla $w \in \mathcal{W}_{\text{agg}}$
         %     \end{enumerate}
-        %     \item Tworzymy słownik, który posłuży nam jako późniejsze wyjście:
-        %     \begin{itemize}
-        %         \item \verb|return_blocks|, gdzie kluczami są bloki lekcyjne, a wartościami ich wymagana liczba tygodniowo.
-        %     \end{itemize}
-        %     \item Tworzymy słownik \verb|requirement_corrections|, gdzie klucze to ograniczenia główne a wartości to liczby naturalne.
-        %     \item Tworzymy pustą listę \verb|multi_req_groups|, która będzie przechowywać zbiory wymagań głównych.
-        %     \item Dla każdego $i$-tego bloku w zbiorze \textit{multi-bloków} dodajemy do \verb|multi_req_groups| krotkę z wszystkimi wymaganiami spełniających następujące warunki:
+
+        % \subsubsection{Przetwarzanie bloków wieloklasowych}
+        %     Dla każdej utworzonej wcześniej grupy $\mathcal{W}_b$:
         %     \begin{enumerate}
-        %         \item Ich przedmiot znajduje się w zbiorze przedmiotów $i$-tego bloku przedmiotów.
-        %         \item Ich klasa znajduję się w zbiorze klas $i$-tego bloku przedmiotów.
-        %     \end{enumerate} 
-        %     \item Tworzymy pustą listę \verb|power_blocks|, która będzie przechowywać zbiory wymagań głównych.
-        %     \item Dla każdego bloku agregującego $i$:
-        %     \begin{enumerate}
-        %         \item Tworzymy zbiór \verb|used_teachers| w celu uniknięcia kolizji nauczycieli.
-        %         \item Tworzymy tymczasową listę \verb|tmp|, która będzie gromadzić wszystkie ograniczenia główne spełniające określone wymagania.
-        %         \item Dodajemy do zbioru \verb|tmp| ograniczenia zapisane w krotce $j$ w \verb|multi_req_groups| jeśli:
-        %         \begin{enumerate}
-        %             \item Klasy wszystkich wymagań w $j$-tej krotce znajdują się w zbiorze klas $i$-tego bloku przedmiotów.
-        %             \item Przedmioty wszystkich wymagań w $j$-tej krotce znajdują się w zbiorze przedmiotów $i$-tego bloku przedmiotów.
-        %             \item Nauczyciel wszystkich wymagań w $j$-tej krotce nie znajduje się w zbiorze \verb|used_teachers|.
-        %             \item Żadno wymaganie w $j$-tej krotce nie zostało wcześniej użyte do stworzenia agregacyjnego bloku lekcyjnego.
-        %         \end{enumerate}
-        %         \item Dodajemy do zbioru \verb|tmp| wszystkie ograniczenia ze zbioru wszystkich wymagań głównych ograniczenia w $j$-tej krotce w \verb|multi_req_groups| jeśli:
-        %         \begin{enumerate}
-        %             \item Nauczyciej danego wymagania nie znajduje się w zbiorze \verb|used_teachers|.
-        %             \item Klasa i przedmiot zgadza się z $i$-tym blokiem agregującym.
-        %         \end{enumerate}
-        %         \item Jeśli dodajemy ograniczenia do \verb|tmp|, to dodajemy ich nauczycieli do \verb|used_teachers|.
-        %         \item W \verb|requirement_corrections| zapisujemy wartość minimalnej liczby wymaganych godzin wszystkich dodanych ograniczeń głównych pod kluczami odpowiednich ograniczeń. Robiąc to, efektywnie tworzymy blok lekcyjny i przypisujemy mu największą możliwą liczbę godzin tygodniowo. W przypadku bloków agregacyjnych ograniczenia główne bardzo często mają taką samą liczbę wymaganych godzin tygodniowo.
-        %         \item Do \verb|return_blocks| zapisujemy \verb|tmp| z wartością minimalnej liczby godzin.
+        %         \item Jeśli wymagania nie zostały w pełni wykorzystane, tworzymy blok
+        %         \item Liczba godzin: $v = \min\{g_w - U(w) : w \in \mathcal{W}_b\}$
+        %         \item Dodajemy do wyników i aktualizujemy wykorzystanie
         %     \end{enumerate}
-        %     \item Tworzymy pustą listę \verb|silgular_req_groups|, która będzie przechowywać
-        %     \item Dla każdego $i$-tego bloku w zbiorze \textit{pojedynczych bloków} i dla każdej klasy $g$:
+
+        % \subsubsection{Generowanie bloków pojedynczych}
+        %     Dla każdego bloku $b \in \mathcal{B}_{\text{single}}$ i klasy $c \in \vec{C_b}$:
         %     \begin{enumerate}
-        %         \item Tworzymy zbiór wymagań \verb|reqs| dla klasy $g$ i dla przedmiotów zdefiniowanych w $i$-tym bloku.
-        %         \item Jeśli klasa $g$ znajduje się w $i$-tym bloku przedmiotów oraz wartości \verb|requirement_corrections| dla wszystkich wymagań w \verb|reqs| są mniejsze niż ich liczba godzin ogarniczeń głównych to:
+        %         \item Znajdujemy wymagania: $\mathcal{W}_c = \{w \in \mathcal{W}: c_w = c \land s_w \in \vec{S_b}\}$
+        %         \item Jeśli zbiór spełnia warunki bloku co do ilości przemiotów, tworzymy blok lekcyjny
+        %         \item W przeciwnym przypadku generujemy wszystkie poprawne kombinacje wymagań
+        %         \item Dla każdej poprawnej kombinacji $\mathcal{W}' \subseteq \mathcal{W}_c$ tworzymy blok
+        %     \end{enumerate}
+
+        % \subsubsection{Iteracyjna alokacja pozostałych godzin}
+        %     \begin{enumerate}
+        %         \item Dopóki istnieją nie w pełni wykorzystane wymagania w blokach pojedynczych:
         %         \begin{enumerate}
-        %             \item Jeśli liczba wymaganych przedmiotów zgadza się z tą zdefiniowaną w $i$-tym bloku to dodajemy \verb|reqs| do \verb|silgular_req_groups|.
-        %             \item W przyciwnym przypadku tworzymy wszystkie możliwe kombinacje (o długości równej sumie wymaganych przedmiotów) wymagań głównych znajdujących się w \verb|reqs| i dodajemy te kombinacje, które są zgodne z wymaganą liczbą przedmiotów.
-        %             Jest to pomocne w przypadkach kiedy na przykład mame zdefiniowany blok przedmiotów z jedną informatyką oraz jednym językiem angielskim.
-        %             Klasy często mają zajęcia języka angielskiego z dwoma nauczycielami --- w takim przypadku \verb|reqs| ma w sobie trzy wymagania.
-        %             Tworząc kombinacje o długości dwóch wymagań gwarantujemy, że dodamy informatykę z jednym angielskim oraz informatykę z drugim angielskim.
+        %             \item Równomiernie zwiększamy liczbę godzin we wszystkich możliwych blokach. 
+        %             Równomiernie oznacza, że iteruję się przez wszystkie bloki i ziększam ich przypisanie o 1, gwarantując tym samym, że wszystkie zostaną użyte. 
+        %             \item Respektujemy ograniczenia maksymalnej liczby bloków tygodniowo
         %         \end{enumerate}
         %     \end{enumerate}
-        %     \item Dla każdego bloku, którego wszystkie wymagania główne mają liczbę godzin większą niż odpowiadającą im wartość w \verb|requirement_corrections|
-        %     oraz każdego bloku, którego maksymalna liczba tygodniowo nie została przekroczona:
-        %     \begin{enumerate}
-        %         \item Dla każdego wymagania głównego w bloku zwiększamy jego wartość w \verb|requirement_corrections| o 1.
-        %     \end{enumerate}
-        %     W ten sposób gwarantujemy równomierne stworzenie bloków. Jest to przydatne przykładowo w wyżej opisanym przykładzie z blokiem inf+ang --- mamy dwa takie bloki dla każdej klasy, aby nie przypisać dwóch godzin do pierwszego i zero do drugiego bloku lekcyjnego musimy obrać takie iteracyjne podejście.
-        %     \item Dla wszystkich wymagań w zbiorze wszystkich wymagan głównych dla których wartość w \verb|requirement_corrections| jest mniejsza niż ich wymagana liczba godzin tygodniowo:
-        %     \begin{enumerate}
-        %         \item Do \verb|return_blocks| zapisujemy blok lekcyjny z jednym wymaganiem głównym jako klucz i różnicą między wymaganiem głównym a wartością z \verb|requirement_corrections|.
-        %     \end{enumerate}
-        %     \item Zwracamy listę kluczy $B$ oraz macierz wymaganych godzin $V$ z wartościami słownika \verb|return_blocks|.
-        % \end{enumerate}
 
-        Wynikiem działania algorytmu zachłannego jest efektywna reprezentacja bloków gotowa do dalszego generowania planu.
-        Algorytm zwraca:
-        \begin{itemize}
-            \item Zbiór bloków lekcyjnych $\mathcal{L}$, gdzie każdy blok $L_i$ jest wekrotem zbiorem wymagań głównych:
-            \[ \mathcal{L} = \left\{L_1, L_2, \dots, L_{\left|\mathcal{L}\right|}\right\}, \quad \forall i \in \left\{1, 2, \dots, \left|\mathcal{L}\right|\right\}: L_i \subset \mathcal{W} \]
-            gdzie $\left|\mathcal{L}\right|$ to liczba wszystkich bloków.
-            \item Macierz wymagań głównych bloków --- liczby godzin tygodniowych, gdzie $v_i$ oznacza liczbę godzin przeznaczonych na blok $b_i$ na przestrzeni tygodnia. 
-            \[ V = \begin{bmatrix} v_1 & v_2 & \cdots & v_{\left|\mathcal{L}\right|} \end{bmatrix}, \quad \forall i \in \left\{1, 2, \dots, \left|\mathcal{L}\right|\right\}: v_i \in \mathbb{N}^+ \]
-        \end{itemize}
-
-        Przy czym gwarantowane jest spełnienie wymagania głównego:
-        \[ \forall w \in \mathcal{W}: \sum_{i: w \in L_i} v_i = g_w \]
+        % \subsubsection{Finalizacja}
+        %     \begin{enumerate}
+        %         \item Dla każdego wymagania $w \in \mathcal{W}$ z niewykorzystanymi godzinami:
+        %         \begin{enumerate}
+        %             \item Tworzymy blok jednostkowy: $\mathcal{L} \gets \mathcal{L} \cup \{\{w\}\}$
+        %             \item $V \gets V \cup \{g_w - U(w)\}$
+        %         \end{enumerate}
+        %     \end{enumerate}
         
     \subsection{Przykładowy wynik}
         Dla danych udostępnionych przez szkołę liczba wymagań głównych wynosi $\left|\mathcal{W}\right| = 378$,
@@ -848,167 +822,148 @@
     Klasyczne podstawy teorii zaprezentował Holland w pracy ,,Genetic algorithms''~\cite{holland1992genetic}.
     W odróżnieniu od podejść gradientowych lub zachłannych algorytm genetyczny eksploruje wiele konkurujących rozwiązań równolegle oraz uniknięcie wczesnego utknięcia na lokalnych wierzchołkach funkcji celu.
 
-    W mojej pracy algorytm ewolucyjny pełni rolę drugiego etapu dekompozycji: po redukcji problemu do listy bloków lekcyjnych pozostaje dyskretne zadanie rozdziału tygodniowych godzin każdego bloku na pięć dni roboczych przy prostych ograniczeniach.
-
-    Zastosowany algorytm ewolucyjny wnosi:
-    \begin{enumerate}
-        \item \textbf{Naturalną obsługę wielu kryteriów} poprzez dodawanie komponentów funkcji przystosowania.
-        \item \textbf{Specjalistyczne operatory} krzyżowania i mutacji działające na poziomie kolumn (bloków), co zachowuje poprawność bez kosztownych procedur naprawczych.
-        \item \textbf{Niską złożoność obliczeniową} dzięki małej liczbie zmiennych w jednym osobniku (5 wartości na blok) i możliwości jednoczesnego oceniania całej populacji używając operacji na macierzach.
-        \item \textbf{Łatwe dostrajanie wag} (priorytety klas kontra nauczyciele) bez zmian w strukturze modelu.
-    \end{enumerate}
-
     Ogólna struktura algorytmu:
     \begin{center}
         \begin{algorithm}[H]
             \caption{,,The general scheme of an evolutionary algorithm in pseudocode''\cite{eiben2015evolutionary}}
-            \SetAlgoLined
             
-            INITIALISE population with random individuals\;
-            EVALUATE each individual\;
+            \texttt{INITIALISE} population with random individuals\;
+            \texttt{EVALUATE} each individual\;
             
             \Repeat{TERMINATION CONDITION is satisfied}{
-                SELECT parents\;
-                RECOMBINE pairs of parents\;
-                MUTATE the resulting offspring\;
-                EVALUATE new individuals\;
-                SELECT individuals for the next generation\;
+                \texttt{SELECT} parents\;
+                \texttt{RECOMBINE} pairs of parents\;
+                \texttt{MUTATE} the resulting offspring\;
+                \texttt{EVALUATE} new individuals\;
+                \texttt{SELECT} individuals for the next generation\;
             }
         \end{algorithm}
     \end{center}
     gdzie w mojej pracy:
     \begin{itemize}
-        \item \verb|INITIALISE| reprezentuje budowę pierwszej populacji (\ref{subsection:generowanie_populacji}) przez losowe generowanie kolumn zgodnie z dostępnością i wymaganiami bloków.
-        \item \verb|EVALUATE| oblicza wartości funkcji przystosowania (\ref{subsection:przystosowanie}) dla każdego osobnika według zdefiniowanych metryk.
-        \item \verb|SELECT parents| realizuje selekcję probabilistyczną (\ref{subsection:selekcja}) z przewagą lepiej ocenionych osobników.
-        \item \verb|RECOMBINE pairs of parents| tworzy potomków (\ref{subsection:krzyzowanie}) przez kolumnowe dziedziczenie struktur bloków (bez łamania ograniczeń).
-        \item \verb|MUTATE the resulting offspring| wprowadza różnorodność przez rekonstrukcję wybranych kolumn (\ref{subsection:mutacja}) z rozkładu wielomianowego.
-        \item \verb|SELECT individuals for the next generation| implementuje elitaryzm i utrzymuje stały rozmiar populacji.
+        \item \verb|INITIALISE| reprezentuje budowę pierwszej populacji przez losowe generowanie kolumn zgodnie z dostępnością nauczycielami i wymaganiami bloków.
+        \item \verb|EVALUATE| oblicza wartości funkcji przystosowania dla każdego osobnika.
+        \item \verb|SELECT parents| realizuje selekcję ruletkową.
+        \item \verb|RECOMBINE| tworzy potomków przez kolumnowe dziedziczenie przydziału bloków.
+        \item \verb|MUTATE| wprowadza różnorodność przez rekonstrukcję wybranych kolumn.
+        \item \verb|SELECT| implementuje elitaryzm i utrzymuje stały rozmiar populacji.
         \item \verb|TERMINATION CONDITION| kończy proces po ustalonej liczbie generacji.
     \end{itemize}
 
-    \subsection{Cel algorytmu}
-        Algorytm ma na celu przydział godzin lekcyjnych z macierzy bloków $V$ do pięciu roboczych dni tygodnia reprezentowanych przez macierz $S$~(\ref{specimen}).
-        Dla każdego bloku generowanych jest pięć wartości całkowitoliczbowych reprezentujących liczbę godzin lekcyjnych przydzielonych do poszczególnych dni, przy zachowaniu wymagań wynikających z poprzedniego etapu przetwarzania.
-        Końcowy przydział godzin powinien mieć następujące cechy:
-        \begin{itemize}
-            \item Spełnione ograniczenia twarde
-            \item Równomierny przydział bloków na przestrzeni tygodnia dla klas
-            \item Równomierny przydział bloków na przestrzeni tygodnia dla nauczycieli
-        \end{itemize}
-
-        \subsubsection{Dane wejściowe}
-            \begin{itemize}
-                \item $\mathcal{L}$
-                \item $V$
-                \item $A$
-                \item $\mathcal{B}$
-                \item $\mathcal{C}$ 
-                \item $\mathcal{T}$ 
-                \item $\mathcal{S}$
-            \end{itemize}
-        
-        \subsubsection{Dane wyjściowe}
-            \begin{itemize}
-                \item Poprawna macierz $S_{\text{best}}$:
-                \begin{itemize}
-                    \item spełniająca wszystkie ograniczenia twarde,
-                    \item posiadająca satysfakcjonującą wartość funkcji przystosowania.
-                \end{itemize} 
-            \end{itemize}
-
     \subsection{Kodowanie i ograniczenia twarde}\label{subsection:kodowanie}
-        Każdy osobnik w populacji jest reprezentowany przez macierz przydziałów $S$ o wymiarach $5 \times \left|\mathcal{L}\right|$.
-        \begin{equation}\label{specimen}
-             S = \begin{bmatrix}
-                s_{1,1} & s_{1,2} & s_{1,3} & \cdots & s_{1, \left|\mathcal{L}\right|} \\
-                s_{2,1} & s_{2,2} & s_{2,3} & \cdots & s_{2, \left|\mathcal{L}\right|} \\
-                s_{3,1} & s_{3,2} & s_{3,3} & \cdots & s_{3, \left|\mathcal{L}\right|} \\
-                s_{4,1} & s_{4,2} & s_{4,3} & \cdots & s_{4, \left|\mathcal{L}\right|} \\
-                s_{5,1} & s_{5,2} & s_{5,3} & \cdots & s_{5, \left|\mathcal{L}\right|} \\
-            \end{bmatrix}, \quad S \in \mathbb{N}^2 
-        \end{equation}
-        gdzie $s_{d,i}$ oznacza liczbę godzin $i$-tego bloku lekcyjnego $L_i$ przydzielonych do $d$-tego dnia tygodnia.
+        Każdy osobnik w populacji jest reprezentowany przez macierz przydziałów $S$ zdefiniowaną w równaniu~\ref{eq:specimen}.
 
         Tak przyjęta reprezentacja umożliwia prostą weryfikację następujących ograniczeń:
         \begin{enumerate}
-            \item Całkowita liczba godzin każdego bloku musi odpowiadać wymaganiom określonym w macierzy $V$.
-            \[ \forall i \in \left\{1, 2, \dots, \left|\mathcal{L}\right|\right\}: \sum_{d=1}^{5} s_{d,i} = v_i \]
-            \item Maksymalna liczba godzin każdego bloku w pojedynczym dniu nie może być większa niż 2.
+            \item suma przypisań $i$-tego bloku lekcyjnego musi być równa $v_i$. Zostało to opisane w równaniu~\ref{eq:specimen_wymaganie_glowne},
+            \item maksymalna liczba godzin każdego bloku w pojedynczym dniu nie może być większa niż 2,
             \[ \forall i \in \left\{1, 2, \dots, \left|\mathcal{L}\right|\right\}, \forall d \in \left\{1, 2, 3, 4, 5\right\}: s_{d, i} \leq 2 \]
-            \item Dla bloków 3-godzinnych konieczne jest przedzielenie 2 godzin do jednego dnia.
+            \item dla bloków 3-godzinnych konieczne jest przedzielenie 2 godzin do jednego dnia.
             \[ \forall i \in \left\{1, 2, \dots, \left|\mathcal{L}\right|\right\}: v_{i} = 3 \implies \exists d \in \left\{1, 2, 3, 4, 5\right\} \text{ takie, że } s_{d, i} = 2 \]
         \end{enumerate}
 
     \subsection{Generowanie populacji początkowej}\label{subsection:generowanie_populacji}
         Generowanie osobników odbywa się losowo z uwzględnieniem wymagań bloków oraz dostępności nauczycieli. 
         Wykorzystuję w tym celu rozkład wielomianowy~\cite{feller1971introduction}, który zapewnia spełnienie podstawowych ograniczeń. 
-        Proces generowania pojedynczego osobnika składa się z następujących etapów wykonywanych dla każdego $i$-tego bloku:
-        \begin{enumerate}
-            \item \textbf{Zagregowanie dostępności nauczycieli:}\\
-            Dla każdego dnia wyznaczana jest dostępność wszystkich nauczycieli przypisanych do $i$-tego bloku.
-            \[ \forall d \in \{1,2,3,4,5\}: a_d' = \min_{t \in T_i} a_{t,d} \]
-            gdzie $T_i = \{t_{w_j} : w_j \in L_i\}$ to zbiór nauczycieli w bloku $L_i$.
-            \item \textbf{Jeśli $v_i = 3$ to:}
-            \begin{enumerate}
-                \item $X_i \gets \begin{bmatrix} 0 & 0 & 0 & 0 & 0 \end{bmatrix}$
-                \item $k, l \gets \text{losowe dni, dla których } a'_i = a'_j = 1$
-                \item $x_k \gets 2, x_l \gets 1$
-            \end{enumerate}
-            Po wykonaniu tych kroków generowanie dla bieżącego bloku jest zakończone.
-            \item \textbf{Stworzenie macierzy prawdopodobieństw wystąpienia bloku w danym dniu:}\\
-            Tworzymy wektor prawdopodobieństw:
-            \begin{align*}
-                P &= \begin{bmatrix} \frac{a'_1}{\sum_{i=1}^{5}a'_i} & \frac{a'_2}{\sum_{i=1}^{5}a'_i} & \frac{a'_3}{\sum_{i=1}^{5}a'_i} & \frac{a'_4}{\sum_{i=1}^{5}a'_i} & \frac{a'_5}{\sum_{i=1}^{5}a'_i} \end{bmatrix} \\
-                P &= \begin{bmatrix} p_1 & p_2 & p_3 & p_4 & p_5 \end{bmatrix}
-            \end{align*}
-            tak stworzone prawdopodobieństwa zapewniają, że $p_d = 0$ jeśli którykolwiek nauczyciel jest niedostępny $d$-tego dnia oraz $\sum_{d=1}^{5} p_d = 1$.
-            \item \textbf{Losowanie z rozkładu wielomianowego:}\\
-            Korzystając z implementacji biblioteki \verb|numpy|~\cite{numpymultinomialdocs}, generowana jest próbka:
-            \[ \verb|numpy.random.multinomial(r,| \begin{bmatrix} p_1 & p_2 & \cdots & p_5 \end{bmatrix}\verb|)| \]
-            Wynikiem tej funkcji jest macierz $X_i = \begin{bmatrix} x_0 & x_1 & \cdots & x_5 \end{bmatrix}$, która ze względu na własności rozkładu spełnia:
-            \[ \begin{cases}
-                    x_d \in \mathbb{N} & \forall d \in \left\{1, 2, \dots, 5\right\} \\
-                    \sum_{d=1}^{5} x_d = v_i & 
-                \end{cases} \]
-            \item \textbf{Korekcja przekroczeń limitu dziennego:}\\
-            Dopóki $\exists d \in \left\{1, 2, 3, 4, 5\right\} : x_d > 2$:
-            \begin{enumerate}
-                \item Dla każdego $d \in \left\{1, 2, 3, 4, 5\right\}$ spełniającego $x_d > 2$:
-                \begin{enumerate}
-                    \item $X_i' \gets \verb|numpy.random.multinomial(|x_d - 2\verb|, |P\verb|)|$
-                    \item $x_d \gets 2$
-                    \item $X_i \gets X_i + X_i'$
-                \end{enumerate}
-            \end{enumerate}
-        \end{enumerate}
+        Proces generowania pojedynczego osobnika składa się z etapów wykonywanych dla każdego $i$-tego bloku przedstawionych w pseudokodzie~\ref{alg:generowanie_populacji}.
+        
+        \vspace*{0.5em}
+        \begin{algorithm}[H]
+            \caption{Generowanie rozkładu zajęć dla bloku $i$}\label{alg:generowanie_populacji}
+
+            \Input{$v_i$, $a_{t,d}$, $T_i$}
+            \Output{Macierz przydziałów $X_i = [x_1, x_2, x_3, x_4, x_5]$}
+            
+            \For{$d \in \{1,2,\dots,5\}$}{
+                $\alpha_d \gets \displaystyle\min_{t \in T_i} a_{t,d}$ \;
+            }
+            
+            \Jesli{$v_i = 3$}{
+                $X_i \gets [0, 0, 0, 0, 0]$ \;
+                Wylosuj dni $k, l$ spośród tych, dla których $\alpha_k = \alpha_l = 1$ \;
+                $x_k \gets 2$, $x_l \gets 1$ \;
+                \Return $X_i$ \;
+            }
+            \Wpp{
+                $P \gets \left[\frac{\alpha_1}{\sum \alpha_d}, \dots, \frac{\alpha_5}{\sum \alpha_d}\right]$ \;
+                $X_i \gets \texttt{numpy.random.multinomial}(v_i, P)$ \;
+            
+                \While{$\exists d : x_d > 2$}{
+                    \For{$\forall d \in \left\{1, 2, \dots, 5\right\}: x_d > 2$}{
+                        $X_i' \gets \texttt{numpy.random.multinomial}(x_d - 2, P)$ \;
+                        $x_d \gets 2$ \;
+                        $X_i \gets X_i + X_i'$ \;
+                    }
+                }
+            }
+            \Return $X_i$
+        \end{algorithm}
+        \vspace*{0.5em}
+
+        Gdzie $T_i = \{t_{w,j} : w_j \in L_i\}$ to zbiór nauczycieli prowadzących zajęcia w bloku $L_i$.
+        
+        % \begin{enumerate}
+        %     \item \textbf{Zagregowanie dostępności nauczycieli:}\\
+        %     Dla każdego dnia wyznaczana jest dostępność wszystkich nauczycieli przypisanych do $i$-tego bloku.
+        %     \[ \forall d \in \{1,2,3,4,5\}: \alpha_d = \min_{t \in T_i} a_{t,d} \]
+        %     gdzie 
+        %     \item \textbf{Jeśli $v_i = 3$ to:}
+        %     \begin{enumerate}
+        %         \item $X_i \gets \begin{bmatrix} 0 & 0 & 0 & 0 & 0 \end{bmatrix}$
+        %         \item $k, l \gets \text{losowe dni, dla których } \alpha_i = \alpha_j = 1$
+        %         \item $x_k \gets 2, x_l \gets 1$
+        %     \end{enumerate}
+        %     Po wykonaniu tych kroków generowanie dla bieżącego bloku jest zakończone.
+        %     \item \textbf{Stworzenie macierzy prawdopodobieństw wystąpienia bloku w danym dniu:}\\
+        %     Tworzymy wektor prawdopodobieństw:
+        %     \begin{align*}
+        %         P &= \begin{bmatrix} \frac{\alpha_1}{\sum_{i=1}^{5}\alpha_i} & \frac{\alpha_2}{\sum_{i=1}^{5}\alpha_i} & \frac{a'_3}{\sum_{i=1}^{5}\alpha_i} & \frac{a'_4}{\sum_{i=1}^{5}\alpha_i} & \frac{\alpha_5}{\sum_{i=1}^{5}\alpha_i} \end{bmatrix} \\
+        %         P &= \begin{bmatrix} p_1 & p_2 & p_3 & p_4 & p_5 \end{bmatrix}
+        %     \end{align*}
+        %     tak stworzone prawdopodobieństwa zapewniają, że $p_d = 0$ jeśli którykolwiek nauczyciel jest niedostępny $d$-tego dnia oraz $\sum_{d=1}^{5} p_d = 1$.
+        %     \item \textbf{Losowanie z rozkładu wielomianowego:}\\
+        %     Korzystając z implementacji biblioteki \verb|numpy|~\cite{numpymultinomialdocs}, generowana jest próbka:
+        %     \[ \verb|numpy.random.multinomial(r,| \begin{bmatrix} p_1 & p_2 & \cdots & p_5 \end{bmatrix}\verb|)| \]
+        %     Wynikiem tej funkcji jest macierz $X_i = \begin{bmatrix} x_0 & x_1 & \cdots & x_5 \end{bmatrix}$, która ze względu na własności rozkładu spełnia:
+        %     \[ \begin{cases}
+        %             x_d \in \mathbb{N} & \forall d \in \left\{1, 2, \dots, 5\right\} \\
+        %             \sum_{d=1}^{5} x_d = v_i & 
+        %         \end{cases} \]
+        %     \item \textbf{Korekcja przekroczeń limitu dziennego:}\\
+        %     Dopóki $\exists d \in \left\{1, 2, 3, 4, 5\right\} : x_d > 2$:
+        %     \begin{enumerate}
+        %         \item Dla każdego $d \in \left\{1, 2, 3, 4, 5\right\}$ spełniającego $x_d > 2$:
+        %         \begin{enumerate}
+        %             \item $X_i' \gets \verb|numpy.random.multinomial(|x_d - 2\verb|, |P\verb|)|$
+        %             \item $x_d \gets 2$
+        %             \item $X_i \gets X_i + X_i'$
+        %         \end{enumerate}
+        %     \end{enumerate}
+        % \end{enumerate}
 
         Po wykonaniu powyższej procedury dla wszystkich bloków, uzyskane wektory $X_i$ łączy się w macierz:
         \[ X = \begin{bmatrix} X_1 \\ X_2 \\ \vdots \\ X_{\left|\mathcal{L}\right|} \end{bmatrix} \]
         Osobnik populacji reprezentowany jest przez transpozycję tej macierzy: $S = X^T$.
 
-    \subsection{Przystosowanie}\label{subsection:przystosowanie}
-        Ocena jakości osobników odbywa się na podstawie czterech niezależnych metryk:        
+    \subsection{Przystosowanie}
+        Ocena jakości osobników odbywa się na podstawie dwóch metryk:        
         \begin{itemize}
-            \item Równomierność rozkładu godzin pracy nauczycieli w ciągu tygodnia
-            \item Równomierność rozkładu godzin lekcyjnych klas w ciągu tygodnia
-            \item Liczba dni, w których nauczyciele muszą pojawić się w szkole
-            \item Różnica między najdłuższym i najkrótszym dniem lekcyjnym dla klas
+            \item równomierności obciążeń dydaktycznych lekcyjnych klas,
+            \item równomierności obciążeń dydaktycznych pracy nauczycieli.
         \end{itemize}
         
-        W początkowej fazie prac wykorzystałem funkcję gęstości rozkładu normalnego z wartością oczekiwaną $\mu = 8$, co wynika z ośmiogodzinnego dnia pracy. 
-        Okazało się jednak, że takie podejście zapewniało wyłącznie nagrody, nie oferując mechanizmu karania niepożądanych rozwiązań.
-        Ograniczało to zdolność algorytmu do korekcji błędów.
-        W odpowiedzi na te wyzwania zaprojektowałem funkcję kwadratową:
+        Aby móc niezależnie oceniać równomierność obciążenia dydaktycznego w poszczególnych dniach tygodnia, konieczne było zaprojektowanie funkcji, która jako argument przyjmuje dzienne wartości obciążeń $\beta_{c,d}$ dla klas oraz $\beta_{t,d}$ dla nauczycieli.
+
+        W początkowej fazie prac rozważałem zastosowanie funkcji gęstości rozkładu normalnego o wartości oczekiwanej \(\mu = 8\), odpowiadającej ośmiogodzinnemu dniowi pracy lub nauki.
+        Szybko okazało się jednak, że funkcja ta jedynie nagradza dobre rozwiązania, lecz nigdy nie karze wyraźnie rozkładów niepożądanych.
+        W rezultacie algorytm tracił możliwość korygowania błędów, gdyż nawet bardzo nierównomierne rozkłady nie były wystarczająco penalizowane.
+    
+        W odpowiedzi na te wyzwania zaprojektowałem funkcję kwadratową przedstawioną na rysunku~\ref{fig:funkcja_rownomiernosc}:
         \[ f(x) = -\left(7 - x\right)^2 + 2 \]
-
-        Jak widać na wykresie funkcji~\ref{fig:funkcja_rownomiernosc}, jej głównym zadaniem jest karanie dni o skrajnym obciążeniu dydaktycznym zarówno dla nauczycieli, jak i uczniów.
-        Wierzchołek funkcji umieściłem w punkcie $x = 7$, a nie $x = 8$, ponieważ pięciogodzinny dzień pracy jest znacznie bardziej akceptowalny niż dziesięciogodzinny.
-        Funkcja nagradza wartości z przedziału $(5, 9)$, przy czym wartości bliskie 7 otrzymują maksymalną ocenę.
-        Wartości spoza tego przedziału są znacząco karane, co zapewnia spełnienie dwóch kluczowych warunków: brak ponad dziesięciogodzinnych dni pracy dla nauczycieli oraz utrzymanie około siedmiogodzinnych dni lekcyjnych dla uczniów.
-
-        Nawet w przypadkach, gdy program nauczania przekracza $35$ godzin tygodniowo (co uniemożliwia dodatnią wartość tej funkcji przy równomiernym rozłożeniu), funkcja zachowuje swoją przydatność w zapewnianiu zgodności z wymaganiami równomiernych rozkładów godzin.
-        Ze względu na malejącą pochodną w przedziale $[7, +\infty)$, rozwiązania z jednym dniem 7-godzinnym kosztem dnia 11-godzinnego otrzymują gorszą ocenę niż rozwiązania z dwoma dniami 9-godzinnymi, co promuje bardziej zrównoważony rozkład obciążenia. będą gorzej oceniane niż osobniki z dwoma dniami o 9 godzinach.
+        która silnie karze zarówno zbyt małe, jak i zbyt duże obciążenia oraz nagradza wartości zbliżone do \(x=7\).
+        Wierzchołek funkcji został przesunięty z $8$ na $7$, ponieważ pięciogodzinny dzień pracy jest znacznie bardziej akceptowalny niż dzień dziesięciogodzinny.
+        Nawet w przypadkach, gdy liczba godzin zajęć przekracza $35$ tygodniowo (co uniemożliwia osiągnięcie maksymalnej wartości funkcji przy równomiernym rozkładzie), funkcja zachowuje zdolność odróżniania rozkładów bardziej wyrównanych od tych skrajnie nierównych.
+        Wynika to z faktu, że pochodna funkcji na przedziale $[7,\infty)$ maleje, przez co rozwiązania z jednym dniem jedenastogodzinnym oceniane są gorzej niż rozwiązania z dwoma dniami dziewięciogodzinnymi.
 
         \begin{figure}[h]
             \centering
@@ -1035,138 +990,166 @@
         \end{figure}
 
         \subsubsection{Ocena względem nauczycieli}
-            Ocena równomierności rozpoczyna się od obliczenia dla każdego nauczyciela wektora obciążenia godzinowego:
-            \[ X_i = \begin{bmatrix} x_{i,1} & x_{i,2} & x_{i,3} & x_{i,4} & x_{i,5} \end{bmatrix} \]
-            gdzie $x_{i,d}$ oznacza liczbę godzin lekcyjnych do przeprowadzenia przez $i$-tego nauczyciela $d$-tego dnia.
-            
-            Problemem funkcji kwadradowej jest fakt, że osobniki otrzymują dużą karę, kiedy zgodnie z przydziałem nauczyciel ma dzień wolny --- jest to niezgodne z założeniami.
-            Wolimy, aby nauczyciej miał cztery dni 8-godzinne niż pięć dni po 6 lub 7 godzin.
-            Aby osiągnąć taką właściwość zeruję wartość funkcji dla $x=0$, co skutkuje następującą funkcją:
+            Dla każdego nauczyciela $t$ tworzony jest wektor dziennego obciążenia dydaktycznego $\boldsymbol{\beta}_t$.
+
+            Zastosowanie funkcji $f(x)$ bez modyfikacji powodowałoby silne karanie dni wolnych ($x=0$), co jest niepożądane --- nauczyciel może mieć dzień wolny i nie powinno to stanowić wady planu.
+            Aby temu zapobiec, zmodyfikowałem funkcję w następujący sposób:
             \[
                 \begin{cases*}
                     f_T(x) = 0 & x = 0\\
                     f_T(x) = -\left(7-x\right)^2 + 2 & \text{ wpp.}\\
                 \end{cases*}
             \]
-            
-            Następnie wyznaczam sumę wartości funkcji dla wszystkich argumentów tego wektora:
-            \[ F_{c_{T_i}} = \sum_{d=1}^{5} f_T(x_{i,d}) \]
-            gdzie $\left|\mathcal{T}\right|$ to liczba wszystkich nauczycieli.
 
-            Końcowa ocena wszystkich nauczycieli to najzwyczajniej suma wszystkich wartości:
-            \[ F_{c_T} = \sum_{i=1}^{\left|\mathcal{T}\right|} F_{c_{T_i}} \]
+            Ocena dla nauczyciela $t$ to suma wartości funkcji dla wszystkich dni tygodnia:
+            \[ F_t = \sum_{d=1}^{5} f_T(\beta_{t,d}) \]
+
+            Ocena wszystkich nauczycieli jest równa:
+            \[ F_{T} = \sum_{t \in \mathcal{T}} F_t \]
 
         \subsubsection{Ocena względem klas}
-            Ocena równomierności godzin lekcyjnych dla klas jest analogiczna do poprzedniej.
-            Tworzony jest wektor obciążenia godzinowego:
-            \[ X_i = \begin{bmatrix} x_{i,1} & x_{i,2} & x_{i,3} & x_{i,4} & x_{i,5} \end{bmatrix} \]
-            gdzie $g_{i,d}$ oznacza liczbę godzin lekcyjnych przez $i$-tej klasy $d$-tego dnia.
+            Proces jest analogiczny, przy czym dla klas dni wolne są niepożądane, więc nie stosuję dodatkowych modyfikacji funkcji.
 
-            W tym przypadku dni wolne nie są zgodne ze względu na ograniczenia opisane w~\ref{subsection:ograniczenia}, a więc modyfikacje funkcji nie są potrzebne.
-
-            Analogicznie do nauczycieli tworzymy kolejno wektory i wartości:
-
-            \noindent
-            \begin{minipage}{.48\textwidth}
-                \[ F_{c_{C_i}} = \sum_{d=1}^{5} f(x_{i,d}) \]
-            \end{minipage}
-            \begin{minipage}{.48\textwidth}
-                \[ F_{c_C} = \sum_{i=1}^{\left|\mathcal{C}\right|} F_{c_{C_i}} \]
-            \end{minipage}\\
-            gdzie $\left|\mathcal{C}\right|$ to liczba wszystkich klas.
+            Oceny mają postać:
+            \begin{align*}
+                F_c &= \sum_{d=1}^{5} f(\beta_{c,d}) \\
+                F_C &= \sum_{c \in \mathcal{C}} F_c
+            \end{align*}
 
         \subsubsection{Normalizacja i wagi}
             Wyznaczanie końcowej wartości funkcji przystosowania wymaga uwzględnienia stosunku liczby nauczycieli do liczby uczniów.
             W typowych placówkach oświatowych liczba nauczycieli przywyższa liczbę klas.
-            Bezpośrednie dodawanie ocen $F_{c_T} + F_{c_G}$ prowadziłoby do znaczącej dominacji oceny nauczycieli w ocenie końcowej.
+            Bezpośrednie dodawanie ocen $F_T + F_C$ prowadziłoby do znaczącej dominacji oceny nauczycieli w ocenie końcowej.
             W celu rozwiązania tego problemu zastosowałem normalizację poprzez dzielenie każdej składowej przez odpowiednio $\left|\mathcal{T}\right|$ i $\left|\mathcal{C}\right|$.
             Takie podejście gwarantuje, że wpływ pojedynczej klasy na ocenę końcową jest porównywalny z wpływem pojedynczego nauczyciela.
 
             Kolejnym aspektem wymagającym uwzględnienia jest relatywna ważność obu kryteriów oceny. 
             W praktyce, wymagania równomiernego rozkładu dla każdej klasy są ważniejsze niż równomierny rozkład godzin nauczycieli.
-            Aby umożliwić sterowanie tymi preferencjami należy zaimplementować wagi, co prowadzi do następującej postaci funkcji przystosowania:
-            \[ F_c = \frac{\alpha_T}{\left|\mathcal{T}\right|} F_{c_T} + \frac{\alpha_G}{\left|\mathcal{C}\right|} F_{c_G}, \quad \alpha_T, \alpha_T \in \mathbb{R}^+ \]
-            gdzie $\alpha_T$ to waga oceny nauczycieli, a $\alpha_G$ to waga oceny klas.
+            Aby umożliwić sterowanie tymi preferencjami należy zaimplementować wagi, co prowadzi do następującej postaci funkcji przystosowania dla $i$-tego osobnika:
+            \[ F_i = \frac{\theta_T}{\left|\mathcal{T}\right|} F_{T,i} + \frac{\theta_C}{\left|\mathcal{C}\right|} F_{C,i}, \quad \theta_T, \theta_C \in \mathbb{R}^+ \]
+            gdzie $\theta_T$ to waga oceny nauczycieli, a $\theta_C$ to waga oceny klas.
 
     \subsection{Selekcja}\label{subsection:selekcja}
-        Zastosowałem traducyjną metodę ruletkową. Polega ona na losowaniu osobników, którzy posłużą jako rodzice z prawdopodobieństwami, które sa proporcjonalne do wartości ich funkcji przystowania.
-        Mając wektor ocen $F_{c\text{ total}} = \begin{bmatrix} F_{c_1} & F_{c_1} & \cdots & F_{c_\mathfrak{P}} \end{bmatrix}$, gdzie $\mathfrak{P}$ to rozmiar populacji, sortujemy go i dzielimy go na pół.
+        Zastosowałem tradycyjną metodę ruletkową. Polega ona na losowaniu osobników, którzy posłużą jako rodzice z prawdopodobieństwami, które sa proporcjonalne do wartości ich funkcji przystowania.
+        Mając wektor ocen $F_{c\text{ total}} = \begin{bmatrix} F_1 & F_2 & \cdots & F_{\mathfrak{P}} \end{bmatrix}$, gdzie $\mathfrak{P}$ to rozmiar populacji, sortujemy go i dzielimy go na pół.
         Drugą połowę populacji, która ma najgorsze wyniki, usuwam i na jej miejsce wstawiam potomków rodziców wylosowanych zgodnie z prawdopodobieństwami:
-        \[ P = \begin{bmatrix} \sigma\left(F_{c_1}\right) & \sigma\left(F_{c_2}\right) & \cdots & \sigma\left(F_{c_\mathfrak{P}}\right) \end{bmatrix}, \quad \sigma(F_{c_i}) = \frac{\exp\left[F_{c_i}\right]}{\sum_{j=1}^{\mathfrak{P}} \exp\left[F_{c_j}\right] } \]
+        \[ P = \begin{bmatrix} \sigma\left(F_1\right) & \sigma\left(F_2\right) & \cdots & \sigma\left(F_{\frac{\mathfrak{P}}{2}}\right) \end{bmatrix}, \quad \sigma(F_i) = \frac{\exp\left[F_i\right]}{\sum_{j=1}^{\frac{\mathfrak{P}}{2}} \exp\left[F_j\right] } \]
         W celu zamiany funkcji przystosowania na prawdopodobieństwa użyłem funkcji SoftMax.
 
     \subsection{Krzyżowanie}\label{subsection:krzyzowanie}
         Największym wyzwaniem podczas projektowania algorytmu okazało się opracowanie krzyżowania osobników, które zagwarantowałoby spójność z nałożonymi ograniczeniami.
         Niemożność zaimplementowania takich rozwiązań jak proste modyfikowanie krzyżowania jednopunktowego zmusiło mnie do opracowania specjalistycznych metod.
 
-        Z uwagi na dwie składowe funkcji zdecydowałem się na zaimplementowanie dwóch niezależnych metod krzyżowania osobników.
-        Takie podejście umożliwia równoczesne dziedziczenie cech związanych z optymalnym rozkładem zajęć zarówno z perspektywy nauczycieli, jak i klas.
+        Z uwagi na dwie składowe funkcji przystosowania zdecydowałem się na zaimplementowanie dwóch niezależnych metod krzyżowania osobników widocznych w pseudokodach~\ref{alg:krzyzowanie_ocena_nauczyciel} oraz~\ref{alg:krzyzowanie_ocena_klasy}.
+        Takie podejście umożliwia równoczesne dziedziczenie cech związanych z optymalnym obciążeniem dydaktycznym zarówno nauczycieli, jak i klas.
         Pozwala to także na stworzenie dwóch różnych potomków z dwóch rodziców.
+        Wygenerowany w ten sposób osobniki $S'$ mają cechy, które gwarantują jak najlepsze przypisanie nauczycieli lub klas wśród obu rodziców.
+        Następną zaletą tego podejścia jest fakt, że gwarantuje to też także spełnienie wszystkich wymagań,
+        jako że wszystkie wymagania odnoszą się do indywidualnych bloków, a tych nie zmieniamy, tylko przepisujemy.
 
-        \subsubsection{Względem oceny nauczycieli}
-            Funkcja krzyżowania uwzględniająca ocenę rozkładu godzin nauczycieli definiuje się następująco:
+        \begin{algorithm}[H]
+            \caption{Krzyżowanie uwzględniające ocenę obciążenia dydaktycznego nauczycieli}\label{alg:krzyzowanie_ocena_nauczyciel}
 
-            \noindent
-            \textbf{Dane wejściowe:}
-                \begin{itemize}
-                    \item $S_1$ --- pierwszy rodzic
-                    \item $S_2$ --- drugi rodzic
-                    \item $F_{T_{S_1}}$ --- ocena nauczycieli pierwszego osobnika
-                    \item $F_{T_{S_2}}$ --- ocena nauczycieli drugiego osobnika
-                \end{itemize}
+            \Input{$S_1$, $S_2$, oraz $F_{t,1}$, $F_{t,2}$ dla wszystkich nauczycieli $t\in\mathcal{T}$}
+            \Output{Macierz potomka $S'$}
             
-            \noindent
-            \textbf{Proces:}
-            \begin{enumerate}
-                \item Inicjalizacja macierzy potomka: $S_{\text{child}} = \mathbf{0}_{5 \times \left|\mathcal{L}\right|}$
-                \item Dla każdego nauczyciela $i \in \left\{1, 2, \dots, \left|\mathcal{T}\right|\right\}$:
-                \begin{enumerate}
-                    \item Jeżeli $F_{T_{i,S_1}} > F_{T_{i,S_2}}$, to dla każdego bloku $j$ prowadzonego przez nauczyciela $i$:
-                    \begin{enumerate}
-                        \item Przepisz kolumnę $j$ z macierzy $S_1$ do kolumny $j$ macierzy $S_{\text{child}}$
-                    \end{enumerate}
-                    \item W przeciwnym przypadku, dla każdego bloku $j$ prowadzonego przez nauczyciela $i$:
-                    \begin{enumerate}
-                        \item Przepisz kolumnę $j$ z macierzy $S_2$ do kolumny $j$ macierzy $S_{\text{child}}$
-                    \end{enumerate}
-                \end{enumerate}
-            \end{enumerate}
-
-            Wygenerowany w ten sposób osobnik $S_{\text{child}}$ ma cechy, które gwarantują jak najlepsze przypisanie nauczycieli wśród obu rodziców.
-            Następną zaletą tego podejścia jest fakt, że gwarantuje to też także spełnienie wszystkich wymagań,
-            jako że wszystkie wymagania odnoszą się do indywidualnych bloków, a tych nie zmieniamy, tylko przepisujemy.
-
-        \subsubsection{Względem oceny klas}
-            Analogicznie definiujemy krzyżowanie względem oceny klas:
-
-            \noindent
-            \textbf{Dane wejściowe:}
-                \begin{itemize}
-                    \item $S_1$ --- pierwszy rodzic
-                    \item $S_2$ --- drugi rodzic
-                    \item $F_{G_{S_1}}$ --- ocena klas pierwszego osobnika
-                    \item $F_{G_{S_2}}$ --- ocena klas drugiego osobnika
-                \end{itemize}
+            $S' \gets \mathbf{0}_{5 \times \left|\mathcal{L}\right|}$ \;
             
-            \noindent
-            \textbf{Proces:}
-            \begin{enumerate}
-                \item Inicjalizacja macierzy potomka: $S_{\text{child}} = \mathbf{0}_{5 \times \left|\mathcal{L}\right|}$
-                \item Dla każdej klasy $i \in \left\{1, 2, \dots, \left|\mathcal{C}\right|\right\}$:
-                \begin{enumerate}
-                    \item Jeżeli $F_{G_{i,S_1}} > F_{G_{i,S_2}}$, to dla każdego bloku $j$ prowadzonego dla klasy $i$:
-                    \begin{enumerate}
-                        \item Przepisz kolumnę $j$ z macierzy $S_1$ do kolumny $j$ macierzy $S_{\text{child}}$
-                    \end{enumerate}
-                    \item W przeciwnym przypadku, dla każdego bloku $j$ prowadzonego przez nauczyciela $i$:
-                    \begin{enumerate}
-                        \item Przepisz kolumnę $j$ z macierzy $S_2$ do kolumny $j$ macierzy $S_{\text{child}}$
-                    \end{enumerate}
-                \end{enumerate}
-            \end{enumerate}
+            \For{$t \in \mathcal{T}$}{
+                \Jesli{$F_{t,1} > F_{t,2}$}{
+                    \For{\textnormal{każdego bloku} $L_i$ \textnormal{prowadzonego przez nauczyciela} $t$}{
+                        \For{$d \in \{1,2,\dots,5\}$}{
+                            $S'_{d,i} \gets S_{1,d,i}$ \;
+                        }
+                    }
+                }
+                \Wpp{
+                    \For{\textnormal{każdego bloku} $L_i$ \textnormal{prowadzonego przez nauczyciela} $t$}{
+                        \For{$d \in \{1,2,\dots,5\}$}{
+                            $S'_{d,i} \gets S_{2,d,i}$ \;
+                        }
+                    }
+                }
+            }
+            \Return $S'$
+        \end{algorithm}
+        \begin{algorithm}[H]
+            \caption{Krzyżowanie uwzględniające ocenę obciążenia dydaktycznego klas}\label{alg:krzyzowanie_ocena_klas}
 
-            Wygenerowany w ten sposób osobnik $S_{\text{child}}$ ma cechy, które gwarantują jak najlepszy rozkład godzin lekcyjnych dla klas wśród obu rodziców.
-            Podobnie w tym przypadku nie modyfikujemy przydziału godzin w indywidualnych blokach, więc zachowujemy zgodność z ograniczeniami.
+            \Input{$S_1$, $S_2$, oraz $F_{c,1}$, $F_{c,2}$ dla wszystkich klas $c\in\mathcal{C}$}
+            \Output{Macierz potomka $S'$}
+            
+            $S' \gets \mathbf{0}_{5 \times \left|\mathcal{L}\right|}$ \;
+            
+            \For{$t \in \mathcal{T}$}{
+                \Jesli{$F_{c,1} > F_{c,2}$}{
+                    \For{\textnormal{każdego bloku} $L_i$ \textnormal{dla klasy} $c$}{
+                        \For{$d \in \{1,2,\dots,5\}$}{
+                            $S'_{d,i} \gets S_{1,d,i}$ \;
+                        }
+                    }
+                }
+                \Wpp{
+                    \For{\textnormal{każdego bloku} $L_i$ \textnormal{prowadzonego przez nauczyciela} $t$}{
+                        \For{$d \in \{1,2,\dots,5\}$}{
+                            $S'_{d,i} \gets S_{2,d,i}$ \;
+                        }
+                    }
+                }
+            }
+            \Return $S'$
+        \end{algorithm}
+            % Funkcja krzyżowania uwzględniająca ocenę rozkładu godzin nauczycieli definiuje się następująco:
+
+            % \noindent
+            % \textbf{Dane wejściowe:}
+            %     \begin{itemize}
+            %         \item $S_1$ --- pierwszy rodzic,
+            %         \item $S_2$ --- drugi rodzic,
+            %         \item $F_{t,1}$ --- ocena wszystkich nauczycieli $t \in \mathcal{T}$ pierwszego osobnika,
+            %         \item $F_{t,2}$ --- ocena wszystkich nauczycieli $t \in \mathcal{T}$ drugiego osobnika.
+            %     \end{itemize}
+            
+            % \noindent
+            % \textbf{Działanie:}
+            % \begin{enumerate}
+            %     \item Inicjalizacja macierzy potomka: $S'} = \mathbf{0}_{5 \times \left|\mathcal{L}\right|}$
+            %     \item Dla każdego nauczyciela $t \in \mathcal{T}$:
+            %     \begin{enumerate}
+            %         \item Jeśli $F_{t,1} > F_{t,2}$, przepisz wszystkie kolumny odpowiadające blokom prowadzonym przez nauczyciela $t$ z macierzy $S_1$ do $S'}$.
+            %         \item W przeciwnym przypadku, przepisz kolumny z macierzy $S_2$.
+            %     \end{enumerate}
+            % \end{enumerate}
+
+            % Wygenerowany w ten sposób osobnik $S'$ ma cechy, które gwarantują jak najlepsze przypisanie nauczycieli wśród obu rodziców.
+            % Następną zaletą tego podejścia jest fakt, że gwarantuje to też także spełnienie wszystkich wymagań,
+            % jako że wszystkie wymagania odnoszą się do indywidualnych bloków, a tych nie zmieniamy, tylko przepisujemy.
+
+        % \subsubsection{Względem oceny klas}
+        %     Analogicznie definiujemy krzyżowanie względem oceny klas:
+
+        %     \noindent
+        %     \textbf{Dane wejściowe:}
+        %         \begin{itemize}
+        %             \item $S_1$ --- pierwszy rodzic,
+        %             \item $S_2$ --- drugi rodzic,
+        %             \item $F_{c,1}$ --- ocena wszystkich klas $c \in \mathcal{C}$ pierwszego osobnika,
+        %             \item $F_{c,2}$ --- ocena wszystkich klas $c \in \mathcal{C}$ drugiego osobnika.
+        %         \end{itemize}
+            
+        %     \noindent
+        %     \textbf{Działanie:}
+        %     \begin{enumerate}
+        %         \item Inicjalizacja macierzy potomka: $S' = \mathbf{0}_{5 \times \left|\mathcal{L}\right|}$
+        %         \item Dla każdej klasy $c \in \mathcal{C}$:
+        %         \begin{enumerate}
+        %             \item Jeśli $F_{c,1} > F_{c,2}$, przepisz wszystkie kolumny odpowiadające blokom klasy $c$ z macierzy $S_1$ do $S'$.
+        %             \item W przeciwnym przypadku przepisz kolumny z macierzy $S_2$.
+        %         \end{enumerate}
+        %     \end{enumerate}
+
+            % Wygenerowany w ten sposób osobnik $S'$ ma cechy, które gwarantują jak najlepszy rozkład godzin lekcyjnych dla klas wśród obu rodziców.
+            % Podobnie w tym przypadku nie modyfikujemy przydziału godzin w indywidualnych blokach, więc zachowujemy zgodność z ograniczeniami.
 
     \subsection{Mutacja}\label{subsection:mutacja}
         Analogicznie do przypadku krzyżowania, zastosowanie prostych metod mutacji (takich jak losowa zamiana pojedynczych przydziałów) nie jest możliwe ze względu na wysokie ryzyko naruszenia ograniczeń.
@@ -1188,7 +1171,7 @@
 
         W celu zwiększenia stabilności procesu ewolucyjnego zaimplementowałem także elitarnego osobnika, który zawsze pojawia się niezmieniony w następnej generacji.
         Jest to osobik o największej wartości funkcji przystosowania:
-        \[ S_{\text{best}} = S_i, \quad i = \underset{j \in \left\{1, 2, \dots \mathfrak{P}\right\}}{\arg\max} F_{c_j} \]
+        \[ S_{\text{best}} = S_i, \quad i = \underset{j \in \left\{1, 2, \dots \mathfrak{P}\right\}}{\arg\max} F_j \]
 
     \subsection{Przykładowy wynik}
         Dla danych wejściowych przedstawionych w poprzednim przykładzie algorytm wygenerował następującego najlepszego osobnika:
@@ -1206,11 +1189,11 @@
             \item jedna godzina chemii została przypisana do środy.
         \end{itemize}
 
-        Na rysunku~\ref{fig:wyniki_ewolucyjny} przedstawiono wartości funkcji celu dla pięciu niezależnych uruchomień algorytmu genetycznego dla 25 generacji, przy następujących parametrach:
+        Na rysunku~\ref{fig:wyniki_ewolucyjny} przedstawiłem wartości funkcji celu dla pięciu niezależnych uruchomień algorytmu genetycznego dla 25 generacji, przy następujących parametrach:
         \begin{itemize}
             \item $\mathfrak{P} = 1000$,
-            \item $\alpha_T = 1$,
-            \item $\alpha_G = 2$.
+            \item $\theta_T = 1$,
+            \item $\theta_G = 2$.
         \end{itemize}
 
         \begin{figure}[H]
@@ -1392,7 +1375,7 @@
             \end{tikzpicture}
             \caption{Wykres wartości funkcji cely dla pięciu uruchomień algorytmu genetycznego}\label{fig:wyniki_ewolucyjny}
         \end{figure}
-        Średni czas obliczeń dla pięciu prób wyniósł \textbf{95.88 s}.  
+        Średni czas obliczeń dla pięciu prób wyniósł 95.88 s.  
         W żadnym przypadku funkcja celu nie osiągnęła wartości dodatnich.
         Wynika to z faktu, że w danych wejściowych występują klasy oraz nauczyciele, którzy mają liczbę bloków znacząco mniejszą niż 35.
         W praktyce uniemożliwia to uzyskiwanie dodatnich wartości funkcji celu, ponieważ algorytm nie ma wystarczającej liczby bloków, by spełnić wszystkie wymagania strukturalne konieczne do uzyskania pozytywnego wyniku.
@@ -1500,7 +1483,7 @@
             \end{cases}
         \]
 
-        \[ F_c = \sum_{t \in \mathcal{T}} \sum_{d=1}^{5} \text{duration}_{t,d} \]
+        \[ F = \sum_{t \in \mathcal{T}} \sum_{d=1}^{5} \text{duration}_{t,d} \]
 
         Minimalizacja tej funkcji prowadzi do kompaktowego układania zajęć, redukując okienka w planach nauczycieli.
 

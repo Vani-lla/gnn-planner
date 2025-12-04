@@ -22,11 +22,6 @@ T.~H. Cormen, C.~E. Leiserson, R.~L. Rivest, and C.~Stein.
 \newblock {\em Introduction to algorithms}.
 \newblock MIT press, 2022.
 
-\bibitem{numpymultinomialdocs}
-N.~Developers.
-\newblock Documentation, numpy.random.multinomial, (2025).
-\newblock Ostatnio otworzono 14 listopada 2025.
-
 \bibitem{eiben2015evolutionary}
 A.~E. Eiben and J.~E. Smith.
 \newblock What is an evolutionary algorithm?

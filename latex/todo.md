@@ -46,6 +46,9 @@
 - Przykładowy zbiór bloków lekcyjnych powinien zawierać faktyczne zbiory jako wymagania główne
 
 - &check; Kod jako rysunek
+- Projekt interfejsu do przeczytania
+- Testy do poprawienia
+- Poprawenie końcowej analizy wyników
 
 - Poprawa widoczności bloków lekcyjnych w wynikach (wspólna oś / skala)
 - Poprawienie wyników
