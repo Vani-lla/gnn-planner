@@ -1,29 +1,28 @@
 \Chapter{Problem układania planu lekcji i algorytm jego rozwiązania}\label{chapter:algorytm}
     Rozdział przedstawia kompleksowe rozwiązanie problemu układania szkolnego planu lekcji. Jego struktura odzwierciedla logikę stopniowego konstruowania finalnego algorytmu.
-    \begin{enumerate}
-        \item \textbf{Sformułowanie problemu} --- rozpoczynam od precyzyjnej definicji terminologii, danych wejściowych, oczekiwanego wyniku oraz formalnego opisu ograniczeń i funkcji celu. Stanowi to fundament dla dalszych rozważań.
-        \item \textbf{Analiza poprzednich podejść} --- krótko omawiam wcześniejsze, nieskuteczne próby rozwiązania, aby uzasadnić konieczność opracowania nowej, hybrydowej metody.
-        \item \textbf{Koncepcja dekompozycji i dobór technik} --- przedstawiam kluczową innowację pracy: podział złożonego problemu na trzy mniejsze, sekwencyjne etapy. Dla każdego z nich uzasadniam wybór najodpowiedniejszej techniki algorytmicznej.
-        \item[4,5,6.] \textbf{Szczegółowy opis algorytmów} --- kolejno, w osobnych sekcjach, szczegółowo opisuję działanie każdego z trzech algorytmów składowych, ilustrując je pseudokodami i przykładami wyników na rzeczywistych danych.
-    \end{enumerate}
+    \begin{itemize}
+        \item \textbf{sformułowanie problemu} --- rozpoczynam od precyzyjnej definicji terminologii, danych wejściowych, oczekiwanego wyniku oraz formalnego opisu ograniczeń i funkcji celu. Stanowi to fundament dla dalszych rozważań,
+        \item \textbf{analiza poprzednich podejść} --- krótko omawiam wcześniejsze, nieskuteczne próby rozwiązania, aby uzasadnić konieczność opracowania nowej, hybrydowej metody,
+        \item \textbf{loncepcja dekompozycji i dobór technik} --- przedstawiam kluczową innowację pracy: podział złożonego problemu na trzy mniejsze, sekwencyjne etapy. Dla każdego z nich uzasadniam wybór najodpowiedniejszej techniki algorytmicznej,
+        \item \textbf{szczegółowy opis algorytmów} --- kolejno, w osobnych sekcjach, szczegółowo opisuję działanie każdego z trzech algorytmów składowych, ilustrując je pseudokodami i przykładami wyników na rzeczywistych danych.
+    \end{itemize}
 
     \section{Sformułowanie problemu optymalizacyjnego}
         Na potrzeby pracy warto ujednolicić terminologię, z uwagi na to, że w języku potocznym niektóre z tych terminów są używane zamiennie:
         \begin{itemize}
-            \item \textbf{Klasa}: Grupa uczniów; przykładowo ,,IIA'', ,,IVC'', \dots
-            Ze względu na angielską nazwę \textit{class}, która koliduje ze składnią języków programowania, w kodzie często odnoszę się do klas jako \verb|student_group|.
-            \item \textbf{Sala}: Miejsce, w którym prowadzone są zajęcia; przykładowo ,,Sala Gimnastyczna 1'', ,,2'', \dots
-            \item \textbf{Przedmiot}: Temat zajęć prowadzonych przez nauczyciela; przykładowo ,,Wychowanie Fizyczne'', ,,Matematyka'', \dots
-            \item \textbf{Lekcja}: Zajęcia prowadzone przez jednego nauczyciela, w jednej sali, z jedną lub więcej klas, które są na temat jednego przedmiotu.
-            \item \textbf{Slot czasowy}: Czas w którym odbywa się lekcja; przykładowo slot zerowy może odbywać się od 7:00 do 7:45.
-            \item \textbf{Okienko}: Przerwa między dwoma lekcjami klasy lub nauczyciela. Występuje gdy zajęcia nie są przeprowadzane bezpośrednio po sobie.
+            \item \textbf{klasa}: Grupa uczniów; przykładowo ,,IIA'', ,,IVC'',
+            \item \textbf{sala}: Miejsce, w którym prowadzone są zajęcia; przykładowo ,,Sala Gimnastyczna 1'', ,,2'',
+            \item \textbf{przedmiot}: Temat zajęć prowadzonych przez nauczyciela; przykładowo ,,Wychowanie Fizyczne'', ,,Matematyka'',
+            \item \textbf{lekcja}: Zajęcia prowadzone przez jednego nauczyciela, w jednej sali, z jedną lub więcej klas, które są na temat jednego przedmiotu,
+            \item \textbf{slot czasowy}: Czas w którym odbywa się lekcja; przykładowo slot zerowy może odbywać się od 7:00 do 7:45,
+            \item \textbf{okienko}: Przerwa między dwoma lekcjami klasy lub nauczyciela. Występuje gdy zajęcia nie są przeprowadzane bezpośrednio po sobie.
         \end{itemize}
 
         Problem optymalizacyjny w tej pracy polega na przypisaniu lekcji do odpowiednich slotów czasowych i sal przy jednoczesnym spełnieniu wymagań.
         W rzeczywistości sformułowanie takiego zadania i wyznaczenie jego rozwiązania stanowi duże wyzwanie.
         Istnieją ograniczenia, które są różne dla każdej klasy, co utrudnia formułowanie problemu --- wiele lekcji jest realizowanych w blokach, które są definiowane każdy z osobna.
         Przez te wyjątki nie jest możliwym wykorzystanie prostych algorytmów.
-        Nie jest także możliwym rozwiązanie jednego wielkiego problemu programowania całkowitoliczbowego w sensownym czasie przy użyciu komputera z przeciętną specyfikacją.
+        Nie jest także efektywnym rozwiązanie jednego wielkiego problemu programowania całkowitoliczbowego w sensownym czasie przy użyciu komputera z przeciętną specyfikacją.
 
         \subsection{Dane i szukane}
             \subsubsection{Słownik podstawowych oznaczeń}\label{slownik_oznaczen}
@@ -44,9 +43,9 @@
                 \end{itemize}
 
             \subsubsection{Wymagania główne}
-                Warto zacząć od przedstawienia sposobu reprezentacji zmiennych zaczynając od wymagań głównych.
-                Ilość godzin tygodniowo odbytych przez klasę z danym nauczycielem w ramach danego przedmiotu jest z góry ustalona.
-                Aby łatwiej zrozumieć na czym polegają takie przypisania warto spojrzeć na dotychczasowy sposób przypisywania ilości godzin nauczycieli do klas w liceum, które dostarczyło dane na potrzeby tej pracy.
+                Warto zacząć od przedstawienia sposobu reprezentacji wymagań głównych.
+                Liczba godzin tygodniowo odbytych przez klasę z danym nauczycielem w ramach danego przedmiotu jest z góry ustalona.
+                Aby łatwiej zrozumieć na czym polegają takie przypisania warto spojrzeć na rysunek~\ref{fig:excel_wymagania} przedstawiający dotychczasowy sposób przypisywania liczby godzin nauczycieli do klas w liceum, które dostarczyło dane na potrzeby tej pracy.
             
                 \begin{figure}[H]
                     \centering
@@ -54,17 +53,17 @@
                     \caption{Zrzut ekranu z arkusza kalkulacyjnego przedstawiąjący przypisanie godzinowe nauczycieli dla każdej klasy.}\label{fig:excel_wymagania}
                 \end{figure}
                 Każdy nauczyciel jest przypisany do prowadzonych przez niego przedmiotów. 
-                Następnie w odpowiednim wierszu nauczyciela, pod odpowiednim przedmiotem, w kolumnie każdej klasy definiowana jest ilość godzin, która będzie poświęcona na prowadzenie tego przedmiotu.
+                Następnie w odpowiednim wierszu nauczyciela, pod odpowiednim przedmiotem, w kolumnie każdej klasy definiowana jest liczba godzin, która będzie poświęcona na prowadzenie tego przedmiotu.
 
                 Zbiór takich wymagań $\mathcal{W}$ definiuje się następująco:
-                \begin{equation}\label{eq:wymaganie_glowne}
+                \begin{equation*}
                     w_i \triangleq \left(t_{w,i}, c_{w,i}, s_{w,i}, g_{w,i}\right) \in \mathcal{W}, \quad \forall i \in \left\{1, 2, \dots, \left|\mathcal{W}\right|\right\}: \begin{cases} t_{w,i} &\in \mathcal{T}\\c_{w,i} &\in \mathcal{C}\\s_{w,i} &\in \mathcal{S}\\g_{w,i} &\in \mathbb{N}^+ \end{cases}
-                \end{equation}
+                \end{equation*}
                 gdzie $g_{w_i}$ to liczba wymaganych tygodniowo godzin przedmiotu $s_{w_i}$ przeprowadzonego przez nauczyciela $t_{w_i}$ dla klasy $c_{w_i}$.
 
-            \subsubsection{Dostępnośc nauczycieli}
+            \subsubsection{Dostępność nauczycieli}
                 Każdy nauczyciel ma też zdefiniowaną dostępność, która jest reprezentowana przez macierz $A$ o wymiarach $\left|\mathcal{T}\right|$ na $5$, gdzie $\left|\mathcal{T}\right|$ to liczba wszystkich nauczycieli.
-                Macierz jest zero-jedynkowa, gdzie 1 oznacza, że $t$-ty nauczyciel jest dostępny $d$-tego dnia tygodnia, a 0 że jest niedostepny.
+                Macierz jest zero-jedynkowa, gdzie 1 oznacza, że $t$-ty nauczyciel jest dostępny $d$-tego dnia tygodnia, a 0 że jest niedostępny.
                 \[ A = \begin{bmatrix}
                     a_{1,1} & a_{1,2} & \cdots & a_{1,5} \\
                     a_{2,1} & a_{2,2} & \cdots & a_{2,5} \\
@@ -86,11 +85,11 @@
                 \end{cases} \]
                 gdzie
                 \begin{itemize}
-                    \item $\vec{S_{b,i}}$ to podzbiór wszystkich przedmitów, których dotyczy blok $b_i$,
+                    \item $\vec{S_{b,i}}$ to podzbiór wszystkich przedmiotów, których dotyczy blok $b_i$,
                     \item $\vec{C_{b,i}}$ to podzbiór wszystkich klas, których dotyczy blok $b_i$,
                     \item $\vec{G_{b,i}}$ to wektor oczekiwanej liczby przedmiotów w bloku,
-                    \item $\gamma$ to wartość binarna informująca o tym czy blok jest \textit{agregujący}, to znaczy czy służy w celu łączenia innych bloków w jeszcze większe bloki,
-                    \item $\epsilon$ to liczba naturalna która informuje o maksymalnej liczbie bloków. Jeśli $\epsilon=0$ to oznacza to, że liczba bloków jest nielimitowana.
+                    \item $\gamma$ to wartość binarna informująca o tym czy blok jest \textit{agregujący} --- służący do łączenia innych bloków w jeszcze większe bloki,
+                    \item $\epsilon$ to liczba naturalna która informuje o maksymalnej liczbie bloków. Jeśli $\epsilon=0$ to, liczba bloków jest nielimitowana.
                 \end{itemize}
                 Przykładowy blok przedmiotów:
                 \begin{itemize}
@@ -103,7 +102,7 @@
                 lub:
                 \begin{itemize}
                     \item $\vec{S_b} = \text{(język angielski)}$,
-                    \item $\vec{C_b} = \mathcal{C}$
+                    \item $\vec{C_b} = \mathcal{C}$,
                     \item $\vec{G_b} = \left(2\right)$,
                     \item $\gamma = 0$,
                     \item $\epsilon = 0$.
@@ -114,10 +113,9 @@
                 \[ z_i \triangleq \left(d_{z,i},h_{z,i},c_{z,i},t_{z,i},s_{z,i},r_{z,i}\right) \in \mathcal{Z}, \quad \forall i \in \left\{0, 1, \dots, \left|\mathcal{Z}_d\right|\right\}: \begin{cases} d_{z,i} &\in \left\{1, 2, 3, 4, 5\right\} \\h_{z,i} &\in \left\{0, 1, \dots, H\right\}\\ c_{z,i} &\in \mathcal{C}\\ t_{z,i} &\in \mathcal{T}\\s_{z,i} &\in \mathcal{S}\\r_{z,i} &\in \mathcal{R} \end{cases} \]
                 Przykładowe interpretacje takich przypisań:
                 \begin{itemize}
-                    \item Poniedziałek, Slot czasowy 0, IA,\ \ nauczyciel francuskiego 1, język francuski, Sala nr 1
-                    \item Poniedziałek, Slot czasowy 0, IIA, nauczyciel francuskiego 1, język francuski, Sala nr 1
-                    \item[$\vdots$]
-                    \item Piątek, Slot czasowy 10, IVC, nauczyciel fizyki 2, fizyka, Sala nr 15
+                    \item poniedziałek, Slot czasowy 0, IA,\ \ nauczyciel francuskiego 1, język francuski, Sala nr 1,
+                    \item poniedziałek, Slot czasowy 0, IIA, nauczyciel francuskiego 1, język francuski, Sala nr 1,
+                    \item piątek, Slot czasowy 10, IVC, nauczyciel fizyki 2, fizyka, Sala nr 15.
                 \end{itemize}
                 W przypadku lekcji, która obejmują więcej klas niż jedna, należy stworzyć przypisanie dla każdej klasy osobno.
             
@@ -126,19 +124,19 @@
 
             \subsubsection{Ograniczenia fizyczne}
                 \begin{itemize}
-                    \item Żaden nauczyciel nie może być w 2 miejscach na raz.
+                    \item żaden nauczyciel nie może być w 2 miejscach na raz,
                     \begin{align*}
                         \forall i, j \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}:\\
                         t_{z,i} = t_{z,j} \implies \left[i = j \lor d_{z,i} \neq d_{z,j} \lor h_{z,i} \neq h_{z,j} \lor \left(d_{z,i} = d_{z,j} \land h_{z,i} = h_{z,j} \land r_{z,i} = r_{z,j}\right)\right]
                     \end{align*}
-                    \item Nauczyciel musi być dostępny.
+                    \item nauczyciel musi być dostępny,
                     \[ \forall i \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}: a_{t_{z,i},d_{z,i}} = 1 \]
-                    \item Żaden uczeń nie może być w 2 miejscach na raz.
+                    \item żaden uczeń nie może być w 2 miejscach na raz,
                     \begin{align*}
                         \forall i, j \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}, \exists k \in \left\{1, 2, \dots \left|\mathcal{B}\right|\right\}:\\
                         \left(d_{z,i} = d_{z,j} \land h_{z,i} = h_{z,j} \land c_{z,i} = c_{z,j} \land i \neq j \right) \implies c_{z,i} \in \vec{C_{b,k}} \land s_{z,i},s_{z,j} \in \vec{S_{b,k}}
                     \end{align*}
-                    \item W żadnej sali nie mogą odbywać się 2 lekcje na raz.
+                    \item w żadnej sali nie mogą odbywać się 2 lekcje na raz.
                     \begin{align*}
                         \forall i, j \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}, \exists k \in \left\{1, 2, \dots \left|\mathcal{B}\right|\right\}:\\
                         \left(d_{z,i} = d_{z,j} \land h_{z,i} = h_{z,j} \land r_{z,i} = r_{z,j} \land i \neq j \right) \implies s_{z,i} = s_{z,j} \land s_{z,i}, s_{z,j} \in \vec{S_{b,k}}
@@ -148,9 +146,9 @@
                 \begin{samepage}
                     \textbf{Ograniczenia prawne}~\cite{karta_nauczyciela, prawo_oswiatowe, obwieszczenie}
                         \begin{itemize}
-                            \item Uczeń nie może mieć więcej niż 2 godzin lekcyjnych tego samego przedmiotu dziennie.
+                            \item uczeń nie może mieć więcej niż 2 godzin lekcyjnych tego samego przedmiotu dziennie,
                             \[ \forall d \in \left\{1, 2, 3, 4, 5\right\}, c \in \mathcal{C}, s \in \mathcal{S}: \left|\left\{z \in \mathcal{Z}: d_z = d \land c_z = c \land s_z = s\right\}\right| \leq 2 \]
-                            \item Jeśli danego dnia mają zostać przeprowadzone 2 godziny jednego przedmiotu, to uczeń musi je mieć bezpośrednio po sobie.
+                            \item jeśli danego dnia mają zostać przeprowadzone 2 godziny jednego przedmiotu, to uczeń musi je mieć bezpośrednio po sobie.
                             \begin{align*}
                                 \forall i, j \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}, c \in \mathcal{C}, s \in \mathcal{S}:\\
                                 \left(d_{z,i} = d_{z,j} \land c_{z,i} = c_{z,j} \land s_{z,i} = s_{z,j} \land i \neq j \right) \implies \left|h_{z,i} - h_{z,j}\right| = 1
@@ -160,14 +158,14 @@
 
             \subsubsection{Ograniczenia jakościowe}
                 \begin{itemize}
-                    \item Brak okienek dla uczniów. Nie istnieje taka para przypisań, dla których różnica między slotami czasowymi jest większa niż suma wszystkich lekcji danego dnia.
+                    \item brak okienek dla uczniów. Nie istnieje taka para przypisań, dla których różnica między slotami czasowymi jest większa niż suma wszystkich lekcji danego dnia,
                     \begin{align*}
                         \nexists i, j \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}, c \in \mathcal{C}:\\
                         d_{z,i} = d_{z,j} \land c_{z,i} = c_{z,j} \land \left|h_{z,i} - h_{z,j}\right| > \left|\left\{z_k: d_{z,k} = d_{z,i} \land c_{z,i}\right\}\right|
                     \end{align*}
-                    \item Odpowiednie przypisanie sal. Lekcje wychowania fizycznego muszą odbyć się w przeznaczonych do tego salach, podobnie lekcji informatyki itd.
+                    \item odpowiednie przypisanie sal. Lekcje wychowania fizycznego muszą odbyć się w przeznaczonych do tego salach, podobnie lekcje informatyki itd.,
                     \[ \forall z_i \in \mathcal{Z}: s_{z,i} \in \vec{R_{r_z}} \]
-                    \item Dla bloków lekcyjnych, które odbywają się 3 razy w tygodniu konieczne jest stworzenie jednego bloku dwugodzinnego.
+                    \item dla bloków lekcyjnych, które odbywają się 3 razy w tygodniu konieczne jest stworzenie jednego bloku dwugodzinnego.
                     \begin{align*}
                         \forall w_i \in \mathcal{W}, \exists d \in \left\{1, 2, 3, 4, 5\right\}: \\ 
                         g_w = 3 \implies \left|\left\{z_j \in \mathcal{Z}: c_{w,i} = c_{z,j} \land s_{w,i} = s_{z,j} \land t_{w,i} = t_{z,j} \land d_{z,j} = d \right\}\right| = 2
@@ -175,7 +173,7 @@
                 \end{itemize}
 
             \subsubsection{Ograniczenie główne}
-                Zgodnie z definicją przyjętą w~\ref{eq:wymaganie_glowne} tygodniowa liczba godzin każdego przedmiotu musi być równa tej ustalonej w zbiorze wymagań:
+                Zgodnie z definicją przyjętą powyżej, tygodniowa liczba godzin każdego przedmiotu musi być równa tej ustalonej w zbiorze wymagań:
                 \[ \forall w_i \in \mathcal{W}: \left|\left\{z_j \in \mathcal{Z}: c_{w,i} = c_{z,j} \land t_{w,i} = t_{z,i} \land s_{w,i} = s_{z,i}\right\}\right| = g_{w,i} \]
 
             % \subsubsection{Hierarchiczna dekompozycja problemu}
@@ -207,7 +205,7 @@
             %     W szczególności jeśli takie oprogramowanie może być w przyszłości rozwijane przez więcej niż jednego dewelopera.
 
         \subsection{Funkcja celu}
-            Plan powinien minimalizować liczbę okienek nauczycieli, co za tym idzie --- minimalizować czas spędzony przez nauczyciela w szkole.
+            Plan powinien posiadać możliwie najmniejszą liczbę okienek nauczycieli, co za tym idzie nauczyciele powinni spędzać możliwie najmniej czasu w szkole.
             Efekt ten możemy osiągnąć minimalizując czas od pierwszej do ostatniej lekcji przeprowadzonej przez nauczyciela każdego dnia:
             
             \[ F = \sum_{d=1}^{5} \sum_{t\in\mathcal{T}} \left(\max_{\substack{i \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}\\ t = t_{z,i} \land d=d_{z,i}}} h_{z,i} - \min_{\substack{i \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}\\ t = t_{z,i} \land d=d_{z,i}}} h_{z,i}\right) \]
@@ -217,18 +215,18 @@
     
     \subsection{Programowanie mieszanocałkowitoliczbowe}\label{subsection:podejscie_zerojedynkowe}
         Moim pierwszym podejściem była próba użycia tylko i wyłącznie pakietu optymalizacyjnego \textit{IBM ILOG CPLEX}.
-        Problem zdefiniowałem używając zmiennych binarnych inspirując się podejściem opisanym w podrozdziale~\ref{section:podejscie_iteracyjne}, tworząc sześcio wymiarową macierz:
-        \begin{enumerate}
-            \item Wymiar nauczycieli
-            \item Wymiar klas
-            \item Wymiar przedmiotów
-            \item Wymiar dnia
-            \item Wymiar slotu czasowego
-            \item Wymiar sal
-        \end{enumerate}
+        Problem zdefiniowałem używając zmiennych binarnych inspirując się podejściem opisanym w sekcji~\ref{section:podejscie_iteracyjne}, tworząc sześciowymiarową macierz:
+        \begin{itemize}
+            \item wymiar nauczycieli,
+            \item wymiar klas,
+            \item wymiar przedmiotów,
+            \item wymiar dnia,
+            \item wymiar slotu czasowego,
+            \item wymiar sal.
+        \end{itemize}
 
         Jak można zauważyć złożoność pamięciowa takiego podejścia uniemożliwia jego efektywne skalowanie.
-        Nawet dla danych średniej szkoły, mającej mniej niż 100 sal, nauczycieli, klas i przedmitów, taka macierz zajmowała setki GB pamięci RAM.
+        Nawet dla danych średniej szkoły, mającej mniej niż 100 sal, nauczycieli, klas i przedmiotów, taka macierz zajmowała setki GB pamięci RAM.
         Rozwiązaniem tego problemu było zastosowanie słownika z wartościami jako zmienne binarne i kluczami jako krotki 6 liczb całkowitych.
         W ten sposób zmienne, które nie posiadają klucza, nie powstają w pamięci.
         Przykładowo krotka reprezentująca (nauczyciel francuskiego, IIIA, poniedziałek, slot czasowy 0, niemiecki, siłownia) nie jest w zbiorze możliwych kluczy.
@@ -272,7 +270,7 @@
         Tak zdefiniowany problem bardzo szybko znajdował rozwiązania, które spełniały wszystkie ograniczenia fizyczne.
 
         Problemem tego rozwiązania jest niemożność wprowadzenia bloków lekcyjnych przy jednoczesnym zachowaniu prostoty obliczeniowej.
-        Kolejnym wyzwaniem było również wprowadzenie minimalizacji liczby okienek dla nauczycieli oraz wprowadzenie wymagania ciągłości zajęć dla wszystkich klas.
+        Kolejnym wyzwaniem było również wprowadzenie minimalizacji liczby okienek dla nauczycieli oraz wymagania ciągłości zajęć dla wszystkich klas.
         Zmienne binarne nie oferują wystarczającej wszechstronności, która jest potrzebna w układaniu planów zajęć.
     
     \subsection{Grafowe sieci neuronowe}
@@ -282,7 +280,7 @@
             a krawędzie łączyły zajęcia o tych samych nauczycielach lub tych samych klasach.
 
         Taka reprezentacja okazała się szczególnie atrakcyjna pod względem implementacji funkcji celu.
-        Ocena dopuszczalności rozwiązania sprowadzała się do weryfikacji spełnienia ograniczeń, które można było w prosty sposób zamodelować za pomocą funkcji kary
+        Ocena wykonalności rozwiązania sprowadziła się do weryfikacji spełnienia ograniczeń, które można było w prosty sposób zamodelować za pomocą funkcji kary.
         Jednocześnie można nagradzać model za przypisywanie lekcji do poprawnych bloków.
         Początkowe rezultaty były bardzo obiecujące --- model już po kilkadziesięciu epokach wykazywał zdolność do identyfikowania, które lekcji powinny być w blokach, a które wymagają rozdzielenia w celu uniknięcia kolizji.
 
@@ -291,24 +289,24 @@
         Zbyt niskie natomiast powodowały, że model preferował optymalizację nagrody za grupowanie lekcji kosztem naruszenia ograniczeń.
 
 \section{Dekompozycja problemu i wybór technik}
-    W niniejszej pracy zaadaptowałem oraz rozwinąłem fundamentalną ideę przedstawioną w podrozdziale~\ref{section:podejscie_iteracyjne}, dostosowując ją do specyfiki problemu układania planu lekcji.
+    W niniejszej pracy zaadaptowałem oraz rozwinąłem fundamentalną ideę przedstawioną w sekcji~\ref{section:podejscie_iteracyjne}, dostosowując ją do specyfiki problemu układania planu lekcji.
     Zdecydowałem się na podział zadania na trzy mniejsze, kolejno realizowane etapy, z których każdy rozwiązuje wyraźnie wydzielony podproblem o niższej złożoności obliczeniowej.
     
-    Analiza moich wcześniejszych prób rozwiązania tego zagadnienia, wskazuje, że oparcie się wyłącznie na metodach inteligentnych bądź na MIP nie prowadzi do satysfakcjonujących rezultatów.
+    Analiza moich wcześniejszych prób rozwiązania tego zagadnienia wskazuje, że oparcie się wyłącznie na metodach inteligentnych bądź na MIP nie prowadzi do satysfakcjonujących rezultatów.
     Zasadnicza innowacja przedstawionego przeze mnie podejścia polega na dekompozycji oryginalnego problemu na trzy sekwencyjne fazy, każda używająca adekwatnej techniki, co stanowi rozwinięcie względem moich wcześniejszych koncepcji.
     
-    Aby móc przeprowadzić dekompozycję warto zdecydowałem się na wprowadzenie następujących pojęć:
+    Aby móc przeprowadzić dekompozycję zdecydowałem się na wprowadzenie następujących pojęć:
     \begin{itemize}
-        \item \textbf{Blok lekcyjny}: Grupa dwóch lub więcej lekcji, które odbywają się w tym samym slocie czasowym.
+        \item \textbf{blok lekcyjny}: Grupa dwóch lub więcej wymagań głownych, które reprezentuja lekcje są w stanie odbywać się w tym samym slocie czasowym.
         Mogą one dotyczyć jednej klasy oraz wielu nauczycieli, jednego nauczyciela i wielu klas, lub też wielu klas i wielu nauczycieli.
-        Na potrzeby tej pracy zbiory jednej lekcji też traktujemy jako pojedyncze bloki lekcyjne.
+        Na potrzeby tej pracy zbiory jednego wymagania głównego też traktujemy jako pojedyncze bloki lekcyjne.
         \item \textbf{Przydział godzinowy}: Posiadając już zbiór takich zbiorów lekcyjnych macierz ich przypisań nazywamy przydziałem godzinowym.
         Każda kolumna takiej macierzy ma 5 wartości i reprezentuję liczbę godzin lekcyjnych przeprowadzoną każdego dnia.
-        Przykładowo kolumna $\begin{bmatrix} 0 & 1 & 0 & 0 & 0 \end{bmatrix}$ reprezentuję jedną godzinę bloku we wtorek.
+        Przykładowo kolumna $\begin{bmatrix} 0 & 1 & 0 & 0 & 0 \end{bmatrix}$ reprezentuje jedną godzinę bloku we wtorek.
     \end{itemize}
 
     Dekompozycja prezentuje się następująco:
-    \begin{enumerate}
+    \begin{itemize}
         \item Etap 1 --- \textbf{Problem kombinatoryki}: \\
         \textbf{Dane wejściowe:} Zbiór wymagań głównych $\mathcal{W}$, zbiór definicji bloków przedmiotów $\mathcal{B}$ oraz zasoby szkolne $\mathcal{T}$, $\mathcal{C}$, $\mathcal{S}$. \\
         \textbf{Wynik:} Zbiór bloków lekcyjnych $\mathcal{L}$ i wektor ich wymaganych godzin tygodniowo $V$. \\
@@ -323,7 +321,7 @@
         \textbf{Dane wejściowe:} Macierz $S$, bloki lekcyjne $\mathcal{L}$ oraz zasoby sal $\mathcal{R}$. \\
         \textbf{Wynik:} Zbiór przypisań $\mathcal{Z}$ określających konkretne sloty czasowe i sale. \\
         \textbf{Cel:} Przypisanie terminów i pomieszczeń dla wszystkich zajęć.
-    \end{enumerate}
+    \end{itemize}
 
     Pełne sformułowanie problemu harmonogramowania prowadziłoby do liczby zmiennych decyzyjnych proporcjonalnej do wyrażenia
     \[ |\mathcal{T}| \times |\mathcal{C}| \times |\mathcal{S}| \times 5 \times H \times |\mathcal{R}| \]
@@ -377,7 +375,7 @@
         \caption{Struktura algorytmu}\label{fig:struktura_algorytmu}
     \end{figure}
 
-    Dla każdego etapu dobrałem technikę optymalizacyjną dopasowaną do charakterystyki problemu.
+    Dla każdego etapu dobrałem technikę optymalizacyjną dopasowaną do specyfiki problemu.
 
     Etap pierwszy charakteryzuje się niewielką przestrzenią decyzyjną oraz prostymi regułami tworzenia kombinacji wymagań głównych.
     Tworzenie bloków sprowadza się do grupowania wszystkich wymagań głównych, które spełniają kryteria opisane w blokach przedmiotów.
@@ -1192,7 +1190,7 @@
             \begin{enumerate}
                 \item Z populacji wybieranych jest losowo $n$ osobników.
                 \item Dla każdego wybranego osobnika wybierany jest losowy podzbiór kolumn (bloków lekcyjnych).
-                \item Dla każdej wybranej kolumny $j$ wylosuj nowy przydział zgodnie z procedurą opisaną w podrozdziale~\ref{subsection:generowanie_populacji}.
+                \item Dla każdej wybranej kolumny $j$ wylosuj nowy przydział zgodnie z procedurą opisaną w podsekcji~\ref{subsection:generowanie_populacji}.
             \end{enumerate}
         \end{samepage}
         

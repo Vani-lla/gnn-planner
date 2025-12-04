@@ -19,35 +19,35 @@
         Głównym celem pracy jest opracowanie i implementacja aplikacji webowej wspomagającej automatyczne układanie planu lekcji z wykorzystaniem algorytmu ewolucyjnego.
         Aplikacja ma umożliwiać generowanie planów uwzględniających:
         \begin{itemize}
-            \item Ograniczenia fizyczne (dostępność sal, unikanie kolizji zajęć)
-            \item Ograniczenia jakościowe (ciągłość zajęć, brak okienek)
-            \item Ograniczenia specyficzne definiowane przez użytkownika (bloki lekcyjne)
+            \item ograniczenia fizyczne (dostępność sal, unikanie kolizji zajęć),
+            \item ograniczenia jakościowe (ciągłość zajęć, brak okienek),
+            \item ograniczenia specyficzne definiowane przez użytkownika (bloki lekcyjne),
         \end{itemize}
 
         Algorytm ma minimalizować liczbę okienek w planach nauczycieli, redukując tym samym czas ich przebywania w szkole.
 
         Dla osiągnięcia postawionego celu konieczne jest wykonanie następujących zadań:
         \begin{itemize}
-            \item Zaprojektowanie i implementacja bazy danych do przechowywania ograniczeń, specyfikacji bloków lekcyjnych oraz wyników generowania planów.
-            \item Zaprojektowanie i wykonanie interfejsu użytkownika umożliwiającego definiowanie wszystkich niezbędnych ograniczeń oraz wizualizację końcowych planów lekcji.
-            \item Opracowanie algorytmu do układania planu lekcji wykorzystującego:
+            \item zaprojektowanie i implementacja bazy danych do przechowywania ograniczeń, specyfikacji bloków lekcyjnych oraz wyników generowania planów,
+            \item zaprojektowanie i wykonanie interfejsu użytkownika umożliwiającego definiowanie wszystkich niezbędnych ograniczeń oraz wizualizację końcowych planów lekcji,
+            \item opracowanie algorytmu do układania planu lekcji wykorzystującego:
             \begin{itemize}
-                \item Algorytm zachłanny do tworzenia struktury bloków lekcyjnych.
-                \item Algorytm ewolucyjny do optymalizacji rozkładu godzinowego.
-                \item Solver dla zadań programowania z ograniczeniami do szczegółowego harmonogramowania.
+                \item algorytm zachłanny do tworzenia struktury bloków lekcyjnych,
+                \item algorytm ewolucyjny do optymalizacji rozkładu godzinowego,
+                \item solver dla zadań programowania z ograniczeniami do szczegółowego harmonogramowania,
             \end{itemize}
-            \item Integracja aplikacji webowej z algorytmem.
+            \item integracja aplikacji webowej z algorytmem.
         \end{itemize}
 
     \section{Aspekt systemowy}
         W pracy zastosowałem podejście systemowe, ponieważ stworzenie aplikacji do generowania planu lekcji wymaga spojrzenia wykraczającego poza sam algorytm optymalizacyjny.
         Takie podejście obejmuje analizę wymagań, ich formalizację, projekt i implementację rozwiązania oraz końcową walidację, co pozwala traktować aplikację jako kompletny system informatyczny, a nie jedynie algorytm.
 
-        Podejście systemowe pomogło mi tażke z głęboką analizą problemu oraz jego dalszą dekompozycją.
+        Podejście systemowe pomogło mi także z dogłębną analizą problemu oraz jego dalszą dekompozycją.
         Modelowanie części algorytmu jako obiektów wejściowo-wyjściowych znacząco ułatwiło proces inżynierski.
         
         Zróżnicowanie uwarunkowań istotnie wpływa na projekt systemu. 
-        Należy uwzględnić zarówno wymagania prawne, fizyczne ograniczenia szkoły (dostępność sal i nauczycieli), jak i kwestie związane z komfortem uczniów, takie jak równomierne rozłożenie obciążeń.
+        Należy uwzględnić zarówno wymagania prawne, fizyczne ograniczenia szkoły (dostępność sal i nauczycieli), jak i kwestie związane z komfortem uczniów, takie jak równomierne rozłożenie obciążeń dydaktycznych.
         Wszystkie te czynniki muszą być odzwierciedlone w modelu danych oraz w module optymalizacyjnym.
         
         Istotny jest również aspekt użytkowy: system musi być praktyczny i intuicyjny w obsłudze.

@@ -1,18 +1,19 @@
 \Chapter{Weryfikacja i walidacja rozwiązania}\label{chapter:tests}
     Rozdział stanowi krytyczną ocenę wdrożonego systemu, podzieloną na dwie kluczowe perspektywy:
     \begin{enumerate}
-        \item Testowanie funkcjonalności --- weryfikacja, czy aplikacja działa zgodnie z założeniami projektowymi. Zawiera formalne scenariusze testowe oraz ich praktyczną realizację.
-        \item Analiza jakości wyniku --- walidacja, czy wygenerowane plany lekcji są użyteczne i poprawne jakościowo. Obejmuje porównanie z planem ręcznym, analizę krytycznych przypadków oraz ewaluację kluczowego wskaźnika efektywności, liczby okienek nauczycieli.
+        \item[1, 2.] Testowanie funkcjonalności --- weryfikacja, czy aplikacja działa zgodnie z założeniami projektowymi. Zawiera formalne scenariusze testowe oraz ich praktyczną realizację.
+        \item[3.] Analiza jakości wyniku --- walidacja, czy wygenerowane plany lekcji są użyteczne i poprawne jakościowo. Obejmuje porównanie z planem ręcznym, analizę krytycznych przypadków oraz ewaluację kluczowego wskaźnika efektywności, liczby okienek nauczycieli.
     \end{enumerate}
 
 \section{Scenariusze testowe}
 
     \subsection{Scenariusz testowy generowania planu lekcji z określonymi parametrami}
-        Poniższy scenariusz opisuje proces wygenerowania planu lekcji przy użyciu zaimplementowanego modułu optymalizacyjnego.
+        Scenariusz zaprezentowany w tabeli~\ref{tab:generowanie_planu} opisuje proces wygenerowania planu lekcji przy użyciu zaimplementowanego modułu optymalizacyjnego.
 
         \begin{table}[h!]
                 \centering
                 % \setlength{\tabcolsep}{8pt} % Default value: 6pt
+                \caption{Generowanie planu lekcji z określonymi parametrami}\label{tab:generowanie_planu}
                 \renewcommand{\arraystretch}{1.3} % 4efault value: 1
                 \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
                     \hline
@@ -37,38 +38,37 @@
                     \textbf{Oczekiwany rezultat} &
                     System generuje kompletny plan lekcji zgodny ze wszystkimi ograniczeniami. System pokazuje użytkownikowi powiadomienie o zakończeniu procesu. \\ \hline
                 \end{tabular}
-                \caption{Generowanie planu lekcji z określonymi parametrami}
             \end{table}
 
     \subsection{Scenariusz przeglądu planów lekcji}
-        Poniższy scenariusz opisuje proces przeglądania istniejących planów lekcji wygenerowanych w systemie.
-            
+        Scenariusz zaprezentowany w tabeli~\ref{tab:scenariusz_przegladu_planow} opisuje proces przeglądania istniejących planów lekcji wygenerowanych w systemie.
+
         \begin{table}[h!]
             \centering
             % \setlength{\tabcolsep}{8pt}
+            \caption{Scenariusz przeglądu planów lekcji}\label{tab:scenariusz_przegladu_planow}
             \renewcommand{\arraystretch}{1.4}
             \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
                 \hline
                 \textbf{Scenariusz} & Przegląd planów lekcji \\ \hline
-                
+
                 \textbf{Opis} & Test weryfikuje możliwość przeglądania wielu wygenerowanych planów lekcji oraz podglądu ich szczegółów z perspektywy klasy i nauczyciela. \\ \hline
-                
+
                 \textbf{Widok początkowy} & Strona główna \\ \hline
-                
+
                 \multirow{2}{*}{\textbf{Wymagania}}
                 & Wprowadzone zasoby: nauczyciele, klasy, sale, przedmioty \\
                 & W systemie dostępne są co najmniej dwa wygenerowane plany lekcji \\ \hline
-                
+
                 \multirow{4}{*}{\textbf{Kroki testowe}}
                 & 1. Przejdź do widoku przeglądania planów lekcji \\
                 & 2. Wybierz najnowszy dostępny plan \\
                 & 3. Wyświetl plan lekcji dla wybranej klasy \\
                 & 4. Wyświetl plan lekcji dla konkretnego nauczyciela \\ \hline
-                
+
                 \textbf{Oczekiwany rezultat} &
                 Użytkownik może poprawnie przeglądać różne warianty planów lekcji oraz widoki szczegółowe, a system prezentuje dane zgodnie z zapisanym stanem. \\ \hline
             \end{tabular}
-            \caption{Scenariusz przeglądu planów lekcji}
         \end{table}
             
 
@@ -78,6 +78,7 @@
         \begin{table}[h!]
             \centering
             % \setlength{\tabcolsep}{8pt}
+            \caption{Scenariusz importowania i edytowania wymagań głównych}
             \renewcommand{\arraystretch}{1.4}
             \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
                 \hline
@@ -100,7 +101,6 @@
                 \textbf{Oczekiwany rezultat} &
                 System poprawnie importuje dane z pliku CSV oraz umożliwia ich edycję i zapisanie nowych wartości. \\ \hline
             \end{tabular}
-            \caption{Scenariusz importowania i edytowania wymagań głównych}
         \end{table}
         
 
@@ -110,6 +110,7 @@
         \begin{table}[h!]
             \centering
             % \setlength{\tabcolsep}{8pt}
+            \caption{Scenariusz edytowania dostępności nauczycieli}
             \renewcommand{\arraystretch}{1.4}
             \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
                 \hline
@@ -132,7 +133,6 @@
                 \textbf{Oczekiwany rezultat} &
                 System zapisuje zmodyfikowane dane dostępności. System pokazuje powiadomienie o powodzeniu operacji \\ \hline
             \end{tabular}
-            \caption{Scenariusz edytowania dostępności nauczycieli}
         \end{table}
 
 \section{Testowanie aplikacji}

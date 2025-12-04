@@ -25,33 +25,37 @@
 - &check; Dodać opis do diagramów sekwencji
 - &check; Opisy do interfejsu
 
-- Sprawdzenie pierwszej pracy z bibliografii
-- Zrobić coś z potężną ilością stron
+- &check; Zrobić coś z potężną ilością stron
 
-- Poprawienie indeksów, nie może być 3 stopniowe - t_{wi} a nie t_w_i
-- Poprawienie strunktury rozdziału trzeciego
-    - 3.3 Dekompozycja problemu i wybór technik
-        - Dekompozycja
-        - Techniki
-        - 3.3.1 Problem z etapu 1
-            - Wprowadzenie konkretnych oznaczeń
-            - Uzasadnienie wyboru techniki
-        - 3.3.2 Problem z etapu 2
-        - 3.3.3 Problem z etapu 3
-- Obciazenia dydaktyczne
-- Wywalenie oznaczeń pośrednich ze sformułowania problemu
-- Rezultaty -> Przykładowy wynik
-- Funkcja celu dla całości problemu
-- Przydział =/= rozkład
-- Przykładowy zbiór bloków lekcyjnych powinien zawierać faktyczne zbiory jako wymagania główne
+- &check;Poprawienie indeksów, nie może być 3 stopniowe - t_{wi} a nie t_w_i
+- &check; Poprawienie strunktury rozdziału trzeciego
+    - &check; 3.3 Dekompozycja problemu i wybór technik
+        - &check; Dekompozycja
+        - &check; Techniki
+        - &check; 3.3.1 Problem z etapu 1
+            - &check; Wprowadzenie konkretnych oznaczeń
+            - &check; Uzasadnienie wyboru techniki
+        - &check; 3.3.2 Problem z etapu 2
+        - &check; 3.3.3 Problem z etapu 3
+- &check; Obciazenia dydaktyczne
+- &check; Wywalenie oznaczeń pośrednich ze sformułowania problemu
+- &check; Rezultaty -> Przykładowy wynik
+- &check; Funkcja celu dla całości problemu
+- &check; Przydział =/= rozkład
 
 - &check; Kod jako rysunek
-- Projekt interfejsu do przeczytania
+- &check; Projekt interfejsu do przeczytania
+
+- Przykładowy zbiór bloków lekcyjnych powinien zawierać faktyczne zbiory jako wymagania główne
+- Diagram wymagań
+
+- Sprawdzenie pierwszej pracy z bibliografii
 - Testy do poprawienia
 - Poprawenie końcowej analizy wyników
-
 - Poprawa widoczności bloków lekcyjnych w wynikach (wspólna oś / skala)
-- Poprawienie wyników
+- Napisać ukłąd pracy
+- Napisać streszczenie
+- Dodać key-wordy
 
 ### Wszelkie inne poprawki :|
 95.43159103393555

@@ -638,10 +638,6 @@ INPUT ./images/vulcan/plan_trudne.png
 INPUT ./chapters/algorytm.tex
 INPUT ./chapters/algorytm.tex
 INPUT chapters/algorytm.tex
-INPUT /usr/share/texmf-dist/tex/latex/lm/t1lmtt.fd
-INPUT /usr/share/texmf-dist/tex/latex/lm/t1lmtt.fd
-INPUT /usr/share/texmf-dist/tex/latex/lm/t1lmtt.fd
-INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmtt12.tfm
 INPUT ./images/excel_wymagania.png
 INPUT ./images/excel_wymagania.png
 INPUT ./images/excel_wymagania.png
@@ -671,6 +667,10 @@ INPUT ./images/interval_vars.png
 INPUT ./images/interval_vars.png
 INPUT ./images/interval_vars.png
 INPUT ./images/interval_vars.png
+INPUT /usr/share/texmf-dist/tex/latex/lm/t1lmtt.fd
+INPUT /usr/share/texmf-dist/tex/latex/lm/t1lmtt.fd
+INPUT /usr/share/texmf-dist/tex/latex/lm/t1lmtt.fd
+INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmtt12.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmbx8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmri8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmri7.tfm

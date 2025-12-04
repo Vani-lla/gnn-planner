@@ -1,19 +1,19 @@
 \Chapter{Powiązane prace}\label{chapter:related}
     Rozdział prezentuje przegląd literatury w trzech wyraźnie oddzielonych obszarach, które stanowią fundament dla rozwiązania zaproponowanego w pracy:
-    \begin{enumerate}
-        \item Podejścia algorytmiczne i metodyczne --- analiza pracy naukowej przedstawiającej zaawansowaną, iteracyjną metodę optymalizacji (MIP z dekompozycją), która posłużyła jako kluczowa inspiracja architektoniczna.
-        \item Podstawy teoretyczne --- formalne wprowadzenie do klasycznego problemu harmonogramowania zadań typu job-shop, który stanowi teoretyczną ramę dla problemu harmonogramowania i uzasadnia użycie technik programowania z ograniczeniami (CP).
-        \item Rozwiązania praktyczne i komercyjne --- szczegółowy przegląd wiodącego na rynku polskim systemu (Vulcan Optivum), służący zrozumieniu rzeczywistych wymagań, złożoności problemu oraz ustaleniu punktu odniesienia dla oceny praktyczności własnego rozwiązania.
-    \end{enumerate}
+    \begin{itemize}
+        \item podejścia algorytmiczne i metodyczne --- analiza pracy naukowej przedstawiającej zaawansowaną, iteracyjną metodę optymalizacji, która posłużyła jako kluczowa inspiracja architektoniczna,
+        \item podstawy teoretyczne --- formalne wprowadzenie do klasycznego problemu harmonogramowania zadań typu job-shop, który stanowi teoretyczną ramę dla problemu harmonogramowania i uzasadnia użycie technik programowania z ograniczeniami,
+        \item rozwiązania praktyczne i komercyjne --- szczegółowy przegląd wiodącego na rynku polskim systemu, służący zrozumieniu rzeczywistych wymagań, złożoności problemu oraz ustaleniu punktu odniesienia dla oceny praktyczności własnego rozwiązania.
+    \end{itemize}
 
     \section{Inspiracja podejściem iteracyjnym}\label{section:podejscie_iteracyjne}
         Praca ,,A mixed-integer programming approach for solving university course timetabling problems''~\cite{rappos2022mixed} przedstawia innowacyjne podejście do rozwiązywania problemów harmonogramowania poprzez dekompozycję na prostsze podproblemy i iteracyjne dodawanie ograniczeń.
         Autorzy wykorzystują strategię polegającą na:
-        \begin{enumerate}
+        \begin{itemize}
             \item Uzyskaniu rozwiązania początkowego z podstawowym zestawem ograniczeń.
             \item Iteracyjnym ,,wstrzykiwaniu'' kolejnych ograniczeń z wykorzystaniem zmiennych sztucznych.
             \item Stosowaniu heurystyk redukcji zmiennych dla kontroli złożoności obliczeniowej.
-        \end{enumerate}
+        \end{itemize}
         
         \subsection{Definicja problemu harmonogramowania}
             W przedstawionym podejściu problem harmonogramowania zajęć uniwersyteckich definiowany jest jako zadanie przydzielenia zajęć do dostępnych sal i terminów oraz przypisania studentów do odpowiednich grup zajęciowych, z uwzględnieniem złożonych ograniczeń i preferencji.
@@ -45,7 +45,7 @@
             \subsubsection{Iteracyjne wstrzykiwanie ograniczeń}
                 Ze względu na bardzo dużą złożoność pełnego modelu, autorzy stosują podejście inkrementalne:
                 
-                \begin{enumerate}
+                \begin{itemize}
                     \item \textbf{Rozwiązanie początkowe}: Optymalizacja rozpoczyna się od uproszczonego modelu zawierającego jedynie fundamentalne ograniczenia oraz podstawowe składniki funkcji celu.
                     \item \textbf{Dodawanie ograniczeń dystrybucyjnych}: Twarde ograniczenia dystrybucyjne są dodawane do modelu w formie ograniczeń wykluczających niedopuszczalne kombinacje przypisań czasowych i salowych. 
                     Dla większości typów ograniczeń generowane są odpowiednie warunki na etapie preprocessingu.
@@ -53,7 +53,7 @@
                     Ograniczenia te są dodawane dopiero gdy zostanie znalezione rozwiązanie całkowitoliczbowe, które je narusza.
                     \item \textbf{Iteracyjne uwzględnianie konfliktów studentów}: Podobne podejście stosowane jest dla uwzględnienia w funkcji celu kar za konflikty studentów.
                     Początkowo pomija się najbardziej złożone składowe związane z konfliktami, a następnie iteracyjnie dodaje się do modelu te ograniczenia, które okazały się istotne w poprzednich uruchomieniach.
-                \end{enumerate}
+                \end{itemize}
             
             \subsubsection{Strategie redukcji złożoności}
                 Aby utrzymać złożoność obliczeniową na akceptowalnym poziomie, autorzy stosują zaawansowane strategie redukcji modelu:
@@ -66,8 +66,8 @@
                 Podejście to pozwala na stopniowe poprawianie jakości rozwiązania przy kontrolowanym wzroście złożoności obliczeniowej, zachowując wykonalność rozwiązania na każdym etapie procesu optymalizacji.
 
     \section{Problem harmonogramowania zadań typu job-shop}\label{section:jssp}
-        Problem harmonogramowania typu \textit{Job-Shop} (ang. \textit{Job-Shop Scheduling Problem} --- JSSP) należy do klasycznych zagadnień optymalizacji kombinatorycznej w badaniach operacyjnych i zarządzaniu produkcją.
-        Ze względu na szerokie zastosowania inżynierskie był intensywnie analizowany w literaturze. Klasyczny wariant, podsumowany m.in. w \cite{xiong2022survey}, można sformalizować następująco.
+        Problem harmonogramowania typu job-shop (ang. \textit{Job-Shop Scheduling Problem} --- JSSP) należy do klasycznych zagadnień optymalizacji kombinatorycznej w badaniach operacyjnych i zarządzaniu produkcją.
+        Ze względu na szerokie zastosowania inżynierskie był intensywnie analizowany w literaturze. Klasyczny wariant, podsumowany m.in. w ,,A survey of job shop scheduling problem: The types and models''~\cite{xiong2022survey}, można sformalizować następująco.
 
         Rozważamy zbiór maszyn:
         \[ M = \{ M_1, M_2, \dots, M_m \} \]
@@ -128,8 +128,8 @@
         Proces rozpoczyna się od zaimportowania danych z arkusza organizacyjnego, a kończy na publikacji gotowego planu~\cite{vulcanprzewodnik}.
 
         Podstawą do tworzenia planu są dane zaimportowane z arkusza organizacyjnego. 
-        Kluczowym wymaganiem, które zostało mi przedstawione przez liceum, które zaopatrzyło mnie w dane do tej pracy jest możliwość importowania podobnych plików w aplikacji.
-        W ten sposób pozbywamy się żmudnego procesu ręcznego wprowadzania ograniczeń.
+        Kluczowym wymaganiem, jakie zostało mi przedstawione przez liceum, które zaopatrzyło mnie w dane do tej pracy jest możliwość importowania podobnych plików w aplikacji.
+        W ten sposób pozbywamy się czasochłonnego procesu ręcznego wprowadzania ograniczeń.
 
         \begin{figure}[!h]
             \centering
@@ -137,7 +137,7 @@
             \caption{Zrzut ekranu importowania arkusza organizacyjnego do programu ,,Plan lekcji Optivum''~\cite{vulcanprzewodnik}}
         \end{figure}
 
-        W następnym etapie użytkownik definije zasoby lokalne zaczynając od sal oraz preferencji.
+        W następnym etapie użytkownik definiuje zasoby lokalne zaczynając od sal oraz preferencji.
         Dla zajęć grupowych kluczowe jest poprawne zdefiniowanie sal. 
         Jeśli kilka grup ma korzystać z jednego dużego pomieszczenia (sala gimnastyczna, pracownia), należy je podzielić na części (przykładowo: salagim1, salagim2) i traktować jako odrębne sale.
         Dla zajęć poza szkołą (basen) wykorzystuje się tzw. ,,salę pozorną''.
@@ -191,7 +191,7 @@
         \end{figure}
 
         Przed automatycznym ułożeniem całego planu, zaleca się ręczne lub automatyczne umieszczenie lekcji uznanych za najtrudniejsze, do których należą zajęcia dzielone na grupy i międzyoddziałowe.
- 
+
         \begin{figure}[!h]
             \centering
             \includegraphics[width=0.65\textwidth]{images/vulcan/plan_trudne.png}
@@ -199,13 +199,13 @@
         \end{figure}
 
         Po ułożeniu ,,trudnych'' lekcji uruchamia się automat dla całego planu.
-        Jeśli automat nie poradzi sobie z ułożeniem wszystkich lekcji (przykładowo z powodu zbyt restrykcyjnych warunków dla grup), należy analizować nieułożone lekcje i łagodzić parametry.
+        Jeśli automat nie poradzi sobie z ułożeniem wszystkich lekcji (przykładowo z powodu zbyt restrykcyjnych warunków dla grup), należy przeanalizować nieułożone lekcje i złagodzić parametry.
         Czasami pomaga kilkakrotne wykonanie minimalizacji okienek i układania całego planu.
 
         Narzędzie ,,Plan lekcji Optivum'' jest bardzo obszernym narzędziem oferującym wiele możliwości. 
         Bierze pod uwagę praktycznie każdy możliwy scenariusz, który może wystąpić w polskiej szkole, co jest rezultatem wieloletniej obecności na rynku oraz doświadczenia deweloperów. 
 
-        Aplikacja znakomicie ilustruje cenę uniwersalności, którą jest konieczność stworzenia rozbudowanej aplikacji wymagającej od użytkowników definiowania wielu ograniczeń, nawet tych rzadko spotykanych w przeciętnej szkole. 
+        Ceną uniwersalności, jest konieczność stowrzenia rozbudowanej aplikacji wymagającej od użytkowników definiowania wielu ograniczeń, nawet tych rzadko spotykanych w przeciętnej szkole. 
         Kolejnym kosztem takiego podejścia jest konieczność specjalistycznych szkoleń --- Vulcan oferuje kosztowne szesnastogodzinne szkolenia online poświęcone wyłącznie obsłudze aplikacji do układania planu lekcji.
 
         Podsumowując, ,,Plan lekcji Optivum'' to doskonałe narzędzie dla dużych placówek, które potrzebują sprawdzonego i kompleksowego rozwiązania.

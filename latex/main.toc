@@ -21,14 +21,14 @@
 \contentsline {subsection}{\numberline {3.1.1}Dane i szukane}{14}{subsection.3.1.1}%
 \contentsline {subsubsection}{Słownik podstawowych oznaczeń}{14}{subsubsection*.14}%
 \contentsline {subsubsection}{Wymagania główne}{14}{subsubsection*.15}%
-\contentsline {subsubsection}{Dostępnośc nauczycieli}{15}{subsubsection*.17}%
+\contentsline {subsubsection}{Dostępność nauczycieli}{15}{subsubsection*.17}%
 \contentsline {subsubsection}{Bloki przedmiotów}{16}{subsubsection*.18}%
 \contentsline {subsubsection}{Szukane}{17}{subsubsection*.19}%
 \contentsline {subsection}{\numberline {3.1.2}Ograniczenia}{17}{subsection.3.1.2}%
 \contentsline {subsubsection}{Ograniczenia fizyczne}{17}{subsubsection*.20}%
 \contentsline {subsubsection}{Ograniczenia jakościowe}{18}{subsubsection*.21}%
 \contentsline {subsubsection}{Ograniczenie główne}{18}{subsubsection*.22}%
-\contentsline {subsection}{\numberline {3.1.3}Funkcja celu}{19}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.3}Funkcja celu}{18}{subsection.3.1.3}%
 \contentsline {section}{\numberline {3.2}Poprzednie podejścia}{19}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Programowanie mieszanocałkowitoliczbowe}{19}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Grafowe sieci neuronowe}{21}{subsection.3.2.2}%
