@@ -4,28 +4,28 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Przypadek użycia UC01}}{46}{table.caption.57}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Przypadek użycia UC02}}{46}{table.caption.58}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Przypadek użycia UC03}}{47}{table.caption.59}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces Przypadek użycia UC04}}{47}{table.caption.60}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces Przypadek użycia UC05}}{48}{table.caption.61}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces Przypadek użycia UC06}}{48}{table.caption.62}%
-\contentsline {table}{\numberline {4.7}{\ignorespaces Przypadek użycia UC07}}{49}{table.caption.63}%
-\contentsline {table}{\numberline {4.8}{\ignorespaces Przypadek użycia UC08}}{49}{table.caption.64}%
-\contentsline {table}{\numberline {4.9}{\ignorespaces Przypadek użycia UC09}}{50}{table.caption.65}%
-\contentsline {table}{\numberline {4.10}{\ignorespaces Przypadek użycia UC10}}{50}{table.caption.66}%
-\contentsline {table}{\numberline {4.11}{\ignorespaces Przypadek użycia UC11}}{51}{table.caption.67}%
-\contentsline {table}{\numberline {4.12}{\ignorespaces Przypadek użycia UC12}}{51}{table.caption.68}%
-\contentsline {table}{\numberline {4.13}{\ignorespaces Tabele podstawowe zasobów szkolnych}}{55}{table.caption.77}%
-\contentsline {table}{\numberline {4.14}{\ignorespaces Tabele definiujące wymagania i ograniczenia}}{56}{table.caption.80}%
-\contentsline {table}{\numberline {4.15}{\ignorespaces Tabele zbiorów zasobów}}{57}{table.caption.83}%
-\contentsline {table}{\numberline {4.16}{\ignorespaces Tabela requirement\_set}}{58}{table.caption.84}%
-\contentsline {table}{\numberline {4.17}{\ignorespaces Tabele przechowujące wygenerowane plany lekcji}}{58}{table.caption.86}%
-\contentsline {table}{\numberline {4.18}{\ignorespaces Struktura wszystkich tabel w bazie danych}}{61}{table.caption.88}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Przypadek użycia UC01}}{46}{table.caption.50}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Przypadek użycia UC02}}{49}{table.caption.51}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Przypadek użycia UC03}}{49}{table.caption.52}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Przypadek użycia UC04}}{50}{table.caption.53}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Przypadek użycia UC05}}{50}{table.caption.54}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Przypadek użycia UC06}}{51}{table.caption.55}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces Przypadek użycia UC07}}{51}{table.caption.56}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces Przypadek użycia UC08}}{52}{table.caption.57}%
+\contentsline {table}{\numberline {4.9}{\ignorespaces Przypadek użycia UC09}}{52}{table.caption.58}%
+\contentsline {table}{\numberline {4.10}{\ignorespaces Przypadek użycia UC10}}{53}{table.caption.59}%
+\contentsline {table}{\numberline {4.11}{\ignorespaces Przypadek użycia UC11}}{53}{table.caption.60}%
+\contentsline {table}{\numberline {4.12}{\ignorespaces Przypadek użycia UC12}}{54}{table.caption.61}%
+\contentsline {table}{\numberline {4.13}{\ignorespaces Tabele podstawowe zasobów szkolnych}}{58}{table.caption.70}%
+\contentsline {table}{\numberline {4.14}{\ignorespaces Tabele definiujące wymagania i ograniczenia}}{59}{table.caption.73}%
+\contentsline {table}{\numberline {4.15}{\ignorespaces Tabele zbiorów zasobów}}{60}{table.caption.76}%
+\contentsline {table}{\numberline {4.16}{\ignorespaces Tabela requirement\_set}}{61}{table.caption.77}%
+\contentsline {table}{\numberline {4.17}{\ignorespaces Tabele przechowujące wygenerowane plany lekcji}}{61}{table.caption.79}%
+\contentsline {table}{\numberline {4.18}{\ignorespaces Struktura wszystkich tabel w bazie danych}}{64}{table.caption.81}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Generowanie planu lekcji z określonymi parametrami}}{75}{table.caption.121}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces Scenariusz przeglądu planów lekcji}}{76}{table.caption.122}%
-\contentsline {table}{\numberline {5.3}{\ignorespaces Scenariusz importowania i edytowania wymagań głównych}}{77}{table.caption.123}%
-\contentsline {table}{\numberline {5.4}{\ignorespaces Scenariusz edytowania dostępności nauczycieli}}{77}{table.caption.124}%
-\contentsline {table}{\numberline {5.5}{\ignorespaces Statystyki dla generowanych planów}}{81}{table.caption.131}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Generowanie planu lekcji z określonymi parametrami}}{80}{table.caption.114}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Scenariusz przeglądu planów lekcji}}{80}{table.caption.115}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Scenariusz importowania i edytowania wymagań głównych}}{81}{table.caption.116}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Scenariusz edytowania dostępności nauczycieli}}{81}{table.caption.117}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Statystyki dla generowanych planów}}{85}{table.caption.124}%
 \addvspace {10\p@ }

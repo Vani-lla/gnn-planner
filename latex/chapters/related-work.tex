@@ -1,5 +1,10 @@
 \Chapter{Powiązane prace}\label{chapter:related}
-    Struktura rozdziału?
+    Rozdział prezentuje przegląd literatury w trzech wyraźnie oddzielonych obszarach, które stanowią fundament dla rozwiązania zaproponowanego w pracy:
+    \begin{enumerate}
+        \item Podejścia algorytmiczne i metodyczne --- analiza pracy naukowej przedstawiającej zaawansowaną, iteracyjną metodę optymalizacji (MIP z dekompozycją), która posłużyła jako kluczowa inspiracja architektoniczna.
+        \item Podstawy teoretyczne --- formalne wprowadzenie do klasycznego problemu harmonogramowania zadań typu job-shop, który stanowi teoretyczną ramę dla problemu harmonogramowania i uzasadnia użycie technik programowania z ograniczeniami (CP).
+        \item Rozwiązania praktyczne i komercyjne --- szczegółowy przegląd wiodącego na rynku polskim systemu (Vulcan Optivum), służący zrozumieniu rzeczywistych wymagań, złożoności problemu oraz ustaleniu punktu odniesienia dla oceny praktyczności własnego rozwiązania.
+    \end{enumerate}
 
     \section{Inspiracja podejściem iteracyjnym}\label{section:podejscie_iteracyjne}
         Praca ,,A mixed-integer programming approach for solving university course timetabling problems''~\cite{rappos2022mixed} przedstawia innowacyjne podejście do rozwiązywania problemów harmonogramowania poprzez dekompozycję na prostsze podproblemy i iteracyjne dodawanie ograniczeń.
@@ -15,7 +20,7 @@
             Głównymi komponentami problemu są:
             
             \begin{itemize}
-                \item \textbf{Zajęcia}: Reprezentują pojedyncze wydarzenia dydaktyczne, które muszą zostać zaplanowane. Każde zajęcie $c$ musi otrzymać unikalne przypisanie czasowe $t$ z listy dopuszczalnych terminów $T_c$ oraz, w wymaganych przypadkach, przypisanie sali $r$ z listy dostępnych pomieszczeń $R_c$.
+                \item \textbf{Zajęcia}: Reprezentują pojedyncze lekcje dydaktyczne, które muszą zostać zaplanowane. Każde zajęcie $l$ musi otrzymać unikalne przypisanie czasowe $h$ z listy dopuszczalnych terminów $H_l$ oraz, w wymaganych przypadkach, przypisanie sali $r$ z listy dostępnych pomieszczeń $R_l$.
                 \item \textbf{Ograniczenia dystrybucyjne}: Stanowią zbiór reguł określających relacje pomiędzy różnymi zajęciami. 
                 Wyróżnia się ograniczenia twarde, które muszą być bezwzględnie spełnione, oraz miękkie, których naruszenie generuje kary w funkcji celu. Przykłady obejmują wymóg rozpoczynania zajęć w tym samym czasie, zakaz nakładania się terminów czy wymóg zachowania minimalnego odstępu czasowego.
                 \item \textbf{Struktura kursów i konfiguracji}: Każdy kurs posiada hierarchiczną strukturę, w ramach której student musi wybrać jedną konfigurację $f$, a następnie po jednym zajęciu z każdej części składowej $P_f$ danej konfiguracji.
@@ -29,9 +34,9 @@
             \subsubsection{Podstawowy model MIP}
                 Podstawę stanowi sformułowanie problemu mieszanocałkowitoliczbowego (MIP) z czterema typami zmiennych decyzyjnych:
                 \begin{itemize}
-                    \item Zmienne $x_{c,t}$ określają czy zajęcia $c$ są przypisane do terminu $t$.
-                    \item Zmienne $y_{c,r}$ określają czy zajęcia $c$ są przypisane do sali $r$.
-                    \item Zmienne $z_{s,c}$ określają czy student $s$ jest przypisany do zajęć $c$.
+                    \item Zmienne $x_{c,t}$ określają czy zajęcia $l$ są przypisane do terminu $h$.
+                    \item Zmienne $y_{c,r}$ określają czy zajęcia $l$ są przypisane do sali $r$.
+                    \item Zmienne $z_{s,c}$ określają czy student $s$ jest przypisany do zajęć $l$.
                     \item Zmienne $Z_{s,f}$ określają czy student $s$ wybiera konfigurację $f$.
                 \end{itemize}
             
@@ -60,98 +65,53 @@
             
                 Podejście to pozwala na stopniowe poprawianie jakości rozwiązania przy kontrolowanym wzroście złożoności obliczeniowej, zachowując wykonalność rozwiązania na każdym etapie procesu optymalizacji.
 
-    \section{Job-Shop Scheduling Problem}\label{section:jssp}
-        Problem harmonogramowania typu \textit{Job-Shop} (JSSP) jest jednym z najbardziej klasycznych i istotnych problemów optymalizacji kombinatorycznej w badaniach operacyjnych i zarządzaniu produkcją.
-        Ze względu na bardzo szerokie zastosowania inżynierskie był intensywnie studiowany przez wielu autorów.
-        Klasyczny wariant można opisać następująco~\cite{xiong2022survey}.
-    
-        Posiadamy zbiór maszyn:
+    \section{Problem harmonogramowania zadań typu job-shop}\label{section:jssp}
+        Problem harmonogramowania typu \textit{Job-Shop} (ang. \textit{Job-Shop Scheduling Problem} --- JSSP) należy do klasycznych zagadnień optymalizacji kombinatorycznej w badaniach operacyjnych i zarządzaniu produkcją.
+        Ze względu na szerokie zastosowania inżynierskie był intensywnie analizowany w literaturze. Klasyczny wariant, podsumowany m.in. w \cite{xiong2022survey}, można sformalizować następująco.
+
+        Rozważamy zbiór maszyn:
         \[ M = \{ M_1, M_2, \dots, M_m \} \]
-        oraz zbiór zadań (prac):
+        zbiór zadań (prac):
         \[ J = \{ J_1, J_2, \dots, J_n \} \]
-        Każde zadanie (job) $J_i$ składa się z liniowo uporządkowanej sekwencji operacji:
-        \[ O_i = \{ O_{i1}, O_{i2}, \dots, O_{i n_i} \} \]
-        które muszą zostać wykonane w ściśle określonej kolejności:
-        \[ O_{i1} \prec O_{i2} \prec \dots \prec O_{i n_i} \]
-    
-        Każda operacja $O_{ij}$ jest przypisana do dokładnie jednej maszyny oraz posiada znany czas przetwarzania:
-        \[ p_{ij} \in \mathbb{N}^+ \]
-    
-        Celem jest wyznaczenie kolejności (uszeregowania) i czasów rozpoczęcia wszystkich operacji na maszynach tak, aby zminimalizować maksymalny czas zakończenia dowolnego zadania (ang. \textit{makespan}):
-        \[ C_{\max} = \max_{i} C_i \]
-        gdzie
-        \[ C_i = S_{i n_i} + p_{i n_i} \]
-        a $S_{ij}$ oznacza czas rozpoczęcia operacji $O_{ij}$.
-    
-        Zmienne decyzyjne:
-        \[ S_{ij} \in \mathbb{N}_{0} \quad \forall i=1,\dots,n,\ \forall j=1,\dots,n_i \]
-    
-        Ograniczenia kolejnościowe:
-        \[ S_{i,j+1} \ge S_{ij} + p_{ij} \quad \forall i,j = 1,\dots,n_i-1 \]
-    
-        Dla każdej pary różnych operacji $(O_{ij}, O_{kl})$ przypisanych do tej samej maszyny zachodzi jedno z dwóch:
-        \begin{equation}
-            S_{ij} + p_{ij} \le S_{kl} \ \lor\ S_{kl} + p_{kl} \le S_{ij}
-        \end{equation}\label{eq:ograniczenie_nakladania}
-    
-        Funkcja celu:
-        \[ F_c = \min C_{\max} \quad \text{przy} \quad C_{\max} \ge S_{i n_i} + p_{i n_i} \ \forall i \]
-    
+        oraz dla każdego zadania $J_i$ liniowo uporządkowaną sekwencję operacji:
+        \[ O_i = \{ O_{i1}, O_{i2}, \dots, O_{i n_i} \}, \quad O_{i1} \prec O_{i2} \prec \dots \prec O_{i n_i} \]
+
+        Każda operacja $O_{ij}$ jest przypisana do dokładnie jednej maszyny (oznaczanej $\mu(i,j) \in \{1,\dots,m\}$) oraz posiada znany, dodatni czas przetwarzania $p_{ij} \in \mathbb{N}^+$.
+
+        Zmiennymi decyzyjnymi są czasy rozpoczęcia operacji $S_{ij} \in \mathbb{N}_0$. Definiujemy czas zakończenia operacji jako $C_{ij} = S_{ij} + p_{ij}$, a czas zakończenia zadania $J_i$ jako $C_i = C_{i n_i}$.
+
+        Celem jest minimalizacja maksymalnego czasu zakończenia (ang. \textit{makespan}):
+        \[ \min\ C_{\max} \quad \text{przy} \quad C_{\max} \ge C_i \ \forall i \in \{1,\dots,n\} \]
+
+        Model spełnia następujące ograniczenia:
+        \begin{itemize}
+            \item \textbf{Ograniczenia kolejnościowe (precedencji)}: dla każdego zadania $J_i$ i $j=1,\dots,n_i-1$ musi zachodzić
+            \[ S_{i,j+1} \ge S_{ij} + p_{ij}. \]
+            \item \textbf{Ograniczenia zasobowe (brak nakładania na tej samej maszynie)}: dla każdej pary różnych operacji $(O_{ij}, O_{kl})$ takich, że $\mu(i,j)=\mu(k,l)$ obowiązuje dysjunkcja czasowa
+            \begin{equation}
+                S_{ij} + p_{ij} \le S_{kl} \quad \text{lub} \quad S_{kl} + p_{kl} \le S_{ij},
+            \end{equation}
+            co w praktyce implementuje się poprzez zmienne binarne i duże stałe $M$ (formulacje MIP) albo jako ograniczenia dysjunktywne.
+        \end{itemize}
+
         \subsection{Podobieństwa do problemu układania planu lekcji}
-            Problem harmonogramowania dla szkół można rozpatrywać jako specyficzną odmianę JSSP z wieloma zasobami. 
-            Podstawowe podobieństwa strukturalne obejmują:
-    
+            Problem planowania zajęć szkolnych można postrzegać jako rozszerzenie JSSP z wieloma typami zasobów. Podstawowe podobieństwa strukturalne obejmują:
+
             \subsubsection{Struktura zasobów}
-                W JSSP mamy zbiór maszyn $M$, natomiast w problemie planu lekcji dysponujemy trzema typami zasobów:
-                \[ \left\{\mathcal{T}, \mathcal{C}, \mathcal{R}\right\} \]
+                W JSSP rozważany jest zbiór maszyn $M$. W problemie planu lekcji występują trzy typy zasobów:
+                \[ \{\mathcal{T}, \mathcal{C}, \mathcal{R}\}, \]
                 gdzie:
                 \begin{itemize}
-                    \item $\mathcal{T}$ --- zbiór nauczycieli (maszyny typu ,,nauczyciel'')
-                    \item $\mathcal{C}$ --- zbiór klas (maszyny typu ,,klasa)'' 
-                    \item $\mathcal{R}$ --- zbiór sal (maszyny typu ,,sala'')
+                    \item $\mathcal{T}$ --- zbiór nauczycieli (zasób typu ,,nauczyciel''),
+                    \item $\mathcal{C}$ --- zbiór klas (zasób typu ,,klasa''),
+                    \item $\mathcal{R}$ --- zbiór sal (zasób typu ,,sala'').
                 \end{itemize}
-    
-            \subsubsection{Struktura zadań}
-                W klasycznym JSSP zadania $J_i$ składają się z operacji $O_{ij}$ i wymagają dostępu do jednego zasobu --- maszyn. 
-                W problemie układania planu zajęć lekcje można traktować jako operację wymagającą jednoczesnego dostępu do trzech zasobów: nauczyciela, klasy i sali.
-                \[ \text{Lekcja } z_i = (d_i, h_i, c_i, t_i, s_i, r_i) \]
-                gdzie $d_i$ to dzień lekcji, $h_i$ to stot czasowy lekcji, $c_i$ to klasa, $t_i$ to nauczyciel, $s_i$ to przedmiot, a $r_i$ to sala.
-    
-            \subsubsection{Ograniczenia nakładania się}
-                Dla każdej pary lekcji $(z_i, z_j)$ współdzielącej zasób $\mathcal{R}$:
-                \[ h_i \neq h_j \ \lor \ d_i \neq d_j \ \lor \ r_i \neq r_j \]
-                co odpowiada warunkowi~\ref{eq:ograniczenie_nakladania} w JSSP.
 
-                Analogiczne ograniczenia należałoby definiować dla pozostałych zasobów $\mathcal{T}$ i $\mathcal{C}$.
-    
-            \subsubsection{Reprezentacja interwałowa}
-                Kluczowym podobieństwem jest wykorzystanie zmiennych interwałowych. 
-                W JSSP operację $O_{ij}$ reprezentujemy jako interwał:
-                \[ I_{ij} = (S_{ij}, p_{ij}, C_{ij}) \]
-                gdzie $C_{ij} = S_{ij} + p_{ij}$.
-        
-                W problemie planu lekcji, lekcję $z_i$ reprezentujemy jako:
-                \[ I_i = (h_i, v_i, h_i + v_i) \]
-                gdzie $v_i$ to liczba godzin (czas trwania), a $h_i$ to slot rozpoczęcia.
-    
-        \subsection{Różnice i specyfika problemu szkolnego}
-            Pomimo strukturalnych podobieństw, problem układania planu lekcji wprowadza istotne modyfikacje:
-    
-            \subsubsection{Wielozasobowość}
-                Podczas gdy w klasycznym JSSP każda operacja wymaga jednej maszyny, lekcja wymaga \textbf{jednoczesnego} dostępu do trzech zasobów:
-                \[ \text{Lekcja } z_i \text{ wymaga: } (t_i, c_i, r_i) \in \mathcal{T} \times \mathcal{C} \times \mathcal{R} \]
-    
-            \subsubsection{Ograniczenia}
-                Problem szkolny wprowadza bogaty zestaw ograniczeń jakościowych niewystępujących w klasycznym JSSP:
-                \begin{itemize}
-                    \item Brak okienek dla uczniów (ciągłość zajęć).
-                    \item Równomierny rozkład zajęć na przestrzeni tygodnia.
-                    \item Ograniczenia prawne (max 2 godziny tego samego przedmiotu dziennie).
-                    \item Dostępność nauczycieli.
-                \end{itemize}
-    
-            Innowacją w podejściu jest wprowadzenie bloków lekcyjnych $\mathcal{L}$, które grupują lekcje $z_i$ odbywające się równocześnie, co stanowi rozszerzenie klasycznej koncepcji operacji w JSSP.
-            Umożliwia to znacznie łatwiejsze definiowanie ograniczeń.
+            \subsubsection{Struktura zadań}
+                W klasycznym JSSP każde zadanie $J_i$ składa się z operacji $O_{ij}$ wymagających jednego zasobu (maszyny). W układaniu planu zajęć pojedyncza lekcja wymaga jednoczesnego dostępu do trzech zasobów: nauczyciela, klasy i sali.
+                Reprezentację lekcji można zapisać jako
+                \[ z_i = (d_i, h_i, c_i, t_i, s_i, r_i), \]
+                gdzie $d_i$ to dzień, $h_i$ to slot czasowy (przykładowo zerowy: 7:00--7:45), $c_i$ to klasa, $t_i$ to nauczyciel, $s_i$ to przedmiot, a $r_i$ to sala.
 
 \section{Istniejące kompleksowe rozwiązania}
     Zadanie układania planu lekcji jest powszechnym wyzwaniem dla placówek edukacyjnych na całym świecie, w tym Polsce, co zaowocowało rozwojem komercyjnych rozwiązań tego problemu. 

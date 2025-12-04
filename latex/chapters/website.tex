@@ -1,4 +1,11 @@
 \Chapter{Aplikacja}\label{chapter:website}
+    Rozdział prezentuje praktyczną realizację rozwiązania teoretycznego przedstawionego wcześniej.
+    Jego struktura odzwierciedla proces inżynierii oprogramowania, przechodzący od wymagań, przez projekt, aż do implementacji:
+    \begin{enumerate}
+        \item Specyfikacja wymagań --- formalizuje oczekiwania wobec systemu, dzieląc je na funkcjonalne i niefunkcjonalne, a następnie konkretyzując za pomocą diagramów przypadków użycia i sekwencji.
+        \item Projekt systemu --- przedstawia wysokopoziomową architekturę aplikacji, szczegółowy projekt bazy danych oraz makietę interfejsu użytkownika.
+        \item Implementacja --- opisuje konkretny stos technologiczny, sposób realizacji poszczególnych komponentów oraz integrację algorytmu z aplikacją webową.
+    \end{enumerate}
 
 \section{Specyfikacja wymagań}
     \subsection{Wymagania funkcjonalne}\label{subsection:wymagania_funkcjonalne}
@@ -831,23 +838,23 @@
             Strona główna pełni funkcję centralnego hubu aplikacji. 
             Umożliwia bezpośrednie przejście do trzech kluczowych sekcji: 
             \begin{enumerate}
-                \item Podglądu istniejących planów lekcji.
-                \item Wprowadzania i edycji ograniczeń głównych.
-                \item Modułu generowania nowych planów.
+                \item podglądu istniejących planów lekcji,
+                \item wprowadzania i edycji ograniczeń głównych,
+                \item modułu generowania nowych planów.
             \end{enumerate}
             
         \subsubsection{Podgląd planów lekcji}
-            Sekcja podglądu planów lekcji realizuje wymagania dotyczące wieloperspektywicznego wglądu w wygenerowane plany.
-            Umożliwia przeglądanie wielu wariantów planów, z możliwością przełączania między widokami:
+            Strona podglądu planu lekcji umożliwia przeglądanie wielu wariantów planów, co realizuje wymaganie co do możliwości przechowywania wielu planów lekcji.
+            Realizuje także wymagania dotyczące wieloperspektywicznego wglądu w wygenerowane plany --- umożliwia wgląd z perspektywy:
             \begin{itemize}
-                \item Nauczycieli --- prezentujący indywidualne plany zajęć każdego pedagoga.
-                \item Klas --- ukazujący rozkład zajęć dla poszczególnych grup uczniowskich.
+                \item nauczycieli --- prezentujący indywidualne plany zajęć każdego pedagoga,
+                \item klas --- ukazujący rozkład zajęć dla poszczególnych grup uczniowskich.
             \end{itemize}
 
         \subsubsection{Moduły wprowadzania danych}
             Aplikacja zawiera kompleksowy zestaw stron do wprowadzania wszystkich typów danych wymaganych do generowania planu:
             \begin{itemize}
-                \item \textbf{Strony zasobów podstawowych} umożliwiają zarządzanie czterema fundamentalnymi zasobami: przedmiotami, nauczycielami, klasami oraz salami.
+                \item \textbf{Strony zasobów} umożliwiają zarządzanie czterema fundamentalnymi zasobami: przedmiotami, nauczycielami, klasami oraz salami.
                 Interfejs powinien zapewniać możliwość ręcznego wprowadzania, edycji i usuwania rekordów, a także importu danych z plików tekstowych w ustalonych formatach.
                 \item \textbf{Strona ograniczeń głównych} dedykowana jest definiowaniu wymagań głównych, czyli przypisań godzinowych nauczycieli do klas dla konkretnych przedmiotów.
                 Interfejs powinien nawiązywać wyglądem i funkcjonalnością do arkuszy kalkulacyjnych, co ułatwia migrację z dotychczas używanych narzędzi.
@@ -1034,7 +1041,7 @@ class RoomPoolViewSet(ModelViewSet):
         \subsubsection{Widoki wprowadzania wymagań}
             Widok wprowadzania wymagań głównych przedstawiony na rysunku~\ref{fig:wprowadzanie_glowne}, który przypomina arkusz kalkulacyjny pokazany na rysunku~\ref{fig:excel_wymagania}, co spełnia wymagania niefunkcjonalne.
             Górny wiersz przewija się razem ze stroną ułatwiając nawikację i wpisywanie wymagań.
-            Podobnie jak widoki wprowadzania zasobów pozwala na wybranie zbioru wymagań głównych.
+            Podobnie jak widoki wprowadzania zasobów pozwala na wybranie zbioru wymagań głównych, co realizuje wymagania funkcjonalne co do pracy z wieloma zestawami zasobów.
 
             Na podobnej zasadzie działają widoki wprowadzania dostępności nauczycieli i bloków przedmiotów przedstawione odpowiednio na rysunkach~\ref{fig:dostepnosc_nauczycieli} i~\ref{fig:wprowadzenie_blokow}.
 
