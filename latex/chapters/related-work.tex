@@ -20,49 +20,52 @@
             Głównymi komponentami problemu są:
             
             \begin{itemize}
-                \item \textbf{Zajęcia}: Reprezentują pojedyncze lekcje dydaktyczne, które muszą zostać zaplanowane. Każde zajęcie $l$ musi otrzymać unikalne przypisanie czasowe $h$ z listy dopuszczalnych terminów $H_l$ oraz, w wymaganych przypadkach, przypisanie sali $r$ z listy dostępnych pomieszczeń $R_l$.
-                \item \textbf{Ograniczenia dystrybucyjne}: Stanowią zbiór reguł określających relacje pomiędzy różnymi zajęciami. 
-                Wyróżnia się ograniczenia twarde, które muszą być bezwzględnie spełnione, oraz miękkie, których naruszenie generuje kary w funkcji celu. Przykłady obejmują wymóg rozpoczynania zajęć w tym samym czasie, zakaz nakładania się terminów czy wymóg zachowania minimalnego odstępu czasowego.
-                \item \textbf{Struktura kursów i konfiguracji}: Każdy kurs posiada hierarchiczną strukturę, w ramach której student musi wybrać jedną konfigurację $f$, a następnie po jednym zajęciu z każdej części składowej $P_f$ danej konfiguracji.
-                \item \textbf{Konflikty studentów}: Powstają gdy student jest przypisany do zajęć zachodzących na siebie w czasie lub gdy czas pomiędzy zajęciami jest niewystarczający na przemieszczenie się między salami.
+                \item \textbf{Zajęcia}: Reprezentują pojedyncze lekcje dydaktyczne, które muszą zostać zaplanowane. 
+                Każde zajęcie $l$ musi zostać przypisane do slotu czasowego $h$ z listy dopuszczalnych slotów $H_l$ oraz, w wymaganych przypadkach, przypisanie sali $r$ z listy dostępnych pomieszczeń $R_l$.
+                \item \textbf{Ograniczenia dystrybucyjne}: Stanowią zbiór reguł określających relacje pomiędzy różnymi zajęciami.
+                Wyróżnia się ograniczenia twarde, które muszą być bezwzględnie spełnione, oraz miękkie, których naruszenie generuje kary w funkcji celu.
+                Przykładowo wymóg rozpoczynania zajęć w tym samym czasie, zakaz nakładania się terminów czy wymóg zachowania minimalnego odstępu czasowego.
+                \item \textbf{Struktura kursów i konfiguracji}: Każdy kurs posiada hierarchiczną strukturę, w ramach której student musi wybrać jedną konfigurację $k$,
+                za następnie po jednym zajęciu z każdej części składowej $P_k$ danej konfiguracji.
+                \item \textbf{Konflikty studentów}: Powstają gdy student jest przypisany do zajęć odbywających się w tym samym czasie
+                lub gdy czas pomiędzy zajęciami jest niewystarczający na przemieszczenie się między salami.
             \end{itemize}
         
         Celem optymalizacyjnym jest znalezienie rozwiązania spełniającego wszystkie twarde ograniczenia przy minimalizacji łącznej kary, uwzględniającej naruszenia ograniczeń miękkich oraz konflikty studentów.
 
-        Kluczowym elementem przedstawionej metody jest dekompozycja oryginalnego, złożonego problemu na szereg prostszych podproblemów, rozwiązywanych sekwencyjnie w procesie iteracyjnym.
+        Kluczowym elementem przedstawionej w pracy metody jest dekompozycja oryginalnego, złożonego problemu na szereg prostszych podproblemów, rozwiązywanych sekwencyjnie w procesie iteracyjnym.
         
             \subsubsection{Podstawowy model MIP}
                 Podstawę stanowi sformułowanie problemu mieszanocałkowitoliczbowego (MIP) z czterema typami zmiennych decyzyjnych:
                 \begin{itemize}
-                    \item Zmienne $x_{c,t}$ określają czy zajęcia $l$ są przypisane do terminu $h$.
-                    \item Zmienne $y_{c,r}$ określają czy zajęcia $l$ są przypisane do sali $r$.
-                    \item Zmienne $z_{s,c}$ określają czy student $s$ jest przypisany do zajęć $l$.
-                    \item Zmienne $Z_{s,f}$ określają czy student $s$ wybiera konfigurację $f$.
+                    \item zmienne $x_{c,h}$ określają czy zajęcia $l$ są przypisane do terminu $h$,
+                    \item zmienne $y_{c,r}$ określają czy zajęcia $l$ są przypisane do sali $r$,
+                    \item zmienne $z_{s,l}$ określają czy student $s$ jest przypisany do zajęć $l$,
+                    \item zmienne $Z_{s,k}$ określają czy student $s$ wybiera konfigurację $k$.
                 \end{itemize}
             
-            Model obejmuje fundamentalne ograniczenia zapewniające poprawność podstawowej struktury rozwiązania, takie jak wymóg przypisania każdych zajęć do dokładnie jednego terminu i sali, spełnienie limitów liczby studentów w grupach oraz zakaz równoczesnego użytkowania tej samej sali przez różne zajęcia.
-            
-            \subsubsection{Iteracyjne wstrzykiwanie ograniczeń}
-                Ze względu na bardzo dużą złożoność pełnego modelu, autorzy stosują podejście inkrementalne:
                 
+            \subsubsection{Iteracyjne wstrzykiwanie ograniczeń}
+                Model obejmuje fundamentalne ograniczenia zapewniające poprawność podstawowej struktury rozwiązania, takie jak wymóg przypisania każdych zajęć do dokładnie jednego terminu i sali, spełnienie limitów liczby studentów w grupach oraz zakaz równoczesnego użytkowania tej samej sali przez różne zajęcia.
+                Ze względu na jego bardzo dużą złożoność, autorzy stosują podejście inkrementalne:
+
                 \begin{itemize}
                     \item \textbf{Rozwiązanie początkowe}: Optymalizacja rozpoczyna się od uproszczonego modelu zawierającego jedynie fundamentalne ograniczenia oraz podstawowe składniki funkcji celu.
                     \item \textbf{Dodawanie ograniczeń dystrybucyjnych}: Twarde ograniczenia dystrybucyjne są dodawane do modelu w formie ograniczeń wykluczających niedopuszczalne kombinacje przypisań czasowych i salowych. 
-                    Dla większości typów ograniczeń generowane są odpowiednie warunki na etapie preprocessingu.
                     \item \textbf{Obsługa ograniczeń specjalnych}: Dla czterech szczególnie złożonych typów ograniczeń (,,MaxDays'', ,,MaxDayLoad'', ,,MaxBreaks'', ,,MaxBlock'') stosowane jest podejście z użyciem ,,leniwych'' ograniczeń (ang. \textit{lazy constraints}). 
-                    Ograniczenia te są dodawane dopiero gdy zostanie znalezione rozwiązanie całkowitoliczbowe, które je narusza.
+                    Takie ograniczenia są dodawane dopiero gdy zostanie znalezione rozwiązanie całkowitoliczbowe, które je narusza.
                     \item \textbf{Iteracyjne uwzględnianie konfliktów studentów}: Podobne podejście stosowane jest dla uwzględnienia w funkcji celu kar za konflikty studentów.
-                    Początkowo pomija się najbardziej złożone składowe związane z konfliktami, a następnie iteracyjnie dodaje się do modelu te ograniczenia, które okazały się istotne w poprzednich uruchomieniach.
+                    Początkowo pomija się najbardziej złożone składowe związane z konfliktami, a następnie iteracyjnie dodaje się do modelu te ograniczenia, które zostały naruszone w poprzednich uruchomieniach.
                 \end{itemize}
             
             \subsubsection{Strategie redukcji złożoności}
                 Aby utrzymać złożoność obliczeniową na akceptowalnym poziomie, autorzy stosują zaawansowane strategie redukcji modelu:
                 \begin{itemize}
-                    \item \textbf{Eliminacja zmiennych}: Identyfikacja i usuwanie zmiennych, których wartości można ustalić z góry na podstawie analizy struktury problemu.
-                    \item \textbf{Agregacja ograniczeń}: Grupowanie podobnych ograniczeń w pojedyncze, bardziej zwarte warunki, co znacząco redukuje rozmiar modelu.
-                    \item \textbf{Selektywne uwzględnianie składowych funkcji celu}: Najbardziej złożone składowe funkcji celu (dotyczące specjalnych ograniczeń dystrybucyjnych i konfliktów studentów) są początkowo pomijane, a następnie dodawane tylko w odniesieniu do tych kombinacji, które okazały się problematyczne w poprzednich iteracjach.
+                    \item \textbf{eliminacja zmiennych}: identyfikacja i usuwanie zmiennych, których wartości można ustalić z góry na podstawie analizy struktury problemu,
+                    \item \textbf{agregacja ograniczeń}: grupowanie podobnych ograniczeń w pojedyncze, bardziej zwarte warunki, co znacząco redukuje rozmiar modelu,
+                    \item \textbf{leniwe ograniczenia}: najbardziej złożone ograniczenia są początkowo pomijane, a następnie dodawane tylko gdy zostały naruszone w poprzednich iteracjach.
                 \end{itemize}
-            
+
                 Podejście to pozwala na stopniowe poprawianie jakości rozwiązania przy kontrolowanym wzroście złożoności obliczeniowej, zachowując wykonalność rozwiązania na każdym etapie procesu optymalizacji.
 
     \section{Problem harmonogramowania zadań typu job-shop}\label{section:jssp}

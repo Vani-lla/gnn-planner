@@ -13,7 +13,7 @@
 \contentsline {section}{\numberline {2.2}Problem harmonogramowania zadań typu job-shop}{5}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Podobieństwa do problemu układania planu lekcji}{6}{subsection.2.2.1}%
 \contentsline {subsubsection}{Struktura zasobów}{6}{subsubsection*.4}%
-\contentsline {subsubsection}{Struktura zadań}{7}{subsubsection*.5}%
+\contentsline {subsubsection}{Struktura zadań}{6}{subsubsection*.5}%
 \contentsline {section}{\numberline {2.3}Istniejące kompleksowe rozwiązania}{7}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Plan lekcji Optivum}{7}{subsection.2.3.1}%
 \contentsline {chapter}{\numberline {3}Problem układania planu lekcji i algorytm jego rozwiązania}{13}{chapter.3}%

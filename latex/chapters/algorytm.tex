@@ -3,7 +3,7 @@
     \begin{itemize}
         \item \textbf{sformułowanie problemu} --- rozpoczynam od precyzyjnej definicji terminologii, danych wejściowych, oczekiwanego wyniku oraz formalnego opisu ograniczeń i funkcji celu. Stanowi to fundament dla dalszych rozważań,
         \item \textbf{analiza poprzednich podejść} --- krótko omawiam wcześniejsze, nieskuteczne próby rozwiązania, aby uzasadnić konieczność opracowania nowej, hybrydowej metody,
-        \item \textbf{loncepcja dekompozycji i dobór technik} --- przedstawiam kluczową innowację pracy: podział złożonego problemu na trzy mniejsze, sekwencyjne etapy. Dla każdego z nich uzasadniam wybór najodpowiedniejszej techniki algorytmicznej,
+        \item \textbf{koncepcja dekompozycji i dobór technik} --- przedstawiam kluczową innowację pracy: podział złożonego problemu na trzy mniejsze, sekwencyjne etapy. Dla każdego z nich uzasadniam wybór najodpowiedniejszej techniki algorytmicznej,
         \item \textbf{szczegółowy opis algorytmów} --- kolejno, w osobnych sekcjach, szczegółowo opisuję działanie każdego z trzech algorytmów składowych, ilustrując je pseudokodami i przykładami wyników na rzeczywistych danych.
     \end{itemize}
 
@@ -289,15 +289,15 @@
         Zbyt niskie natomiast powodowały, że model preferował optymalizację nagrody za grupowanie lekcji kosztem naruszenia ograniczeń.
 
 \section{Dekompozycja problemu i wybór technik}
-    W niniejszej pracy zaadaptowałem oraz rozwinąłem fundamentalną ideę przedstawioną w sekcji~\ref{section:podejscie_iteracyjne}, dostosowując ją do specyfiki problemu układania planu lekcji.
-    Zdecydowałem się na podział zadania na trzy mniejsze, kolejno realizowane etapy, z których każdy rozwiązuje wyraźnie wydzielony podproblem o niższej złożoności obliczeniowej.
+    W niniejszej pracy zaadaptowałem oraz rozwinąłem fundamentalną ideę przedstawioną w sekcji~\ref{section:podejscie_iteracyjne}, dostosowując ją do specyfiki mojego problemu.
+    Zdecydowałem się na podział zadania na trzy mniejsze, kolejno realizowane etapy, z których każdy rozwiązuje wyraźnie wydzielony podproblem o niższej złożoności obliczeniowej niż problem kompletny.
     
     Analiza moich wcześniejszych prób rozwiązania tego zagadnienia wskazuje, że oparcie się wyłącznie na metodach inteligentnych bądź na MIP nie prowadzi do satysfakcjonujących rezultatów.
     Zasadnicza innowacja przedstawionego przeze mnie podejścia polega na dekompozycji oryginalnego problemu na trzy sekwencyjne fazy, każda używająca adekwatnej techniki, co stanowi rozwinięcie względem moich wcześniejszych koncepcji.
     
     Aby móc przeprowadzić dekompozycję zdecydowałem się na wprowadzenie następujących pojęć:
     \begin{itemize}
-        \item \textbf{blok lekcyjny}: Grupa dwóch lub więcej wymagań głownych, które reprezentuja lekcje są w stanie odbywać się w tym samym slocie czasowym.
+        \item \textbf{Blok lekcyjny}: Grupa dwóch lub więcej wymagań głownych, które reprezentuja lekcje są w stanie odbywać się w tym samym slocie czasowym.
         Mogą one dotyczyć jednej klasy oraz wielu nauczycieli, jednego nauczyciela i wielu klas, lub też wielu klas i wielu nauczycieli.
         Na potrzeby tej pracy zbiory jednego wymagania głównego też traktujemy jako pojedyncze bloki lekcyjne.
         \item \textbf{Przydział godzinowy}: Posiadając już zbiór takich zbiorów lekcyjnych macierz ich przypisań nazywamy przydziałem godzinowym.
@@ -475,6 +475,10 @@
 
             Są to decyzje o marginalnym wpływie na wynik --- potencjalny zysk z wyboru jednej opcji zamiast innej jest minimalny.
             Z tego powodu zastosowałem algorytm zachłanny, który zawsze wybiera pierwszą możliwą opcję prowadzącą do utworzenia jak największego bloku lekcyjnego.
+
+            Ponadto~\ref{section:podejscie_iteracyjne}\dots
+            Podobnie jak w pracy przedstawionej w sekcji~\ref{section:podejscie_iteracyjne} autorzy agregowali ograniczenia tak ja uzywając bloków lekcyjnych agreguję liczne ograniczenia.
+            
             
         \subsubsection{Oznaczenia}
             Aby w pełni zrozumieć działanie algorytmu, należy formalnie zdefiniować pojęcie bloku lekcyjnego.
