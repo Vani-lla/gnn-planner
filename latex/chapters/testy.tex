@@ -1,19 +1,19 @@
 \Chapter{Weryfikacja i walidacja rozwiązania}\label{chapter:tests}
     Rozdział stanowi krytyczną ocenę wdrożonego systemu, podzieloną na dwie kluczowe perspektywy:
-    \begin{enumerate}
-        \item[1, 2.] Testowanie funkcjonalności --- weryfikacja, czy aplikacja działa zgodnie z założeniami projektowymi. Zawiera formalne scenariusze testowe oraz ich praktyczną realizację.
-        \item[3.] Analiza jakości wyniku --- walidacja, czy wygenerowane plany lekcji są użyteczne i poprawne jakościowo. Obejmuje porównanie z planem ręcznym, analizę krytycznych przypadków oraz ewaluację kluczowego wskaźnika efektywności, liczby okienek nauczycieli.
-    \end{enumerate}
+    \begin{itemize}
+        \item testowanie funkcjonalności --- weryfikacja, czy aplikacja działa zgodnie z założeniami projektowymi. Zawiera formalne scenariusze testowe oraz ich praktyczną realizację,
+        \item analiza jakości wyniku --- walidacja, czy wygenerowane plany lekcji są użyteczne i poprawne jakościowo. Obejmuje porównanie z planem ręcznym, analizę krytycznych przypadków oraz ewaluację kluczowego wskaźnika efektywności, liczby okienek nauczycieli.
+    \end{itemize}
 
 \section{Scenariusze testowe}
 
     \subsection{Scenariusz testowy generowania planu lekcji z określonymi parametrami}
-        Scenariusz zaprezentowany w tabeli~\ref{tab:generowanie_planu} opisuje proces wygenerowania planu lekcji przy użyciu zaimplementowanego modułu optymalizacyjnego.
+        Scenariusz zaprezentowany w tabeli~\ref{tab:scenariusz_1} opisuje proces wygenerowania planu lekcji przy użyciu zaimplementowanego modułu optymalizacyjnego.
 
         \begin{table}[h!]
                 \centering
                 % \setlength{\tabcolsep}{8pt} % Default value: 6pt
-                \caption{Generowanie planu lekcji z określonymi parametrami}\label{tab:generowanie_planu}
+                \caption{Generowanie planu lekcji z określonymi parametrami}\label{tab:scenariusz_1}
                 \renewcommand{\arraystretch}{1.3} % 4efault value: 1
                 \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
                     \hline
@@ -46,7 +46,7 @@
         \begin{table}[h!]
             \centering
             % \setlength{\tabcolsep}{8pt}
-            \caption{Scenariusz przeglądu planów lekcji}\label{tab:scenariusz_przegladu_planow}
+            \caption{Scenariusz przeglądu planów lekcji}\label{tab:scenariusz_przegladu_planow}\label{tab:scenariusz_2}
             \renewcommand{\arraystretch}{1.4}
             \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
                 \hline
@@ -78,7 +78,7 @@
         \begin{table}[h!]
             \centering
             % \setlength{\tabcolsep}{8pt}
-            \caption{Scenariusz importowania i edytowania wymagań głównych}
+            \caption{Scenariusz importowania i edytowania wymagań głównych}\label{tab:scenariusz_3}
             \renewcommand{\arraystretch}{1.4}
             \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
                 \hline
@@ -94,9 +94,10 @@
                 
                 \multirow{4}{*}{\textbf{Kroki testowe}}
                 & 1. Przejdź do widoku dodawania wymagań głównych \\
-                & 2. Przeciągnij plik CSV do aplikacji \\
-                & 3. Edytuj wymagania godzinowe dla wybranej klasy i nauczyciela \\
-                & 4. Zapisz zmiany \\ \hline
+                & 2. Wybierz odpowiednie zbiory zasobów \\
+                & 3. Przeciągnij plik CSV do aplikacji \\
+                & 4. Edytuj wymagania godzinowe dla wybranej klasy i nauczyciela \\
+                & 5. Zapisz zmiany \\ \hline
                 
                 \textbf{Oczekiwany rezultat} &
                 System poprawnie importuje dane z pliku CSV oraz umożliwia ich edycję i zapisanie nowych wartości. \\ \hline
@@ -110,7 +111,7 @@
         \begin{table}[h!]
             \centering
             % \setlength{\tabcolsep}{8pt}
-            \caption{Scenariusz edytowania dostępności nauczycieli}
+            \caption{Scenariusz edytowania dostępności nauczycieli}\label{tab:scenariusz_4}
             \renewcommand{\arraystretch}{1.4}
             \begin{tabular}{|p{0.25\textwidth}|p{0.70\textwidth}|}
                 \hline
@@ -137,33 +138,84 @@
 
 \section{Testowanie aplikacji}
     \subsection{Test generowania planu lekcji z określonymi parametrami}
+        Test potwierdza poprawność procesu generowania planu zgodnie ze scenariuszem przedstawionym w tabeli~\ref{tab:scenariusz_1}.
+        Jak widać na rysunku~\ref{fig:test_1} aplikacja pozwala użytkownikowi na zdefiniowanie liczby generacji i spełnia wszystkie wymagania.
+        Kolejno wykonywane kroki to:
+        \begin{itemize}
+            \item przejście do widoku generowania planów lekcji,
+            \item wpisywanie liczby generacji,
+            \item wybieranie zbioru ograniczeń,
+            \item uruchomienie procesu oraz otrzymane powiadomienie.
+        \end{itemize}
+
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.45\textwidth, height=4cm]{images/test1/krok1.png}
-            \includegraphics[width=0.45\textwidth, height=4cm]{images/test1/krok2.png}
-            \includegraphics[width=0.45\textwidth, height=4cm]{images/test1/krok3.png}
-            \includegraphics[width=0.45\textwidth, height=4cm]{images/test1/krok4.png}
+            \includegraphics[width=0.48\textwidth]{images/test1/krok1.png}
+            \includegraphics[width=0.48\textwidth]{images/test1/krok2.png}
+            \includegraphics[width=0.48\textwidth]{images/test1/krok3.png}
+            \includegraphics[width=0.48\textwidth]{images/test1/krok4.png}
             \caption{Zrzuty ekranów wykonanych kroków dla scenariusza generowania planu lekcji}\label{fig:test_1}
         \end{figure}
 
     \subsection{Test przeglądania planów lekcji}
+        Test weryfikuje realizację wymagań dotyczących wieloperspektywicznego wglądu w plan.
+        Na rysunku~\ref{fig:test_2} przedstawiłem proces testowania tej funkcjonalności zgodnie ze scenariuszem przedstawionym w tabeli~\ref{tab:scenariusz_2}.
+        Użytkownik kolejno:
+        \begin{itemize}
+            \item przechodzi do widoku przeglądania planów lekcji,
+            \item wybiera najnowszy dostępny plan,
+            \item wybiera perspektywę konkretnej klasy,
+            \item wybiera perspektywę konkretnego nauczyciela.
+        \end{itemize}
+
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.45\textwidth, height=4cm]{images/test2/krok1.png}
-            \includegraphics[width=0.45\textwidth, height=4cm]{images/test2/krok2.png}
-            \includegraphics[width=0.45\textwidth, height=4cm]{images/test2/krok3.png}
-            \includegraphics[width=0.45\textwidth, height=4cm]{images/test2/krok4.png}
-            \caption{Zrzuty ekranów wykonanych kroków dla scenariusza generowania planu lekcji}\label{fig:test_2}
+            \includegraphics[width=0.48\textwidth]{images/test2/krok1.png}
+            \includegraphics[width=0.48\textwidth]{images/test2/krok2.png}
+            \includegraphics[width=0.48\textwidth]{images/test2/krok3.png}
+            \includegraphics[width=0.48\textwidth]{images/test2/krok4.png}
+            \caption{Zrzuty ekranów wykonanych kroków dla scenariusza przeglądania planów lekcji}\label{fig:test_2}
         \end{figure}
 
     \subsection{Test importowania i edytowania wymagań głównych}
+        Test weryfikuje możliwość importowania wymagań głównych z pliku csv oraz możliwość ich modyfikowania.
+        Na rysunku~\ref{fig:test_3} przedstawiłem kroki użytkownika testującego aplikację zgodnie ze scenariuszem przedstawionym w tabeli~\ref{tab:scenariusz_3}.
+        Użytkownik kolejno:
+        \begin{itemize}
+            \item przychodzi do widoku dodawania wymagań głównych,
+            \item wybiera odpowiednie zbiory zasobów,
+            \item importuje plik csv,
+            \item edytuje pojedyncze wymaganie główne,
+            \item zapisuje zmiany i dostaje powiadomienie.
+        \end{itemize}
+
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.45\textwidth, height=4cm]{images/test3/krok1.png}
-            \includegraphics[width=0.45\textwidth, height=4cm]{images/test3/krok2.png}
-            \includegraphics[width=0.45\textwidth, height=4cm]{images/test3/krok3.png}
-            \includegraphics[width=0.45\textwidth, height=4cm]{images/test3/krok4.png}
-            \caption{Zrzuty ekranów wykonanych kroków dla scenariusza generowania planu lekcji}\label{fig:test_3}
+            \includegraphics[width=0.48\textwidth]{images/test3/krok1.png}
+            \includegraphics[width=0.48\textwidth]{images/test3/krok2.png}
+            \includegraphics[width=0.48\textwidth]{images/test3/krok3.png}
+            \includegraphics[width=0.48\textwidth]{images/test3/krok4.png}
+            \includegraphics[width=0.48\textwidth]{images/test3/krok5.png}
+            \caption{Zrzuty ekranów wykonanych kroków dla scenariusza importowania i edytowania wymagań głównych}\label{fig:test_3}
+        \end{figure}
+
+    \subsection{Test edytowania dostępności nauczycieli}
+        Test sprawdza poprawność modyfikacji dostępności zgodnie ze scenariuszem przedstawionym w tabeli~\ref{tab:scenariusz_4}.
+        Rysunek~\ref{fig:test_3} przedstawia proces:
+        \begin{itemize}
+            \item wybrania widoku edytowania dostępności nauczycieli,
+            \item wybierania odpowiedniego zbioru wymagań,
+            \item edytowania dostępności pierwszych dwóch nauczycieli,
+            \item zapisania wyniku oraz otrzymania powiadomienia o sukcesie operacji.
+        \end{itemize}
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.48\textwidth]{images/test4/krok1.png}
+            \includegraphics[width=0.48\textwidth]{images/test4/krok2.png}
+            \includegraphics[width=0.48\textwidth]{images/test4/krok3.png}
+            \includegraphics[width=0.48\textwidth]{images/test4/krok4.png}
+            \caption{Zrzuty ekranów wykonanych kroków dla scenariusza edytowania dostępności nauczycieli}\label{fig:test_4}
         \end{figure}
 
 

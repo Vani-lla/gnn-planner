@@ -1,11 +1,11 @@
 \Chapter{Aplikacja}\label{chapter:website}
     Rozdział prezentuje praktyczną realizację rozwiązania teoretycznego przedstawionego wcześniej.
     Jego struktura odzwierciedla proces inżynierii oprogramowania, przechodzący od wymagań, przez projekt, aż do implementacji:
-    \begin{enumerate}
-        \item Specyfikacja wymagań --- formalizuje oczekiwania wobec systemu, dzieląc je na funkcjonalne i niefunkcjonalne, a następnie konkretyzując za pomocą diagramów przypadków użycia i sekwencji.
-        \item Projekt systemu --- przedstawia wysokopoziomową architekturę aplikacji, szczegółowy projekt bazy danych oraz makietę interfejsu użytkownika.
-        \item Implementacja --- opisuje konkretny stos technologiczny, sposób realizacji poszczególnych komponentów oraz integrację algorytmu z aplikacją webową.
-    \end{enumerate}
+    \begin{itemize}
+        \item specyfikacja wymagań --- formalizuje oczekiwania wobec systemu, dzieląc je na funkcjonalne i niefunkcjonalne, a następnie konkretyzując za pomocą diagramów przypadków użycia i sekwencji,
+        \item projekt systemu --- przedstawia wysokopoziomową architekturę aplikacji, szczegółowy projekt bazy danych oraz makietę interfejsu użytkownika,
+        \item implementacja --- opisuje konkretny stos technologiczny, sposób realizacji poszczególnych komponentów oraz integrację algorytmu z aplikacją webową.
+    \end{itemize}
 
 \section{Specyfikacja wymagań}
     \subsection{Wymagania funkcjonalne}\label{subsection:wymagania_funkcjonalne}
@@ -542,12 +542,12 @@
     \subsection{Architektura systemu}
         Wybór odpowiedniej architektury systemu jest kluczowy dla zapewnienia jego skalowalności, elastyczności i możliwości dalszego rozwoju.
         W celu spełnienia wszystkich wymagań projektowych podzieliłem aplikację na cztery główne komponenty:
-        \begin{enumerate}
+        \begin{itemize}
             \item \textbf{Interfejs użytkownika} (ang. \textit{Graphical User Interface}, GUI) --- odpowiada za komunikację z użytkownikiem, umożliwiając wygodną obsługę systemu bez konieczności znajomości szczegółów działania jego wewnętrznych mechanizmów.
             \item \textbf{Warstwę sewerową} --- umożliwia sprawną integrację wszystkich komponentów poprzez interfejs programowania aplikacji (ang. \textit{Application Programming Interface}, API).
             \item \textbf{Baza danych} --- przechowywuje wszystkie zasoby, ograniczenia oraz plany lekcji w ustrukturyzowany sposób.
             \item \textbf{Moduł optymalizacyjny} --- realizuje algorytmy generowania planów lekcji, przetwarzając dane z bazy i uwzględniając wszystkie wymagania i ograniczenia.
-        \end{enumerate}
+        \end{itemize}
 
         \begin{figure}[H]
             \centering
@@ -836,11 +836,11 @@
         \subsubsection{Strona główna}
             Strona główna pełni funkcję centralnego hubu aplikacji. 
             Umożliwia bezpośrednie przejście do trzech kluczowych sekcji: 
-            \begin{enumerate}
+            \begin{itemize}
                 \item podglądu istniejących planów lekcji,
                 \item wprowadzania i edycji ograniczeń głównych,
                 \item modułu generowania nowych planów.
-            \end{enumerate}
+            \end{itemize}
             
         \subsubsection{Podgląd planów lekcji}
             Strona podglądu planu lekcji umożliwia przeglądanie wielu wariantów planów, co realizuje wymaganie co do możliwości przechowywania wielu planów lekcji.
@@ -1065,26 +1065,16 @@ class RoomPoolViewSet(ModelViewSet):
     \subsection{Integracja z algorytmem}
         Dzięki adekwatnemu wyborowi technologii, proces integracji modułu optymalizacyjnego z warstwą serwerową został znacząco uproszczony.
         Zaimplementowałem dedykowany endpoint, który przyjmuje żądania typu POST zawierające parametry konfiguracyjne algorytmu, w tym liczbę generacji dla algorytmu ewolucyjnego oraz ID zbioru wymagań.\\
-        Proces generowania planu lekcji przebiega według następującego schematu:
-        \begin{enumerate}
-            \item Pobranie i walidacja danych wejściowych z żądania.
-            \item Wczytanie odpowiedniego zestawu ograniczeń i wymagań z bazy danych.
-            \item Uruchomienie trójetapowego algorytmu optymalizacyjnego z przekazanymi parametrami.
-            \item Transformacja wyników algorytmu do przypisań lekcyjnych.
-            \item Utworzenie nowego rekordu planu lekcji w bazie danych.
-            \item Zapisanie wygenerowanych przypisań (lekcji) w powiązaniu z utworzonym planem.
-            \item Zwrócenie odpowiedzi zawierającej status operacji.
-        \end{enumerate}
-
+        Dalszy proces jest opisany na diagrame seksencji~\ref{fig:sekwencje_1}
 
         % Dzięki adekwatnemu wyborze technologii proces integracji modułu optymalizacyjnego z warstwą serwerową był prosty.
         % Stworzyłem endpoint do którego interfejs webowy może wysyłać zapytanie typu POST z wartością liczbową mówiącą i liczbie generacji.
         % Cały proces można opisać w następujących krokach:
-        % \begin{enumerate}
+        % \begin{itemize}
         %     \item Uruchom algorytm z odpowiednimi ograniczeniami podanymi w zapytaniu
         %     \item Przetwórz wynik algorytmu na przypisania
         %     \item Stwój nowy plan lekcji
         %     \item Zapisz przypisania w stworzonym planie lekcji
         %     \item Zapisz plan lekcji i przypisania (lekcje) w bazie danych
         %     \item Zwróć wiadomość o sukcesie bądź ewentualnych błędach
-        % \end{enumerate}
+        % \end{itemize}

@@ -113,16 +113,17 @@
 \contentsline {subsubsection}{Widoki wprowadzania zasobów}{72}{subsubsection*.105}%
 \contentsline {subsubsection}{Widoki wprowadzania wymagań}{74}{subsubsection*.110}%
 \contentsline {subsection}{\numberline {4.3.5}Integracja z algorytmem}{76}{subsection.4.3.5}%
-\contentsline {chapter}{\numberline {5}Weryfikacja i walidacja rozwiązania}{79}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Scenariusze testowe}{79}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Scenariusz testowy generowania planu lekcji z określonymi parametrami}{79}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Scenariusz przeglądu planów lekcji}{79}{subsection.5.1.2}%
-\contentsline {subsection}{\numberline {5.1.3}Scenariusz importowania i edytowania wymagań głównych}{79}{subsection.5.1.3}%
-\contentsline {subsection}{\numberline {5.1.4}Scenariusz edytowania dostępności nauczycieli}{79}{subsection.5.1.4}%
-\contentsline {section}{\numberline {5.2}Testowanie aplikacji}{82}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Test generowania planu lekcji z określonymi parametrami}{82}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Test przeglądania planów lekcji}{82}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Test importowania i edytowania wymagań głównych}{83}{subsection.5.2.3}%
+\contentsline {chapter}{\numberline {5}Weryfikacja i walidacja rozwiązania}{77}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Scenariusze testowe}{77}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Scenariusz testowy generowania planu lekcji z określonymi parametrami}{77}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Scenariusz przeglądu planów lekcji}{77}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}Scenariusz importowania i edytowania wymagań głównych}{77}{subsection.5.1.3}%
+\contentsline {subsection}{\numberline {5.1.4}Scenariusz edytowania dostępności nauczycieli}{77}{subsection.5.1.4}%
+\contentsline {section}{\numberline {5.2}Testowanie aplikacji}{80}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Test generowania planu lekcji z określonymi parametrami}{80}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Test przeglądania planów lekcji}{80}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Test importowania i edytowania wymagań głównych}{81}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Test edytowania dostępności nauczycieli}{82}{subsection.5.2.4}%
 \contentsline {section}{\numberline {5.3}Analiza jakości wyników generowania planu lekcji}{83}{section.5.3}%
 \contentsline {chapter}{\numberline {6}Wnioski i perspektywy rozwoju}{87}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Problemy rozwiązania}{87}{section.6.1}%

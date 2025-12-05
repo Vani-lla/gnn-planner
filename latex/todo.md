@@ -46,11 +46,12 @@
 - &check; Kod jako rysunek
 - &check; Projekt interfejsu do przeczytania
 
-- Przykładowy zbiór bloków lekcyjnych powinien zawierać faktyczne zbiory jako wymagania główne
+- &check; Przykładowy zbiór bloków lekcyjnych powinien zawierać faktyczne zbiory jako wymagania główne
 - Diagram wymagań
 
+
 - Sprawdzenie pierwszej pracy z bibliografii
-- Testy do poprawienia
+- &check; Testy do poprawienia
 - Poprawenie końcowej analizy wyników
 - Poprawa widoczności bloków lekcyjnych w wynikach (wspólna oś / skala)
 - Napisać ukłąd pracy

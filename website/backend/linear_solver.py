@@ -133,7 +133,7 @@ def solve_schedule(req_set: RequirementSet, block_list, specimen):
             )
 
         # --- Optimization target ---
-        model.Minimize(sum(minimization_vars))
+        # model.Minimize(sum(minimization_vars))
 
         # --- Solve ---
         solver = cp_model.CpSolver()
