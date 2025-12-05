@@ -47,16 +47,20 @@
 - &check; Projekt interfejsu do przeczytania
 
 - &check; Przykładowy zbiór bloków lekcyjnych powinien zawierać faktyczne zbiory jako wymagania główne
-- Diagram wymagań
+- &check; Diagram wymagań
 
 
-- Sprawdzenie pierwszej pracy z bibliografii
+- &check; Sprawdzenie pierwszej pracy z bibliografii
 - &check; Testy do poprawienia
+- &check; Dodać key-wordy
+- &check; Zmienne przedziałowe <- zmienne interwałowe
 - Poprawenie końcowej analizy wyników
 - Poprawa widoczności bloków lekcyjnych w wynikach (wspólna oś / skala)
-- Napisać ukłąd pracy
+- Napisać układ pracy
 - Napisać streszczenie
-- Dodać key-wordy
+- Dodać opis do potężnego pseudokodu
+- Poprawienie diagramu dekompozycji
+- &check; Słownictwo backend/frontend/endpoint/widoki
 
 ### Wszelkie inne poprawki :|
 95.43159103393555

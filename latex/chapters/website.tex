@@ -2,9 +2,9 @@
     Rozdział prezentuje praktyczną realizację rozwiązania teoretycznego przedstawionego wcześniej.
     Jego struktura odzwierciedla proces inżynierii oprogramowania, przechodzący od wymagań, przez projekt, aż do implementacji:
     \begin{itemize}
-        \item specyfikacja wymagań --- formalizuje oczekiwania wobec systemu, dzieląc je na funkcjonalne i niefunkcjonalne, a następnie konkretyzując za pomocą diagramów przypadków użycia i sekwencji,
-        \item projekt systemu --- przedstawia wysokopoziomową architekturę aplikacji, szczegółowy projekt bazy danych oraz makietę interfejsu użytkownika,
-        \item implementacja --- opisuje konkretny stos technologiczny, sposób realizacji poszczególnych komponentów oraz integrację algorytmu z aplikacją webową.
+        \item Specyfikacja wymagań --- formalizuje oczekiwania wobec systemu, dzieląc je na funkcjonalne i niefunkcjonalne, a następnie konkretyzując za pomocą diagramów przypadków użycia i sekwencji.
+        \item Projekt systemu --- przedstawia wysokopoziomową architekturę aplikacji, szczegółowy projekt bazy danych oraz makietę interfejsu użytkownika.
+        \item Implementacja --- opisuje konkretny stos technologiczny, sposób realizacji poszczególnych komponentów oraz integrację algorytmu z aplikacją webową.
     \end{itemize}
 
 \section{Specyfikacja wymagań}
@@ -35,7 +35,7 @@
             \end{itemize}
         \end{itemize}
 
-        Szczegółowa specyfikacja wymagań została przedstawiona na załączonym diagramie przypadków użycia (\ref{fig:diagram_wymagan}).
+        Szczegółowa specyfikacja wymagań została przedstawiona na rysunku diagramu wymagań \ref{fig:diagram_wymagan}.
 
             \begin{sidewaysfigure}[!p]
                 \centering
@@ -539,13 +539,13 @@
 
 \newpage
 \section{Projekt}
-    \subsection{Architektura systemu}
-        Wybór odpowiedniej architektury systemu jest kluczowy dla zapewnienia jego skalowalności, elastyczności i możliwości dalszego rozwoju.
+    \subsection{Architektura aplikacji}
+        Wybór odpowiedniej architektury aplikacji jest kluczowy dla zapewnienia jej skalowalności, elastyczności i możliwości dalszego rozwoju.
         W celu spełnienia wszystkich wymagań projektowych podzieliłem aplikację na cztery główne komponenty:
         \begin{itemize}
             \item \textbf{Interfejs użytkownika} (ang. \textit{Graphical User Interface}, GUI) --- odpowiada za komunikację z użytkownikiem, umożliwiając wygodną obsługę systemu bez konieczności znajomości szczegółów działania jego wewnętrznych mechanizmów.
             \item \textbf{Warstwę sewerową} --- umożliwia sprawną integrację wszystkich komponentów poprzez interfejs programowania aplikacji (ang. \textit{Application Programming Interface}, API).
-            \item \textbf{Baza danych} --- przechowywuje wszystkie zasoby, ograniczenia oraz plany lekcji w ustrukturyzowany sposób.
+            \item \textbf{Bazę danych} --- przechowywuje wszystkie zasoby, ograniczenia oraz plany lekcji w ustrukturyzowany sposób.
             \item \textbf{Moduł optymalizacyjny} --- realizuje algorytmy generowania planów lekcji, przetwarzając dane z bazy i uwzględniając wszystkie wymagania i ograniczenia.
         \end{itemize}
 
@@ -580,11 +580,10 @@
                 \node[below=0.1cm of user] {Użytkownik};
 
                 % Connections
-                \draw[<->, very thick, -latex] (user.east) -- (gui.west) node[midway, above]{};
-                \draw[<->, very thick, -latex] (gui.east) -- (api.west) node[midway, above]{};
-                \draw[<->, very thick, -latex] (api.south) -- (db.north) node[midway, right]{};
-                \draw[<->, very thick, -latex] (api.south west) -- (opt.north east) node[midway, above]{};
-            
+                \draw[<->, very thick] (user.east) -- (gui.west) node[midway, above]{};
+                \draw[<->, very thick] (gui.east) -- (api.west) node[midway, above]{};
+                \draw[<->, very thick] (api.south) -- (db.north) node[midway, right]{};
+                \draw[<->, very thick] (api.south west) -- (opt.north east) node[midway, above]{};
             \end{tikzpicture}
             \caption{Architektura aplikacji}
         \end{figure}
@@ -821,7 +820,7 @@
                 & \texttt{hour} & Slot czasowy \\
                 \hline
             \end{tabular}
-            \caption{Struktura wszystkich tabel w bazie danych}
+            \caption{Struktura najważniejszych tabel w bazie danych}
         \end{table}
     \clearpage
 
@@ -853,7 +852,7 @@
         \subsubsection{Moduły wprowadzania danych}
             Aplikacja zawiera kompleksowy zestaw stron do wprowadzania wszystkich typów danych wymaganych do generowania planu:
             \begin{itemize}
-                \item \textbf{Strony zasobów} umożliwiają zarządzanie czterema fundamentalnymi zasobami: przedmiotami, nauczycielami, klasami oraz salami.
+                \item \textbf{Strony zasobów} umożliwiają zarządzanie czterema podstawowymi zasobami: przedmiotami, nauczycielami, klasami oraz salami.
                 Interfejs powinien zapewniać możliwość ręcznego wprowadzania, edycji i usuwania rekordów, a także importu danych z plików tekstowych w ustalonych formatach.
                 \item \textbf{Strona ograniczeń głównych} dedykowana jest definiowaniu wymagań głównych, czyli przypisań godzinowych nauczycieli do klas dla konkretnych przedmiotów.
                 Interfejs powinien nawiązywać wyglądem i funkcjonalnością do arkuszy kalkulacyjnych, co ułatwia migrację z dotychczas używanych narzędzi.
@@ -879,23 +878,30 @@
         W wyborze stosu technologicznego kierowałem się produktywnością rozwoju aplikacji, skalowalnością rozwiązania oraz integracją z innymi komponentami systemu.
 
         \subsubsection{Interfejs webowy}
+            Frontend to część aplikacji odpowiadająca za interfejs użytkownika i działająca po stronie przeglądarki internetowej.
+            Framework frontendowy to zestaw narzędzi, bibliotek i konwencji programistycznych, które ułatwiają i przyspieszają tworzenie oprogramowania, zapewniając gotowe rozwiązania dla typowych problemów.
+
             Decyzja o wykorzystaniu Reacta~\cite{react} jako frameworka frontendowego wynika z kilku kluczowych czynników.
             Po pierwsze, posiadam znaczące doświadczenie w rozwoju aplikacji przy użyciu tej technologii, co pozwoliło na efektywną implementację interfejsu użytkownika.
             Po drugie, React jest jednym z najbardziej popularnych i dojrzałych frameworków frontendowych, co gwarantuje obszerną dokumentację oraz aktywną społeczność wspierającą rozwój.
-            Po trzecie, React oferuje responsywne zarządzanie stanem aplikacji, co umożliwia dynamiczną aktualizację widoków planów lekcji bez konieczności przeładowywania strony, zapewniając płynne doświadczenie użytkownika podczas przeglądania planów lekcji.
+            Po trzecie, React oferuje responsywne zarządzanie stanem aplikacji, co umożliwia dynamiczną aktualizację widoków planów lekcji bez konieczności przeładowywania strony, zapewniając płynność interakcji użytkownika podczas przeglądania planów lekcji.
 
         \subsubsection{Warstwa serwerowa}
             Wybór Pythona jako głównego języka programowania dla całego systemu był decyzją, podyktowaną koniecznością sprawnej integracji modułu optymalizacyjnego z warstwą aplikacji webowej.
             Implementacja algorytmu generowania planu lekcji w Pythonie umożliwiła wykorzystanie pakietów optymalizacyjnych Google OR-Tools oraz biblioteki NumPy, eliminując potrzebę tworzenia skomplikowanych interfejsów międzyjęzykowych.
-            
+
+            Backend to część aplikacji działająca po stronie serwera, jest odpowiedzialna za logikę, komunikację z bazą danych oraz zapewnianie API dla frontendu.
+            Stanowi on fundament aplikacji webowej, podczas gdy frontend odpowiada za prezentację danych użytkownikowi.
+            Podobnie jak w przypadku frontendu istnieje wiele frameworków ułatwiających tworzenie tej części aplikacji.
+
             Wybór Django~\cite{django} jako frameworka backendowego został dokonany po analizie alternatywnego rozwiązania w Pythonie --- FastAPI.
             Pomimo że FastAPI oferuje wydajność i nowoczesne funkcje, Django zapewnia kompleksowe podejście, które jest lepiej dostosowane do złożonych aplikacji webowych.
-            Moje wcześniejsze doświadczenie z Django pozwoliło na efektywną pracę oraz sprawne wykorzystanie technik ORM (ang. \textit{Object-relational mapping}).
+            Moje wcześniejsze doświadczenie z Django pozwoliło na efektywną pracę oraz sprawne wykorzystanie technik ORM (ang. \textit{Object-Relational Mapping}).
             Dodatkowo, skalowalność Django i jego bezpieczeństo zapewniają solidne fundamenty dla aplikacji, która może ewoluować w przyszłości.
 
         \subsubsection{Baza danych}
             PostgreSQL został wybrany jako system zarządzania bazą danych ze względu na jego wsparcie oraz doskonałą integrację z Django.
-            Kluczowym czynnikiem była kompatybilność z biblioteką django-tenants, która umożliwia przyszłą implementację architektury opisanej w jej dokumentacji~\cite{djangotenants}.
+            Kluczowym czynnikiem była kompatybilność z biblioteką Django-Tenants, która umożliwia przyszłą implementację architektury opisanej w jej dokumentacji~\cite{djangotenants}.
             Ta funkcjonalność pozwoli w przyszłości na łatwe dodanie obsługi wielu niezależnych użytkowników lub instytucji w obrębie pojedynczej instancji aplikacji.
             Dodatkowo, wsparcie dla niestandardowych typów danych, między innymi JSON, w PostgreSQL idealnie odpowiada potrzebom przechowywania skomplikowanych struktur danych, takich jak macierze dostępności nauczycieli czy konfiguracje bloków przedmiotów.
 
@@ -904,7 +910,7 @@
             W przypadku algorytmu ewolucyjnego wykorzystałem bibliotekę NumPy, która dzięki zoptymalizowanym operacjom macierzowym znacząco przyspiesza obliczenia i umożliwia efektywne przetwarzanie populacji rozwiązań.
 
             Algorytm zachłanny oraz algorytm ewolucyjny zostały zaimplementowane od zera, przy użyciu wspomnianej wyżej biblioteki, co pozwoliło na pełną kontrolę nad ich działaniem.
-            W trzecim etapie użyłem pakietu Google OR-Tools, który oferuje bogaty zestaw narzędzi do modelowania problemów programowania z ograniczeniami, w tym zmienne interwałowe i ograniczenia typu \verb|NoOverlap|.
+            W trzecim etapie użyłem pakietu Google OR-Tools, który oferuje bogaty zestaw narzędzi do modelowania problemów programowania z ograniczeniami, w tym zmienne przedziałowe i ograniczenia typu \verb|NoOverlap|.
             Jego dobra dokumentacja, wysoka wydajność oraz natywna integracja z Pythonem sprawiają, że stanowi on naturalny wybór w tego typu zastosowaniach.
 
     \subsection{Implementacja bazy danych w Django}
@@ -927,21 +933,28 @@ class Room(models.Model):
                 \caption{Fragment kodu służący do definicji tabeli sal}\label{fig:code1}
             \end{figure}
 
-        Analogiczna implementacja dla reszty tabel opisanych w~\ref{subsection:projekt_bazy_danych}.
+        Implementacja dla reszty tabel opisanych w punkcie~\ref{subsection:projekt_bazy_danych} jest analogiczna.
 
     \subsection{Implementacja API}
+        Aby zrozumieć implementację API w Django należy znać parę pojęć:
+        \begin{itemize}
+            \item \textbf{Serializacja} (ang. \textit{Serializing}) to proces konwersji obiektów Django na format danych przesyłany przez API oraz konwersja danych przychodzących na obiekty Django.
+            \item \textbf{Widok} (ang. \textit{View}) to komponent odpowiedzialny za przetwarzanie żądań HTTP i zwracanie odpowiedzi, implementujący logikę biznesową dla konkretnych punktów końcowych.
+            \item \textbf{Punkt końcowy} (ang. \textit{Endpoint}) to unikalny adres URL w API, który odpowiada na żądania HTTP i udostępnia konkretną funkcjonalność.
+        \end{itemize}
+
         Warstwa API została zaimplementowana z wykorzystaniem Django REST Framework --- elastycznego zestawu narzędzi do budowy interfejsów REST w Django.
         Znacząco przyspieszyło to proces rozwijania aplikacji poprzez dostarczenie gotowych komponentów do obsługi operacji CRUD, walidacji danych, autentykacji i serializacji.
-        Jedną z kluczowych zalet frameworka są automatyczne widoki \verb|ModelViewSet|, które generują kompletny zestaw endpointów dla modelu na podstawie minimalnej konfiguracji, eliminując konieczność ręcznego implementowania rutynowych operacji.
+        Jedną z kluczowych zalet frameworka są widoki \verb|ModelViewSet|, które automatycznie generują kompletny zestaw punktów końcowych dla modelu na podstawie minimalnej konfiguracji, eliminując konieczność ręcznego implementowania rutynowych operacji.
         Takie widoki są również modyfikowalne, co pozwala na uwzględnienie niestandardowych przypadków, takich jak tworzenie wielu wymagań głównych na raz w celu poprawienia wydajności, z relatywną łatwością.
 
         \begin{figure}[H]
             \centering
             \includegraphics[width=1.0\textwidth]{images/django_api_overview.png}
-            \caption{Automatycznie wygenerowana lista endpointów stworzonych przy użyciu \mbox{ModelViewSet}}\label{fig:api_default_router}
+            \caption{Automatycznie wygenerowana lista punktów końcowych stworzonych przy użyciu \mbox{ModelViewSet}}\label{fig:api_default_router}
         \end{figure}
 
-        Na rysunku~\ref{fig:code2} przedstawiłem przykładową implementację endpointów dotyczących tabeli \verb|room_pool| używając klast \verb|ModelViewSet|.
+        Na rysunku~\ref{fig:code2} przedstawiłem przykładową implementację punktów końcowych dotyczących tabeli \verb|room_pool| używając klast \verb|ModelViewSet|.
         \begin{figure}[H]
             \begin{lstlisting}[language=Python]
 class RoomPoolSerializer(serializers.ModelSerializer):
@@ -953,7 +966,7 @@ class RoomPoolViewSet(ModelViewSet):
     queryset = RoomPool.objects.all()
     serializer_class = RoomPoolSerializer
             \end{lstlisting}
-            \caption{Fragment kodu służący do implementacji endpointów dla zbioru sal}\label{fig:code2}
+            \caption{Fragment kodu służący do implementacji punktów końcowych dla zbioru sal}\label{fig:code2}
         \end{figure}
 
     \subsection{Implementacja interfejsu webowego}
@@ -1014,7 +1027,7 @@ class RoomPoolViewSet(ModelViewSet):
 
         \subsubsection{Widoki wprowadzania zasobów}
             Widoki wprowadzania zasobów pozwalają na tworzenie, i wybieranie ich zbiorów.
-            Implementacje przedstawione na rysunkach~\ref{fig:add_subject},~\ref{fig:add_teacher},~\ref{fig:add_room},~\ref{fig:add_class} spełniają wymagania funkcjonalne co do dodawania zasobów.
+            Implementacje przedstawione na rysunkach~\ref{fig:add_subject},~\ref{fig:add_teacher},~\ref{fig:add_room} i~\ref{fig:add_class} spełniają wymagania funkcjonalne co do dodawania zasobów.
 
             \begin{figure}[H]
                 \centering
@@ -1064,7 +1077,7 @@ class RoomPoolViewSet(ModelViewSet):
 
     \subsection{Integracja z algorytmem}
         Dzięki adekwatnemu wyborowi technologii, proces integracji modułu optymalizacyjnego z warstwą serwerową został znacząco uproszczony.
-        Zaimplementowałem dedykowany endpoint, który przyjmuje żądania typu POST zawierające parametry konfiguracyjne algorytmu, w tym liczbę generacji dla algorytmu ewolucyjnego oraz ID zbioru wymagań.\\
+        Zaimplementowałem dedykowany punkt końcowy, który przyjmuje żądania typu POST zawierające parametry konfiguracyjne algorytmu, w tym liczbę generacji dla algorytmu ewolucyjnego oraz ID zbioru wymagań.\\
         Dalszy proces jest opisany na diagrame seksencji~\ref{fig:sekwencje_1}
 
         % Dzięki adekwatnemu wyborze technologii proces integracji modułu optymalizacyjnego z warstwą serwerową był prosty.

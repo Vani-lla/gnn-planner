@@ -33,7 +33,7 @@
 \contentsline {subsection}{\numberline {3.2.1}Programowanie mieszanocałkowitoliczbowe}{19}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Grafowe sieci neuronowe}{21}{subsection.3.2.2}%
 \contentsline {section}{\numberline {3.3}Dekompozycja problemu i wybór technik}{21}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Problem kombinatoryki}{23}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.1}Problem grupowania}{23}{subsection.3.3.1}%
 \contentsline {subsubsection}{Bloki lekcyjne}{23}{subsubsection*.25}%
 \contentsline {subsubsection}{Przestrzeń decyzyjna}{24}{subsubsection*.26}%
 \contentsline {subsubsection}{Oznaczenia}{24}{subsubsection*.27}%
@@ -66,11 +66,11 @@
 \contentsline {subsubsection}{Ciągłość zajęć dla klas}{41}{subsubsection*.41}%
 \contentsline {subsubsection}{Nakładanie się nauczycieli}{41}{subsubsection*.42}%
 \contentsline {subsubsection}{Kolizje sal}{41}{subsubsection*.43}%
-\contentsline {subsubsection}{Sekwencjonowanie przedmiotów}{41}{subsubsection*.44}%
+\contentsline {subsubsection}{Kolejność przedmiotów}{41}{subsubsection*.44}%
 \contentsline {subsection}{\numberline {3.6.3}Funkcja celu}{41}{subsection.3.6.3}%
-\contentsline {subsection}{\numberline {3.6.4}Transformacja interwałów na przypisania końcowe}{41}{subsection.3.6.4}%
+\contentsline {subsection}{\numberline {3.6.4}Transformacja przedziałów na przypisania końcowe}{41}{subsection.3.6.4}%
 \contentsline {subsubsection}{Ekstrakcja rozwiązań z solvera}{42}{subsubsection*.45}%
-\contentsline {subsubsection}{Mapowanie na strukturę lekcji}{42}{subsubsection*.46}%
+\contentsline {subsubsection}{Odwzorowanie na strukturę lekcji}{42}{subsubsection*.46}%
 \contentsline {subsubsection}{Przykład transformacji}{42}{subsubsection*.47}%
 \contentsline {subsection}{\numberline {3.6.5}Przykładowy wynik}{43}{subsection.3.6.5}%
 \contentsline {chapter}{\numberline {4}Aplikacja}{45}{chapter.4}%
@@ -83,7 +83,7 @@
 \contentsline {subsubsection}{Diagram sekwencji przeglądania planów lekcji}{55}{subsubsection*.64}%
 \contentsline {subsubsection}{Diagram sekwencji wprowadzania i edycji danych}{56}{subsubsection*.66}%
 \contentsline {section}{\numberline {4.2}Projekt}{57}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Architektura systemu}{57}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.1}Architektura aplikacji}{57}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}Projekt struktury bazy danych}{58}{subsection.4.2.2}%
 \contentsline {subsubsection}{Tabele podstawowe}{58}{subsubsection*.69}%
 \contentsline {subsubsection}{Tabele wymagań}{59}{subsubsection*.72}%
@@ -102,7 +102,7 @@
 \contentsline {subsubsection}{Warstwa serwerowa}{67}{subsubsection*.89}%
 \contentsline {subsubsection}{Baza danych}{67}{subsubsection*.90}%
 \contentsline {subsubsection}{Moduł optymalizacyjny}{67}{subsubsection*.91}%
-\contentsline {subsection}{\numberline {4.3.2}Implementacja bazy danych w Django}{67}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.2}Implementacja bazy danych w Django}{68}{subsection.4.3.2}%
 \contentsline {subsubsection}{Tabela sal}{68}{subsubsection*.92}%
 \contentsline {subsection}{\numberline {4.3.3}Implementacja API}{68}{subsection.4.3.3}%
 \contentsline {subsection}{\numberline {4.3.4}Implementacja interfejsu webowego}{69}{subsection.4.3.4}%

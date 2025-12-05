@@ -79,7 +79,7 @@
                 \[ \forall i \in \left\{1, 2, \dots, \left|\mathcal{B}\right|\right\}: \begin{cases}
                     \vec{S_{b,i}} &\subset \mathcal{S} \\
                     \vec{C_{b,i}} &\subseteq  \mathcal{C} \\
-                    \vec{G_{b,i}} &\in \mathbb{N}^{\left|\vec{S_b}\right|} \\
+                    \vec{G_{b,i}} &\in \mathbb{N}^{\left|\vec{S_{b,i}}\right|} \\
                     \gamma_{b,i} &\in \left\{0, 1\right\} \\
                     \epsilon_{b,i} & \in \mathbb{N}
                 \end{cases} \]
@@ -87,7 +87,7 @@
                 \begin{itemize}
                     \item $\vec{S_{b,i}}$ to podzbiór wszystkich przedmiotów, których dotyczy blok $b_i$,
                     \item $\vec{C_{b,i}}$ to podzbiór wszystkich klas, których dotyczy blok $b_i$,
-                    \item $\vec{G_{b,i}}$ to wektor oczekiwanej liczby przedmiotów w bloku,
+                    \item $\vec{G_{b,i}}$ to wektor oczekiwanej liczby godzin przedmiotów w bloku,
                     \item $\gamma$ to wartość binarna informująca o tym czy blok jest \textit{agregujący} --- służący do łączenia innych bloków w jeszcze większe bloki,
                     \item $\epsilon$ to liczba naturalna która informuje o maksymalnej liczbie bloków. Jeśli $\epsilon=0$ to, liczba bloków jest nielimitowana.
                 \end{itemize}
@@ -161,7 +161,7 @@
                     \item brak okienek dla uczniów. Nie istnieje taka para przypisań, dla których różnica między slotami czasowymi jest większa niż suma wszystkich lekcji danego dnia,
                     \begin{align*}
                         \nexists i, j \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}, c \in \mathcal{C}:\\
-                        d_{z,i} = d_{z,j} \land c_{z,i} = c_{z,j} \land \left|h_{z,i} - h_{z,j}\right| > \left|\left\{z_k: d_{z,k} = d_{z,i} \land c_{z,i}\right\}\right|
+                        d_{z,i} = d_{z,j} \land c_{z,i} = c_{z,j} \land \left|h_{z,i} - h_{z,j}\right| > \left|\left\{z_k \in \mathcal{Z}: d_{z,k} = d_{z,i} \land c_{z,i}\right\}\right|
                     \end{align*}
                     \item odpowiednie przypisanie sal. Lekcje wychowania fizycznego muszą odbyć się w przeznaczonych do tego salach, podobnie lekcje informatyki itd.,
                     \[ \forall z_i \in \mathcal{Z}: s_{z,i} \in \vec{R_{r_z}} \]
@@ -173,7 +173,7 @@
                 \end{itemize}
 
             \subsubsection{Ograniczenie główne}
-                Zgodnie z definicją przyjętą powyżej, tygodniowa liczba godzin każdego przedmiotu musi być równa tej ustalonej w zbiorze wymagań:
+                Zgodnie z definicją przedstawioną powyżej, tygodniowa liczba godzin każdego przedmiotu musi być równa tej ustalonej w zbiorze wymagań:
                 \[ \forall w_i \in \mathcal{W}: \left|\left\{z_j \in \mathcal{Z}: c_{w,i} = c_{z,j} \land t_{w,i} = t_{z,i} \land s_{w,i} = s_{z,i}\right\}\right| = g_{w,i} \]
 
             % \subsubsection{Hierarchiczna dekompozycja problemu}
@@ -211,8 +211,8 @@
             \[ F = \sum_{d=1}^{5} \sum_{t\in\mathcal{T}} \left(\max_{\substack{i \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}\\ t = t_{z,i} \land d=d_{z,i}}} h_{z,i} - \min_{\substack{i \in \left\{1, 2, \dots, \left|\mathcal{Z}\right|\right\}\\ t = t_{z,i} \land d=d_{z,i}}} h_{z,i}\right) \]
 
 \section{Poprzednie podejścia}
-    Aby w pełni zrozumieć mój wybór narzędzi warto szybko przetoczyć historię moich poprzednich podejść do rozwiązania tego problemu.
-    
+    Aby w pełni zrozumieć mój wybór narzędzi warto szybko przytoczyć historię moich poprzednich podejść do rozwiązania tego problemu.
+
     \subsection{Programowanie mieszanocałkowitoliczbowe}\label{subsection:podejscie_zerojedynkowe}
         Moim pierwszym podejściem była próba użycia tylko i wyłącznie pakietu optymalizacyjnego \textit{IBM ILOG CPLEX}.
         Problem zdefiniowałem używając zmiennych binarnych inspirując się podejściem opisanym w sekcji~\ref{section:podejscie_iteracyjne}, tworząc sześciowymiarową macierz:
@@ -220,8 +220,8 @@
             \item wymiar nauczycieli,
             \item wymiar klas,
             \item wymiar przedmiotów,
-            \item wymiar dnia,
-            \item wymiar slotu czasowego,
+            \item wymiar dni,
+            \item wymiar slotów czasowych,
             \item wymiar sal.
         \end{itemize}
 
@@ -272,7 +272,7 @@
         Problemem tego rozwiązania jest niemożność wprowadzenia bloków lekcyjnych przy jednoczesnym zachowaniu prostoty obliczeniowej.
         Kolejnym wyzwaniem było również wprowadzenie minimalizacji liczby okienek dla nauczycieli oraz wymagania ciągłości zajęć dla wszystkich klas.
         Zmienne binarne nie oferują wystarczającej wszechstronności, która jest potrzebna w układaniu planów zajęć.
-    
+
     \subsection{Grafowe sieci neuronowe}
         W odpowiedzi na problemy z MIP, zdecydowałem się na zbadanie alternatywnych metod rozwiązania.
         Wybrałem niekonwencjonalną reprezentację problemu harmonogramowania używając grafowych sieci neuronowych~\cite{schlichtkrull2018modeling}.
@@ -282,32 +282,33 @@
         Taka reprezentacja okazała się szczególnie atrakcyjna pod względem implementacji funkcji celu.
         Ocena wykonalności rozwiązania sprowadziła się do weryfikacji spełnienia ograniczeń, które można było w prosty sposób zamodelować za pomocą funkcji kary.
         Jednocześnie można nagradzać model za przypisywanie lekcji do poprawnych bloków.
-        Początkowe rezultaty były bardzo obiecujące --- model już po kilkadziesięciu epokach wykazywał zdolność do identyfikowania, które lekcji powinny być w blokach, a które wymagają rozdzielenia w celu uniknięcia kolizji.
+        Początkowe rezultaty były bardzo obiecujące --- model już po kilkudziesięciu cyklach uczenia wykazywał zdolność do identyfikowania, które lekcji powinny być w blokach, a które wymagają rozdzielenia w celu uniknięcia kolizji.
 
         Główną wadą w tym podejściu okazał się brak gwarancji spełnienia ograniczeń twardych oraz trudności przy układaniu planu iteracyjnie (lekcja po lekcji).
         Eksperymenty wykazały, że przy zastosowaniu zbyt wysokich współczynników kary, proces uczenia nie przynosił rezultatów. 
         Zbyt niskie natomiast powodowały, że model preferował optymalizację nagrody za grupowanie lekcji kosztem naruszenia ograniczeń.
 
 \section{Dekompozycja problemu i wybór technik}
-    W niniejszej pracy zaadaptowałem oraz rozwinąłem fundamentalną ideę przedstawioną w sekcji~\ref{section:podejscie_iteracyjne}, dostosowując ją do specyfiki mojego problemu.
+    W niniejszej pracy zaadaptowałem oraz rozwinąłem ideę przedstawioną w podrozdziale~\ref{section:podejscie_iteracyjne}, dostosowując ją do specyfiki mojego problemu.
     Zdecydowałem się na podział zadania na trzy mniejsze, kolejno realizowane etapy, z których każdy rozwiązuje wyraźnie wydzielony podproblem o niższej złożoności obliczeniowej niż problem kompletny.
     
     Analiza moich wcześniejszych prób rozwiązania tego zagadnienia wskazuje, że oparcie się wyłącznie na metodach inteligentnych bądź na MIP nie prowadzi do satysfakcjonujących rezultatów.
-    Zasadnicza innowacja przedstawionego przeze mnie podejścia polega na dekompozycji oryginalnego problemu na trzy sekwencyjne fazy, każda używająca adekwatnej techniki, co stanowi rozwinięcie względem moich wcześniejszych koncepcji.
+    Zasadnicza innowacja przedstawionego przeze mnie podejścia polega na dekompozycji oryginalnego problemu na trzy podproblemy rozwiązywane sekwencyjnie odpowiednimi technikami, każda używająca adekwatnej techniki.
+    Jest to rozwinięcie względem moich wcześniejszych koncepcji.
     
     Aby móc przeprowadzić dekompozycję zdecydowałem się na wprowadzenie następujących pojęć:
     \begin{itemize}
         \item \textbf{Blok lekcyjny}: Grupa dwóch lub więcej wymagań głownych, które reprezentuja lekcje są w stanie odbywać się w tym samym slocie czasowym.
         Mogą one dotyczyć jednej klasy oraz wielu nauczycieli, jednego nauczyciela i wielu klas, lub też wielu klas i wielu nauczycieli.
         Na potrzeby tej pracy zbiory jednego wymagania głównego też traktujemy jako pojedyncze bloki lekcyjne.
-        \item \textbf{Przydział godzinowy}: Posiadając już zbiór takich zbiorów lekcyjnych macierz ich przypisań nazywamy przydziałem godzinowym.
-        Każda kolumna takiej macierzy ma 5 wartości i reprezentuję liczbę godzin lekcyjnych przeprowadzoną każdego dnia.
-        Przykładowo kolumna $\begin{bmatrix} 0 & 1 & 0 & 0 & 0 \end{bmatrix}$ reprezentuje jedną godzinę bloku we wtorek.
+        \item \textbf{Przydział godzinowy}: Posiadając już zbiór takich bloków lekcyjnych macierz ich przypisań nazywamy przydziałem godzinowym.
+        Każda kolumna takiej macierzy ma 5 wartości i reprezentuje liczbę godzin lekcyjnych przeprowadzoną każdego dnia.
+        Przykładowo kolumna $\begin{bmatrix} 0 & 1 & 0 & 0 & 0 \end{bmatrix}^T$ reprezentuje jedną godzinę bloku we wtorek.
     \end{itemize}
 
     Dekompozycja prezentuje się następująco:
     \begin{itemize}
-        \item Etap 1 --- \textbf{Problem kombinatoryki}: \\
+        \item Etap 1 --- \textbf{Problem grupowania}: \\
         \textbf{Dane wejściowe:} Zbiór wymagań głównych $\mathcal{W}$, zbiór definicji bloków przedmiotów $\mathcal{B}$ oraz zasoby szkolne $\mathcal{T}$, $\mathcal{C}$, $\mathcal{S}$. \\
         \textbf{Wynik:} Zbiór bloków lekcyjnych $\mathcal{L}$ i wektor ich wymaganych godzin tygodniowo $V$. \\
         \textbf{Cel:} Grupowanie pojedynczych wymagań głównych w możliwe do zrealizowania bloki lekcyjne.
@@ -328,7 +329,7 @@
     co w przypadku typowej szkoły skutkowałoby powstaniem nawet kilku milionów potencjalnych zmiennych.
     Tak duża skala zadania stanowi istotne wyzwanie obliczeniowe i uzasadnia konieczność zastosowania wieloetapowego podejścia.
     
-    Na rysunku~\ref{fig:struktura_algorytmu} przedstawiłem diagram struktury algorytmu:
+    Na rysunku~\ref{fig:dekompozycja_problemu} przedstawiłem diagram dekompozycji problemu:
 
     \begin{figure}[h]
         \centering
@@ -372,7 +373,7 @@
             
             \draw[->] (R3.south) -- (C.north);
         \end{tikzpicture}
-        \caption{Struktura algorytmu}\label{fig:struktura_algorytmu}
+        \caption{Dekompozycja problemu}\label{fig:dekompozycja_problemu}
     \end{figure}
 
     Dla każdego etapu dobrałem technikę optymalizacyjną dopasowaną do specyfiki problemu.
@@ -387,10 +388,10 @@
     Biorąc pod uwagę tę potrzebę oraz naturalną reprezentację danych wyjściowych w postaci macierzy, zdecydowałem się na użycie algorytmu ewolucyjnego.
     Podejście to upraszcza definiowanie funkcji celu (nie wymaga znajomości gradientu), zapewnia efektywne przeszukiwanie ogromnej liczby kombinacji i umożliwia bezpośrednie wykorzystanie formatu danych wyjściowych jako kodowania osobników.
 
-    Trzeci etap sprowadza się do problemu harmonogramowania, który jak omówiono wcześniej można przekształcić do postaci opisanej w rozdziale~\ref{section:jssp}.
+    Trzeci etap sprowadza się do problemu harmonogramowania, który jak omówiono wcześniej można przekształcić do postaci opisanej w podrozdziale~\ref{section:jssp}.
     Choć istnieje wiele podejść rozwiązujących tego typu zadania, zdecydowałem się na zastosowanie programowania liniowego z ograniczeniami.
-    Metoda ta nie wymaga ode mnie projektowania własnego algorytmu rozwiązującego, co znacząco upraszcza proces implementacji, a jednocześnie gwarantuje wysoką jakość otrzymanych harmonogramów.
-    W szczególności wykorzystałem zmienne interwałowe, które ułatwiają modelowanie złożonych zależności czasowych i ograniczeń między lekcjami.
+    Metoda ta nie wymaga projektowania własnego algorytmu rozwiązującego, co znacząco upraszcza proces implementacji, a jednocześnie gwarantuje wysoką jakość otrzymanych harmonogramów.
+    W szczególności wykorzystałem zmienne przedziałowe, które ułatwiają modelowanie złożonych zależności czasowych i ograniczeń między lekcjami.
 
     Taki dobór technik tworzy hybrydowe podejście, które wykorzystuje mocne strony każdej metody, zapewniając kompromis między jakością rozwiązania a czasem obliczeń.
     Na rysunku~\ref{fig:struktura_algorytmu_techniki} przedstawiłem strukturę algorytmu z wpisanymi odpowiednimi nazwami technik.
@@ -440,7 +441,7 @@
         \caption{Struktura algorytmu z doborem technik}\label{fig:struktura_algorytmu_techniki}
     \end{figure}
 
-    \subsection{Problem kombinatoryki}
+    \subsection{Problem grupowania}
         \subsubsection{Bloki lekcyjne}
             Operując na blokach lekcyjnych dużo łatwiej zdefiniować ograniczenia fizyczne.
             Rozważmy trzy lekcje: język niemiecki, język francuski oraz język rosyjski.
@@ -449,7 +450,7 @@
             Grupując takie wymagania w jeden blok trzech lekcji, możemy traktować go jak pojedynczą lekcję przy definiowaniu ograniczeń: blok nie może pokrywać się czasowo z innymi lekcjami, ale jego wewnętrzna struktura nie wymaga dodatkowych wyjątków.
 
             Drugą zaletą podejścia blokowego jest uproszczenie modelowania lekcji przeprowadzanych jednocześnie dla wielu klas. Sytuacje takie są częste, szczególnie w przypadku przedmiotów o małej liczbie uczniów.
-            Często w szkołach brakuje uczniów zapisanych na przykładowo język rosyjski, aby uzasadnić indywidualne lekcje prowadzone przez nauczyciela z tylko i wyłącznie jedną klasą.
+            Często w szkołach brakuje uczniów zapisanych na, przykładowo, język rosyjski, aby uzasadnić indywidualne lekcje prowadzone przez nauczyciela z tylko i wyłącznie jedną klasą.
             Definiowanie ograniczeń dla każdej lekcji z osobna wymagałoby licznych wyjątków, natomiast połączenie wymagań głównych w jeden wspólny blok pozwala traktować taką lekcję jak każde inne zajęcia w systemie, bez potrzeby dodatkowych reguł.
 
             Kolejną korzyścią jest możliwość łączenia bloków w struktury jeszcze wyższego poziomu. Wyobraźmy sobie trzy klasy:
@@ -460,7 +461,7 @@
                 \item IIIA i IIIB mają lekcję języka francuskiego razem, a klasa IIIC osobno z innym nauczycielem,
                 \item każda klasa ma indywidualną lekcję języka niemieckiego, przy czym klasy IIIA i IIIC mają tego samego nauczyciela.
             \end{itemize}
-            Po analizie widać, że wszystkie zajęcia poza jedną lekcją języka niemieckiego mogą być prowadzone równocześnie.
+            Z analizy wynika, że wszystkie zajęcia poza jedną lekcją języka niemieckiego mogą być prowadzone równocześnie.
             Tworząc wieloklasowe bloki lekcyjne, możemy je następnie łączyć w większe bloki: blok języka rosyjskiego można połączyć z blokiem języka francuskiego dla klas IIIA i IIIB oraz lekcją francuskiego klasy IIIC,
             a następnie dodać do tego dwie lekcje języka niemieckiego, pozostawiając jedynie trzecią lekcję poza blokiem.
 
@@ -476,10 +477,8 @@
             Są to decyzje o marginalnym wpływie na wynik --- potencjalny zysk z wyboru jednej opcji zamiast innej jest minimalny.
             Z tego powodu zastosowałem algorytm zachłanny, który zawsze wybiera pierwszą możliwą opcję prowadzącą do utworzenia jak największego bloku lekcyjnego.
 
-            Ponadto~\ref{section:podejscie_iteracyjne}\dots
-            Podobnie jak w pracy przedstawionej w sekcji~\ref{section:podejscie_iteracyjne} autorzy agregowali ograniczenia tak ja uzywając bloków lekcyjnych agreguję liczne ograniczenia.
-            
-            
+            Podobnie jak w pracy omówionej w podrozdziale~\ref{section:podejscie_iteracyjne}, gdzie autorzy zmniejszali złożoność przez agregację ograniczeń, moje podejście wykorzystuje bloki lekcyjne do scalenia wielu ograniczeń, co istotnie redukuje przestrzeń decyzyjną na dalszych etapach rozwiązania.
+
         \subsubsection{Oznaczenia}
             Aby w pełni zrozumieć działanie algorytmu, należy formalnie zdefiniować pojęcie bloku lekcyjnego.
             Blok lekcyjny $L$ to zbiór wymagań głównych realizowanych jednocześnie --- w ramach jednej lub kilku lekcji.
@@ -514,10 +513,10 @@
             Celem pierwszego etapu jest maksymalizacja liczby bloków składających się z więcej niż jednego wymagania głównego oraz równe przedzielenie godzin pomiędzy te bloki.
             Jako że istnieje jeden równomierny przydział godzin, to nie uwzględniamy go w funkcji celu.
             Odpowiada temu funkcja celu:
-            \[ F = \sum_{L \in \left\{L: \left|L\right| > 1 \land L \in \mathcal{L}\right\}} \left|L\right| \]
+            \[ F = \left|\left\{L \in \mathcal{L}: \left|L\right| > 1\right\}\right| \]
 
             Algorytm zachłanny iteracyjnie przechodzi przez zbiór bloków przedmiotów $\mathcal{B}$ tworząc wszystkie możliwe bloki lekcyjne spełniające kryteria opisane w tych blokach.
-            W ten sposób gwarantujemy akceptowalny wynik funkcji celu.
+            W ten sposób gwarantujemy akceptowalną wartość funkcji celu.
 
     \subsection{Problem alokacji}
         \subsubsection{Oznaczenia}
@@ -556,7 +555,7 @@
                 \vdots \\
                 \beta_{c,5} \end{bmatrix},
             \quad
-            \beta_{c,d} = \sum_{\substack{L_i \in \mathcal{L} \\ c\in\left\{c_{wj}:\ w_j \in L_i\right\}}} s_{d,i} \]
+            \beta_{c,d} = \sum_{\substack{L_i \in \mathcal{L} \\ c\in\left\{c_{w,j}:\ w_j \in L_i\right\}}} s_{d,i} \]
             czyli sumę wszystkich godzin bloków, w których uczestniczy klasa $C$, przypadających na dzień $d$.
 
             Celem jest równomierne rozłożenie zajęć między dni tygodnia, tak aby uniknąć bardzo krótkich oraz bardzo przeładowanych dni.
@@ -568,19 +567,19 @@
 
     \subsection{Problem harmonogramowania}
         Trzeci etap, podobnie jak poprzedni, cechuje się dużą przestrzenią decyzyjną.
-        Istnieje wiele wykonalnych planów, z których część generuje liczne okienka w harmonogramach nauczycieli.
-        Z tego powodu zdecydowałem się zastosować programowanie liniowe z ograniczeniami (CP-SAT/CP), które w praktyce dostarcza wysokiej jakości rozwiązania bez potrzeby projektowania własnego algorytmu przeszukiwania.
+        Istnieje wiele wykonalnych planów, z których część powoduje liczne okienka w harmonogramach nauczycieli.
+        Z tego powodu zdecydowałem się zastosować programowanie liniowe z ograniczeniami (ang. \textit{Constraint Programming}, CP), które w praktyce dostarcza wysokiej jakości rozwiązania bez potrzeby projektowania własnego algorytmu przeszukiwania.
 
-        Aby zapewnić poprawność i przejrzystość modelu, sformułowałem problem harmonogramowania jako specyficzny wariant JSSP z wykorzystaniem zmiennych interwałowych.
+        Aby zapewnić poprawność i przejrzystość modelu, sformułowałem problem harmonogramowania jako specyficzny wariant JSSP z wykorzystaniem zmiennych przedziałowych.
         Na rysunku~\ref{fig:intervals} przedstawiono przykładową wizualizację rozwiązania JSSP.
 
         \begin{figure}[ht]
             \centering
             \includegraphics[width=0.9\textwidth]{images/interval_vars.png}
-            \caption{Wizualizacja rozwiązania klasycznego problemu JSSP z wykorzystaniem zmiennych interwałowych~\cite{googleortoolsjssp}}\label{fig:intervals}
+            \caption{Wizualizacja rozwiązania klasycznego problemu JSSP z wykorzystaniem zmiennych przedziałowych~\cite{googleortoolsjssp}}\label{fig:intervals}
         \end{figure}
 
-        Podejście oparte na interwałach oferuje większą elastyczność niż model binarny z podrozdziału~\ref{subsection:podejscie_zerojedynkowe}, a jednocześnie upraszcza definicję kluczowych ograniczeń.
+        Podejście oparte na przedziałach oferuje większą elastyczność niż model binarny z podrozdziału~\ref{subsection:podejscie_zerojedynkowe}, a jednocześnie upraszcza definicję kluczowych ograniczeń.
 
         Dzięki temu, że w etapie pierwszym utworzyłem bloki lekcyjne, które nie nachodzą na siebie, mogę zdefiniować zadania z prostymi ograniczeniami nienakładania.
         Dodatkowo, dzięki drugiemu etapowi układam plan niezależnie dla każdego dnia tygodnia $d \in \{1,2,3,4,5\}$, reprezentowanego przez wiersze macierzy $S_{\text{best}}$.
@@ -594,18 +593,18 @@
 
         \subsubsection{Zmienne decyzyjne i ograniczenia}~\label{subsubsection:zmienne_decyzyjne_ograniczenia}
             Wszystkie zmienne definiuję osobno dla każdego dnia $d \in \{1,2,\dots,5\}$.
-            Dla każdego bloku lekcyjnego $L_i$, dla którego $s_{d,i} > 0$, wprowadzam zmienną interwałową
+            Dla każdego bloku lekcyjnego $L_i$, dla którego $s_{d,i} > 0$, wprowadzam zmienną przedziałową
             \[  I_i = (\boldsymbol{s}_i, s_{d,i}, \boldsymbol{e}_i), \quad \boldsymbol{e}_i = \boldsymbol{s}_i + s_{d,i}, \quad \boldsymbol{s}_i, \boldsymbol{e}_i \in [0,H] \]
-            gdzie $\boldsymbol{s}_i$ i $\boldsymbol{e}_i$ oznaczają odpowiednio slot rozpoczęcia i zakończenia interwału dla bloku $L_i$.
+            gdzie $\boldsymbol{s}_i$ i $\boldsymbol{e}_i$ oznaczają odpowiednio slot rozpoczęcia i zakończenia przedziału dla bloku $L_i$.
 
             Ograniczenia nienakładania się, implementuję przy użyciu funkcji \verb|AddNoOverlap|~\cite{googleortoolsoverlap}.
-            Funkcja przyjmuje zbiór interwałów i generuje wszystkie potrzebne ograniczenia bez konieczności ręcznego ich definiowania.
-            Operację tę wykonuję niezależnie dla zbiorów interwałów powiązanych z każdą klasą i każdym nauczycielem.
+            Funkcja przyjmuje zbiór przedziałów i generuje wszystkie potrzebne ograniczenia bez konieczności ręcznego ich definiowania.
+            Operację tę wykonuję niezależnie dla zbiorów przedziałów powiązanych z każdą klasą i każdym nauczycielem.
 
-            Kolejną zaletą interwałów jest możliwość użycia ich wariantu opcjonalnego do przypisywania sal.
-            Dla każdej dopuszczalnej kombinacji (blok $L_i$, nauczyciel $t$, przedmiot $s$, sala $r$) definiuję opcjonalny interwał
+            Kolejną zaletą przedziałów jest możliwość użycia ich wariantu opcjonalnego do przypisywania sal.
+            Dla każdej dopuszczalnej kombinacji (blok $L_i$, nauczyciel $t$, przedmiot $s$, sala $r$) definiuję opcjonalny przedział
             \[ O_{i,t,s,r} = (\boldsymbol{s}_i, s_{d,i}, \boldsymbol{e}_i, p_{i,t,s,r}), \quad p_{i,t,s,r} \in \{0,1\} \]
-            gdzie rozważam wyłącznie kombinacje spełniające wymagania (np. blok z matematyką, nauczyciel matematyki, matematyka, sala do matematyki), co eliminuje niemożliwe kombinacje (analogicznie jak w podejściu z~\ref{section:podejscie_iteracyjne}).
+            gdzie rozważam wyłącznie kombinacje spełniające wymagania (np. blok z matematyką, nauczyciel matematyki, matematyka, sala do matematyki), co eliminuje niemożliwe kombinacje (analogicznie jak w podejściu z podrozdziału ~\ref{section:podejscie_iteracyjne}).
             Ograniczenia nienakładania dla sal obowiązują tylko wtedy, gdy $p_{i,s,t,r} = 1$.
 
             W praktyce musimy narzucić, aby suma odpowiednich zmiennych $p_{i,t,s,r}$ była równa wymaganej liczbie sal dla danego bloku.
@@ -614,7 +613,7 @@
             Ograniczenie to zapewnia, że dokładnie jedna sala matematyki zostanie przypisana do danego bloku.
             Sale, które nie obsługują matematyki, nie mogą zostać przypisane, ponieważ nie definiuję dla nich zmiennych decyzyjnych, co także eliminuje niemożliwe kombinacje.
 
-            Analogicznie do zwykłych interwałów, nienakładanie dla sal tworzę poprzez \verb|AddNoOverlap|, przekazując zbiór wszystkich opcjonalnych interwałów dla danej sali i powtarzając tę operację dla każdego $r \in \mathcal{R}$.
+            Analogicznie do zwykłych przedziałów, nienakładanie dla sal tworzę poprzez \verb|AddNoOverlap|, przekazując zbiór wszystkich opcjonalnych przedziałów dla danej sali i powtarzając tę operację dla każdego $r \in \mathcal{R}$.
 
             Pozostałe ograniczenia omawiam szczegółowo w kolejnych sekcjach.
         
@@ -628,8 +627,8 @@
                     \Delta_t &= \tau_{\text{end},t} - \tau_{\text{start},t}
                 \end{cases}
             \]
-            Wielkość $\Delta_t$ reprezentuje czas obecności nauczyciela w szkole (od początku pierwszego interwału do końca ostatniego interwału).
-            Minimalizuję sumę tych czasów,
+            Wielkość $\Delta_t$ reprezentuje czas obecności nauczyciela w szkole (od początku pierwszego do końca ostatniego przedziału).
+            Minimalizuję sumę tych czasów
             \[ F = \sum_{t \in \mathcal{T}} \Delta_t \]
             co prowadzi do kompaktowego układania zajęć i redukcji okienek w planach nauczycieli.
 
@@ -701,7 +700,7 @@
                 \For{\textnormal{każdego bloku pojedynczego} $\mathcal{W}' \in \mathcal{L}$}{
                     \If{\textnormal{można zwiększyć liczbę godzin}}{
                         Zwiększ wartość $v$ odpowiadającą blokowi $\mathcal{W}'$ o $1$ \;
-                        \ForEach{$w \in \mathcal{W}'$}{
+                        \For{\textnormal{każdego} $w \in \mathcal{W}'$}{
                             $U(w) \gets U(w) + 1$ \;
                         }
                     }
@@ -714,7 +713,7 @@
                 }
             }
             
-            \Return $\mathcal{L}, V$
+            \Return $\mathcal{L}, V$ \,
         \end{algorithm}
 
         % \subsubsection{Inicjalizacja}
@@ -823,7 +822,7 @@
         \[ V = \begin{bmatrix} 2 & \cdots & 1 & \cdots & 1 & \cdots \end{bmatrix} \]
 
         W wynikach możemy zaobserwować działanie algorytmu. 
-        Pierwszym elementem w $\mathcal{L}$ jest komparatywnie duży, wieloklasowy blok lekcyjny powstały w fazie agregacji (opisanej w~\ref{agregacja_blokow}).
+        Pierwszym elementem w $\mathcal{L}$ jest komparatywnie duży, wieloklasowy blok lekcyjny powstały w fazie agregacji.
         Obejmuje on między innymi:
         \begin{itemize}
             \item Lekcję j.\ niemieckiego z klasami IVA oraz IVF prowadzoną przez nauczyciela Jn1,
@@ -856,7 +855,7 @@
     Ogólna struktura algorytmu:
     \begin{center}
         \begin{algorithm}[H]
-            \caption{,,The general scheme of an evolutionary algorithm in pseudocode''\cite{eiben2015evolutionary}}
+            \caption{Ogólny schemat algorytmu ewolucyjnego~\cite{eiben2015evolutionary}}
             
             \texttt{INITIALISE} population with random individuals\;
             \texttt{EVALUATE} each individual\;
@@ -882,16 +881,16 @@
     \end{itemize}
 
     \subsection{Kodowanie i ograniczenia twarde}\label{subsection:kodowanie}
-        Każdy osobnik w populacji jest reprezentowany przez macierz przydziałów $S$ zdefiniowaną w równaniu~\ref{eq:specimen}.
+        Każdy osobnik w populacji jest reprezentowany przez macierz przydziałów $S$ przyjętą w definicji oznaczenia~(\ref{eq:specimen}).
 
         Tak przyjęta reprezentacja umożliwia prostą weryfikację następujących ograniczeń:
-        \begin{enumerate}
-            \item suma przypisań $i$-tego bloku lekcyjnego musi być równa $v_i$. Zostało to opisane w równaniu~\ref{eq:specimen_wymaganie_glowne},
+        \begin{itemize}
+            \item suma przypisań $i$-tego bloku lekcyjnego musi być równa $v_i$. Zostało to opisane w warunku~(\ref{eq:specimen_wymaganie_glowne}),
             \item maksymalna liczba godzin każdego bloku w pojedynczym dniu nie może być większa niż 2,
             \[ \forall i \in \left\{1, 2, \dots, \left|\mathcal{L}\right|\right\}, \forall d \in \left\{1, 2, 3, 4, 5\right\}: s_{d, i} \leq 2 \]
             \item dla bloków 3-godzinnych konieczne jest przedzielenie 2 godzin do jednego dnia.
             \[ \forall i \in \left\{1, 2, \dots, \left|\mathcal{L}\right|\right\}: v_{i} = 3 \implies \exists d \in \left\{1, 2, 3, 4, 5\right\} \text{ takie, że } s_{d, i} = 2 \]
-        \end{enumerate}
+        \end{itemize}
 
     \subsection{Generowanie populacji początkowej}\label{subsection:generowanie_populacji}
         Generowanie osobników odbywa się losowo z uwzględnieniem wymagań bloków oraz dostępności nauczycieli. 
@@ -931,7 +930,7 @@
         \end{algorithm}
         \vspace*{0.5em}
 
-        Gdzie $T_i = \{t_{w,j} : w_j \in L_i\}$ to zbiór nauczycieli prowadzących zajęcia w bloku $L_i$.
+        Przez $T_i = \{t_{w,j} : w_j \in L_i\}$ oznaczono zbiór nauczycieli prowadzących zajęcia w bloku $L_i$.
         
         % \begin{enumerate}
         %     \item \textbf{Zagregowanie dostępności nauczycieli:}\\
@@ -974,13 +973,13 @@
 
         Po wykonaniu powyższej procedury dla wszystkich bloków, uzyskane wektory $X_i$ łączy się w macierz:
         \[ \boldsymbol{X} = \begin{bmatrix} X_1 \\ X_2 \\ \vdots \\ X_{\left|\mathcal{L}\right|} \end{bmatrix} \]
-        Osobnik populacji reprezentowany jest przez transpozycję tej macierzy: $S = \boldsymbol{X}^T$.
+        Osobnik populacji reprezentowany jest przez transpozycję tej macierzy $S = \boldsymbol{X}^T$.
 
     \subsection{Przystosowanie}
-        Ocena jakości osobników odbywa się na podstawie dwóch metryk:        
+        Ocena jakości osobników odbywa się na podstawie dwóch wzkaźników:
         \begin{itemize}
-            \item równomierności obciążeń dydaktycznych lekcyjnych klas,
-            \item równomierności obciążeń dydaktycznych pracy nauczycieli.
+            \item wskaźnika równomierności obciążeń dydaktycznych lekcyjnych klas,
+            \item wskaźnika równomierności obciążeń dydaktycznych pracy nauczycieli.
         \end{itemize}
         
         Aby móc niezależnie oceniać równomierność obciążenia dydaktycznego w poszczególnych dniach tygodnia, konieczne było zaprojektowanie funkcji, która jako argument przyjmuje dzienne wartości obciążeń $\beta_{c,d}$ dla klas oraz $\beta_{t,d}$ dla nauczycieli.
@@ -1055,7 +1054,7 @@
             Takie podejście gwarantuje, że wpływ pojedynczej klasy na ocenę końcową jest porównywalny z wpływem pojedynczego nauczyciela.
 
             Kolejnym aspektem wymagającym uwzględnienia jest relatywna ważność obu kryteriów oceny. 
-            W praktyce, wymagania równomiernego rozkładu dla każdej klasy są ważniejsze niż równomierny rozkład godzin nauczycieli.
+            W praktyce, wymagania równomiernego rozkładu dla każdej klasy są ważniejsze niż równomierny rozkład obciążeń nauczycieli.
             Aby umożliwić sterowanie tymi preferencjami należy zaimplementować wagi, co prowadzi do następującej postaci funkcji przystosowania dla $i$-tego osobnika:
             \[ F_i = \frac{\theta_T}{\left|\mathcal{T}\right|} F_{T,i} + \frac{\theta_C}{\left|\mathcal{C}\right|} F_{C,i}, \quad \theta_T, \theta_C \in \mathbb{R}^+ \]
             gdzie $\theta_T$ to waga oceny nauczycieli, a $\theta_C$ to waga oceny klas.
@@ -1071,7 +1070,7 @@
         Największym wyzwaniem podczas projektowania algorytmu okazało się opracowanie krzyżowania osobników, które zagwarantowałoby spójność z nałożonymi ograniczeniami.
         Niemożność zaimplementowania takich rozwiązań jak proste modyfikowanie krzyżowania jednopunktowego zmusiło mnie do opracowania specjalistycznych metod.
 
-        Z uwagi na dwie składowe funkcji przystosowania zdecydowałem się na zaimplementowanie dwóch niezależnych metod krzyżowania osobników widocznych w pseudokodach~\ref{alg:krzyzowanie_ocena_nauczyciel} oraz~\ref{alg:krzyzowanie_ocena_klasy}.
+        Z uwagi na dwie składowe funkcji przystosowania zdecydowałem się na zaimplementowanie dwóch niezależnych metod krzyżowania osobników widocznych w pseudokodach~\ref{alg:krzyzowanie_ocena_nauczyciel} oraz~\ref{alg:krzyzowanie_ocena_klas}.
         Takie podejście umożliwia równoczesne dziedziczenie cech związanych z optymalnym obciążeniem dydaktycznym zarówno nauczycieli, jak i klas.
         Pozwala to także na stworzenie dwóch różnych potomków z dwóch rodziców.
         Wygenerowany w ten sposób osobniki $S'$ mają cechy, które gwarantują jak najlepsze przypisanie nauczycieli lub klas wśród obu rodziców.
@@ -1194,7 +1193,7 @@
             \begin{enumerate}
                 \item Z populacji wybieranych jest losowo $n$ osobników.
                 \item Dla każdego wybranego osobnika wybierany jest losowy podzbiór kolumn (bloków lekcyjnych).
-                \item Dla każdej wybranej kolumny $j$ wylosuj nowy przydział zgodnie z procedurą opisaną w podsekcji~\ref{subsection:generowanie_populacji}.
+                \item Dla każdej wybranej kolumny $j$ wylosuj nowy przydział zgodnie z procedurą opisaną w punkcie~\ref{subsection:generowanie_populacji}.
             \end{enumerate}
         \end{samepage}
         
@@ -1215,12 +1214,12 @@
         \end{bmatrix} \]
         Interpretacja macierzy przydziału jest następująca:
         \begin{itemize}
-            \item blok językowy (niemiecki + francuski + rosyjski) został umieszczony po jednej godzinie w poniedziałek oraz piątek,
+            \item blok językowy (niemiecki, francuski, rosyjski) został umieszczony po jednej godzinie w poniedziałek oraz piątek,
             \item jedna godzina wspólnego bloku informatyki i języka angielskiego została przydzielona do wtorku,
             \item jedna godzina chemii została przypisana do środy.
         \end{itemize}
 
-        Na rysunku~\ref{fig:wyniki_ewolucyjny} przedstawiłem wartości funkcji celu dla pięciu niezależnych uruchomień algorytmu genetycznego dla 25 generacji, przy następujących parametrach:
+        Na rysunku~\ref{fig:wyniki_ewolucyjny} przedstawiłem wartości funkcji celu dla pięciu niezależnych uruchomień algorytmu genetycznego dla 25 pokoleń, przy następujących parametrach:
         \begin{itemize}
             \item $\mathfrak{P} = 1000$,
             \item $\theta_T = 1$,
@@ -1233,7 +1232,7 @@
                 \begin{axis}[
                     width=14cm,
                     height=8cm,
-                    xlabel={Generacja},
+                    xlabel={Numer pokolenia},
                     ylabel={Wartość funkcji celu dla $S_{\text{best}}$},
                     grid=both,
                     legend style={at={(1.02,1)}, anchor=north west},
@@ -1409,7 +1408,7 @@
         Średni czas obliczeń dla pięciu prób wyniósł 95.88 s.  
         W żadnym przypadku funkcja celu nie osiągnęła wartości dodatnich.
         Wynika to z faktu, że w danych wejściowych występują klasy oraz nauczyciele, którzy mają liczbę bloków znacząco mniejszą niż 35.
-        W praktyce uniemożliwia to uzyskiwanie dodatnich wartości funkcji celu, ponieważ algorytm nie ma wystarczającej liczby bloków, by spełnić wszystkie wymagania strukturalne konieczne do uzyskania pozytywnego wyniku.
+        W praktyce uniemożliwia to uzyskiwanie dodatnich wartości funkcji celu, ponieważ algorytm nie ma wystarczającej liczby bloków, by spełnić wszystkie wymagania strukturalne konieczne do uzyskania dodatniego wyniku.
 
 \section{Solver programowania liniowego z ograniczeniami}\label{section:solver}
     Programowanie z ograniczeniami (ang. \textit{Constraint Programming}, CP) jest sposobem modelowania i rozwiązywania problemów kombinatorycznych, w którym rozwiązanie opisuje się za pomocą zmiennych decyzyjnych, dziedzin tych zmiennych oraz ograniczeń wiążących je ze sobą.
@@ -1422,7 +1421,7 @@
     \end{itemize}
 
     \subsection{Zmienne decyzyjne}
-        Zmienne decyzyjne są definiwane zgodnie z definicjami przedstawionymi w sekcji~\ref{subsubsection:zmienne_decyzyjne_ograniczenia}.
+        Zmienne decyzyjne są definiwane zgodnie z definicjami przedstawionymi w punkcie~\ref{subsubsection:zmienne_decyzyjne_ograniczenia}.
 
     \subsection{Ograniczenia}
         Każde z poniższych ograniczeń nakładamy niezależnie dla każdego dnia $d\in\left\{1, 2, \dots, 5\right\}$.
@@ -1460,29 +1459,29 @@
             \[ \mathcal{O}_{r,d} = \{O_{i,t,s,r} : L_i \in \mathcal{L}, t \in \mathcal{T} s \in \mathcal{S}, s_{\text{best},d,i} > 0\} \]
             \[ \texttt{AddNoOverlap}(\mathcal{O}_{r,d}) \]
         
-        \subsubsection{Sekwencjonowanie przedmiotów}
-            Ograniczenie dotyczące dwóch takich samych przedmiotów jednego dnia jest łatwo rozwiązywane poprzez zastosowanie interwałów, gdyż z definicji mamy zagwarantowane, że:
+        \subsubsection{Kolejność przedmiotów}
+            Ograniczenie dotyczące dwóch takich samych przedmiotów jednego dnia jest łatwo rozwiązywane poprzez zastosowanie przedziałów, gdyż z definicji mamy zagwarantowane, że:
             \[ \forall i \in \left\{1, 2, \dots, \left|\mathcal{L}\right|\right\}: s_{\text{best},d,i} = 2 \implies \boldsymbol{e}_i - \boldsymbol{s}_i = 2 \]
             W ten sposób jeśli do danego dnia są przypisane dwie godziny $i$-tego bloku, to mamy gwarancję, że następują one po sobie.
 
     \subsection{Funkcja celu}
         Funkcja celu jest definiwana zgodnie z definicją przedstawioną w sekcji~\ref{subsubsection:zmienne_decyzyjne_ograniczenia}.
 
-    \subsection{Transformacja interwałów na przypisania końcowe}
-        Po znalezieniu rozwiązania przez solver CP-SAT, konieczne jest przekształcenie zmiennych interwałowych na ostateczne przypisania w zbiorze $\mathcal{Z}$.
-        Proces ten obejmuje ekstrakcję wartości zmiennych decyzyjnych i mapowanie na strukturę danych planu lekcji.
+    \subsection{Transformacja przedziałów na przypisania końcowe}
+        Po znalezieniu rozwiązania przez solver CP-SAT, konieczne jest przekształcenie zmiennych przedziałowych na ostateczne przypisania w zbiorze $\mathcal{Z}$.
+        Proces ten obejmuje ekstrakcję wartości zmiennych decyzyjnych i odwzorowanie na strukturę danych planu lekcji.
         
         \subsubsection{Ekstrakcja rozwiązań z solvera}
-            Dla każdego interwału $I_i$ w rozwiązaniu zapisujemy następujące wartości:
+            Dla każdego przedziału $I_i$ w rozwiązaniu zapisujemy następujące wartości:
             \begin{itemize}
-                \item $L_i$
-                \item $\boldsymbol{s}_i$
-                \item $\boldsymbol{e}_i$
-                \item $d$ --- aktualnie przetwarzany dzień tygodnia
+                \item $L_i$,
+                \item $\boldsymbol{s}_i$,
+                \item $\boldsymbol{e}_i$,
+                \item $d$ --- aktualnie przetwarzany dzień tygodnia,
                 \item $\mathcal{R}_i = \left\{r \in \mathcal{R}: \exists t \in \mathcal{T}, s \in \mathcal{S} \text{ takie, że } p_{i,t,s,r} = 1 \right\}$ --- zbiór aktywnych sal, które zostały przypisane do bloku $L_i$.
             \end{itemize}
         
-        \subsubsection{Mapowanie na strukturę lekcji}
+        \subsubsection{Odwzorowanie na strukturę lekcji}
             Dla każdych takich wartości tworzymy konkretne przypisania w zbiorze $\mathcal{Z}$.
             Wpierw tworzymy funkcję, która będzie przypisywać nauczycieli i prowadzone przez nich przedmioty $s$ do odpowiednich sal.
             \begin{align*}
@@ -1494,9 +1493,12 @@
 
             Dla każdego wymagania $w \in L_i$ i każdego slotu czasowego $h \in \left[1, e_i-s_i\right]$:
             \begin{align*}
-                z &= (d, h, c_w, t_w, s_w, f(t_w)) \\
+                z &\gets (d, h, c_w, t_w, s_w, f(t_w)) \\
                 \mathcal{Z}_d &\gets \mathcal{Z}_d \cup \{z\}
             \end{align*}
+            Proces ten powtarzamy dla wszystkich dni tygodnia, tworząc kompletny plan lekcji
+            \[ \mathcal{Z} = \bigcup_{d=1}^5 \mathcal{Z}_d \]
+            spełniający wszystkie ograniczenia i optymalizujący funkcję celu.
         
         \subsubsection{Przykład transformacji}
             Rozważmy blok $L_i = \{w_1, w_2\}$ z $v_i = 2$, gdzie:
@@ -1514,8 +1516,6 @@
             \end{align*}
 
             Jest to równoznaczne z leckją wychowania fizycznego podzieloną na dwie grupy, które odbywają się w tym samym czasie.
-
-            Proces ten powtarzamy dla wszystkich dni tygodnia, tworząc kompletny plan lekcji $\mathcal{Z} = \bigcup_{d=1}^5 \mathcal{Z}_d$ spełniający wszystkie ograniczenia i optymalizujący funkcję celu.
 
     \subsection{Przykładowy wynik}
         Dla danych wejściowych przedstawionych w poprzednim przykładzie mamy następujące przypisania:

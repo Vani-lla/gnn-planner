@@ -12,9 +12,9 @@
 \contentsline {figure}{\numberline {2.8}{\ignorespaces Zrzut ekranu wprowadzania ,,trudnych'' lekcji do programu ,,Plan lekcji Optivum''~\cite {vulcanprzewodnik}}}{11}{figure.caption.13}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Zrzut ekranu z arkusza kalkulacyjnego przedstawiąjący przypisanie godzinowe nauczycieli dla każdej klasy.}}{15}{figure.caption.16}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Struktura algorytmu}}{22}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Dekompozycja problemu}}{22}{figure.caption.23}%
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Struktura algorytmu z doborem technik}}{23}{figure.caption.24}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Wizualizacja rozwiązania klasycznego problemu JSSP z wykorzystaniem zmiennych interwałowych~\cite {googleortoolsjssp}}}{27}{figure.caption.31}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Wizualizacja rozwiązania klasycznego problemu JSSP z wykorzystaniem zmiennych przedziałowych~\cite {googleortoolsjssp}}}{27}{figure.caption.31}%
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Wykres funkcji użytej do ewaluacji rozkładu godzin nauczycieli i klas na przestrzeni tygodnia.}}{35}{figure.caption.35}%
 \contentsline {figure}{\numberline {3.6}{\ignorespaces Wykres wartości funkcji cely dla pięciu uruchomień algorytmu genetycznego}}{39}{figure.caption.39}%
 \addvspace {10\p@ }
@@ -28,8 +28,8 @@
 \contentsline {figure}{\numberline {4.8}{\ignorespaces Diagram tabel podstawowych i wymagań w bazie danych}}{60}{figure.caption.74}%
 \contentsline {figure}{\numberline {4.9}{\ignorespaces Diagram pełnego projektu bazy danych}}{63}{figure.caption.80}%
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Fragment kodu służący do definicji tabeli sal}}{68}{figure.caption.93}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Automatycznie wygenerowana lista endpointów stworzonych przy użyciu \mbox {ModelViewSet}}}{69}{figure.caption.94}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Fragment kodu służący do implementacji endpointów dla zbioru sal}}{69}{figure.caption.95}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Automatycznie wygenerowana lista punktów końcowych stworzonych przy użyciu \mbox {ModelViewSet}}}{69}{figure.caption.94}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Fragment kodu służący do implementacji punktów końcowych dla zbioru sal}}{69}{figure.caption.95}%
 \contentsline {figure}{\numberline {4.13}{\ignorespaces Nawigacja interfejsu webowego}}{70}{figure.caption.97}%
 \contentsline {figure}{\numberline {4.14}{\ignorespaces Strona główna interfejsu webowego}}{70}{figure.caption.99}%
 \contentsline {figure}{\numberline {4.15}{\ignorespaces Podgląd planu z perspektywy nauczyciela}}{71}{figure.caption.101}%

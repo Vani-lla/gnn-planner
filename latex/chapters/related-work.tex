@@ -1,9 +1,9 @@
 \Chapter{Powiązane prace}\label{chapter:related}
     Rozdział prezentuje przegląd literatury w trzech wyraźnie oddzielonych obszarach, które stanowią fundament dla rozwiązania zaproponowanego w pracy:
     \begin{itemize}
-        \item podejścia algorytmiczne i metodyczne --- analiza pracy naukowej przedstawiającej zaawansowaną, iteracyjną metodę optymalizacji, która posłużyła jako kluczowa inspiracja architektoniczna,
-        \item podstawy teoretyczne --- formalne wprowadzenie do klasycznego problemu harmonogramowania zadań typu job-shop, który stanowi teoretyczną ramę dla problemu harmonogramowania i uzasadnia użycie technik programowania z ograniczeniami,
-        \item rozwiązania praktyczne i komercyjne --- szczegółowy przegląd wiodącego na rynku polskim systemu, służący zrozumieniu rzeczywistych wymagań, złożoności problemu oraz ustaleniu punktu odniesienia dla oceny praktyczności własnego rozwiązania.
+        \item Podejścia algorytmiczne i metodyczne --- analiza pracy naukowej przedstawiającej zaawansowaną, iteracyjną metodę optymalizacji, która posłużyła jako kluczowa inspiracja architektoniczna.
+        \item Podstawy teoretyczne --- formalne wprowadzenie do klasycznego problemu harmonogramowania zadań typu job-shop, który stanowi teoretyczną ramę dla problemu harmonogramowania i uzasadnia użycie technik programowania z ograniczeniami.
+        \item Rozwiązania praktyczne i komercyjne --- szczegółowy przegląd wiodącego na rynku polskim systemu, służący zrozumieniu rzeczywistych wymagań, złożoności problemu oraz ustaleniu punktu odniesienia dla oceny praktyczności własnego rozwiązania.
     \end{itemize}
 
     \section{Inspiracja podejściem iteracyjnym}\label{section:podejscie_iteracyjne}
@@ -31,7 +31,7 @@
                 lub gdy czas pomiędzy zajęciami jest niewystarczający na przemieszczenie się między salami.
             \end{itemize}
         
-        Celem optymalizacyjnym jest znalezienie rozwiązania spełniającego wszystkie twarde ograniczenia przy minimalizacji łącznej kary, uwzględniającej naruszenia ograniczeń miękkich oraz konflikty studentów.
+        Celem optymalizacji jest znalezienie rozwiązania spełniającego wszystkie twarde ograniczenia przy minimalizacji łącznej kary, uwzględniającej naruszenia ograniczeń miękkich oraz konflikty studentów.
 
         Kluczowym elementem przedstawionej w pracy metody jest dekompozycja oryginalnego, złożonego problemu na szereg prostszych podproblemów, rozwiązywanych sekwencyjnie w procesie iteracyjnym.
         
@@ -47,11 +47,11 @@
                 
             \subsubsection{Iteracyjne wstrzykiwanie ograniczeń}
                 Model obejmuje fundamentalne ograniczenia zapewniające poprawność podstawowej struktury rozwiązania, takie jak wymóg przypisania każdych zajęć do dokładnie jednego terminu i sali, spełnienie limitów liczby studentów w grupach oraz zakaz równoczesnego użytkowania tej samej sali przez różne zajęcia.
-                Ze względu na jego bardzo dużą złożoność, autorzy stosują podejście inkrementalne:
+                Ze względu na jego bardzo dużą złożoność, autorzy stosują podejście wieloetapowe:
 
                 \begin{itemize}
                     \item \textbf{Rozwiązanie początkowe}: Optymalizacja rozpoczyna się od uproszczonego modelu zawierającego jedynie fundamentalne ograniczenia oraz podstawowe składniki funkcji celu.
-                    \item \textbf{Dodawanie ograniczeń dystrybucyjnych}: Twarde ograniczenia dystrybucyjne są dodawane do modelu w formie ograniczeń wykluczających niedopuszczalne kombinacje przypisań czasowych i salowych. 
+                    \item \textbf{Dodawanie ograniczeń dystrybucyjnych}: Twarde ograniczenia dystrybucyjne są dodawane do modelu w formie ograniczeń wykluczających niedopuszczalne kombinacje przypisań czasowych $x_{c,h}$ i salowych $y_{c,r}$. 
                     \item \textbf{Obsługa ograniczeń specjalnych}: Dla czterech szczególnie złożonych typów ograniczeń (,,MaxDays'', ,,MaxDayLoad'', ,,MaxBreaks'', ,,MaxBlock'') stosowane jest podejście z użyciem ,,leniwych'' ograniczeń (ang. \textit{lazy constraints}). 
                     Takie ograniczenia są dodawane dopiero gdy zostanie znalezione rozwiązanie całkowitoliczbowe, które je narusza.
                     \item \textbf{Iteracyjne uwzględnianie konfliktów studentów}: Podobne podejście stosowane jest dla uwzględnienia w funkcji celu kar za konflikty studentów.
@@ -61,9 +61,9 @@
             \subsubsection{Strategie redukcji złożoności}
                 Aby utrzymać złożoność obliczeniową na akceptowalnym poziomie, autorzy stosują zaawansowane strategie redukcji modelu:
                 \begin{itemize}
-                    \item \textbf{eliminacja zmiennych}: identyfikacja i usuwanie zmiennych, których wartości można ustalić z góry na podstawie analizy struktury problemu,
-                    \item \textbf{agregacja ograniczeń}: grupowanie podobnych ograniczeń w pojedyncze, bardziej zwarte warunki, co znacząco redukuje rozmiar modelu,
-                    \item \textbf{leniwe ograniczenia}: najbardziej złożone ograniczenia są początkowo pomijane, a następnie dodawane tylko gdy zostały naruszone w poprzednich iteracjach.
+                    \item \textbf{Eliminacja zmiennych}: identyfikacja i usuwanie zmiennych, których wartości można ustalić z góry na podstawie analizy struktury problemu.
+                    \item \textbf{Agregacja ograniczeń}: grupowanie podobnych ograniczeń w pojedyncze, bardziej zwarte warunki, co znacząco redukuje rozmiar modelu.
+                    \item \textbf{Leniwe ograniczenia}: najbardziej złożone ograniczenia są początkowo pomijane, a następnie dodawane tylko gdy zostały naruszone w poprzednich iteracjach.
                 \end{itemize}
 
                 Podejście to pozwala na stopniowe poprawianie jakości rozwiązania przy kontrolowanym wzroście złożoności obliczeniowej, zachowując wykonalność rozwiązania na każdym etapie procesu optymalizacji.
