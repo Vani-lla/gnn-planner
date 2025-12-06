@@ -56,4 +56,31 @@
         Podejście systemowe jest konieczne, aby stworzyć spójne, skalowalne i odpowiadające rzeczywistym potrzebom szkoły narzędzie.
 
 \section{Układ pracy}
-    Zarysuj strukturę swojej pracy dyplomowej. Ogólnie przedstawienie pracy. Przykładowo: ,,Praca dzieli się na $7$ rozdziałów (\dots)''. Rozdział \ref{chapter:politechnika} dotyczy (\dots). Temat został rozwinięty~w~\ref{chapter:podrozdzial}.
+    Praca dzieli się na sześć zasadniczych rozdziałów, które kolejno wprowadzają w tematykę, przedstawiają stan wiedzy, prezentują autorskie rozwiązanie, opisują jego praktyczną implementację, weryfikują jej skuteczność oraz podsumowują uzyskane rezultaty i wskazują kierunki dalszego rozwoju.
+
+    Rozdział~\ref{chapter:related} poświęcony jest przeglądowi powiązanych prac i stanowi teoretyczne zaplecze dla dalszych rozważań.
+    W jego ramach dokonałem analizy istniejących podejść naukowych i komercyjnych.
+    Szczególnie dokładnie omówiłem podejście iteracyjne programowania mieszanego całkowitoliczbowego, które było inspiracją dla architektury aplikacji.
+    Następnie przedstawiłem klasyczny problem harmonogramowania zadań typu job-shop oraz pokazałem, jak mój problem jest jego odmianą.
+    Na koniec, w celu zrozumienia rzeczywistych wymagań i wyzwań, dokonałem szczegółowego przeglądu wiodącego na rynku polskim systemu komercyjnego.
+
+    Centralną i kluczową częścią pracy jest rozdział~\ref{chapter:algorytm}, który w całości dotyczy problemu układania planu lekcji i proponowanego algorytmu jego rozwiązania.
+    Rozdział zaczyna się od formalnego sformułowania problemu optymalizacyjnego, włączając w to definicję terminologii, danych wejściowych, szukanych, ograniczeń i funkcji celu.
+    Następnie, w oparciu o doświadczenia z wcześniejszych prób rozwiązania, zaprezentowałem kluczową innowację pracy: hierarchiczną dekompozycję oryginalnego, złożonego problemu na trzy mniejsze etapy.
+    Dla każdego z tych etapów opisałem dobór i zasadę działania techniki adekwatnej do danego podproblemu oraz przykładowe wyniki na rzeczywistych danych, co pozwoli na prześledzenie logiki całego procesu generowania planu.
+
+    Rozdział~\ref{chapter:website} koncentruje się na praktycznym aspekcie pracy, czyli projekcie oraz implementacji aplikacji webowej.
+    Zaczyna się on od specyfikacji wymagań, przypadków użycia oraz diagramów sekwencji.
+    W dalszej części szczegółowo opisałem projekt systemu obejmujący jego ogólną architekturę, projekt bazy danych oraz omówienie projektu interfejsu użytkownika.
+    Ostatnia część tego rozdziału opisuje implementację oraz uzasadnia wybór stosu technologicznego.
+
+    Rozdział~\ref{chapter:tests} służy weryfikacji i walidacji stworzonego rozwiązania.
+    Jego pierwsza część zawiera formalne scenariusze testowe kluczowych funkcjonalności aplikacji, a następna dokumentuje testy przeprowadzone na ich podstawie.
+    Najważniejszą część tego rozdziału stanowi analiza jakościowa wyników.
+    Obejmuje ona omówienie ograniczeń posiadanych danych, analizę całościową wygenerowanego planu lekcji, a także ocenę kluczowego wskaźnika --- liczby okienek nauczycieli.
+    Dalej szczegółowo analizuję krytyczny przypadek klasy o profilu łączonym oraz omawiam wydajność czasową całego procesu optymalizacyjnego.
+
+    Ostatni rozdział pracy~\ref{chapter:conclusions} stanowi podsumowanie oraz prezentuje perspektywy rozwoju.
+    Najpierw omówiłem ograniczenia i problemy bieżącej wersji rozwiązania.
+    Następnie zaprezentowałem konkretne kierunki dalszych prac, które pomogą w rozwiązaniu wcześniej wspomnianych problemów.
+    Rozdział, a tym samym cała praca, zamknie się sformułowaniem ostatecznych wniosków, potwierdzających trafność przyjętej metody dekompozycji oraz oceniających praktyczną przydatność opracowanego systemu.

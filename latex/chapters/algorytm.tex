@@ -646,6 +646,21 @@
                 \[ \mathcal{B}_{\text{single}} = \mathcal{B} \cap \left(\mathcal{B}_{\text{multi}} \cup \mathcal{B}_{\text{multi}}\right) \]
             \end{itemize}
 
+        \subsubsection{Procedura}
+            Procedurę generowania bloków można podzielić na parę faz:
+            \begin{itemize}
+                \item \textbf{Tworzenie grup wieloklasowych} --- grupowanie wymagań głównych dotyczących tego samego przedmiotu dla różnych klas;\\
+                przykładowo język rosyjski dla klasy IIIA, IIIC, IIID.
+                \item \textbf{Agregacja bloków} --- łączenie powstałych bloków międzyklasowych z innymi wymaganiami, które mogą odbywać się równolegle;\\
+                przykładowo wyżej wspomniany język rozyjski oraz język niemiecki dla klasy IIIA. 
+                \item \textbf{Tworzenie bloków pojedynczych} --- formowanie bloków wewnątrz pojedynczych klas;\\
+                przykładowo podział wychowania fizycznego na grupy chłopięce i dziewczęce.
+                \item \textbf{Tworzenie bloków jednostkowych} --- utworzenie jednoelementowych zbiorów dla pozostałych wymagań, niezgrupowanych w poprzednich fazach;\\
+                przykładowo lekcja języka polskiego w której musi uczestniczyć cała klasa.
+                \item \textbf{Przydział godzin lekcyjnych do bloków} --- rozdzielenie godzin z wymagań głównych do bloków tak, aby każdy blok w obrębie klasy dostał przynajmniej jedną godzinę.
+            \end{itemize}
+
+            Szczegółowy opis działania przedstawiłem w pseudokodzie~\ref{alg:generowanie_blokow}.
         
         \begin{algorithm}[H]
             \caption{Generowanie bloków lekcyjnych z wymagań}\label{alg:generowanie_blokow}
@@ -1514,7 +1529,7 @@
             Jest to równoznaczne z leckją wychowania fizycznego podzieloną na dwie grupy, które odbywają się w tym samym czasie.
 
     \subsection{Przykładowy wynik}
-        Dla danych wejściowych przedstawionych w poprzednim przykładzie mamy następujące przypisania:
+        Dla danych wejściowych przedstawionych w poprzednim przykładzie otryzmałem następujące przypisania:
         \[
             \mathcal{Z} = \left\{ 
                 \begin{aligned}
@@ -1532,3 +1547,8 @@
                 \end{aligned}
             \right\}
         \]
+
+        Wszystkie lekcje zostały przypisane zgodnie z określonymi ograniczeniami.
+        Nauczyciele otrzymali zajęcia zgodne z wymaganiami głównymi, 
+        a przedmioty, w szczególności informatyka oraz chemia, zostały przydzielone do odpowiednio wyposażonych sal dydaktycznych.
+

@@ -1,7 +1,7 @@
 ## Do zrobienia:
 - Wstęp:
     - &check; Dodać aspekt systemowy
-    - Dodać układ pracy
+    - &check; Dodać układ pracy
 - Powiązane prace:
     - &check; Opisać lepiej podejście iteracyjne w pierwszej pracy
 - Problem układania planu lekcji i algorytm rozwiązania:
@@ -54,14 +54,18 @@
 - &check; Testy do poprawienia
 - &check; Dodać key-wordy
 - &check; Zmienne przedziałowe <- zmienne interwałowe
-- Poprawenie końcowej analizy wyników
-- Poprawa widoczności bloków lekcyjnych w wynikach (wspólna oś / skala)
-- Napisać układ pracy
-- Napisać streszczenie
-- Dodać opis do potężnego pseudokodu
-- Poprawienie diagramu dekompozycji
-- Przykładowy wynik etap 3ci
+- &check; Poprawenie końcowej analizy wyników
+- &check; Poprawa widoczności bloków lekcyjnych w wynikach (wspólna oś / skala)
+- &check; Napisać układ pracy
+- &check; Napisać streszczenie
+- &check; Dodać opis do potężnego pseudokodu
+- &check; Przykładowy wynik etap 3ci
 - &check; Słownictwo backend/frontend/endpoint/widoki
+
+- Poprawienie diagramu dekompozycji
+- Citations
+- Layout
+- Wzory
 
 ### Wszelkie inne poprawki :|
 95.43159103393555

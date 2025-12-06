@@ -1,7 +1,21 @@
 \section*{Streszczenie}
 
-Bardzo fajny algorytm w bardzo fajnej aplikacji
+Problem automatycznego układania szkolnego planu lekcji jest złożonym zagadnieniem optymalizacyjnym, z którym corocznie mierzą się placówki oświatowe.
+Konieczność równoczesnego spełnienia wielu ograniczeń --- dostępności nauczycieli, niekolizyjności zajęć, ciągłości lekcji oraz minimalizacji okienek --- sprawia, że ręczne tworzenie planu jest procesem niezwykle czasochłonnym.
+
+Niniejsza praca ma na celu usprawnienie tego procesu poprzez zaprojektowanie i implementację algorytmu oraz funkcjonalnej aplikacji webowej.
+Kluczową innowacją jest dekompozycja problemu na trzy sekwencyjne etapy: grupowanie pojedynczych zajęć w bloki lekcyjne, optymalny przydział tych bloków do dni tygodnia za pomocą algorytmu ewolucyjnego oraz finalne przypisanie do nich konkretnych sal i terminów.
+
+Proponowane rozwiązanie zostało w pełni zaimplementowane jako aplikacja webowa używająca Reacta oraz Django.
+Sercem systemu jest moduł optymalizacyjny napisany w Pythonie, który do efektywnego rozwiązywania problemu harmonogramowania wykorzystuje bibliotekę Google OR-Tools, a do obliczeń w algorytmie ewolucyjnym bibliotekę NumPy.
 
 \section*{Abstract}
 
-Very nice algorytm w bardzo nice aplikacji
+The automatic creation of a school timetable is a complex optimization problem that educational institutions face annually.
+The need to simultaneously satisfy multiple constraints --- teacher availability, non-overlapping lessons, continuity of classes, and minimization of teacher gaps --- makes manual schedule creation a laborious process.
+
+This thesis aims to streamline this process by designing and implementing an algorithm and a functional web application.
+The key innovation is the decomposition of the problem into three sequential stages: grouping individual lessons into instructional blocks, optimally allocating these blocks to weekdays using an evolutionary algorithm, and the final assignment of specific rooms and time slots to them.
+
+The proposed solution has been fully implemented as a web application using React and Django.
+The core of the system is an optimization module written in Python, which utilizes the Google OR-Tools library for efficiently solving the scheduling problem and the NumPy library for computations within the evolutionary algorithm.

@@ -2,56 +2,56 @@
 \babel@toc {polish}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Zrzut ekranu importowania arkusza organizacyjnego do programu ,,Plan lekcji Optivum''~\cite {vulcanprzewodnik}}}{8}{figure.caption.6}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Zrzut ekranu wprowadzania sal do programu ,,Plan lekcji Optivum''~\cite {vulcanprzewodnik}}}{8}{figure.caption.7}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Zrzut ekranu wprowadzania preferencji sal względem przedmiotów do programu ,,Plan lekcji Optivum''~\cite {vulcanprzewodnik}}}{9}{figure.caption.8}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Zrzut ekranu wprowadzania preferencji sal względem nauczycieli do programu ,,Plan lekcji Optivum''~\cite {vulcanprzewodnik}}}{9}{figure.caption.9}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Zrzut ekranu wprowadzania bloków przedmiotów do programu ,,Plan lekcji Optivum''~\cite {vulcanprzewodnik}}}{9}{figure.caption.10}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Zrzut ekranu wprowadzania terminów zajęć dla poszczególnych klas do programu ,,Plan lekcji Optivum''~\cite {vulcanprzewodnik}}}{10}{figure.caption.11}%
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Zrzut ekranu wprowadzania dostępności nauczycieli do programu ,,Plan lekcji Optivum''~\cite {vulcanprzewodnik}}}{10}{figure.caption.12}%
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Zrzut ekranu wprowadzania ,,trudnych'' lekcji do programu ,,Plan lekcji Optivum''~\cite {vulcanprzewodnik}}}{11}{figure.caption.13}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Zrzut ekranu importowania arkusza organizacyjnego do programu ,,Plan lekcji Optivum''~\cite {vulcanprzewodnik}}}{10}{figure.caption.6}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Zrzut ekranu wprowadzania sal do programu ,,Plan lekcji Optivum''~\cite {vulcanprzewodnik}}}{10}{figure.caption.7}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Zrzut ekranu wprowadzania preferencji sal względem przedmiotów do programu ,,Plan lekcji Optivum''~\cite {vulcanprzewodnik}}}{11}{figure.caption.8}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Zrzut ekranu wprowadzania preferencji sal względem nauczycieli do programu ,,Plan lekcji Optivum''~\cite {vulcanprzewodnik}}}{11}{figure.caption.9}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Zrzut ekranu wprowadzania bloków przedmiotów do programu ,,Plan lekcji Optivum''~\cite {vulcanprzewodnik}}}{11}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Zrzut ekranu wprowadzania terminów zajęć dla poszczególnych klas do programu ,,Plan lekcji Optivum''~\cite {vulcanprzewodnik}}}{12}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Zrzut ekranu wprowadzania dostępności nauczycieli do programu ,,Plan lekcji Optivum''~\cite {vulcanprzewodnik}}}{12}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Zrzut ekranu wprowadzania ,,trudnych'' lekcji do programu ,,Plan lekcji Optivum''~\cite {vulcanprzewodnik}}}{13}{figure.caption.13}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Zrzut ekranu z arkusza kalkulacyjnego przedstawiąjący przypisanie godzinowe nauczycieli dla każdej klasy.}}{15}{figure.caption.16}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Dekompozycja problemu}}{22}{figure.caption.23}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Struktura algorytmu z doborem technik}}{23}{figure.caption.24}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Wizualizacja rozwiązania klasycznego problemu JSSP z wykorzystaniem zmiennych przedziałowych~\cite {googleortoolsjssp}}}{27}{figure.caption.31}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Wykres funkcji użytej do ewaluacji rozkładu godzin nauczycieli i klas na przestrzeni tygodnia.}}{35}{figure.caption.35}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Wykres wartości funkcji celu dla pięciu uruchomień algorytmu genetycznego}}{39}{figure.caption.39}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Zrzut ekranu z arkusza kalkulacyjnego przedstawiąjący przypisanie godzinowe nauczycieli dla każdej klasy.}}{17}{figure.caption.16}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Dekompozycja problemu}}{24}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Struktura algorytmu z doborem technik}}{25}{figure.caption.24}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Wizualizacja rozwiązania klasycznego problemu JSSP z wykorzystaniem zmiennych przedziałowych~\cite {googleortoolsjssp}}}{29}{figure.caption.31}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Wykres funkcji użytej do ewaluacji rozkładu godzin nauczycieli i klas na przestrzeni tygodnia.}}{36}{figure.caption.36}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Wykres wartości funkcji celu dla pięciu uruchomień algorytmu genetycznego}}{40}{figure.caption.40}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagram wymagań}}{47}{figure.caption.48}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Diagram przypadków użycia}}{48}{figure.caption.49}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Diagram sekwencji generowania planu lekcji}}{55}{figure.caption.63}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Diagram sekwencji dla przypadku użycia oglądania planu lekcji}}{56}{figure.caption.65}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Diagram sekwencji edycji bądź wprowadzania wymagań głównych}}{56}{figure.caption.67}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Architektura aplikacji}}{57}{figure.caption.68}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Diagram tabel podstawowych w bazie danych}}{59}{figure.caption.71}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Diagram tabel podstawowych i wymagań w bazie danych}}{60}{figure.caption.74}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Diagram pełnego projektu bazy danych}}{63}{figure.caption.80}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Fragment kodu służący do definicji tabeli sal}}{68}{figure.caption.93}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Automatycznie wygenerowana lista punktów końcowych stworzonych przy użyciu \mbox {ModelViewSet}}}{69}{figure.caption.94}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Fragment kodu służący do implementacji punktów końcowych dla zbioru sal}}{69}{figure.caption.95}%
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Nawigacja interfejsu webowego}}{70}{figure.caption.97}%
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Strona główna interfejsu webowego}}{70}{figure.caption.99}%
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Podgląd planu z perspektywy nauczyciela}}{71}{figure.caption.101}%
-\contentsline {figure}{\numberline {4.16}{\ignorespaces Podgląd planu z perspektywy klasy}}{71}{figure.caption.102}%
-\contentsline {figure}{\numberline {4.17}{\ignorespaces Widok generowania planu lekcji}}{72}{figure.caption.104}%
-\contentsline {figure}{\numberline {4.18}{\ignorespaces Widok dodawania przedmiotów}}{73}{figure.caption.106}%
-\contentsline {figure}{\numberline {4.19}{\ignorespaces Widok dodawania nauczycieli}}{73}{figure.caption.107}%
-\contentsline {figure}{\numberline {4.20}{\ignorespaces Widok dodawania sal}}{74}{figure.caption.108}%
-\contentsline {figure}{\numberline {4.21}{\ignorespaces Widok dodawania klas}}{74}{figure.caption.109}%
-\contentsline {figure}{\numberline {4.22}{\ignorespaces Widok dodawania wymagań głównych}}{75}{figure.caption.111}%
-\contentsline {figure}{\numberline {4.23}{\ignorespaces Widok wprowadzania dostępności nauczycieli}}{76}{figure.caption.112}%
-\contentsline {figure}{\numberline {4.24}{\ignorespaces Widok dodawania bloków przedmiotów}}{76}{figure.caption.113}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagram wymagań}}{47}{figure.caption.49}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Diagram przypadków użycia}}{48}{figure.caption.50}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Diagram sekwencji generowania planu lekcji}}{55}{figure.caption.64}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Diagram sekwencji dla przypadku użycia oglądania planu lekcji}}{56}{figure.caption.66}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Diagram sekwencji edycji bądź wprowadzania wymagań głównych}}{56}{figure.caption.68}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Architektura aplikacji}}{57}{figure.caption.69}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Diagram tabel podstawowych w bazie danych}}{59}{figure.caption.72}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Diagram tabel podstawowych i wymagań w bazie danych}}{60}{figure.caption.75}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Diagram pełnego projektu bazy danych}}{63}{figure.caption.81}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Fragment kodu służący do definicji tabeli sal}}{68}{figure.caption.94}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Automatycznie wygenerowana lista punktów końcowych stworzonych przy użyciu \mbox {ModelViewSet}}}{69}{figure.caption.95}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Fragment kodu służący do implementacji punktów końcowych dla zbioru sal}}{69}{figure.caption.96}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Nawigacja interfejsu webowego}}{70}{figure.caption.98}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Strona główna interfejsu webowego}}{70}{figure.caption.100}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Podgląd planu z perspektywy nauczyciela}}{71}{figure.caption.102}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Podgląd planu z perspektywy klasy}}{71}{figure.caption.103}%
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Widok generowania planu lekcji}}{72}{figure.caption.105}%
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Widok dodawania przedmiotów}}{73}{figure.caption.107}%
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Widok dodawania nauczycieli}}{73}{figure.caption.108}%
+\contentsline {figure}{\numberline {4.20}{\ignorespaces Widok dodawania sal}}{74}{figure.caption.109}%
+\contentsline {figure}{\numberline {4.21}{\ignorespaces Widok dodawania klas}}{74}{figure.caption.110}%
+\contentsline {figure}{\numberline {4.22}{\ignorespaces Widok dodawania wymagań głównych}}{75}{figure.caption.112}%
+\contentsline {figure}{\numberline {4.23}{\ignorespaces Widok wprowadzania dostępności nauczycieli}}{76}{figure.caption.113}%
+\contentsline {figure}{\numberline {4.24}{\ignorespaces Widok dodawania bloków przedmiotów}}{76}{figure.caption.114}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Zrzuty ekranów wykonanych kroków dla scenariusza generowania planu lekcji}}{80}{figure.caption.118}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Zrzuty ekranów wykonanych kroków dla scenariusza przeglądania planów lekcji}}{81}{figure.caption.119}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Zrzuty ekranów wykonanych kroków dla scenariusza importowania i edytowania wymagań głównych}}{82}{figure.caption.120}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Zrzuty ekranów wykonanych kroków dla scenariusza edytowania dostępności nauczycieli}}{83}{figure.caption.121}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Histogram obciążeń dydaktycznych nauczycieli tygodniowo}}{84}{figure.caption.122}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Histogram obciążeń dydaktycznych uczniów tygodniowo}}{85}{figure.caption.123}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Histogram obciążeń dydaktycznych nauczycieli}}{86}{figure.caption.124}%
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Histogram obciążeń dydaktycznych uczniów}}{87}{figure.caption.125}%
-\contentsline {figure}{\numberline {5.9}{\ignorespaces Wygenerowany plan lekcji dla klasy IIAC}}{89}{figure.caption.127}%
-\contentsline {figure}{\numberline {5.10}{\ignorespaces Plan lekcji dla klasy IIAC stworzony przez szkołę}}{90}{figure.caption.128}%
-\contentsline {figure}{\numberline {5.11}{\ignorespaces Zestawienie środowych planów lekcji dla kolejno klas IIIA, IIIC, IIID, IIIF i IIIG}}{92}{figure.caption.129}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Zrzuty ekranów wykonanych kroków dla scenariusza generowania planu lekcji}}{80}{figure.caption.119}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Zrzuty ekranów wykonanych kroków dla scenariusza przeglądania planów lekcji}}{81}{figure.caption.120}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Zrzuty ekranów wykonanych kroków dla scenariusza importowania i edytowania wymagań głównych}}{82}{figure.caption.121}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Zrzuty ekranów wykonanych kroków dla scenariusza edytowania dostępności nauczycieli}}{83}{figure.caption.122}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Histogram obciążeń dydaktycznych nauczycieli tygodniowo}}{84}{figure.caption.123}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Histogram obciążeń dydaktycznych uczniów tygodniowo}}{85}{figure.caption.124}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Histogram obciążeń dydaktycznych nauczycieli}}{86}{figure.caption.125}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Histogram obciążeń dydaktycznych uczniów}}{87}{figure.caption.126}%
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Wygenerowany plan lekcji dla klasy IIAC}}{89}{figure.caption.128}%
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Plan lekcji dla klasy IIAC stworzony przez szkołę}}{90}{figure.caption.129}%
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Zestawienie środowych planów lekcji dla kolejno klas IIIA, IIIC, IIID, IIIF i IIIG}}{92}{figure.caption.130}%
 \addvspace {10\p@ }

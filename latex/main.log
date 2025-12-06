@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.11.11)  6 DEC 2025 18:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.11.11)  7 DEC 2025 00:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1484,28 +1484,25 @@ File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 
 {/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}]
 
-LaTeX Warning: Reference `chapter:politechnika' on page 2 undefined on input line 59.
+[2]) (./chapters/related-work.tex
+
+[3]
+
+[4
 
 
-LaTeX Warning: Reference `chapter:podrozdzial' on page 2 undefined on input line 59.
-
-) (./chapters/related-work.tex
-
-[2{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}]
+]
 Rozdzia\l  2.
 
 
-[3
-
-
-{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}]
-
-[4]
-
-[5{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
+[5{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}]
 
 [6]
-<images/vulcan/import_arkusz.png, id=502, 551.05875pt x 487.06969pt>
+
+[7{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
+
+[8]
+<images/vulcan/import_arkusz.png, id=516, 551.05875pt x 487.06969pt>
 File: images/vulcan/import_arkusz.png Graphic file (type png)
 <use images/vulcan/import_arkusz.png>
 Package pdftex.def Info: images/vulcan/import_arkusz.png  used on input line 139.
@@ -1514,7 +1511,7 @@ Package pdftex.def Info: images/vulcan/import_arkusz.png  used on input line 139
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/vulcan/sale.png, id=505, 755.07094pt x 374.90062pt>
+<images/vulcan/sale.png, id=519, 755.07094pt x 374.90062pt>
 File: images/vulcan/sale.png Graphic file (type png)
 <use images/vulcan/sale.png>
 Package pdftex.def Info: images/vulcan/sale.png  used on input line 150.
@@ -1522,7 +1519,7 @@ Package pdftex.def Info: images/vulcan/sale.png  used on input line 150.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/vulcan/sale_pref2.png, id=508, 659.46375pt x 242.40562pt>
+<images/vulcan/sale_pref2.png, id=522, 659.46375pt x 242.40562pt>
 File: images/vulcan/sale_pref2.png Graphic file (type png)
 <use images/vulcan/sale_pref2.png>
 Package pdftex.def Info: images/vulcan/sale_pref2.png  used on input line 156.
@@ -1530,7 +1527,7 @@ Package pdftex.def Info: images/vulcan/sale_pref2.png  used on input line 156.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/vulcan/sale_pref1.png, id=511, 582.67688pt x 438.13687pt>
+<images/vulcan/sale_pref1.png, id=525, 582.67688pt x 438.13687pt>
 File: images/vulcan/sale_pref1.png Graphic file (type png)
 <use images/vulcan/sale_pref1.png>
 Package pdftex.def Info: images/vulcan/sale_pref1.png  used on input line 162.
@@ -1540,8 +1537,8 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[7]
-<images/vulcan/bloki.png, id=520, 954.56625pt x 313.17pt>
+[9]
+<images/vulcan/bloki.png, id=533, 954.56625pt x 313.17pt>
 File: images/vulcan/bloki.png Graphic file (type png)
 <use images/vulcan/bloki.png>
 Package pdftex.def Info: images/vulcan/bloki.png  used on input line 173.
@@ -1550,7 +1547,7 @@ Package pdftex.def Info: images/vulcan/bloki.png  used on input line 173.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/vulcan/horyzont.png, id=523, 894.34125pt x 642.90187pt>
+<images/vulcan/horyzont.png, id=536, 894.34125pt x 642.90187pt>
 File: images/vulcan/horyzont.png Graphic file (type png)
 <use images/vulcan/horyzont.png>
 Package pdftex.def Info: images/vulcan/horyzont.png  used on input line 183.
@@ -1558,43 +1555,43 @@ Package pdftex.def Info: images/vulcan/horyzont.png  used on input line 183.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/vulcan/dostepnosc_nauczycieli.png, id=526, 895.09406pt x 498.36188pt>
+<images/vulcan/dostepnosc_nauczycieli.png, id=539, 895.09406pt x 498.36188pt>
 File: images/vulcan/dostepnosc_nauczycieli.png Graphic file (type png)
 <use images/vulcan/dostepnosc_nauczycieli.png>
 Package pdftex.def Info: images/vulcan/dostepnosc_nauczycieli.png  used on input line 192.
 (pdftex.def)             Requested size: 306.81741pt x 170.8324pt.
 
 
-[8 <./images/vulcan/import_arkusz.png (PNG copy)> <./images/vulcan/sale.png (PNG copy)>]
+[10 <./images/vulcan/import_arkusz.png (PNG copy)> <./images/vulcan/sale.png (PNG copy)>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/vulcan/plan_trudne.png, id=535, 1239.88219pt x 779.91376pt>
+<images/vulcan/plan_trudne.png, id=548, 1239.88219pt x 779.91376pt>
 File: images/vulcan/plan_trudne.png Graphic file (type png)
 <use images/vulcan/plan_trudne.png>
 Package pdftex.def Info: images/vulcan/plan_trudne.png  used on input line 200.
 (pdftex.def)             Requested size: 306.81741pt x 192.99057pt.
 
 
-[9 <./images/vulcan/sale_pref2.png (PNG copy)> <./images/vulcan/sale_pref1.png (PNG copy)> <./images/vulcan/bloki.png (PNG copy)>]
+[11 <./images/vulcan/sale_pref2.png (PNG copy)> <./images/vulcan/sale_pref1.png (PNG copy)> <./images/vulcan/bloki.png (PNG copy)>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[10 <./images/vulcan/horyzont.png (PNG copy)> <./images/vulcan/dostepnosc_nauczycieli.png (PNG copy)>]) (./chapters/algorytm.tex
+[12 <./images/vulcan/horyzont.png (PNG copy)> <./images/vulcan/dostepnosc_nauczycieli.png (PNG copy)>]) (./chapters/algorytm.tex
 
-[11 <./images/vulcan/plan_trudne.png (PNG copy)>]
+[13 <./images/vulcan/plan_trudne.png (PNG copy)>]
 
-[12
+[14
 
 
 ]
 Rozdzia\l  3.
 
 
-[13]
-<images/excel_wymagania.png, id=566, 479.54156pt x 294.34969pt>
+[15]
+<images/excel_wymagania.png, id=579, 479.54156pt x 294.34969pt>
 File: images/excel_wymagania.png Graphic file (type png)
 <use images/excel_wymagania.png>
 Package pdftex.def Info: images/excel_wymagania.png  used on input line 52.
@@ -1604,25 +1601,21 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[14]
-
-[15{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc} <./images/excel_wymagania.png (PNG copy)>]
-
 [16]
 
-[17]
+[17{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc} <./images/excel_wymagania.png (PNG copy)>]
 
 [18]
+
+[19]
+
+[20]
 LaTeX Font Info:    Trying to load font information for U+euf on input line 235.
  (/usr/share/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 ) (/usr/share/texmf-dist/tex/latex/microtype/mt-euf.cfg
 File: mt-euf.cfg 2006/07/03 v1.1 microtype config. file: AMS Euler Fraktur (RS)
 )
-
-[19]
-
-[20]
 
 [21]
 
@@ -1635,7 +1628,11 @@ File: mt-euf.cfg 2006/07/03 v1.1 microtype config. file: AMS Euler Fraktur (RS)
 [25]
 
 [26]
-<images/interval_vars.png, id=663, 981.6675pt x 153.57375pt>
+
+[27]
+
+[28]
+<images/interval_vars.png, id=676, 981.6675pt x 153.57375pt>
 File: images/interval_vars.png Graphic file (type png)
 <use images/interval_vars.png>
 Package pdftex.def Info: images/interval_vars.png  used on input line 578.
@@ -1650,24 +1647,14 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 
 
-[27 <./images/interval_vars.png>]
-
-[28]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-[29]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
+[29 <./images/interval_vars.png>]
 
 [30]
+
+[31]
 Overfull \vbox (8.46922pt too high) has occurred while \output is active []
 
 
-
-[31]
 
 [32]
 
@@ -1689,24 +1676,24 @@ Overfull \vbox (8.46922pt too high) has occurred while \output is active []
 
 [41]
 
-[42]) (./chapters/website.tex
+[42]
 
-[43]
+[43]) (./chapters/website.tex
 
-[44
-
-
-]
+[44]
 Rozdzia\l  4.
 
 
-[45]
-<images/diagramy/Requirement Diagram1.png, id=890, 1168.24455pt x 704.6325pt>
+[45
+
+
+]
+<images/diagramy/Requirement Diagram1.png, id=897, 1168.24455pt x 704.6325pt>
 File: images/diagramy/Requirement Diagram1.png Graphic file (type png)
 <use images/diagramy/Requirement Diagram1.png>
 Package pdftex.def Info: images/diagramy/Requirement Diagram1.png  used on input line 42.
 (pdftex.def)             Requested size: 652.73294pt x 393.69911pt.
-<images/diagramy/Use Case Diagram1.png, id=891, 609.9588pt x 474.45255pt>
+<images/diagramy/Use Case Diagram1.png, id=898, 609.9588pt x 474.45255pt>
 File: images/diagramy/Use Case Diagram1.png Graphic file (type png)
 <use images/diagramy/Use Case Diagram1.png>
 Package pdftex.def Info: images/diagramy/Use Case Diagram1.png  used on input line 114.
@@ -1827,12 +1814,12 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [53]
 
 [54]
-<images/diagramy/Sequence Diagram1.png, id=945, 948.6642pt x 300.4023pt>
+<images/diagramy/Sequence Diagram1.png, id=952, 948.6642pt x 300.4023pt>
 File: images/diagramy/Sequence Diagram1.png Graphic file (type png)
 <use images/diagramy/Sequence Diagram1.png>
 Package pdftex.def Info: images/diagramy/Sequence Diagram1.png  used on input line 512.
 (pdftex.def)             Requested size: 472.03123pt x 149.47195pt.
-<images/diagramy/Sequence Diagram2.png, id=946, 557.9244pt x 325.215pt>
+<images/diagramy/Sequence Diagram2.png, id=953, 557.9244pt x 325.215pt>
 File: images/diagramy/Sequence Diagram2.png Graphic file (type png)
 <use images/diagramy/Sequence Diagram2.png>
 Package pdftex.def Info: images/diagramy/Sequence Diagram2.png  used on input line 525.
@@ -1845,7 +1832,7 @@ Underfull \vbox (badness 5189) has occurred while \output is active []
 [55
 
  <./images/diagramy/Sequence Diagram1.png>]
-<images/diagramy/Sequence Diagram3.png, id=956, 726.5544pt x 343.2825pt>
+<images/diagramy/Sequence Diagram3.png, id=964, 726.5544pt x 343.2825pt>
 File: images/diagramy/Sequence Diagram3.png Graphic file (type png)
 <use images/diagramy/Sequence Diagram3.png>
 Package pdftex.def Info: images/diagramy/Sequence Diagram3.png  used on input line 534.
@@ -1857,7 +1844,7 @@ Package pdftex.def Info: images/diagramy/Sequence Diagram3.png  used on input li
 [57
 
 ]
-<images/diagramy/diagram_db_podstawowe.png, id=972, 1110.1475pt x 1110.1475pt>
+<images/diagramy/diagram_db_podstawowe.png, id=979, 1110.1475pt x 1110.1475pt>
 File: images/diagramy/diagram_db_podstawowe.png Graphic file (type png)
 <use images/diagramy/diagram_db_podstawowe.png>
 Package pdftex.def Info: images/diagramy/diagram_db_podstawowe.png  used on input line 636.
@@ -1868,7 +1855,7 @@ Underfull \vbox (badness 1565) has occurred while \output is active []
 
 
 [58]
-<images/diagramy/diagram_db_wymagan.png, id=979, 2076.75874pt x 2076.75874pt>
+<images/diagramy/diagram_db_wymagan.png, id=986, 2076.75874pt x 2076.75874pt>
 File: images/diagramy/diagram_db_wymagan.png Graphic file (type png)
 <use images/diagramy/diagram_db_wymagan.png>
 Package pdftex.def Info: images/diagramy/diagram_db_wymagan.png  used on input line 678.
@@ -1892,7 +1879,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 725--726
 
  []
 
-<images/diagramy/diagram_db_2.png, id=996, 2561.57pt x 2561.57pt>
+<images/diagramy/diagram_db_2.png, id=1003, 2561.57pt x 2561.57pt>
 File: images/diagramy/diagram_db_2.png Graphic file (type png)
 <use images/diagramy/diagram_db_2.png>
 Package pdftex.def Info: images/diagramy/diagram_db_2.png  used on input line 759.
@@ -1926,7 +1913,7 @@ File: lstlang1.sty 2024/09/23 1.10c listings language file
 )
 
 [68]
-<images/django_api_overview.png, id=1063, 1220.30907pt x 647.41875pt>
+<images/django_api_overview.png, id=1070, 1220.30907pt x 647.41875pt>
 File: images/django_api_overview.png Graphic file (type png)
 <use images/django_api_overview.png>
 Package pdftex.def Info: images/django_api_overview.png  used on input line 953.
@@ -1934,12 +1921,12 @@ Package pdftex.def Info: images/django_api_overview.png  used on input line 953.
 
 
 [69 <./images/django_api_overview.png (PNG copy)>]
-<images/strona/nawigacja.png, id=1081, 1437.87187pt x 270.25969pt>
+<images/strona/nawigacja.png, id=1089, 1437.87187pt x 270.25969pt>
 File: images/strona/nawigacja.png Graphic file (type png)
 <use images/strona/nawigacja.png>
 Package pdftex.def Info: images/strona/nawigacja.png  used on input line 986.
 (pdftex.def)             Requested size: 424.82523pt x 79.84962pt.
-<images/strona/strona_glowna.png, id=1083, 1917.1625pt x 933.4875pt>
+<images/strona/strona_glowna.png, id=1091, 1917.1625pt x 933.4875pt>
 File: images/strona/strona_glowna.png Graphic file (type png)
 <use images/strona/strona_glowna.png>
 Package pdftex.def Info: images/strona/strona_glowna.png  used on input line 995.
@@ -1947,12 +1934,12 @@ Package pdftex.def Info: images/strona/strona_glowna.png  used on input line 995
 
 
 [70 <./images/strona/nawigacja.png (PNG copy)> <./images/strona/strona_glowna.png>]
-<images/strona/plan_nauczyciel.png, id=1096, 1917.1625pt x 933.4875pt>
+<images/strona/plan_nauczyciel.png, id=1103, 1917.1625pt x 933.4875pt>
 File: images/strona/plan_nauczyciel.png Graphic file (type png)
 <use images/strona/plan_nauczyciel.png>
 Package pdftex.def Info: images/strona/plan_nauczyciel.png  used on input line 1007.
 (pdftex.def)             Requested size: 424.82523pt x 206.84924pt.
-<images/strona/plan_klasa_1.png, id=1097, 1917.1625pt x 933.4875pt>
+<images/strona/plan_klasa_1.png, id=1104, 1917.1625pt x 933.4875pt>
 File: images/strona/plan_klasa_1.png Graphic file (type png)
 <use images/strona/plan_klasa_1.png>
 Package pdftex.def Info: images/strona/plan_klasa_1.png  used on input line 1012.
@@ -1963,17 +1950,17 @@ Underfull \vbox (badness 4001) has occurred while \output is active []
 
 
 [71 <./images/strona/plan_nauczyciel.png> <./images/strona/plan_klasa_1.png>]
-<images/strona/generowanie.png, id=1108, 1917.1625pt x 933.4875pt>
+<images/strona/generowanie.png, id=1115, 1917.1625pt x 933.4875pt>
 File: images/strona/generowanie.png Graphic file (type png)
 <use images/strona/generowanie.png>
 Package pdftex.def Info: images/strona/generowanie.png  used on input line 1024.
 (pdftex.def)             Requested size: 424.82523pt x 206.84924pt.
-<images/strona/przedmioty.png, id=1113, 1917.1625pt x 933.4875pt>
+<images/strona/przedmioty.png, id=1120, 1917.1625pt x 933.4875pt>
 File: images/strona/przedmioty.png Graphic file (type png)
 <use images/strona/przedmioty.png>
 Package pdftex.def Info: images/strona/przedmioty.png  used on input line 1034.
 (pdftex.def)             Requested size: 424.82523pt x 206.84924pt.
-<images/strona/nauczyciele.png, id=1114, 1917.1625pt x 933.4875pt>
+<images/strona/nauczyciele.png, id=1121, 1917.1625pt x 933.4875pt>
 File: images/strona/nauczyciele.png Graphic file (type png)
 <use images/strona/nauczyciele.png>
 Package pdftex.def Info: images/strona/nauczyciele.png  used on input line 1039.
@@ -1984,12 +1971,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 [72 <./images/strona/generowanie.png>]
-<images/strona/sale.png, id=1127, 1917.1625pt x 933.4875pt>
+<images/strona/sale.png, id=1134, 1917.1625pt x 933.4875pt>
 File: images/strona/sale.png Graphic file (type png)
 <use images/strona/sale.png>
 Package pdftex.def Info: images/strona/sale.png  used on input line 1044.
 (pdftex.def)             Requested size: 424.82523pt x 206.84924pt.
-<images/strona/klasy.png, id=1128, 1917.1625pt x 933.4875pt>
+<images/strona/klasy.png, id=1135, 1917.1625pt x 933.4875pt>
 File: images/strona/klasy.png Graphic file (type png)
 <use images/strona/klasy.png>
 Package pdftex.def Info: images/strona/klasy.png  used on input line 1049.
@@ -2000,17 +1987,17 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 [73 <./images/strona/przedmioty.png> <./images/strona/nauczyciele.png>]
-<images/strona/wymagania_glowne_1.png, id=1140, 1917.1625pt x 933.4875pt>
+<images/strona/wymagania_glowne_1.png, id=1147, 1917.1625pt x 933.4875pt>
 File: images/strona/wymagania_glowne_1.png Graphic file (type png)
 <use images/strona/wymagania_glowne_1.png>
 Package pdftex.def Info: images/strona/wymagania_glowne_1.png  used on input line 1062.
 (pdftex.def)             Requested size: 424.82523pt x 206.84924pt.
-<images/strona/wymagania_glowne_2.png, id=1141, 1917.1625pt x 933.4875pt>
+<images/strona/wymagania_glowne_2.png, id=1148, 1917.1625pt x 933.4875pt>
 File: images/strona/wymagania_glowne_2.png Graphic file (type png)
 <use images/strona/wymagania_glowne_2.png>
 Package pdftex.def Info: images/strona/wymagania_glowne_2.png  used on input line 1064.
 (pdftex.def)             Requested size: 424.82523pt x 206.84924pt.
-<images/strona/dostepnosc.png, id=1142, 1917.1625pt x 933.4875pt>
+<images/strona/dostepnosc.png, id=1149, 1917.1625pt x 933.4875pt>
 File: images/strona/dostepnosc.png Graphic file (type png)
 <use images/strona/dostepnosc.png>
 Package pdftex.def Info: images/strona/dostepnosc.png  used on input line 1069.
@@ -2018,7 +2005,7 @@ Package pdftex.def Info: images/strona/dostepnosc.png  used on input line 1069.
 
 
 [74 <./images/strona/sale.png> <./images/strona/klasy.png>]
-<images/strona/bloki.png, id=1153, 1917.1625pt x 933.4875pt>
+<images/strona/bloki.png, id=1160, 1917.1625pt x 933.4875pt>
 File: images/strona/bloki.png Graphic file (type png)
 <use images/strona/bloki.png>
 Package pdftex.def Info: images/strona/bloki.png  used on input line 1074.
@@ -2085,42 +2072,42 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 [79]
-<images/test1/krok1.png, id=1187, 1003.75pt x 501.875pt>
+<images/test1/krok1.png, id=1194, 1003.75pt x 501.875pt>
 File: images/test1/krok1.png Graphic file (type png)
 <use images/test1/krok1.png>
 Package pdftex.def Info: images/test1/krok1.png  used on input line 153.
 (pdftex.def)             Requested size: 226.57297pt x 113.28458pt.
-<images/test1/krok2.png, id=1188, 1003.75pt x 501.875pt>
+<images/test1/krok2.png, id=1195, 1003.75pt x 501.875pt>
 File: images/test1/krok2.png Graphic file (type png)
 <use images/test1/krok2.png>
 Package pdftex.def Info: images/test1/krok2.png  used on input line 154.
 (pdftex.def)             Requested size: 226.57297pt x 113.28458pt.
-<images/test1/krok3.png, id=1189, 1003.75pt x 501.875pt>
+<images/test1/krok3.png, id=1196, 1003.75pt x 501.875pt>
 File: images/test1/krok3.png Graphic file (type png)
 <use images/test1/krok3.png>
 Package pdftex.def Info: images/test1/krok3.png  used on input line 155.
 (pdftex.def)             Requested size: 226.57297pt x 113.28458pt.
-<images/test1/krok4.png, id=1190, 1003.75pt x 501.875pt>
+<images/test1/krok4.png, id=1197, 1003.75pt x 501.875pt>
 File: images/test1/krok4.png Graphic file (type png)
 <use images/test1/krok4.png>
 Package pdftex.def Info: images/test1/krok4.png  used on input line 156.
 (pdftex.def)             Requested size: 226.57297pt x 113.28458pt.
-<images/test2/krok1.png, id=1193, 1003.75pt x 501.875pt>
+<images/test2/krok1.png, id=1200, 1003.75pt x 501.875pt>
 File: images/test2/krok1.png Graphic file (type png)
 <use images/test2/krok1.png>
 Package pdftex.def Info: images/test2/krok1.png  used on input line 173.
 (pdftex.def)             Requested size: 226.57297pt x 113.28458pt.
-<images/test2/krok2.png, id=1194, 1003.75pt x 501.875pt>
+<images/test2/krok2.png, id=1201, 1003.75pt x 501.875pt>
 File: images/test2/krok2.png Graphic file (type png)
 <use images/test2/krok2.png>
 Package pdftex.def Info: images/test2/krok2.png  used on input line 174.
 (pdftex.def)             Requested size: 226.57297pt x 113.28458pt.
-<images/test2/krok3.png, id=1195, 1003.75pt x 501.875pt>
+<images/test2/krok3.png, id=1202, 1003.75pt x 501.875pt>
 File: images/test2/krok3.png Graphic file (type png)
 <use images/test2/krok3.png>
 Package pdftex.def Info: images/test2/krok3.png  used on input line 175.
 (pdftex.def)             Requested size: 226.57297pt x 113.28458pt.
-<images/test2/krok4.png, id=1196, 1003.75pt x 501.875pt>
+<images/test2/krok4.png, id=1203, 1003.75pt x 501.875pt>
 File: images/test2/krok4.png Graphic file (type png)
 <use images/test2/krok4.png>
 Package pdftex.def Info: images/test2/krok4.png  used on input line 176.
@@ -2128,27 +2115,27 @@ Package pdftex.def Info: images/test2/krok4.png  used on input line 176.
 
 
 [80 <./images/test1/krok1.png> <./images/test1/krok2.png> <./images/test1/krok3.png> <./images/test1/krok4.png>]
-<images/test3/krok1.png, id=1209, 1003.75pt x 501.875pt>
+<images/test3/krok1.png, id=1216, 1003.75pt x 501.875pt>
 File: images/test3/krok1.png Graphic file (type png)
 <use images/test3/krok1.png>
 Package pdftex.def Info: images/test3/krok1.png  used on input line 194.
 (pdftex.def)             Requested size: 226.57297pt x 113.28458pt.
-<images/test3/krok2.png, id=1210, 1003.75pt x 501.875pt>
+<images/test3/krok2.png, id=1217, 1003.75pt x 501.875pt>
 File: images/test3/krok2.png Graphic file (type png)
 <use images/test3/krok2.png>
 Package pdftex.def Info: images/test3/krok2.png  used on input line 195.
 (pdftex.def)             Requested size: 226.57297pt x 113.28458pt.
-<images/test3/krok3.png, id=1211, 1003.75pt x 501.875pt>
+<images/test3/krok3.png, id=1218, 1003.75pt x 501.875pt>
 File: images/test3/krok3.png Graphic file (type png)
 <use images/test3/krok3.png>
 Package pdftex.def Info: images/test3/krok3.png  used on input line 196.
 (pdftex.def)             Requested size: 226.57297pt x 113.28458pt.
-<images/test3/krok4.png, id=1212, 1003.75pt x 501.875pt>
+<images/test3/krok4.png, id=1219, 1003.75pt x 501.875pt>
 File: images/test3/krok4.png Graphic file (type png)
 <use images/test3/krok4.png>
 Package pdftex.def Info: images/test3/krok4.png  used on input line 197.
 (pdftex.def)             Requested size: 226.57297pt x 113.28458pt.
-<images/test3/krok5.png, id=1213, 1003.75pt x 501.875pt>
+<images/test3/krok5.png, id=1220, 1003.75pt x 501.875pt>
 File: images/test3/krok5.png Graphic file (type png)
 <use images/test3/krok5.png>
 Package pdftex.def Info: images/test3/krok5.png  used on input line 198.
@@ -2159,22 +2146,22 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 [81 <./images/test2/krok1.png> <./images/test2/krok2.png> <./images/test2/krok3.png> <./images/test2/krok4.png>]
-<images/test4/krok1.png, id=1225, 1003.75pt x 501.875pt>
+<images/test4/krok1.png, id=1232, 1003.75pt x 501.875pt>
 File: images/test4/krok1.png Graphic file (type png)
 <use images/test4/krok1.png>
 Package pdftex.def Info: images/test4/krok1.png  used on input line 214.
 (pdftex.def)             Requested size: 226.57297pt x 113.28458pt.
-<images/test4/krok2.png, id=1226, 1003.75pt x 501.875pt>
+<images/test4/krok2.png, id=1233, 1003.75pt x 501.875pt>
 File: images/test4/krok2.png Graphic file (type png)
 <use images/test4/krok2.png>
 Package pdftex.def Info: images/test4/krok2.png  used on input line 215.
 (pdftex.def)             Requested size: 226.57297pt x 113.28458pt.
-<images/test4/krok3.png, id=1227, 1003.75pt x 501.875pt>
+<images/test4/krok3.png, id=1234, 1003.75pt x 501.875pt>
 File: images/test4/krok3.png Graphic file (type png)
 <use images/test4/krok3.png>
 Package pdftex.def Info: images/test4/krok3.png  used on input line 216.
 (pdftex.def)             Requested size: 226.57297pt x 113.28458pt.
-<images/test4/krok4.png, id=1228, 1003.75pt x 501.875pt>
+<images/test4/krok4.png, id=1235, 1003.75pt x 501.875pt>
 File: images/test4/krok4.png Graphic file (type png)
 <use images/test4/krok4.png>
 Package pdftex.def Info: images/test4/krok4.png  used on input line 217.
@@ -2208,12 +2195,12 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 ]
 
 [87]
-<images/plans/plan_IIBG.png, id=1277, 1792.6975pt x 781.92125pt>
+<images/plans/plan_IIBG.png, id=1284, 1792.6975pt x 781.92125pt>
 File: images/plans/plan_IIBG.png Graphic file (type png)
 <use images/plans/plan_IIBG.png>
 Package pdftex.def Info: images/plans/plan_IIBG.png  used on input line 429.
 (pdftex.def)             Requested size: 652.70158pt x 284.68898pt.
-<images/plans/plan_IIBG_koper.png, id=1278, 1164.35pt x 854.19125pt>
+<images/plans/plan_IIBG_koper.png, id=1285, 1164.35pt x 854.19125pt>
 File: images/plans/plan_IIBG_koper.png Graphic file (type png)
 <use images/plans/plan_IIBG_koper.png>
 Package pdftex.def Info: images/plans/plan_IIBG_koper.png  used on input line 434.
@@ -2231,7 +2218,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [89 <./images/plans/plan_IIBG.png>]
 
 [90 <./images/plans/plan_IIBG_koper.png>]
-<images/plans/plan_blok_polaczony_2.png, id=1297, 1791.69376pt x 650.43pt>
+<images/plans/plan_blok_polaczony_2.png, id=1304, 1791.69376pt x 650.43pt>
 File: images/plans/plan_blok_polaczony_2.png Graphic file (type png)
 <use images/plans/plan_blok_polaczony_2.png>
 Package pdftex.def Info: images/plans/plan_blok_polaczony_2.png  used on input line 449.
@@ -2276,7 +2263,7 @@ Underfull \vbox (badness 6893) has occurred while \output is active []
 
 
 [99]
-runsystem(latexminted cleantemp  --timestamp 20251206182853 FAD58DE7366495DB4650CFEFAC2FCD61)...executed safely (allowed).
+runsystem(latexminted cleantemp  --timestamp 20251207001620 FAD58DE7366495DB4650CFEFAC2FCD61)...executed safely (allowed).
 
  (./main.aux)
  ***********
@@ -2291,18 +2278,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: DAF966BDE43CCFC811FBF974FA38F6EC;14742.
  ) 
 Here is how much of TeX's memory you used:
- 51676 strings out of 475136
- 1127778 string characters out of 5766290
- 1985746 words of memory out of 5000000
- 73109 multiletter control sequences out of 15000+600000
- 645803 words of font info for 202 fonts, out of 8000000 for 9000
+ 51677 strings out of 475136
+ 1127777 string characters out of 5766290
+ 1985699 words of memory out of 5000000
+ 73107 multiletter control sequences out of 15000+600000
+ 645900 words of font info for 203 fonts, out of 8000000 for 9000
  34 hyphenation exceptions out of 8191
  107i,21n,110p,1045b,2208s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eufm7.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmib10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (105 pages, 6065272 bytes).
+Output written on main.pdf (105 pages, 6071877 bytes).
 PDF statistics:
- 1630 PDF objects out of 1728 (max. 8388607)
- 1354 compressed objects within 14 object streams
- 441 named destinations out of 1000 (max. 500000)
+ 1637 PDF objects out of 1728 (max. 8388607)
+ 1361 compressed objects within 14 object streams
+ 442 named destinations out of 1000 (max. 500000)
  47488 words of extra memory for PDF output out of 51595 (max. 10000000)
 
