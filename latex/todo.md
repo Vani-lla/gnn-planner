@@ -60,6 +60,7 @@
 - Napisać streszczenie
 - Dodać opis do potężnego pseudokodu
 - Poprawienie diagramu dekompozycji
+- Przykładowy wynik etap 3ci
 - &check; Słownictwo backend/frontend/endpoint/widoki
 
 ### Wszelkie inne poprawki :|

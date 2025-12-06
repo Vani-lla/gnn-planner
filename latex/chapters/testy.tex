@@ -220,86 +220,253 @@
 
 
 \section{Analiza jakości wyników generowania planu lekcji}
-    Dane przekazane przez placówkę oświatową pochodzą z początkowej fazy procesu układania planu lekcji i uległy zmianom po uzyskaniu pełnych informacji o uczniach.
-    W szczególności nie obejmują one lekcji wychowawczych (LW) oraz zajęć dodanych na końcowym etapie tworzenia planu (np. EO, EZ, \dots).
-    W konsekwencji nie było możliwe pełne zamodelowanie tych elementów ani uwzględnienie ich podczas optymalizacji planu.
+    \subsection{Omówienie danych wejściowych}
+        Dane przekazane przez placówkę oświatową pochodzą z początkowej fazy procesu układania planu lekcji i uległy zmianom po uzyskaniu pełnych informacji o uczniach.
+        W szczególności nie obejmują one lekcji wychowawczych (LW) oraz zajęć dodanych na końcowym etapie tworzenia planu (np. EO, EZ, \dots).
+        W konsekwencji nie było możliwe pełne zamodelowanie tych elementów ani uwzględnienie ich podczas optymalizacji planu.
 
-    Istotnym ograniczeniem była również kwestia ochrony danych osobowych nauczycieli --- nie uzyskałem dostępu do imion i nazwisk, co uniemożliwiło identyfikację sytuacji, w których jeden nauczyciel prowadzi więcej niż jeden przedmiot.
-    Tym samym nie można było zamodelować potencjalnych konfliktów wynikających z równoległego prowadzenia zajęć w różnych klasach przez tego samego nauczyciela.
+        Istotnym ograniczeniem była również kwestia ochrony danych osobowych nauczycieli --- nie uzyskałem dostępu do imion i nazwisk, co uniemożliwiło identyfikację sytuacji, w których jeden nauczyciel prowadzi więcej niż jeden przedmiot.
+        Tym samym nie można było zamodelować potencjalnych konfliktów wynikających z równoległego prowadzenia zajęć w różnych klasach przez tego samego nauczyciela.
+    
+    \subsection{Omówienie całego planu}
+        Plan omówiony poniżej został wygenerowany używając osobnika przedstawionego w punkcie~\ref{subsection:przykladowy_ewolucyjny}.
 
-    Uwzględniając powyższe ograniczenia, szczególnej analizie poddałem klasy o profilach łączonych, ponieważ to właśnie dla nich ręczne ułożenie planu jest najbardziej wymagające.
-    W moim zbiorze danych klasa IIAC łączy profil psychologiczny z prawnym, co oznacza konieczność równoległego prowadzenia bloków lekcyjnych dotyczących obu ścieżek kształcenia.
-    Wygenerowany plan lekcji dla tej klasy przedstawiłem na rysunku~\ref{fig:plan_IIBG}. 
-    Dla porównania, na rysunku~\ref{fig:plan_IIBG_koper} zaprezentowałem plan opracowany ręcznie przez szkołę.
+        Ocenianie jakości wyników należy zacząć od analizy obciążeń dydaktycznych.
+        Na rysunku~\ref{fig:dydaktyczne_nauczyciele_tygodniowo} przedstawiono histogram wymaganej tygodniowej liczby godzin lekcyjnych dla nauczycieli.
+        Analogicznie, na rysunku~\ref{fig:dydaktyczne_klasy_tygodniowo} zaprezentowano histogram liczby obowiązkowych godzin lekcyjnych dla klas.
 
-    % Dane które dostałem od placówki oświatowej są z początkowej fazy układania planu lekcji.
-    % Uległy one zmianom kiedy szkoła dostała dokładne dane o uczniach.
-    % Przede wszystkim nie są zapisane lekcje wychowawcze (LW) oraz inne lekcje, które dostały dodane na samym końcu układania planu lekcji (EO, EZ, \dots).
-    % Przez to nie mogłem ich zamodelować i zabrać pod uwagę podczas układania planu lekcji.
-    % Kolejnym aspektem jest prywatność imień i nazwisk nauczycieli --- nie uzyskałem dostępu do tych chronionych danych.
-    % Oznacza to, że w przypadku gdzie jeden nauczyciel uczy 2 różnych przedmiotów, to nie byłem w stanie tego zamodelować.
+        \begin{samepage}
+            \begin{figure}[h]
+                \centering
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        ybar,
+                        bar width=1.5em,
+                        xlabel={Obciążenie dydaktyczne (godziny)},
+                        x label style = {yshift=-0.6em},
+                        ylabel={Liczność},
+                        width=0.8\textwidth,
+                        height=0.5\textwidth,
+                        xtick=data,
+                        ymin=0,
+                        xticklabels={0-2, 3-5, 6-8, 9-11, 12-14, 15-17, 18-20, 21-23, 24-26, 27-29, 30-32, 33-35},
+                        xtick={0,1,2,3,4,5,6,7,8,9,10,11},
+                        x tick label style={rotate=30, anchor=center, yshift=-0.6em, xshift=-0.3em}
+                    ]
+                    \addplot coordinates {
+                        (0, 14+0+4)  % 0-2
+                        (1, 3+1+4)   % 3-5
+                        (2, 0+4+3)   % 6-8
+                        (3, 1+2+3)   % 9-11
+                        (4, 2+3+1)   % 12-14
+                        (5, 2+2+4)   % 15-17
+                        (6, 0+8+9)   % 18-20
+                        (7, 5+1+1)   % 21-23
+                        (8, 0+0+1)   % 24-26
+                        (9, 0+0+0)   % 27-29
+                        (10, 0+0+0)  % 30-32
+                        (11, 0+1+0)  % 33-35
+                    };
+                    \end{axis}
+                \end{tikzpicture}
+                \caption{Histogram obciążeń dydaktycznych nauczycieli tygodniowo}\label{fig:dydaktyczne_nauczyciele_tygodniowo}
+            \end{figure}
+    
+            \begin{figure}[h]
+                \centering
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        ybar,
+                        bar width=1.5em,
+                        xlabel={Obciążenie dydaktyczne per dzień (godziny)},
+                        ylabel={Liczność},
+                        width=0.8\textwidth,
+                        height=0.5\textwidth,
+                        xtick=data,
+                        ymin=0,
+                    ]
+                    \addplot coordinates {
+                        (22, 1)
+                        (23, 1)
+                        (24, 0)
+                        (25, 2)
+                        (26, 1)
+                        (27, 1)
+                        (28, 1)
+                        (29, 2)
+                        (30, 1)
+                        (31, 1)
+                        (32, 2)
+                        (33, 3)
+                        (34, 1)
+                        (35, 2)
+                        (36, 2)
+                    };
+                    \end{axis}
+                \end{tikzpicture}
+                \caption{Histogram obciążeń dydaktycznych uczniów tygodniowo}\label{fig:dydaktyczne_klasy_tygodniowo}
+            \end{figure}
+        \end{samepage}
 
-    % Mając to na uwadze warto przyjrzeć się planom dla klas o łączonych profilach.
-    % Są to klasy dla których szczególnie trudno ułożyć ręcznie plan ze względu na niestandardowe bloki lekcyjne.
-    % Przykładowo w moich danych klasa IIBG jest klasą, która łączy profil językowy z profilem ekonomicznym.
-    % W praktyce oznacza to, że zajęcia z programu jednego profilu muszą odbywać się jednocześnie z zajęciami drugiego profilu.
-    % Plan lekcji wygenerowany przez algorytm przedstawiłem na rysunku~\ref{fig:plan_IIBG}, dla porównania plan stworzony ręcznie przez placówkę edukacyjną przedstawiono na rysunku~\ref{fig:plan_IIBG_koper}.
+        Z przedstawionych histogramów wynika, że wielu nauczycielom przypisano tygodniowe obciążenie równe zero.
+        Wynika to z faktu, że szkoła dysponuje większą liczbą nauczycieli, niż jest w praktyce potrzebne do realizacji aktualnej liczby zajęć.
+        W rezultacie wiele nauczycieli nie zostaje przypisanych do prowadzenia lekcji.
+        Ponadto przez anonimowość nazwisk nauczycieli, niektórzy nauczyciele zostali w modelu sztucznie rozbici na dwie lub trzy osoby.
+        Powoduje to sztuczne zaniżenie wymaganej tygodniowo liczby godzin od poszczególnych nauczycieli.
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{images/plans/plan_IIBG.png}
-        \caption{Wygenerowany plan lekcji dla klasy IIAC}\label{fig:plan_IIBG}
-    \end{figure}
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{images/plans/plan_IIBG_koper.png}
-        \caption{Plan lekcji dla klasy IIAC stworzony przez szkołę}\label{fig:plan_IIBG_koper}
-    \end{figure}
+        Z kolei, ze względu na nieuwzględnienie części lekcji opisanych wcześniej, wymagana tygodniowa liczba godzin dla klas jest również sztucznie zaniżona.
+        Mimo tego można zaobserwować, że niektóre klasy mają znacząco niższe obciążenia tygodniowe niż pozostałe.
+        Wynika to przede wszystkim z faktu, że klasy maturalne realizują istotnie mniejszą liczbę zajęć niż, przykładowo, klasy pierwsze.
 
-    Analizując wygenerowany plan można zauważyć, że algorytm poprawnie odwzorował wymagane bloki lekcyjne, takie jak jednoczesne prowadzenie języka biologii i wiedzy o społeczeństwie, a także prawidłowo przydzielił sale o specjalnym przeznaczeniu (sale gimnastyczne, pracownie informatyczne, \dots).
-    Plan charakteryzuje się również równomiernym rozkładem obciążeń dydaktycznych w ciągu tygodnia.
+        \clearpage
 
-    Kolejnym istotnym aspektem jest prawidłowe zaplanowanie zajęć prowadzonych jednocześnie dla wielu klas.
-    Najczęściej występują tu bloki językowe obejmujące język francuski, niemiecki oraz rosyjski.
-    Przykład takiego bloku, realizowanego w środy, przedstawiono na rysunku~\ref{fig:plan_blok}.
+        Biorąc pod uwagę te obserwacje, możemy przejść do analizy dziennego obciążenia dydaktycznego.
+        Na rysunkach~\ref{fig:dydaktyczne_nauczyciele_dni} oraz~\ref{fig:dydaktyczne_nauczyciele_klasy} przedstawiono odpowiednio histogram dziennych obciążeń nauczycieli i klas.
 
-    % Jak możemy zauważyć wygenerowany plan poprawnie wygenerował niestandardowe bloki lekcyjne, takie jak język niemiecki prowadzony razem z matematyką, oraz poprawnie przypisał odpowiednie sale do przedmiotów (Sale gimnastyczne, sale informatyczne, \dots).
-    % Widzimy także równomierny przydział obciążeń dydaktycznych dla każdego dnia.
+        \begin{samepage}
+            \begin{figure}[h]
+                \centering
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        ybar,
+                        bar width=1.5em,
+                        xlabel={Obciążenie dydaktyczne per dzień (godziny)},
+                        ylabel={Liczność},
+                        width=0.8\textwidth,
+                        height=0.5\textwidth,
+                        xtick=data,
+                        ymin=0,
+                    ]
+                    \addplot coordinates {
+                        (0,130)
+                        (1,18)
+                        (2,44)
+                        (3,45)
+                        (4,51)
+                        (5,44)
+                        (6,21)
+                        (7,11)
+                        (8,1)
+                        (9,1)
+                        (10,2)
+                        (11,0)
+                        (12,1)
+                        (13,0)
+                        (14,1)
+                    };
+                    \end{axis}
+                \end{tikzpicture}
+                \caption{Histogram obciążeń dydaktycznych nauczycieli}\label{fig:dydaktyczne_nauczyciele_dni}
+            \end{figure}
+    
+            \begin{figure}[h]
+                \centering
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        ybar,
+                        bar width=1.5em,
+                        xlabel={Obciążenie dydaktyczne per dzień (godziny)},
+                        ylabel={Liczność},
+                        width=0.8\textwidth,
+                        height=0.5\textwidth,
+                        xtick=data,
+                        ymin=0,
+                    ]
+                    \addplot coordinates {
+                        (4,6)
+                        (5,27)
+                        (6,37)
+                        (7,28)
+                        (8,12)
+                    };
+                    \end{axis}
+                \end{tikzpicture}
+                \caption{Histogram obciążeń dydaktycznych uczniów}\label{fig:dydaktyczne_nauczyciele_klasy}
+            \end{figure}
+        \end{samepage}
 
-    % Kolejnym ważnym aspektem są także lekcje, które są prowadzone dla wielu klas.
-    % Najczęściej występującymi międzyklasowymi blokami lekcyjnymi są bloki językowe zawierające język francuski, język niemiecki oraz język rosyjski.
-    % Przykładowo na rysunku~\ref{fig:plan_blok} pokazany blok rosyjski, francuski, niemiecki odbywający się w środę.
+        Z analizy wyników wynika, że nauczyciele mają liczne dni wolne.
+        Jest to zamierzony efekt, osiągnięty dzięki modyfikacji funkcji przystosowania w algorytmie ewolucyjnym.
+        Niestety, ze względu na zastosowane wagi $\theta_T = 1$ i $\theta_G = 2$, algorytm w większym stopniu optymalizował obciążenia klas niż nauczycieli.
+        W rezultacie pojawiły się dwa przypadki, w których nauczyciel ma zaplanowane 12 lub 14 godzin zajęć w jednym dniu.
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.2\textwidth]{images/plans/IIIC_blok.png}
-        \includegraphics[width=0.2\textwidth]{images/plans/IIID_blok.png}
-        \includegraphics[width=0.2\textwidth]{images/plans/IIIF_blok.png}
-        \caption{Środowy plan lekcji dla klas IIIC, IIID oraz IIIF}\label{fig:plan_blok}
-    \end{figure}
+        Zastosowane wagi spowodowały jednocześnie, że rozkład obciążeń uczniów jest bardzo korzystny.
+        Nie pojawiają się wartości skrajne ani nieakceptowalne.
+        Minimalne obciążenie, wynoszące 4 godziny, dotyczy klas maturalnych, które mają stosunkowo niską liczbę wymaganych godzin tygodniowo (22 lub 23).
+        Wszystkie pozostałe wyniki mieszczą się w przedziale od 4 do 8 godzin dziennie, co umożliwia tworzenie praktycznych i realistycznych planów lekcji.
 
-    Aby ocenić jakość wygenerowanych harmonogramów, przeanalizowałem liczbę okienek nauczycieli w planie zoptymalizowanym pod kątem minimalizacji ich liczby oraz w planie, który jedynie spełnia wszystkie ograniczenia, lecz nie został poddany optymalizacji.
-    Wyniki zestawiono w tabeli~\ref{tab:statystyki_planow}.
-    Ze względu na brak dostępu do szczegółowych danych dotyczących planu ułożonego ręcznie przez szkołę możliwe było jedynie porównanie wariantów wygenerowanych przez algorytm.
-    % Należy przeanalizować także liczbę okienek nauczycieli w wygenerowanym planie lekcji.
-    % Nie mam dostępu do danych z ręcznie ułozonego planu lekcji, ale mogę porównać liczbę okienek przy minimalizacji funkcji celu do liczby okienek przy zwyczajnych szukaniu rozwiązania, które jest wykonalne a nie optymalne.
-    % Najważniejsze statystyki przedstawiono w tabeli~\ref{tab:statystyki_planow}
+        \clearpage
+        
+        Aby ocenić jakość wygenerowanych harmonogramów, przeanalizowałem także liczbę okienek nauczycieli w planie zoptymalizowanym pod kątem minimalizacji ich liczby oraz w planie, który jedynie spełnia wszystkie ograniczenia, lecz nie został poddany optymalizacji.
+        Wyniki zestawiono w tabeli~\ref{tab:statystyki_planow}.
+        Ze względu na brak dostępu do szczegółowych danych dotyczących planu ułożonego ręcznie przez szkołę możliwe było jedynie porównanie wariantów wygenerowanych przez algorytm.
 
-    \begin{table}[h!]
-        \centering
-        % \setlength{\tabcolsep}{8pt} % Default value: 6pt
-        \renewcommand{\arraystretch}{1.3} % 4efault value: 1
-        \begin{tabular}{|p{0.45\textwidth}|c|c|c|c|c|c|}
-            \hline
-            \textbf{Dzień tygodnia} & Pon & Wt & Śr & Czw & Pt & Całościowo \\ \hline
-            \textbf{Liczba bloków} & 132 & 133 & 133 & 135 & 140 & 673 \\ \hline
-            \textbf{Liczba okienek przy minimalizacji} & 65 & 41 & 68 & 59 & 72 & 305 \\ \hline
-            \textbf{Liczba okienek przy minimalizacji per nauczyciel} & 1.05 & 0.98 & 1.10 & 0.95 & 1.16 & 5.24 \\ \hline
-            \textbf{Liczba okienek bez minimalizacji} & 172 & 157 & 141 & 139 & 133 & 742 \\ \hline
-            \textbf{Liczba okienek bez minimalizacji per nauczyciel} & 2.77 & 2.53 & 2.27 & 2.24 & 2.15 & 11.96 \\ \hline
-        \end{tabular}
-        \caption{Statystyki dla generowanych planów}\label{tab:statystyki_planow}
-    \end{table}
+        \begin{table}[H]
+            \centering
+            % \setlength{\tabcolsep}{8pt} % Default value: 6pt
+            \caption{Statystyki dla generowanych planów}\label{tab:statystyki_planow}
+            \renewcommand{\arraystretch}{1.3} % 4efault value: 1
+            \begin{tabular}{|p{0.45\textwidth}|c|c|c|c|c|c|}
+                \hline
+                \textbf{Dzień tygodnia} & Pon & Wt & Śr & Czw & Pt & Całościowo \\ \hline
+                \textbf{Liczba bloków} & 132 & 133 & 133 & 135 & 140 & 673 \\ \hline
+                \textbf{Liczba okienek przy minimalizacji} & 65 & 41 & 68 & 59 & 72 & 305 \\ \hline
+                \textbf{Liczba okienek przy minimalizacji per nauczyciel} & 1.05 & 0.98 & 1.10 & 0.95 & 1.16 & 5.24 \\ \hline
+                \textbf{Liczba okienek bez minimalizacji} & 172 & 157 & 141 & 139 & 133 & 742 \\ \hline
+                \textbf{Liczba okienek bez minimalizacji per nauczyciel} & 2.77 & 2.53 & 2.27 & 2.24 & 2.15 & 11.96 \\ \hline
+            \end{tabular}
+        \end{table}
 
-    Czas potrzebny na wygenerowanie planu zajęć z minimalizacją liczby okienek wyniósł 6 minut i 52 sekundy, co spełnia założenia projektowe.
-    Wyniki potwierdzają wysoką skuteczność algorytmu --- średnio około pięciu okienek w ciągu całego tygodnia na nauczyciela można uznać za wynik satysfakcjonujący.
+
+    \subsection{Omówienie szczególnych przypadków}
+        Szczególnej analizie poddałem klasy o profilach łączonych, ponieważ to właśnie dla nich ręczne ułożenie planu jest najbardziej wymagające.
+        W moim zbiorze danych klasa IIAC łączy profil psychologiczny z prawnym, co oznacza konieczność równoległego prowadzenia bloków lekcyjnych dotyczących obu ścieżek kształcenia.
+        Wygenerowany plan lekcji dla tej klasy przedstawiłem na rysunku~\ref{fig:plan_IIBG}. 
+        Dla porównania, na rysunku~\ref{fig:plan_IIBG_koper} zaprezentowałem plan opracowany ręcznie przez szkołę.
+
+        \begin{sidewaysfigure}[p]
+            \centering
+            \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{images/plans/plan_IIBG.png}
+            \caption{Wygenerowany plan lekcji dla klasy IIAC}\label{fig:plan_IIBG}
+        \end{sidewaysfigure}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.9\textwidth]{images/plans/plan_IIBG_koper.png}
+            \caption{Plan lekcji dla klasy IIAC stworzony przez szkołę}\label{fig:plan_IIBG_koper}
+        \end{figure}
+
+        Analizując wygenerowany plan można zauważyć, że algorytm poprawnie odwzorował wymagane bloki lekcyjne, takie jak jednoczesne prowadzenie języka biologii i wiedzy o społeczeństwie, a także prawidłowo przydzielił sale o specjalnym przeznaczeniu (sale gimnastyczne, pracownie informatyczne, \dots).
+        Plan charakteryzuje się również równomiernym rozkładem obciążeń dydaktycznych w ciągu tygodnia.
+
+        \clearpage
+
+        Kolejnym istotnym aspektem jest prawidłowe zaplanowanie zajęć prowadzonych jednocześnie dla wielu klas.
+        Najczęściej występują tu bloki językowe obejmujące język francuski, niemiecki oraz rosyjski.
+        Przykład takiego bloku, realizowanego w środy, przedstawiono na rysunku~\ref{fig:plan_blok}.
+
+        \begin{sidewaysfigure}[p]
+            \centering
+            \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{images/plans/plan_blok_polaczony_2.png}
+            \caption{Zestawienie środowych planów lekcji dla kolejno klas IIIA, IIIC, IIID, IIIF i IIIG}\label{fig:plan_blok}
+        \end{sidewaysfigure}
+
+        Wyniki potwierdzają wysoką skuteczność algorytmu --- średnio około pięciu okienek w ciągu całego tygodnia na nauczyciela można uznać za wynik satysfakcjonujący.
+
+
+    \subsection{Wydajność generowania planu lekcji}
+        Testy wydajnościowe przeprowadzono na następującej konfiguracji sprzętowej:
+        \begin{itemize}
+            \item \textbf{procesor:} AMD Ryzen 7 2700X (16 wątków), 3.875 GHz,
+            \item \textbf{karta graficzna:} AMD Radeon RX 7700 XT,
+            \item \textbf{pamięć RAM:} 16GB,
+            \item \textbf{system operacyjny}: Linux 6.17.9.arch1-1.
+        \end{itemize}
+        Przy czym warto zaznaczyć, że algorytm nie korzysta z karty graficznej.
+
+        Czas generowania bloków lekcyjnych jest znikomy w porównaniu do pozostałych etapów (poniżej jednej sekundy).
+        Średni czas działania algorytmu ewolucyjnego, obliczony na podstawie pięciu niezależnych prób, wyniósł 95 sekund.
+        Następnie wygenerowanie pełnego planu zajęć wraz z minimalizacją liczby okienek zajęło 6 minut i 52 sekundy.
+
+        Łączny czas potrzebny do uzyskania kompletnego planu lekcji dla rzeczywistych danych wyniósł zatem około 8.45 minuty.
+        Jest to bardzo dobry rezultat, biorąc pod uwagę złożoność problemu, liczne zależności oraz obecność klas o profilach łączonych.
+        Ponadto czas ten mieści się w wymaganym limicie 10 minut, określonym w wymaganiach niefunkcjonalnych systemu.

@@ -125,7 +125,11 @@
 \contentsline {subsection}{\numberline {5.2.3}Test importowania i edytowania wymagań głównych}{81}{subsection.5.2.3}%
 \contentsline {subsection}{\numberline {5.2.4}Test edytowania dostępności nauczycieli}{82}{subsection.5.2.4}%
 \contentsline {section}{\numberline {5.3}Analiza jakości wyników generowania planu lekcji}{83}{section.5.3}%
-\contentsline {chapter}{\numberline {6}Wnioski i perspektywy rozwoju}{87}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Problemy rozwiązania}{87}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Perspektywy rozwoju}{87}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Wnioski}{88}{section.6.3}%
+\contentsline {subsection}{\numberline {5.3.1}Omówienie danych wejściowych}{83}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Omówienie całego planu}{83}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Omówienie szczególnych przypadków}{88}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}Wydajność generowania planu lekcji}{91}{subsection.5.3.4}%
+\contentsline {chapter}{\numberline {6}Wnioski i perspektywy rozwoju}{93}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Problemy rozwiązania}{93}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Perspektywy rozwoju}{93}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Wnioski}{94}{section.6.3}%

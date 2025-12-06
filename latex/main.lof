@@ -16,7 +16,7 @@
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Struktura algorytmu z doborem technik}}{23}{figure.caption.24}%
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Wizualizacja rozwiązania klasycznego problemu JSSP z wykorzystaniem zmiennych przedziałowych~\cite {googleortoolsjssp}}}{27}{figure.caption.31}%
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Wykres funkcji użytej do ewaluacji rozkładu godzin nauczycieli i klas na przestrzeni tygodnia.}}{35}{figure.caption.35}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Wykres wartości funkcji cely dla pięciu uruchomień algorytmu genetycznego}}{39}{figure.caption.39}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Wykres wartości funkcji celu dla pięciu uruchomień algorytmu genetycznego}}{39}{figure.caption.39}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Diagram wymagań}}{47}{figure.caption.48}%
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Diagram przypadków użycia}}{48}{figure.caption.49}%
@@ -47,7 +47,11 @@
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Zrzuty ekranów wykonanych kroków dla scenariusza przeglądania planów lekcji}}{81}{figure.caption.119}%
 \contentsline {figure}{\numberline {5.3}{\ignorespaces Zrzuty ekranów wykonanych kroków dla scenariusza importowania i edytowania wymagań głównych}}{82}{figure.caption.120}%
 \contentsline {figure}{\numberline {5.4}{\ignorespaces Zrzuty ekranów wykonanych kroków dla scenariusza edytowania dostępności nauczycieli}}{83}{figure.caption.121}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Wygenerowany plan lekcji dla klasy IIAC}}{84}{figure.caption.122}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Plan lekcji dla klasy IIAC stworzony przez szkołę}}{84}{figure.caption.123}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Środowy plan lekcji dla klas IIIC, IIID oraz IIIF}}{85}{figure.caption.124}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Histogram obciążeń dydaktycznych nauczycieli tygodniowo}}{84}{figure.caption.122}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Histogram obciążeń dydaktycznych uczniów tygodniowo}}{85}{figure.caption.123}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Histogram obciążeń dydaktycznych nauczycieli}}{86}{figure.caption.124}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Histogram obciążeń dydaktycznych uczniów}}{87}{figure.caption.125}%
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Wygenerowany plan lekcji dla klasy IIAC}}{89}{figure.caption.127}%
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Plan lekcji dla klasy IIAC stworzony przez szkołę}}{90}{figure.caption.128}%
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Zestawienie środowych planów lekcji dla kolejno klas IIIA, IIIC, IIID, IIIF i IIIG}}{92}{figure.caption.129}%
 \addvspace {10\p@ }

@@ -66,13 +66,36 @@ def run_evolutionary_process(generations: int, req_set_id: int):
     # )
     # print(time() - start)
 
-    for v in teacher_day_hours(BLOCK_LIST, REQ_SET, best_specimen).values():
-        print(v)
-    print("------")
+    ll = []
+    for k, v in teacher_day_hours(BLOCK_LIST, REQ_SET, best_specimen).items():
+        # print(sum(v))
+        ll.append(sum(v))
+    l = np.array(list(teacher_day_hours(BLOCK_LIST, REQ_SET, best_specimen).values())).flatten()
+    for x in np.unique(l):
+        print(x, np.sum(l==x))
+    print("--")
+    for x in range(max(ll) + 1):
+        print(f"({x}, {ll.count(x)})")
+        
+    print("------ xd")
+    l = []
+    ll = []
     for k, v in group_day_lessons(BLOCK_LIST, REQ_SET, best_specimen).items():
-        print(k.name, v)
+        ll.append(sum(v))
+        l.extend(v)
+    print("--")
+    for x in range(max(ll)):
+        print(f"({x}, {ll.count(x)})")
+        
+    print("--")
+    l = np.array(l)
+    # l = np.array(list(group_day_lessons(BLOCK_LIST, REQ_SET, best_specimen).values())).flatten()
+    # print(np.unique(l))
+    for x in range(0, 14):
+        print(x, np.sum(l==x))
 
     start = time()
+    return
     plan = solve_schedule(REQ_SET, BLOCK_LIST, best_specimen)
     print(time() - start)
 
