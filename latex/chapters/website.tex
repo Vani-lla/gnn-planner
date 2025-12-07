@@ -8,6 +8,8 @@
     \end{itemize}
 
 \section{Specyfikacja wymagań}
+    Pełny zestaw wymagań, wraz ze szczegółowymi opisami, został zwizualizowany w formie diagramu wymagań na rysunku \ref{fig:diagram_wymagan}.
+
     \subsection{Wymagania funkcjonalne}\label{subsection:wymagania_funkcjonalne}
         Aplikacja musi realizować cztery kluczowe grupy funkcjonalności:
         \begin{itemize}
@@ -17,6 +19,7 @@
             \item \textbf{przeglądanie planów} --- wizualizacja planów z perspektywy nauczycieli i klas dla wielu wariantów.
         \end{itemize}
 
+    \newpage
     \subsection{Wymagania niefunkcjonalne}
         System musi spełniać następujące wymagania jakościowe:
 
@@ -34,8 +37,6 @@
                 \item Przejrzystość, minimalizm, wygoda i prostota w użytkowaniu interfejsu.
             \end{itemize}
         \end{itemize}
-
-        Szczegółowa specyfikacja wymagań została przedstawiona na rysunku diagramu wymagań \ref{fig:diagram_wymagan}.
 
             \begin{sidewaysfigure}[!p]
                 \centering
@@ -105,17 +106,17 @@
     %     Uwzględnienie zarówno wymagań funkcjonalnych, jak i niefunkcjonalnych pozwala na stworzenie kompletnej aplikacji, która nie tylko realizuje założone funkcje, ale także zapewnia komfortowe i niezawodne środowisko pracy dla docelowych użytkowników.
 
     \subsection{Przypadki użycia}
-        Diagram przypadków użycia pozwala na zwizualizowanie wcześniej omawianych wymagań funkcjonalnych w formie graficznej, ukazując interakcje między użytkownikami a systemem.
+        Diagram przypadków użycia przedstawiony na rysunku~\ref{fig:usecases} pozwala na zwizualizowanie wcześniej omawianych wymagań funkcjonalnych w formie graficznej, ukazując interakcje między użytkownikami a systemem.
         Ułatwia on powiązanie specyfikacji wymagań z projektem architektury, stanowiąc punkt wyjścia do dalszych etapów analizy i implementacji.
-        W niniejszej sekcji omawiam kluczowe przypadki użycia zilustrowane na diagramie, obejmujące zarówno generowanie planów lekcji, ich przeglądanie, jak i zarządzanie danymi wejściowymi systemu.
+        W niniejszej sekcji omawiam kluczowe przypadki użycia zilustrowane na diagramie w tabelach od~\ref{tab:use_case_1} do~\ref{tab:use_case_last}, obejmujące zarówno generowanie planów lekcji, ich przeglądanie, jak i zarządzanie danymi wejściowymi systemu.
 
-        \begin{figure}[!h]
+        \begin{sidewaysfigure}[p]
             \centering
-            \includegraphics[width=1.0\textwidth]{images/diagramy/Use Case Diagram1.png}
+            \includegraphics[width=0.85\textwidth,height=0.85\textheight,keepaspectratio]{images/diagramy/Use Case Diagram1.png}
             \caption{Diagram przypadków użycia}\label{fig:usecases}
-        \end{figure}
+        \end{sidewaysfigure}
 
-        \begin{table}[h!]
+        \begin{table}[p]
             \centering
             % \setlength{\tabcolsep}{8pt}
             \renewcommand{\arraystretch}{1.4}
@@ -146,10 +147,10 @@
                 & 3. Użytkownik wybiera widok \\
                 & 4. System wyświetla odpowiedni plan lekcji z danej perspektywy \\ \hline
             \end{tabular}
-            \caption{Przypadek użycia UC01}
+            \caption{Przypadek użycia UC01}\label{tab:use_case_1}
         \end{table}
 
-        \begin{table}[h!]
+        \begin{table}[p]
             \centering
             % \setlength{\tabcolsep}{8pt}
             \renewcommand{\arraystretch}{1.4}
@@ -182,7 +183,7 @@
             \caption{Przypadek użycia UC02}
         \end{table}
 
-        \begin{table}[h!]
+        \begin{table}[p]
             \centering
             % \setlength{\tabcolsep}{8pt}
             \renewcommand{\arraystretch}{1.4}
@@ -217,7 +218,7 @@
             \caption{Przypadek użycia UC03}
         \end{table}
 
-        \begin{table}[h!]
+        \begin{table}[p]
             \centering
             % \setlength{\tabcolsep}{8pt}
             \renewcommand{\arraystretch}{1.4}
@@ -250,7 +251,7 @@
             \caption{Przypadek użycia UC04}
         \end{table}
 
-        \begin{table}[h!]
+        \begin{table}[p]
             \centering
             % \setlength{\tabcolsep}{8pt}
             \renewcommand{\arraystretch}{1.4}
@@ -278,7 +279,7 @@
             \caption{Przypadek użycia UC05}
         \end{table}
 
-        \begin{table}[h!]
+        \begin{table}[p]
             \centering
             % \setlength{\tabcolsep}{8pt}
             \renewcommand{\arraystretch}{1.4}
@@ -307,7 +308,7 @@
             \caption{Przypadek użycia UC06}
         \end{table}
 
-        \begin{table}[h!]
+        \begin{table}[p]
             \centering
             % \setlength{\tabcolsep}{8pt}
             \renewcommand{\arraystretch}{1.4}
@@ -344,7 +345,7 @@
             \caption{Przypadek użycia UC07}
         \end{table}
 
-        \begin{table}[h!]
+        \begin{table}[p]
             \centering
             % \setlength{\tabcolsep}{8pt}
             \renewcommand{\arraystretch}{1.4}
@@ -374,7 +375,7 @@
             \caption{Przypadek użycia UC08}
         \end{table}
 
-        \begin{table}[h!]
+        \begin{table}[p]
             \centering
             % \setlength{\tabcolsep}{8pt}
             \renewcommand{\arraystretch}{1.4}
@@ -404,7 +405,7 @@
             \caption{Przypadek użycia UC09}
         \end{table}
 
-        \begin{table}[h!]
+        \begin{table}[p]
             \centering
             % \setlength{\tabcolsep}{8pt}
             \renewcommand{\arraystretch}{1.4}
@@ -433,7 +434,7 @@
             \caption{Przypadek użycia UC10}
         \end{table}
 
-        \begin{table}[h!]
+        \begin{table}[p]
             \centering
             % \setlength{\tabcolsep}{8pt}
             \renewcommand{\arraystretch}{1.4}
@@ -467,7 +468,7 @@
             \caption{Przypadek użycia UC11}
         \end{table}
 
-        \begin{table}[h!]
+        \begin{table}[p]
             \centering
             % \setlength{\tabcolsep}{8pt}
             \renewcommand{\arraystretch}{1.4}
@@ -494,7 +495,7 @@
                 & System wyświetla powiadomienie o powodzeniu zapisu \\
                 & System wybiera nowy zbiór zasobów bądź ograniczeń \\ \hline
             \end{tabular}
-            \caption{Przypadek użycia UC12}
+            \caption{Przypadek użycia UC12}\label{tab:use_case_last}
         \end{table}
     \clearpage
 
@@ -506,11 +507,11 @@
         \subsubsection{Diagram sekwencji generowania planu lekcji}
             Najważniejszym do zaprojektowania jest diagram sekwencji generowania planu lekcji.
             Jego poprawne zaprojektowanie ma istotny wpływ na czas oczekiwania użytkownika, ponieważ nadmiarowa komunikacja między interfejsem a backendem może znacząco wydłużyć proces.
-            Diagram przedstawia minimalny, konieczny zestaw komunikatów prowadzących do wywołania algorytmu optymalizacyjnego i zwrócenia użytkownikowi gotowego planu.
+            Diagram na rysunku~\ref{fig:diag_sekw_1} przedstawia minimalny, konieczny zestaw komunikatów prowadzących do wywołania algorytmu optymalizacyjnego i zwrócenia użytkownikowi gotowego planu.
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=1.0\textwidth]{images/diagramy/Sequence Diagram1.png}
-                \caption{Diagram sekwencji generowania planu lekcji}
+                \caption{Diagram sekwencji generowania planu lekcji}\label{fig:diag_sekw_1}
             \end{figure}
         
         \subsubsection{Diagram sekwencji przeglądania planów lekcji}
@@ -520,19 +521,20 @@
             
             Z tego powodu zastosowałem inne rozwiązanie --- po wybraniu konkretnego planu aplikacja wykonuje jedno większe zapytanie do bazy danych, a następnie cała dalsza filtracja odbywa się po stronie klienta.
             Minimalnie wydłuża to czas pierwszego ładowania, ale zapewnia pełną płynność późniejszej interakcji.
+            Proces został zilustrowany na diagramie~\ref{fig:diag_sekw_2}
             \begin{figure}[H]
                 \centering
-                \includegraphics[width=1.0\textwidth]{images/diagramy/Sequence Diagram2.png}
-                \caption{Diagram sekwencji dla przypadku użycia oglądania planu lekcji}
+                \includegraphics[width=0.9\textwidth]{images/diagramy/Sequence Diagram2.png}
+                \caption{Diagram sekwencji dla przypadku użycia oglądania planu lekcji}\label{fig:diag_sekw_2}
             \end{figure}
 
         \subsubsection{Diagram sekwencji wprowadzania i edycji danych}
-            Trzeci scenariusz obejmuje wprowadzanie lub edycję danych, takich jak wymagania główne.
+            Trzeci scenariusz obejmuje wprowadzanie lub edycję danych, takich jak wymagania główne i został zaprezentowany na rysunku~\ref{fig:diag_sekw_3}.
             Kluczowym założeniem było ograniczenie liczby zapytań do serwera przy jednoczesnym zapewnieniu użytkownikowi informacji zwrotnej o powodzeniu operacji.
             \begin{figure}[H]
                 \centering
-                \includegraphics[width=1.0\textwidth]{images/diagramy/Sequence Diagram3.png}
-                \caption{Diagram sekwencji edycji bądź wprowadzania wymagań głównych}
+                \includegraphics[width=0.9\textwidth]{images/diagramy/Sequence Diagram3.png}
+                \caption{Diagram sekwencji edycji bądź wprowadzania wymagań głównych}\label{fig:diag_sekw_3}
             \end{figure}
 
         \clearpage
@@ -597,12 +599,22 @@
         Aby zapewnić elastyczność, zastosowałem mechanizm zbiorów zasobów oraz zbiorów wymagań, dzięki czemu każdy wygenerowany plan odwołuje się do spójnej konfiguracji danych.
 
         Poniżej opisałem strukturę bazy danych, dzieląc ją na cztery grupy tabel:
-        tabele podstawowe, tabele wymagań, tabele agregujące, oraz tabele wyników.
+        \begin{itemize}
+            \item tabele podstawowe,
+            \item tabele wymagań, 
+            \item tabele agregujące,
+            \item tabele wyników.
+        \end{itemize}
+
+        Pełny diagram bazy danych znajduje się na rysunku~\ref{fig:baza_danych}, a omówienie kolumn tabel znajduje się w tabeli~\ref{tab:baza_danych}.
 
         \subsubsection{Tabele podstawowe}
-            Tabele podstawowe definiują fundamentalne zasoby szkoły, stanowiąc punkt odniesienia dla całego systemu:
+            Tabele podstawowe definiują fundamentalne zasoby szkoły, stanowiąc punkt odniesienia dla całego systemu.
+            Relacje między nimi przedstawiłem w tabeli~\ref{tab:relacje_baza_1}, a ich diagram na rysunku~\ref{fig:diagram_baza_1}.
+
             \begin{table}[H]
                 \centering
+                \caption{Tabele podstawowe zasobów szkolnych}\label{tab:relacje_baza_1}
                 \begin{tabular}{|r|l|}
                     \hline
                     \textbf{Tabela} & \textbf{Relacja} \\
@@ -613,7 +625,6 @@
                     \texttt{room} & M:N do \texttt{subject} \\
                     \hline
                 \end{tabular}
-                \caption{Tabele podstawowe zasobów szkolnych}
             \end{table}
 
             \noindent
@@ -631,18 +642,27 @@
                 \end{itemize}
             \end{itemize}
 
-            \begin{figure}[H]
+            \begin{figure}[!th]
                 \centering
                 \includegraphics[width=0.5\textwidth]{images/diagramy/diagram_db_podstawowe.png}
-                \caption{Diagram tabel podstawowych w bazie danych}
+                \caption{Diagram tabel podstawowych w bazie danych}\label{fig:diagram_baza_1}
             \end{figure}
+            \begin{figure}[!th]
+                \centering
+                \includegraphics[width=0.8\textwidth]{images/diagramy/diagram_db_wymagan.png}
+                \caption{Diagram tabel podstawowych i wymagań w bazie danych}\label{fig:diagram_baza_1}
+            \end{figure}
+
+        \clearpage
 
         \subsubsection{Tabele wymagań}
             Tabele wymagań definiują, co dokładnie należy umieścić w planie lekcji.
             W przeciwieństwie do tabel zasobów nie opisują one tego, co istnieje w szkole, lecz to, jakie lekcji muszą zostać wygenerowane.
+            Relacje tych tabel przedstawiłem w tabeli~\ref{tab:relacje_baza_2}, a ich diagram na rysunku~\ref{fig:diagram_baza_2}.
 
             \begin{table}[H]
                 \centering
+                \caption{Tabele definiujące wymagania i ograniczenia}\label{tab:relacje_baza_2}
                 \begin{tabular}{|r|l|}
                     \hline
                     \textbf{Tabela} & \textbf{Relacje} \\
@@ -652,7 +672,6 @@
                     \texttt{teacher\_availability} & N:1 z \texttt{teacher} \\
                     \hline
                 \end{tabular}
-                \caption{Tabele definiujące wymagania i ograniczenia}
             \end{table}
 
             \noindent
@@ -673,17 +692,13 @@
                 \end{itemize}
             \end{itemize}
 
-            \begin{figure}[H]
-                \centering
-                \includegraphics[width=0.8\textwidth]{images/diagramy/diagram_db_wymagan.png}
-                \caption{Diagram tabel podstawowych i wymagań w bazie danych}
-            \end{figure}
-
         \subsubsection{Zbiory danych}
-            Mechanizm zbiorów umożliwia grupowanie zasobów i wymagań dla różnych kontekstów:
+            Mechanizm zbiorów umożliwia grupowanie zasobów i wymagań dla różnych kontekstów.
+            Ich relacje przedstawiłem w tabeli~\ref{tab:relacje_baza_3}
 
             \begin{table}[H]
                 \centering
+                \caption{Tabele zbiorów zasobów}\label{tab:relacje_baza_3}
                 \begin{tabular}{|r|l|}
                     \hline
                     \textbf{Tabela} & \textbf{Relacja} \\
@@ -694,27 +709,29 @@
                     \texttt{room\_pool} & 1:N z room \\
                     \hline
                 \end{tabular}
-                \caption{Tabele zbiorów zasobów}
             \end{table}
 
             Dla nauczycieli i przedmiotów zastosowałem relację wiele-do-wielu, ponieważ zasoby te charakteryzują się względną stabilnością pomiędzy latami szkolnymi --- większość nauczycieli i przedmiotów pozostaje niezmienna, a jedynie dodawane są nowe rekordy dla nowo zatrudnionych pedagogów lub wprowadzanych przedmiotów.
 
-            W przypadku sal przyjęto relację jeden-do-wielu, co wynika z całkowitej niezmienności tej puli zasobów pomiędzy okresami szkolnymi.
+            \newpage
+            W przypadku sal przyjąłem relację jeden-do-wielu, co wynika z całkowitej niezmienności tej puli zasobów pomiędzy okresami szkolnymi.
             Natomiast dla klas zastosowałem relację jeden-do-wielu, odzwierciedlającą coroczną całkowitą wymianę składu grup uczniowskich --- klasy z poprzedniego roku nie są ponownie wykorzystywane w kolejnych okresach, co eliminuje potrzebę stosowania relacji wiele-do-wielu.
 
             Szczególną rolę pełni tabela \texttt{requirement\_set} (zbiór wymagań głównych), ponieważ agreguje wszystkie inne zasoby oraz ogarniczenia.
+            Jej relacje przedstawiłem w tabeli~\ref{tab:relacje_baza_4}.
 
             \begin{table}[H]
                 \centering
+                \caption{Tabela requirement\_set}\label{tab:relacje_baza_4}
                 \begin{tabular}{|r|l|}
                     \hline
                     \textbf{Tabela} & \textbf{Relacja} \\
                     \hline
-                    \multirow{2}{*}{\texttt{requirement\_set}} & 1:N z \texttt{requirement}, \texttt{teacher\_availability}, \texttt{subject\_block} \\
-                    & N:1 z \texttt{subject\_pool}, \texttt{student\_group\_pool}, \texttt{teacher\_pool}, \texttt{room\_pool} \\
+                    \multirow{3}{*}{\texttt{requirement\_set}} & 1:N z \texttt{requirement}, \texttt{teacher\_availability}, \texttt{subject\_block} \\
+                    & N:1 z \texttt{subject\_pool}, \texttt{student\_group\_pool}, \\
+                    & \ \ \ \ \ \ \ \ \texttt{teacher\_pool} oraz \texttt{room\_pool} \\
                     \hline
                 \end{tabular}
-                \caption{Tabela requirement\_set}
             \end{table} 
 
             \noindent
@@ -722,7 +739,7 @@
             \begin{itemize}
                 \item \texttt{requirement\_set} każdy rekord opisuje jedno wymaganie główne.
                 \begin{itemize}
-                    \item Posiada relację 1:N z tabelą \texttt{requirement}, \texttt{teacher\_availability} oraz \texttt{subject\_block}. \\
+                    \item 1:N z tabelami \texttt{requirement}, \texttt{teacher\_availability}, \texttt{subject\_block}. \\
                     \item Zawiera klucze obce do tabel \texttt{subject\_pool}, \texttt{student\_group\_pool}, \texttt{teacher\_pool} oraz \texttt{room\_pool}.
                 \end{itemize}
             \end{itemize}
@@ -732,10 +749,11 @@
             Zaprezentowany model bazy danych zapewnia elastyczność niezbędną do obsługi zmieniających się wymagań szkolnych poprzez mechanizm zbiorów. Struktura umożliwia wielokrotne wykorzystanie zasobów pomiędzy różnymi konfiguracjami planów, zachowując przy tym prostotę i wydajność.
 
         \subsubsection{Tabele wyników}
-            Tabele przechowujące wygenerowane plany lekcji i ich przypisania:
+            Relacje tabel przechowujących wygenerowane plany lekcji i ich przypisania zaprezentowałem w tabeli~\ref{tab:relacje_baza_5}.
 
             \begin{table}[H]
                 \centering
+                \caption{Tabele przechowujące wygenerowane plany lekcji}\label{tab:relacje_baza_5}
                 \begin{tabular}{|l|l|}
                     \hline
                     \textbf{Tabela} & \textbf{Relacje} \\
@@ -744,7 +762,6 @@
                     \texttt{lesson} & N:1 z teacher, subject, room, student\_group, plan \\
                     \hline
                 \end{tabular}
-                \caption{Tabele przechowujące wygenerowane plany lekcji}
             \end{table}
 
             \noindent
@@ -757,11 +774,12 @@
         \begin{figure}[p]
             \centering
             \includegraphics[width=1.0\textwidth]{images/diagramy/diagram_db_2.png}
-            \caption{Diagram pełnego projektu bazy danych}
+            \caption{Diagram pełnego projektu bazy danych}\label{fig:baza_danych}
         \end{figure}
 
         \begin{table}[p]
             \centering
+            \caption{Struktura najważniejszych tabel w bazie danych}\label{tab:baza_danych}
             \begin{tabular}{|p{0.27\textwidth}|p{0.2\textwidth}|p{0.45\textwidth}|}
                 \hline
                 \textbf{Tabela} & \textbf{Kolumna} & \textbf{Opis} \\
@@ -820,7 +838,6 @@
                 & \texttt{hour} & Slot czasowy \\
                 \hline
             \end{tabular}
-            \caption{Struktura najważniejszych tabel w bazie danych}
         \end{table}
     \clearpage
 
@@ -875,8 +892,6 @@
 
 \section{Implementacja}
     \subsection{Wybór narzędzi}
-        W wyborze stosu technologicznego kierowałem się produktywnością rozwoju aplikacji, skalowalnością rozwiązania oraz integracją z innymi komponentami systemu.
-
         \subsubsection{Interfejs webowy}
             Frontend to część aplikacji odpowiadająca za interfejs użytkownika i działająca po stronie przeglądarki internetowej.
             Framework frontendowy to zestaw narzędzi, bibliotek i konwencji programistycznych, które ułatwiają i przyspieszają tworzenie oprogramowania, zapewniając gotowe rozwiązania dla typowych problemów.
@@ -894,7 +909,7 @@
             Stanowi on fundament aplikacji webowej, podczas gdy frontend odpowiada za prezentację danych użytkownikowi.
             Podobnie jak w przypadku frontendu istnieje wiele frameworków ułatwiających tworzenie tej części aplikacji.
 
-            Wybór Django~\cite{django} jako frameworka backendowego został dokonany po analizie alternatywnego rozwiązania w Pythonie --- FastAPI.
+            Wybór Django~\cite{django} jako frameworka backendowego został dokonany po analizie alternatywnego rozwiązania w Pythonie --- FastAPI~\cite{fast_api}.
             Pomimo że FastAPI oferuje wydajność i nowoczesne funkcje, Django zapewnia kompleksowe podejście, które jest lepiej dostosowane do złożonych aplikacji webowych.
             Moje wcześniejsze doświadczenie z Django pozwoliło na efektywną pracę oraz sprawne wykorzystanie technik ORM (ang. \textit{Object-Relational Mapping}).
             Dodatkowo, skalowalność Django i jego bezpieczeństo zapewniają solidne fundamenty dla aplikacji, która może ewoluować w przyszłości.
@@ -919,7 +934,7 @@
         Relacje wiele-do-jednego są definiowanę klasą \verb|ForeignKey|.
         Relacje wiele-do-wielu implementuje się za pomocą klasy \verb|ManyToManyField|, która automatycznie generuje niezbędne tabele pośredniczące w bazie danych.
 
-        Każda tabela w systemie, z wyjątkiem automatycznie generowanych tabel dla relacji wiele-do-wielu, jest definiowana przez dedykowaną klasę w pliku \verb|models.py|. 
+        Każda tabela w systemie, z wyjątkiem automatycznie generowanych tabel dla relacji wiele-do-wielu, jest definiowana przez dedykowaną klasę~\cite{djangomodeldocs} w pliku \verb|models.py|. 
         Na rysunku~\ref{fig:code1} przedstawiłem przykładową implementację modelu reprezentującego sale.
 
         \subsubsection{Tabela sal}
@@ -1025,6 +1040,7 @@ class RoomPoolViewSet(ModelViewSet):
                 \caption{Widok generowania planu lekcji}\label{fig:plan_generowanie}
             \end{figure}
 
+        \newpage
         \subsubsection{Widoki wprowadzania zasobów}
             Widoki wprowadzania zasobów pozwalają na tworzenie, i wybieranie ich zbiorów.
             Implementacje przedstawione na rysunkach~\ref{fig:add_subject},~\ref{fig:add_teacher},~\ref{fig:add_room} i~\ref{fig:add_class} spełniają wymagania funkcjonalne co do dodawania zasobów.
@@ -1050,6 +1066,7 @@ class RoomPoolViewSet(ModelViewSet):
                 \caption{Widok dodawania klas}\label{fig:add_class}
             \end{figure}
 
+        \newpage
         \subsubsection{Widoki wprowadzania wymagań}
             Widok wprowadzania wymagań głównych przedstawiony na rysunku~\ref{fig:wprowadzanie_glowne}, który przypomina arkusz kalkulacyjny pokazany na rysunku~\ref{fig:excel_wymagania}, co spełnia wymagania niefunkcjonalne.
             Górny wiersz przewija się razem ze stroną ułatwiając nawikację i wpisywanie wymagań.
@@ -1078,7 +1095,7 @@ class RoomPoolViewSet(ModelViewSet):
     \subsection{Integracja z algorytmem}
         Dzięki adekwatnemu wyborowi technologii, proces integracji modułu optymalizacyjnego z warstwą serwerową został znacząco uproszczony.
         Zaimplementowałem dedykowany punkt końcowy, który przyjmuje żądania typu POST zawierające parametry konfiguracyjne algorytmu, w tym liczbę generacji dla algorytmu ewolucyjnego oraz ID zbioru wymagań.\\
-        Dalszy proces jest opisany na diagrame seksencji~\ref{fig:sekwencje_1}
+        Dalszy proces jest opisany na diagrame seksencji~\ref{fig:diag_sekw_1}
 
         % Dzięki adekwatnemu wyborze technologii proces integracji modułu optymalizacyjnego z warstwą serwerową był prosty.
         % Stworzyłem endpoint do którego interfejs webowy może wysyłać zapytanie typu POST z wartością liczbową mówiącą i liczbie generacji.

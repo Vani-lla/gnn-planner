@@ -3,7 +3,7 @@
 \contentsline {chapter}{\numberline {1}Wstęp}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Cel i zakres pracy}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Aspekt systemowy}{2}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Układ pracy}{2}{section.1.3}%
+\contentsline {section}{\numberline {1.3}Układ pracy}{3}{section.1.3}%
 \contentsline {chapter}{\numberline {2}Powiązane prace}{5}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Inspiracja podejściem iteracyjnym}{5}{section.2.1}%
 \contentsline {subsection}{\numberline {2.1.1}Definicja problemu harmonogramowania}{5}{subsection.2.1.1}%
@@ -16,121 +16,119 @@
 \contentsline {subsubsection}{Struktura zadań}{8}{subsubsection*.5}%
 \contentsline {section}{\numberline {2.3}Istniejące kompleksowe rozwiązania}{9}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Plan lekcji Optivum}{9}{subsection.2.3.1}%
-\contentsline {chapter}{\numberline {3}Problem układania planu lekcji i algorytm jego rozwiązania}{15}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Sformułowanie problemu optymalizacyjnego}{15}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Dane i szukane}{16}{subsection.3.1.1}%
-\contentsline {subsubsection}{Słownik podstawowych oznaczeń}{16}{subsubsection*.14}%
-\contentsline {subsubsection}{Wymagania główne}{16}{subsubsection*.15}%
-\contentsline {subsubsection}{Dostępność nauczycieli}{17}{subsubsection*.17}%
-\contentsline {subsubsection}{Bloki przedmiotów}{18}{subsubsection*.18}%
-\contentsline {subsubsection}{Szukane}{19}{subsubsection*.19}%
-\contentsline {subsection}{\numberline {3.1.2}Ograniczenia}{19}{subsection.3.1.2}%
-\contentsline {subsubsection}{Ograniczenia fizyczne}{19}{subsubsection*.20}%
-\contentsline {subsubsection}{Ograniczenia jakościowe}{20}{subsubsection*.21}%
-\contentsline {subsubsection}{Ograniczenie główne}{20}{subsubsection*.22}%
-\contentsline {subsection}{\numberline {3.1.3}Funkcja celu}{20}{subsection.3.1.3}%
-\contentsline {section}{\numberline {3.2}Poprzednie podejścia}{21}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Programowanie mieszanocałkowitoliczbowe}{21}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Grafowe sieci neuronowe}{23}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3}Dekompozycja problemu i wybór technik}{23}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Problem grupowania}{25}{subsection.3.3.1}%
-\contentsline {subsubsection}{Bloki lekcyjne}{25}{subsubsection*.25}%
-\contentsline {subsubsection}{Przestrzeń decyzyjna}{26}{subsubsection*.26}%
-\contentsline {subsubsection}{Oznaczenia}{26}{subsubsection*.27}%
-\contentsline {subsubsection}{Funkcja celu}{27}{subsubsection*.28}%
-\contentsline {subsection}{\numberline {3.3.2}Problem alokacji}{28}{subsection.3.3.2}%
-\contentsline {subsubsection}{Oznaczenia}{28}{subsubsection*.29}%
-\contentsline {subsubsection}{Funkcja celu}{28}{subsubsection*.30}%
-\contentsline {subsection}{\numberline {3.3.3}Problem harmonogramowania}{29}{subsection.3.3.3}%
-\contentsline {subsubsection}{Zmienne decyzyjne i ograniczenia}{29}{subsubsection*.32}%
-\contentsline {subsubsection}{Funkcja celu}{30}{subsubsection*.33}%
-\contentsline {section}{\numberline {3.4}Algorytm zachłanny}{30}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Działanie}{31}{subsection.3.4.1}%
-\contentsline {subsubsection}{Klasyfikacja bloków}{31}{subsubsection*.34}%
-\contentsline {subsubsection}{Procedura}{31}{subsubsection*.35}%
-\contentsline {subsection}{\numberline {3.4.2}Przykładowy wynik}{33}{subsection.3.4.2}%
-\contentsline {section}{\numberline {3.5}Algorytm ewolucyjny}{34}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Kodowanie i ograniczenia twarde}{34}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Generowanie populacji początkowej}{35}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}Przystosowanie}{35}{subsection.3.5.3}%
-\contentsline {subsubsection}{Ocena względem nauczycieli}{36}{subsubsection*.37}%
-\contentsline {subsubsection}{Ocena względem klas}{37}{subsubsection*.38}%
-\contentsline {subsubsection}{Normalizacja i wagi}{37}{subsubsection*.39}%
-\contentsline {subsection}{\numberline {3.5.4}Selekcja}{38}{subsection.3.5.4}%
-\contentsline {subsection}{\numberline {3.5.5}Krzyżowanie}{38}{subsection.3.5.5}%
-\contentsline {subsection}{\numberline {3.5.6}Mutacja}{39}{subsection.3.5.6}%
-\contentsline {subsection}{\numberline {3.5.7}Przykładowy wynik}{40}{subsection.3.5.7}%
-\contentsline {section}{\numberline {3.6}Solver programowania liniowego z ograniczeniami}{41}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Zmienne decyzyjne}{41}{subsection.3.6.1}%
-\contentsline {subsection}{\numberline {3.6.2}Ograniczenia}{41}{subsection.3.6.2}%
-\contentsline {subsubsection}{Ograniczenie przypisania sal}{41}{subsubsection*.41}%
-\contentsline {subsubsection}{Ciągłość zajęć dla klas}{42}{subsubsection*.42}%
-\contentsline {subsubsection}{Nakładanie się nauczycieli}{42}{subsubsection*.43}%
-\contentsline {subsubsection}{Kolizje sal}{42}{subsubsection*.44}%
-\contentsline {subsubsection}{Kolejność przedmiotów}{42}{subsubsection*.45}%
-\contentsline {subsection}{\numberline {3.6.3}Funkcja celu}{42}{subsection.3.6.3}%
-\contentsline {subsection}{\numberline {3.6.4}Transformacja przedziałów na przypisania końcowe}{42}{subsection.3.6.4}%
-\contentsline {subsubsection}{Ekstrakcja rozwiązań z solvera}{43}{subsubsection*.46}%
-\contentsline {subsubsection}{Odwzorowanie na strukturę lekcji}{43}{subsubsection*.47}%
-\contentsline {subsubsection}{Przykład transformacji}{43}{subsubsection*.48}%
-\contentsline {subsection}{\numberline {3.6.5}Przykładowy wynik}{44}{subsection.3.6.5}%
-\contentsline {chapter}{\numberline {4}Aplikacja}{45}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Specyfikacja wymagań}{45}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Wymagania funkcjonalne}{45}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Wymagania niefunkcjonalne}{45}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Przypadki użycia}{46}{subsection.4.1.3}%
-\contentsline {subsection}{\numberline {4.1.4}Diagramy sekwencji}{55}{subsection.4.1.4}%
-\contentsline {subsubsection}{Diagram sekwencji generowania planu lekcji}{55}{subsubsection*.63}%
-\contentsline {subsubsection}{Diagram sekwencji przeglądania planów lekcji}{55}{subsubsection*.65}%
-\contentsline {subsubsection}{Diagram sekwencji wprowadzania i edycji danych}{56}{subsubsection*.67}%
-\contentsline {section}{\numberline {4.2}Projekt}{57}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Architektura aplikacji}{57}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Projekt struktury bazy danych}{58}{subsection.4.2.2}%
-\contentsline {subsubsection}{Tabele podstawowe}{58}{subsubsection*.70}%
-\contentsline {subsubsection}{Tabele wymagań}{59}{subsubsection*.73}%
-\contentsline {subsubsection}{Zbiory danych}{60}{subsubsection*.76}%
-\contentsline {subsubsection}{Tabele wyników}{61}{subsubsection*.79}%
-\contentsline {subsection}{\numberline {4.2.3}Projekt interfejsu}{65}{subsection.4.2.3}%
-\contentsline {subsubsection}{Nawigacja}{65}{subsubsection*.83}%
-\contentsline {subsubsection}{Strona główna}{65}{subsubsection*.84}%
-\contentsline {subsubsection}{Podgląd planów lekcji}{65}{subsubsection*.85}%
-\contentsline {subsubsection}{Moduły wprowadzania danych}{65}{subsubsection*.86}%
-\contentsline {subsubsection}{Moduł generowania planu}{66}{subsubsection*.87}%
-\contentsline {subsubsection}{Spójność i ergonomia}{66}{subsubsection*.88}%
-\contentsline {section}{\numberline {4.3}Implementacja}{66}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Wybór narzędzi}{66}{subsection.4.3.1}%
-\contentsline {subsubsection}{Interfejs webowy}{66}{subsubsection*.89}%
-\contentsline {subsubsection}{Warstwa serwerowa}{67}{subsubsection*.90}%
-\contentsline {subsubsection}{Baza danych}{67}{subsubsection*.91}%
-\contentsline {subsubsection}{Moduł optymalizacyjny}{67}{subsubsection*.92}%
-\contentsline {subsection}{\numberline {4.3.2}Implementacja bazy danych w Django}{68}{subsection.4.3.2}%
-\contentsline {subsubsection}{Tabela sal}{68}{subsubsection*.93}%
-\contentsline {subsection}{\numberline {4.3.3}Implementacja API}{68}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Implementacja interfejsu webowego}{69}{subsection.4.3.4}%
-\contentsline {subsubsection}{Nawigacja}{70}{subsubsection*.97}%
-\contentsline {subsubsection}{Strona główna}{70}{subsubsection*.99}%
-\contentsline {subsubsection}{Podgląd planów lekcji}{71}{subsubsection*.101}%
-\contentsline {subsubsection}{Widok generowania planów lekcji}{72}{subsubsection*.104}%
-\contentsline {subsubsection}{Widoki wprowadzania zasobów}{72}{subsubsection*.106}%
-\contentsline {subsubsection}{Widoki wprowadzania wymagań}{74}{subsubsection*.111}%
-\contentsline {subsection}{\numberline {4.3.5}Integracja z algorytmem}{76}{subsection.4.3.5}%
-\contentsline {chapter}{\numberline {5}Weryfikacja i walidacja rozwiązania}{77}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Scenariusze testowe}{77}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Scenariusz testowy generowania planu lekcji z określonymi parametrami}{77}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Scenariusz przeglądu planów lekcji}{77}{subsection.5.1.2}%
-\contentsline {subsection}{\numberline {5.1.3}Scenariusz importowania i edytowania wymagań głównych}{77}{subsection.5.1.3}%
-\contentsline {subsection}{\numberline {5.1.4}Scenariusz edytowania dostępności nauczycieli}{77}{subsection.5.1.4}%
-\contentsline {section}{\numberline {5.2}Testowanie aplikacji}{80}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Test generowania planu lekcji z określonymi parametrami}{80}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Test przeglądania planów lekcji}{80}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Test importowania i edytowania wymagań głównych}{81}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}Test edytowania dostępności nauczycieli}{82}{subsection.5.2.4}%
-\contentsline {section}{\numberline {5.3}Analiza jakości wyników generowania planu lekcji}{83}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Omówienie danych wejściowych}{83}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Omówienie całego planu}{83}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}Omówienie szczególnych przypadków}{88}{subsection.5.3.3}%
-\contentsline {subsection}{\numberline {5.3.4}Wydajność generowania planu lekcji}{91}{subsection.5.3.4}%
-\contentsline {chapter}{\numberline {6}Wnioski i perspektywy rozwoju}{93}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Problemy rozwiązania}{93}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Perspektywy rozwoju}{93}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Wnioski}{94}{section.6.3}%
+\contentsline {chapter}{\numberline {3}Problem układania planu lekcji i algorytm jego rozwiązania}{13}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Sformułowanie problemu optymalizacyjnego}{13}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Dane i szukane}{14}{subsection.3.1.1}%
+\contentsline {subsubsection}{Słownik podstawowych oznaczeń}{14}{subsubsection*.14}%
+\contentsline {subsubsection}{Wymagania główne}{14}{subsubsection*.15}%
+\contentsline {subsubsection}{Dostępność nauczycieli}{15}{subsubsection*.17}%
+\contentsline {subsubsection}{Bloki przedmiotów}{15}{subsubsection*.18}%
+\contentsline {subsubsection}{Szukane}{16}{subsubsection*.19}%
+\contentsline {subsection}{\numberline {3.1.2}Ograniczenia}{16}{subsection.3.1.2}%
+\contentsline {subsubsection}{Ograniczenia fizyczne}{16}{subsubsection*.20}%
+\contentsline {subsubsection}{Ograniczenia jakościowe}{17}{subsubsection*.21}%
+\contentsline {subsubsection}{Ograniczenie główne}{17}{subsubsection*.22}%
+\contentsline {subsection}{\numberline {3.1.3}Funkcja celu}{18}{subsection.3.1.3}%
+\contentsline {section}{\numberline {3.2}Poprzednie podejścia}{18}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Programowanie mieszanocałkowitoliczbowe}{18}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Grafowe sieci neuronowe}{20}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Dekompozycja problemu i wybór technik}{20}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Problem grupowania}{23}{subsection.3.3.1}%
+\contentsline {subsubsection}{Bloki lekcyjne}{23}{subsubsection*.25}%
+\contentsline {subsubsection}{Przestrzeń decyzyjna}{23}{subsubsection*.26}%
+\contentsline {subsubsection}{Oznaczenia}{24}{subsubsection*.27}%
+\contentsline {subsubsection}{Funkcja celu}{25}{subsubsection*.28}%
+\contentsline {subsection}{\numberline {3.3.2}Problem alokacji}{25}{subsection.3.3.2}%
+\contentsline {subsubsection}{Oznaczenia}{25}{subsubsection*.29}%
+\contentsline {subsubsection}{Funkcja celu}{25}{subsubsection*.30}%
+\contentsline {subsection}{\numberline {3.3.3}Problem harmonogramowania}{26}{subsection.3.3.3}%
+\contentsline {subsubsection}{Zmienne decyzyjne i ograniczenia}{27}{subsubsection*.32}%
+\contentsline {subsubsection}{Funkcja celu}{27}{subsubsection*.33}%
+\contentsline {section}{\numberline {3.4}Algorytm zachłanny}{28}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Działanie}{28}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Przykładowy wynik}{30}{subsection.3.4.2}%
+\contentsline {section}{\numberline {3.5}Algorytm ewolucyjny}{31}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Kodowanie i ograniczenia twarde}{31}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Generowanie populacji początkowej}{32}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Przystosowanie}{33}{subsection.3.5.3}%
+\contentsline {subsubsection}{Ocena względem nauczycieli}{34}{subsubsection*.36}%
+\contentsline {subsubsection}{Ocena względem klas}{34}{subsubsection*.37}%
+\contentsline {subsubsection}{Normalizacja i wagi}{34}{subsubsection*.38}%
+\contentsline {subsection}{\numberline {3.5.4}Selekcja}{35}{subsection.3.5.4}%
+\contentsline {subsection}{\numberline {3.5.5}Krzyżowanie}{35}{subsection.3.5.5}%
+\contentsline {subsection}{\numberline {3.5.6}Mutacja}{36}{subsection.3.5.6}%
+\contentsline {subsection}{\numberline {3.5.7}Przykładowy wynik}{37}{subsection.3.5.7}%
+\contentsline {section}{\numberline {3.6}Programowanie liniowe z ograniczeniami}{38}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Zmienne decyzyjne}{38}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Ograniczenia}{38}{subsection.3.6.2}%
+\contentsline {subsubsection}{Ograniczenie przypisania sal}{38}{subsubsection*.40}%
+\contentsline {subsubsection}{Ciągłość zajęć dla klas}{39}{subsubsection*.41}%
+\contentsline {subsubsection}{Nakładanie się nauczycieli}{39}{subsubsection*.42}%
+\contentsline {subsubsection}{Kolizje sal}{39}{subsubsection*.43}%
+\contentsline {subsubsection}{Kolejność przedmiotów}{39}{subsubsection*.44}%
+\contentsline {subsection}{\numberline {3.6.3}Funkcja celu}{39}{subsection.3.6.3}%
+\contentsline {subsection}{\numberline {3.6.4}Transformacja przedziałów na przypisania końcowe}{40}{subsection.3.6.4}%
+\contentsline {subsubsection}{Ekstrakcja rozwiązań z solvera}{40}{subsubsection*.45}%
+\contentsline {subsubsection}{Odwzorowanie na strukturę lekcji}{40}{subsubsection*.46}%
+\contentsline {subsubsection}{Przykład transformacji}{41}{subsubsection*.47}%
+\contentsline {subsection}{\numberline {3.6.5}Przykładowy wynik}{41}{subsection.3.6.5}%
+\contentsline {chapter}{\numberline {4}Aplikacja}{43}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Specyfikacja wymagań}{43}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Wymagania funkcjonalne}{43}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Wymagania niefunkcjonalne}{44}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Przypadki użycia}{44}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}Diagramy sekwencji}{53}{subsection.4.1.4}%
+\contentsline {subsubsection}{Diagram sekwencji generowania planu lekcji}{53}{subsubsection*.62}%
+\contentsline {subsubsection}{Diagram sekwencji przeglądania planów lekcji}{53}{subsubsection*.64}%
+\contentsline {subsubsection}{Diagram sekwencji wprowadzania i edycji danych}{54}{subsubsection*.66}%
+\contentsline {section}{\numberline {4.2}Projekt}{55}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Architektura aplikacji}{55}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Projekt struktury bazy danych}{56}{subsection.4.2.2}%
+\contentsline {subsubsection}{Tabele podstawowe}{56}{subsubsection*.69}%
+\contentsline {subsubsection}{Tabele wymagań}{58}{subsubsection*.73}%
+\contentsline {subsubsection}{Zbiory danych}{58}{subsubsection*.75}%
+\contentsline {subsubsection}{Tabele wyników}{59}{subsubsection*.78}%
+\contentsline {subsection}{\numberline {4.2.3}Projekt interfejsu}{62}{subsection.4.2.3}%
+\contentsline {subsubsection}{Nawigacja}{62}{subsubsection*.82}%
+\contentsline {subsubsection}{Strona główna}{62}{subsubsection*.83}%
+\contentsline {subsubsection}{Podgląd planów lekcji}{62}{subsubsection*.84}%
+\contentsline {subsubsection}{Moduły wprowadzania danych}{62}{subsubsection*.85}%
+\contentsline {subsubsection}{Moduł generowania planu}{63}{subsubsection*.86}%
+\contentsline {subsubsection}{Spójność i ergonomia}{63}{subsubsection*.87}%
+\contentsline {section}{\numberline {4.3}Implementacja}{63}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Wybór narzędzi}{63}{subsection.4.3.1}%
+\contentsline {subsubsection}{Interfejs webowy}{63}{subsubsection*.88}%
+\contentsline {subsubsection}{Warstwa serwerowa}{64}{subsubsection*.89}%
+\contentsline {subsubsection}{Baza danych}{64}{subsubsection*.90}%
+\contentsline {subsubsection}{Moduł optymalizacyjny}{64}{subsubsection*.91}%
+\contentsline {subsection}{\numberline {4.3.2}Implementacja bazy danych w Django}{65}{subsection.4.3.2}%
+\contentsline {subsubsection}{Tabela sal}{65}{subsubsection*.92}%
+\contentsline {subsection}{\numberline {4.3.3}Implementacja API}{65}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Implementacja interfejsu webowego}{66}{subsection.4.3.4}%
+\contentsline {subsubsection}{Nawigacja}{67}{subsubsection*.96}%
+\contentsline {subsubsection}{Strona główna}{67}{subsubsection*.98}%
+\contentsline {subsubsection}{Podgląd planów lekcji}{68}{subsubsection*.100}%
+\contentsline {subsubsection}{Widok generowania planów lekcji}{69}{subsubsection*.103}%
+\contentsline {subsubsection}{Widoki wprowadzania zasobów}{70}{subsubsection*.105}%
+\contentsline {subsubsection}{Widoki wprowadzania wymagań}{72}{subsubsection*.110}%
+\contentsline {subsection}{\numberline {4.3.5}Integracja z algorytmem}{73}{subsection.4.3.5}%
+\contentsline {chapter}{\numberline {5}Weryfikacja i walidacja rozwiązania}{75}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Scenariusze testowe}{75}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Scenariusz testowy generowania planu lekcji z określonymi parametrami}{75}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Scenariusz przeglądu planów lekcji}{75}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}Scenariusz importowania i edytowania wymagań głównych}{75}{subsection.5.1.3}%
+\contentsline {subsection}{\numberline {5.1.4}Scenariusz edytowania dostępności nauczycieli}{75}{subsection.5.1.4}%
+\contentsline {section}{\numberline {5.2}Testowanie aplikacji}{78}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Test generowania planu lekcji z określonymi parametrami}{78}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Test przeglądania planów lekcji}{78}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Test importowania i edytowania wymagań głównych}{79}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Test edytowania dostępności nauczycieli}{81}{subsection.5.2.4}%
+\contentsline {section}{\numberline {5.3}Analiza jakości wyników generowania planu lekcji}{81}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Omówienie danych wejściowych}{81}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Omówienie całego planu}{82}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Omówienie szczególnych przypadków}{84}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}Wydajność generowania planu lekcji}{88}{subsection.5.3.4}%
+\contentsline {chapter}{\numberline {6}Wnioski i perspektywy rozwoju}{89}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Problemy rozwiązania}{89}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Perspektywy rozwoju}{89}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Wnioski}{90}{section.6.3}%

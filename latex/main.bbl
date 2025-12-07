@@ -13,14 +13,27 @@ Obwieszczenie ministra edukacji narodowej z dnia 4 września 2020 r. w sprawie o
 \newblock Dz.U. 2020 poz. 1604, 2020.
 
 \bibitem{djangotenants}
-B.~P. Carneiro.
-\newblock Django-tenants documentation, (2025).
+{Bernardo Pires Carneiro}.
+\newblock Django-tenants documentation.
+\newblock Online. Dostęp pod adresem: \url{https://django-tenants.readthedocs.io/en/latest/}, 2025.
 \newblock Ostatnio otworzono 27 listopada 2025.
 
 \bibitem{cormen2022introduction}
 T.~H. Cormen, C.~E. Leiserson, R.~L. Rivest, and C.~Stein.
 \newblock {\em Introduction to algorithms}.
 \newblock MIT press, 2022.
+
+\bibitem{djangomodeldocs}
+{Django Software Foundation}.
+\newblock Documentation, models.
+\newblock Online. Dostęp pod adresem: \url{https://docs.djangoproject.com/en/5.2/topics/db/models/}, 2025.
+\newblock Ostatnio otworzono 12 listopada 2025.
+
+\bibitem{django}
+{Django Software Foundation}.
+\newblock The web framework for perfectionists with deadlines.
+\newblock Online. Dostęp pod adresem: \url{https://www.djangoproject.com/}, 2025.
+\newblock Ostatnio otworzono 27 listopada 2025.
 
 \bibitem{eiben2015evolutionary}
 A.~E. Eiben and J.~E. Smith.
@@ -32,19 +45,16 @@ W.~Feller et~al.
 \newblock {\em An introduction to probability theory and its applications}, volume 963.
 \newblock Wiley New York, 1971.
 
-\bibitem{django}
-D.~S. Foundation.
-\newblock The web framework for perfectionists with deadlines., (2025).
-\newblock Ostatnio otworzono 27 listopada 2025.
-
 \bibitem{googleortoolsoverlap}
-Google.
-\newblock Documentation, or-tools - addnooverlap, (2025).
+{Google}.
+\newblock Documentation, or-tools - addnooverlap.
+\newblock Online. Dostęp pod adresem: \url{https://developers.google.com/optimization/reference/python/sat/python/cp_model#addnooverlap}, 2025.
 \newblock Ostatnio otworzono 25 listopada 2025.
 
 \bibitem{googleortoolsjssp}
-Google.
-\newblock Documentation, or-tools - job shop, (2025).
+{Google}.
+\newblock Documentation, or-tools - job shop.
+\newblock Online. Dostęp pod adresem: \url{https://developers.google.com/optimization/scheduling/job_shop}, 2025.
 \newblock Ostatnio otworzono 25 listopada 2025.
 
 \bibitem{holland1992genetic}
@@ -53,9 +63,10 @@ J.~H. Holland.
 \newblock {\em Scientific american}, 267(1):66--73, 1992.
 
 \bibitem{react}
-Meta.
-\newblock React, (2025).
-\newblock Ostatnio otworzono 27 listopada 2025.
+{Meta}.
+\newblock React.
+\newblock Online. Dostęp pod adresem: \url{https://react.dev/}, 2025.
+\newblock Ostatnio otworzono 25 listopada 2025.
 
 \bibitem{rappos2022mixed}
 E.~Rappos, E.~Thi{\'e}mard, S.~Robert, and J.-F. H{\^e}che.
@@ -67,9 +78,16 @@ M.~Schlichtkrull, T.~N. Kipf, P.~Bloem, R.~Van Den~Berg, I.~Titov, and M.~Wellin
 \newblock Modeling relational data with graph convolutional networks.
 \newblock In {\em European semantic web conference}, pages 593--607. Springer, 2018.
 
+\bibitem{fast_api}
+{Sebastián Ramírez}.
+\newblock Fastapi.
+\newblock Online. Dostęp pod adresem: \url{https://fastapi.tiangolo.com/}, 2025.
+\newblock Ostatnio otworzono 7 grudnia 2025.
+
 \bibitem{vulcanprzewodnik}
-Vulcan.
-\newblock Plan lekcji optivum. układanie planu lekcji - krok po kroku, (2025).
+{Vulcan}.
+\newblock Plan lekcji optivum. układanie planu lekcji - krok po kroku.
+\newblock Online. Dostęp pod adresem: \url{https://www.bazawiedzy.vulcan.edu.pl/bazawiedzy.php/show/365}, 2025.
 \newblock Ostatnio otworzono 25 listopada 2025.
 
 \bibitem{xiong2022survey}

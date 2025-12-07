@@ -73,7 +73,7 @@
             
 
     \subsection{Scenariusz importowania i edytowania wymagań głównych}
-        Scenariusz opisuje proces masowego importu wymagań głównych oraz ich późniejszej ręcznej edycji.
+        Scenariusz zaprezentowany w tabeli~\ref{tab:scenariusz_3} opisuje proces masowego importu wymagań głównych oraz ich późniejszej ręcznej edycji.
         
         \begin{table}[h!]
             \centering
@@ -106,7 +106,7 @@
         
 
     \subsection{Scenariusz edytowania dostępności nauczycieli}
-        Scenariusz opisuje proces modyfikacji dostępności nauczycieli po wcześniejszym zdefiniowaniu wymagań głównych.
+        Scenariusz zaprezentowany w tabeli~\ref{tab:scenariusz_4} opisuje proces modyfikacji dostępności nauczycieli po wcześniejszym zdefiniowaniu wymagań głównych.
         
         \begin{table}[h!]
             \centering
@@ -189,6 +189,7 @@
             \item zapisuje zmiany i dostaje powiadomienie.
         \end{itemize}
 
+        \newpage
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.48\textwidth]{images/test3/krok1.png}
@@ -199,6 +200,7 @@
             \caption{Zrzuty ekranów wykonanych kroków dla scenariusza importowania i edytowania wymagań głównych}\label{fig:test_3}
         \end{figure}
 
+    \newpage
     \subsection{Test edytowania dostępności nauczycieli}
         Test sprawdza poprawność modyfikacji dostępności zgodnie ze scenariuszem przedstawionym w tabeli~\ref{tab:scenariusz_4}.
         Rysunek~\ref{fig:test_3} przedstawia proces:
@@ -222,7 +224,7 @@
 \section{Analiza jakości wyników generowania planu lekcji}
     \subsection{Omówienie danych wejściowych}
         Dane przekazane przez placówkę oświatową pochodzą z początkowej fazy procesu układania planu lekcji i uległy zmianom po uzyskaniu pełnych informacji o uczniach.
-        W szczególności nie obejmują one lekcji wychowawczych (LW) oraz zajęć dodanych na końcowym etapie tworzenia planu (np. EO, EZ, \dots).
+        W szczególności nie obejmują one lekcji wychowawczych (LW) oraz zajęć dodanych na końcowym etapie tworzenia planu (przykładowo EO, EZ, \dots).
         W konsekwencji nie było możliwe pełne zamodelowanie tych elementów ani uwzględnienie ich podczas optymalizacji planu.
 
         Istotnym ograniczeniem była również kwestia ochrony danych osobowych nauczycieli --- nie uzyskałem dostępu do imion i nazwisk, co uniemożliwiło identyfikację sytuacji, w których jeden nauczyciel prowadzi więcej niż jeden przedmiot.
@@ -232,83 +234,81 @@
         Plan omówiony poniżej został wygenerowany używając osobnika przedstawionego w punkcie~\ref{subsection:przykladowy_ewolucyjny}.
 
         Ocenianie jakości wyników należy zacząć od analizy obciążeń dydaktycznych.
-        Na rysunku~\ref{fig:dydaktyczne_nauczyciele_tygodniowo} przedstawiono histogram wymaganej tygodniowej liczby godzin lekcyjnych dla nauczycieli.
+        Na rysunku~\ref{fig:dydaktyczne_nauczyciele_tygodniowo} przedstawiłem histogram wymaganej tygodniowej liczby godzin lekcyjnych do przeprowadzenia przez nauczycieli.
         Analogicznie, na rysunku~\ref{fig:dydaktyczne_klasy_tygodniowo} zaprezentowano histogram liczby obowiązkowych godzin lekcyjnych dla klas.
 
-        \begin{samepage}
-            \begin{figure}[h]
-                \centering
-                \begin{tikzpicture}
-                    \begin{axis}[
-                        ybar,
-                        bar width=1.5em,
-                        xlabel={Obciążenie dydaktyczne (godziny)},
-                        x label style = {yshift=-0.6em},
-                        ylabel={Liczność},
-                        width=0.8\textwidth,
-                        height=0.5\textwidth,
-                        xtick=data,
-                        ymin=0,
-                        xticklabels={0-2, 3-5, 6-8, 9-11, 12-14, 15-17, 18-20, 21-23, 24-26, 27-29, 30-32, 33-35},
-                        xtick={0,1,2,3,4,5,6,7,8,9,10,11},
-                        x tick label style={rotate=30, anchor=center, yshift=-0.6em, xshift=-0.3em}
-                    ]
-                    \addplot coordinates {
-                        (0, 14+0+4)  % 0-2
-                        (1, 3+1+4)   % 3-5
-                        (2, 0+4+3)   % 6-8
-                        (3, 1+2+3)   % 9-11
-                        (4, 2+3+1)   % 12-14
-                        (5, 2+2+4)   % 15-17
-                        (6, 0+8+9)   % 18-20
-                        (7, 5+1+1)   % 21-23
-                        (8, 0+0+1)   % 24-26
-                        (9, 0+0+0)   % 27-29
-                        (10, 0+0+0)  % 30-32
-                        (11, 0+1+0)  % 33-35
-                    };
-                    \end{axis}
-                \end{tikzpicture}
-                \caption{Histogram obciążeń dydaktycznych nauczycieli tygodniowo}\label{fig:dydaktyczne_nauczyciele_tygodniowo}
-            \end{figure}
-    
-            \begin{figure}[h]
-                \centering
-                \begin{tikzpicture}
-                    \begin{axis}[
-                        ybar,
-                        bar width=1.5em,
-                        xlabel={Obciążenie dydaktyczne per dzień (godziny)},
-                        ylabel={Liczność},
-                        width=0.8\textwidth,
-                        height=0.5\textwidth,
-                        xtick=data,
-                        ymin=0,
-                    ]
-                    \addplot coordinates {
-                        (22, 1)
-                        (23, 1)
-                        (24, 0)
-                        (25, 2)
-                        (26, 1)
-                        (27, 1)
-                        (28, 1)
-                        (29, 2)
-                        (30, 1)
-                        (31, 1)
-                        (32, 2)
-                        (33, 3)
-                        (34, 1)
-                        (35, 2)
-                        (36, 2)
-                    };
-                    \end{axis}
-                \end{tikzpicture}
-                \caption{Histogram obciążeń dydaktycznych uczniów tygodniowo}\label{fig:dydaktyczne_klasy_tygodniowo}
-            \end{figure}
-        \end{samepage}
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                    ybar,
+                    bar width=1.5em,
+                    xlabel={Obciążenie dydaktyczne (godziny)},
+                    x label style = {yshift=-0.6em},
+                    ylabel={Liczba wystąpień},
+                    width=0.8\textwidth,
+                    height=0.48\textwidth,
+                    xtick=data,
+                    ymin=0,
+                    xticklabels={0-2, 3-5, 6-8, 9-11, 12-14, 15-17, 18-20, 21-23, 24-26, 27-29, 30-32, 33-35},
+                    xtick={0,1,2,3,4,5,6,7,8,9,10,11},
+                    x tick label style={rotate=30, anchor=center, yshift=-0.6em, xshift=-0.3em}
+                ]
+                \addplot coordinates {
+                    (0, 14+0+4)  % 0-2
+                    (1, 3+1+4)   % 3-5
+                    (2, 0+4+3)   % 6-8
+                    (3, 1+2+3)   % 9-11
+                    (4, 2+3+1)   % 12-14
+                    (5, 2+2+4)   % 15-17
+                    (6, 0+8+9)   % 18-20
+                    (7, 5+1+1)   % 21-23
+                    (8, 0+0+1)   % 24-26
+                    (9, 0+0+0)   % 27-29
+                    (10, 0+0+0)  % 30-32
+                    (11, 0+1+0)  % 33-35
+                };
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Histogram obciążeń dydaktycznych nauczycieli tygodniowo}\label{fig:dydaktyczne_nauczyciele_tygodniowo}
+        \end{figure}
 
-        Z przedstawionych histogramów wynika, że wielu nauczycielom przypisano tygodniowe obciążenie równe zero.
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                    ybar,
+                    bar width=1.5em,
+                    xlabel={Obciążenie dydaktyczne (godziny)},
+                    ylabel={Liczba wystąpień},
+                    width=0.8\textwidth,
+                    height=0.48\textwidth,
+                    xtick=data,
+                    ymin=0,
+                ]
+                \addplot coordinates {
+                    (22, 1)
+                    (23, 1)
+                    (24, 0)
+                    (25, 2)
+                    (26, 1)
+                    (27, 1)
+                    (28, 1)
+                    (29, 2)
+                    (30, 1)
+                    (31, 1)
+                    (32, 2)
+                    (33, 3)
+                    (34, 1)
+                    (35, 2)
+                    (36, 2)
+                };
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Histogram obciążeń dydaktycznych uczniów tygodniowo}\label{fig:dydaktyczne_klasy_tygodniowo}
+        \end{figure}
+
+        Wielu nauczycielom przypisano tygodniowe obciążenie równe zero.
         Wynika to z faktu, że szkoła dysponuje większą liczbą nauczycieli, niż jest w praktyce potrzebne do realizacji aktualnej liczby zajęć.
         W rezultacie wiele nauczycieli nie zostaje przypisanych do prowadzenia lekcji.
         Ponadto przez anonimowość nazwisk nauczycieli, niektórzy nauczyciele zostali w modelu sztucznie rozbici na dwie lub trzy osoby.
@@ -318,72 +318,68 @@
         Mimo tego można zaobserwować, że niektóre klasy mają znacząco niższe obciążenia tygodniowe niż pozostałe.
         Wynika to przede wszystkim z faktu, że klasy maturalne realizują istotnie mniejszą liczbę zajęć niż, przykładowo, klasy pierwsze.
 
-        \clearpage
-
         Biorąc pod uwagę te obserwacje, możemy przejść do analizy dziennego obciążenia dydaktycznego.
-        Na rysunkach~\ref{fig:dydaktyczne_nauczyciele_dni} oraz~\ref{fig:dydaktyczne_nauczyciele_klasy} przedstawiono odpowiednio histogram dziennych obciążeń nauczycieli i klas.
+        Na rysunkach~\ref{fig:dydaktyczne_nauczyciele_dni} oraz~\ref{fig:dydaktyczne_nauczyciele_klasy} przedstawiłem odpowiednio histogram dziennych obciążeń nauczycieli i klas.
 
-        \begin{samepage}
-            \begin{figure}[h]
-                \centering
-                \begin{tikzpicture}
-                    \begin{axis}[
-                        ybar,
-                        bar width=1.5em,
-                        xlabel={Obciążenie dydaktyczne per dzień (godziny)},
-                        ylabel={Liczność},
-                        width=0.8\textwidth,
-                        height=0.5\textwidth,
-                        xtick=data,
-                        ymin=0,
-                    ]
-                    \addplot coordinates {
-                        (0,130)
-                        (1,18)
-                        (2,44)
-                        (3,45)
-                        (4,51)
-                        (5,44)
-                        (6,21)
-                        (7,11)
-                        (8,1)
-                        (9,1)
-                        (10,2)
-                        (11,0)
-                        (12,1)
-                        (13,0)
-                        (14,1)
-                    };
-                    \end{axis}
-                \end{tikzpicture}
-                \caption{Histogram obciążeń dydaktycznych nauczycieli}\label{fig:dydaktyczne_nauczyciele_dni}
-            \end{figure}
-    
-            \begin{figure}[h]
-                \centering
-                \begin{tikzpicture}
-                    \begin{axis}[
-                        ybar,
-                        bar width=1.5em,
-                        xlabel={Obciążenie dydaktyczne per dzień (godziny)},
-                        ylabel={Liczność},
-                        width=0.8\textwidth,
-                        height=0.5\textwidth,
-                        xtick=data,
-                        ymin=0,
-                    ]
-                    \addplot coordinates {
-                        (4,6)
-                        (5,27)
-                        (6,37)
-                        (7,28)
-                        (8,12)
-                    };
-                    \end{axis}
-                \end{tikzpicture}
-                \caption{Histogram obciążeń dydaktycznych uczniów}\label{fig:dydaktyczne_nauczyciele_klasy}
-            \end{figure}
-        \end{samepage}
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                    ybar,
+                    bar width=1.5em,
+                    xlabel={Obciążenie dydaktyczne per dzień (godziny)},
+                    ylabel={Liczba wystąpień},
+                    width=0.8\textwidth,
+                    height=0.4\textwidth,
+                    xtick=data,
+                    ymin=0,
+                ]
+                \addplot coordinates {
+                    (0,130)
+                    (1,18)
+                    (2,44)
+                    (3,45)
+                    (4,51)
+                    (5,44)
+                    (6,21)
+                    (7,11)
+                    (8,1)
+                    (9,1)
+                    (10,2)
+                    (11,0)
+                    (12,1)
+                    (13,0)
+                    (14,1)
+                };
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Histogram obciążeń dydaktycznych nauczycieli}\label{fig:dydaktyczne_nauczyciele_dni}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                    ybar,
+                    bar width=1.5em,
+                    xlabel={Obciążenie dydaktyczne per dzień (godziny)},
+                    ylabel={Liczba wystąpień},
+                    width=0.8\textwidth,
+                    height=0.4\textwidth,
+                    xtick=data,
+                    ymin=0,
+                ]
+                \addplot coordinates {
+                    (4,6)
+                    (5,27)
+                    (6,37)
+                    (7,28)
+                    (8,12)
+                };
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Histogram obciążeń dydaktycznych uczniów}\label{fig:dydaktyczne_nauczyciele_klasy}
+        \end{figure}
 
         Z analizy wyników wynika, że nauczyciele mają liczne dni wolne.
         Jest to zamierzony efekt, osiągnięty dzięki modyfikacji funkcji przystosowania w algorytmie ewolucyjnym.
@@ -394,11 +390,9 @@
         Nie pojawiają się wartości skrajne ani nieakceptowalne.
         Minimalne obciążenie, wynoszące 4 godziny, dotyczy klas maturalnych, które mają stosunkowo niską liczbę wymaganych godzin tygodniowo (22 lub 23).
         Wszystkie pozostałe wyniki mieszczą się w przedziale od 4 do 8 godzin dziennie, co umożliwia tworzenie praktycznych i realistycznych planów lekcji.
-
-        \clearpage
         
         Aby ocenić jakość wygenerowanych harmonogramów, przeanalizowałem także liczbę okienek nauczycieli w planie zoptymalizowanym pod kątem minimalizacji ich liczby oraz w planie, który jedynie spełnia wszystkie ograniczenia, lecz nie został poddany optymalizacji.
-        Wyniki zestawiono w tabeli~\ref{tab:statystyki_planow}.
+        Wyniki zestawiłem w tabeli~\ref{tab:statystyki_planow}.
         Ze względu na brak dostępu do szczegółowych danych dotyczących planu ułożonego ręcznie przez szkołę możliwe było jedynie porównanie wariantów wygenerowanych przez algorytm.
 
         \begin{table}[H]
@@ -417,32 +411,30 @@
             \end{tabular}
         \end{table}
 
-
+    
     \subsection{Omówienie szczególnych przypadków}
         Szczególnej analizie poddałem klasy o profilach łączonych, ponieważ to właśnie dla nich ręczne ułożenie planu jest najbardziej wymagające.
         W moim zbiorze danych klasa IIAC łączy profil psychologiczny z prawnym, co oznacza konieczność równoległego prowadzenia bloków lekcyjnych dotyczących obu ścieżek kształcenia.
         Wygenerowany plan lekcji dla tej klasy przedstawiłem na rysunku~\ref{fig:plan_IIBG}. 
         Dla porównania, na rysunku~\ref{fig:plan_IIBG_koper} zaprezentowałem plan opracowany ręcznie przez szkołę.
 
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.9\textwidth]{images/plans/plan_IIBG_koper.png}
+            \caption{Plan lekcji dla klasy IIAC stworzony przez szkołę}\label{fig:plan_IIBG_koper}
+        \end{figure}
         \begin{sidewaysfigure}[p]
             \centering
             \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{images/plans/plan_IIBG.png}
             \caption{Wygenerowany plan lekcji dla klasy IIAC}\label{fig:plan_IIBG}
         \end{sidewaysfigure}
-        \begin{figure}[h]
-            \centering
-            \includegraphics[width=0.9\textwidth]{images/plans/plan_IIBG_koper.png}
-            \caption{Plan lekcji dla klasy IIAC stworzony przez szkołę}\label{fig:plan_IIBG_koper}
-        \end{figure}
 
         Analizując wygenerowany plan można zauważyć, że algorytm poprawnie odwzorował wymagane bloki lekcyjne, takie jak jednoczesne prowadzenie języka biologii i wiedzy o społeczeństwie, a także prawidłowo przydzielił sale o specjalnym przeznaczeniu (sale gimnastyczne, pracownie informatyczne, \dots).
         Plan charakteryzuje się również równomiernym rozkładem obciążeń dydaktycznych w ciągu tygodnia.
 
-        \clearpage
-
         Kolejnym istotnym aspektem jest prawidłowe zaplanowanie zajęć prowadzonych jednocześnie dla wielu klas.
         Najczęściej występują tu bloki językowe obejmujące język francuski, niemiecki oraz rosyjski.
-        Przykład takiego bloku, realizowanego w środy, przedstawiono na rysunku~\ref{fig:plan_blok}.
+        Przykład takiego bloku, realizowanego w środy w pierwszym oraz drugim slocie czasowym, przedstawiłem na rysunku~\ref{fig:plan_blok}.
 
         \begin{sidewaysfigure}[p]
             \centering
@@ -452,9 +444,9 @@
 
         Wyniki potwierdzają wysoką skuteczność algorytmu --- średnio około pięciu okienek w ciągu całego tygodnia na nauczyciela można uznać za wynik satysfakcjonujący.
 
-
+    \newpage
     \subsection{Wydajność generowania planu lekcji}
-        Testy wydajnościowe przeprowadzono na następującej konfiguracji sprzętowej:
+        Testy wydajnościowe przeprowadziłem na następującej konfiguracji sprzętowej:
         \begin{itemize}
             \item \textbf{procesor:} AMD Ryzen 7 2700X (16 wątków), 3.875 GHz,
             \item \textbf{karta graficzna:} AMD Radeon RX 7700 XT,

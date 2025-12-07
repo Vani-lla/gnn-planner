@@ -1,42 +1,46 @@
 \Chapter{Wstęp}\label{chapter:introduction}
     Jednym z corocznych wyzwań placówek oświatowych jest ułożenie dobrego planu lekcji.
-    Pomimo postępu technologicznego, proces ten nadal sprawia istotne trudności nawet najlepiej zorganizowanym szkołom. Problem można podzielić na dwa zasadnicze etapy:
+    Pomimo postępu technologicznego, proces ten nadal często opiera się na czasochłonnej, ręcznej pracy, co prowadzi do istotnych trudności logistycznych, wydłuża czas przygotowań i może skutkować nieoptymalnymi rozwiązaniami.
+    Problem można podzielić na dwa zasadnicze etapy:
 
-    \begin{enumerate}
-        \item \textbf{Przydział godzinowy nauczycieli do każdej klasy.} Przydział nauczycieli do klas jest zadaniem, które wykonuje się przed rekrutacją.
-            W praktyce oznacza to rozpoczęcie pracy nad planem bez informacji o dokładnej liczbie uczniów. 
-            Dostępne są jedynie prognozy które pozwalają na określenie liczby klas, co zapewnia to ciągłość nauczania jednego nauczyciela z roku na rok dla danej klasy.
-        \item \textbf{Przypisania godzin rozpoczęcia i zakończenia lekcji oraz sal, w których będą się odbywać.} Mając już informację o liczbie godzin lekcyjnych, które każda klasa musi odbyć z każdym nauczycielem, możemy przejść do tworzenia właściwego planu.
-            Głównym ograniczeniem jest stworzony w etapie pierwszym przydział godzin. 
-            Proces ten, wykonywany ręcznie, może zajmować dziesiątki godzin pracy, co często skutkuje chaosem organizacyjnym w pierwszych tygodniach roku szkolnego.
-    \end{enumerate}
+    \begin{itemize}
+        \item \textbf{Tworzenie przydziału godzinowego} czyli określenie, ile godzin tygodniowo każdy nauczyciel ma prowadzić z daną klasą i w ramach jakiego przedmiotu.
+        Jest to zadanie strategiczne, wykonywane na podstawie szacunków liczby uczniów w danym roczniku, które wyznacza szkielet całego planu.
+        \item \textbf{Harmonogramowanie} jest drugim i bardziej złożonym etapem. 
+        Polega na przypisanie każdej z zaplanowanych lekcji konkretnego dnia, godziny rozpoczęcia i sali, przy ścisłym respektowaniu wszystkich fizycznych, prawnych i jakościowych ograniczeń.
+        To właśnie ten etap, realizowany tradycyjnie metodami ręcznymi, jest niezwykle czasochłonny i stanowi największą trudność w organizacji roku szkolnego.
+    \end{itemize}
 
-    Drugi etap stanowi klasyczny problem harmonogramowania z ograniczeniami twardymi i miękkimi.
-    W niniejszej pracy zaproponowałem podejście łączące algorytm ewolucyjny, inspirowany mechanizmami biologicznej ewolucji (mutacja, krzyżowanie, selekcja), z technikami programowania ograniczeń.
-    Takie połączenie umożliwia osiągnięcie wysokiej jakości rozwiązań przy akceptowalnym czasie obliczeń, oferując praktyczny kompromis między optymalnością a wydajnością.
-    
+    Niniejsza praca odpowiada na to wyzwanie, prezentując kompleksowe, automatyczne rozwiązanie obejmujące obydwa te etapy.
+    Głównym celem pracy jest usprawnienie całego procesu poprzez zaprojektowanie i implementację algorytmu oraz funkcjonalnej aplikacji wspomagającej.
+
     \section{Cel i zakres pracy}
-        Głównym celem pracy jest opracowanie i implementacja aplikacji webowej wspomagającej automatyczne układanie planu lekcji z wykorzystaniem algorytmu ewolucyjnego.
-        Aplikacja ma umożliwiać generowanie planów uwzględniających:
+        Głównym celem pracy jest zaprojektowanie i implementacja kompleksowego systemu wspomagającego automatyczne układanie szkolnego planu lekcji.
+        System ten obejmuje funkcjonalną aplikację webową służącą do definiowania wszystkich danych wejściowych i zarządzania procesem, oraz algorytm optymalizacyjny generujący finalne plany.
+
+        Kluczową innowacją jest dekompozycja złożonego problemu harmonogramowania i zastosowanie hybrydowego podejścia, łączącego trzy techniki:
+        \begin{itemize}
+            \item algorytm zachłanny do tworzenia struktury bloków lekcyjnych,
+            \item algorytm ewolucyjny do optymalizacji rozkładu godzinowego na przestrzeni tygodnia oraz
+            \item programowania z ograniczeniami do szczegółowego harmonogramowania.
+        \end{itemize}
+        Takie połączenie ma na celu znalezienie praktycznego kompromisu między wysoką jakością rozwiązania a akceptowalnym czasem obliczeń.
+
+        \newpage
+        Aplikacja wraz z algorytmem ma umożliwiać generowanie poprawnych i użytecznych planów lekcji, które spełniają następujące kategorie ograniczeń:
         \begin{itemize}
             \item ograniczenia fizyczne (dostępność sal, unikanie kolizji zajęć),
             \item ograniczenia jakościowe (ciągłość zajęć, brak okienek),
-            \item ograniczenia specyficzne definiowane przez użytkownika (bloki lekcyjne),
+            \item ograniczenia specyficzne definiowane przez użytkownika (bloki lekcyjne).
         \end{itemize}
-
-        Algorytm ma minimalizować liczbę okienek w planach nauczycieli, redukując tym samym czas ich przebywania w szkole.
 
         Dla osiągnięcia postawionego celu konieczne jest wykonanie następujących zadań:
         \begin{itemize}
-            \item zaprojektowanie i implementacja bazy danych do przechowywania ograniczeń, specyfikacji bloków lekcyjnych oraz wyników generowania planów,
-            \item zaprojektowanie i wykonanie interfejsu użytkownika umożliwiającego definiowanie wszystkich niezbędnych ograniczeń oraz wizualizację końcowych planów lekcji,
-            \item opracowanie algorytmu do układania planu lekcji wykorzystującego:
-            \begin{itemize}
-                \item algorytm zachłanny do tworzenia struktury bloków lekcyjnych,
-                \item algorytm ewolucyjny do optymalizacji rozkładu godzinowego,
-                \item solver dla zadań programowania z ograniczeniami do szczegółowego harmonogramowania,
-            \end{itemize}
-            \item integracja aplikacji webowej z algorytmem.
+            \item zaprojektowanie i implementacja relacyjnej bazy danych do przechowywania wszystkich zasobów (nauczyciele, klasy, sale, przedmioty), ograniczeń, definicji bloków oraz wyników generowania planów,
+            \item zaprojektowanie i implementacja interfejsu użytkownika umożliwiającego intuicyjne wprowadzanie danych, konfigurację parametrów algorytmu oraz wizualizację wygenerowanych planów z perspektywy nauczyciela i klasy,
+            \item opracowanie i implementacja wieloetapowego algorytmu generowania planu,
+            \item integracja modułu algorytmicznego z aplikacją webową i zapewnienie pełnej funkcjonalności poprzez odpowiedn interfejs programowania aplikacji,
+            \item przeprowadzenie testów i walidacji systemu na rzeczywistych danych szkolnych w celu potwierdzenia jego poprawności, wydajności i praktycznej użyteczności.
         \end{itemize}
 
     \section{Aspekt systemowy}

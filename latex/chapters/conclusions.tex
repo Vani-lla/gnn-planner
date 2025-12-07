@@ -33,38 +33,31 @@
         Integracja takich informacji w ostatnim etapie algorytmu umożliwi bardziej realistyczne planowanie.
 
         Wartym analizy kierunkiem rozwoju jest również dodanie czwartego etapu generowania planu lekcji.
-        Mógłby on polegać na zebraniu dziennych harmonogramów i potraktowaniu ich jako punktu wyjścia dla solwera programowania liniowego z ograniczeniami.
+        Mógłby on polegać na zebraniu dziennych harmonogramów i potraktowaniu ich jako punktu wyjścia dla solvera programowania liniowego z ograniczeniami.
         Ponieważ bazowe rozwiązanie jest już poprawne, dodatkowa optymalizacja nie powinna znacząco zwiększyć czasu obliczeń, a może wyraźnie poprawić globalną jakość tygodniowego planu.
         
-        Poza stroną algorytmiczną, dalsze prace wymagają rozbudowy warstwy użytkowej.
+        Poza stroną algorytmiczną, dalsze prace wymagają także rozbudowy warstwy użytkowej.
         System powinien obsługiwać wielu użytkowników, co wymaga implementacji kont opartych o przykładowo adresy e-mail i hasła.
         Pozwoliłoby to na wdrożenie aplikacji na rynku.
         
         Interfejs aplikacji również powinien zostać znacząco rozwinięty.
-        Obecna wersja skupia się na funkcjonalności, natomiast pełnoprawne wdrożenie wymaga bardziej intuicyjnego, przejrzystego i przyjaznego użytkownikowi UI.
+        Obecna wersja skupia się na funkcjonalności, natomiast pełnoprawne wdrożenie wymaga bardziej intuicyjnego, przejrzystego i przyjaznego użytkownikowi interfejsu.
         W szczególności konieczne jest zapewnienie narzędzi do ręcznej edycji wygenerowanego planu --- poprawy sal, wymiany pojedynczych lekcji czy reorganizacji fragmentów tygodnia.
         Tego typu funkcjonalność jest niezbędna, ponieważ nawet najlepszy algorytm nie jest w stanie uwzględnić wszystkich specyficznych preferencji i wyjątków charakterystycznych dla danej szkoły.
 
     \section{Wnioski}
-        Zastosowany algorytm zachłanny do generowania bloków lekcyjnych okazał się trafnym wyborem.
-        Jego prostota znacząco ułatwia konstrukcję ograniczeń i eliminuje potrzebę stosowania bardziej złożonych metod.
-        Pozwala również na pojedyncze wywołanie funkcji \verb|NoOverlap| dla danej klasy, ponieważ bloki lekcyjne, w przeciwieństwie do pojedynczych zajęć, nie mogą na siebie zachodzić (przykładowo francuski i niemiecki).
-        Dzięki temu proces tworzenia harmonogramu jest bardziej przejrzysty i obliczeniowo efektywny.
-
-        Uzyskany plan lekcji, choć wymagałby pewnych ręcznych korekt, jest wystarczająco bliski rozwiązaniu praktycznemu. 
-        Podejście które przedstawiłem, oparte na podziale problemu na trzy mniejsze podproblemy, okazało się efektywne przy dostępnej strukturze danych wejściowych. 
-        Koncepcja ta jest na tyle dobrze uzasadniona i elastyczna, że z powodzeniem może być stosowana również w przyszłych działaniach i projektach.
-
-        Praca zawiera propozycję wieloetapowego modelu generowania planu lekcji.
+        Praca zawiera propozycję wieloetapowej dekompozycji problemu, co okazało się trafnym kierunkiem działań.
         Pokazałem, że takie połączenie umożliwia uzyskanie poprawnych rozwiązań mimo złożonych zależności między zajęciami.
-        Eksperymenty wykazały, że rozdzielenie problemu na trzy podproblemy znacząco poprawia efektywność obliczeń i upraszcza formułowanie ograniczeń.
 
+        Tworzenie bloków lekcyjnych w istotny sposób zmniejszyło liczbę ogrniczeń w problemie harmonogramowania --- zastosowany algorytm zachłanny do generowania bloków lekcyjnych okazał się trafnym wyborem.
+        Jego prostota znacząco ułatwia konstrukcję ograniczeń i eliminuje potrzebę stosowania bardziej złożonych metod.
+        Eksperymenty wykazały, że dzięki temu proces tworzenia planu jest bardziej przejrzysty i obliczeniowo efektywny.
+        
+        Dekompozycja tygodniowego harmonogramowania na pięć niezależnych problemów dziennych w drugim etapie algorytmu przyniosła istotne korzyści praktyczne.
+        Takie podejście zmniejszyło złożoność obliczeniową każdego pojedynczego zadania, umożliwiając ich rozwiązanie w rozsądnym czasie, nawet na przeciętnych konfiguracjach sprzętowych.
+        Co ważne, uzyskane w ten sposób dzienne harmonogramy stanowią doskonały punkt wyjścia dla potencjalnej, globalnej optymalizacji w skali całego tygodnia, co stanowi obiecujący kierunek dalszych badań.
 
-% Zakończenie, podsumowuje najważniejsze wnioski, podaje możliwości dalszego rozwinięcia wykonanych prac i wskazuje obszar potencjalnego zastosowania pracy.
-% Rezultaty pracy mają charakter poznawczy, mogą mieć charakter użytkowy.
-% Należy dokonać analizy uzyskanych wyników.
-% Rezultaty powinny charakteryzować się oryginalnością, a nawet w pewnym stopniu nowatorstwem.
-% Praca zawiera (\dots). Zostało pokazane (\dots). Eksperymenty wykazały (\dots). 
-% Tu piszemy wnioski i obserwacje.
-
-% Widzimy, że (\dots). Z tego powodu przyszła praca powinna obejmować (\dots). 
+        Finalny rezultat pracy --- aplikacja webowa wraz z algorytmem generującym plany --- potwierdza zasadność przyjętej metodologii.
+        Wygenerowane plany są na tyle poprawne, że stanowią realną podstawę do ewentualnych, drobnych ręcznych korekt.
+        Uzyskany plan lekcji, choć wymagałby pewnych ręcznych korekt, jest wystarczająco bliski rozwiązaniu praktycznemu.
+        Elastyczność zaproponowanego rozwiązania, opartego na podziale problemu na podproblemy, stanowi solidny fundament, który z powodzeniem może być rozwijany i adaptowany w przyszłych projektach.
