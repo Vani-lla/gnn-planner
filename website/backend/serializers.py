@@ -45,7 +45,7 @@ class PlanSerializer(serializers.ModelSerializer):
 class RequirementSetSerializer(serializers.ModelSerializer):
     class Meta:
         model = RequirementSet
-        fields = ["id", "name", "teacher_pool", "group_pool", "subject_pool"]
+        fields = ["id", "name", "teacher_pool", "group_pool", "subject_pool", "room_pool"]
 
 
 class StudentGroupSerializer(serializers.ModelSerializer):

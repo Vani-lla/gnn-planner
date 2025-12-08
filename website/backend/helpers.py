@@ -148,9 +148,6 @@ def generate_blocks(
         BLOCK_LIST.append(tuple(block))
         BLOCK_VAL.append(hours)
 
-    # for block, hours in zip(BLOCK_LIST, BLOCK_VAL):
-    #     print(f"{hours} | {tuple(str(req) for req in block)}")
-
     return BLOCK_LIST, np.array(BLOCK_VAL)
 
 
@@ -194,7 +191,6 @@ def generate_blocks(
         )
         multi_req_groups.append(reqs)
         block_reqset[tuple(reqs)] = block
-        # print(block)
 
     power_blocks = []
     for block in combinatory_blocks:
@@ -224,25 +220,21 @@ def generate_blocks(
         tmp = tuple(tmp)
         if tmp:
             power_blocks.append(tmp)
-            print(tmp)
+
             correction = min(req.hours for req in tmp)
             for req in tmp:
                 requirement_corrections[req] = correction
                 return_blocks[tmp] = correction
                 block_reqset[tmp] = block
-        else:
-            print("xxx", block)
 
     for block in multi_req_groups:
-        # print(block)
+
         if all(req not in requirement_corrections for req in block):
             correction = min(req.hours for req in block)
             return_blocks[tuple(block)] = correction
 
             for req in block:
                 requirement_corrections[req] = correction
-
-            # print(block, "x")
 
     singular_req_groups = []
     for block in singular_blocks:
@@ -278,42 +270,17 @@ def generate_blocks(
         for requirements in singular_req_groups
     ):
         for requirements in singular_req_groups:
-            # if "II_BG" in [r.group.name for r in requirements]:
-            #     print(
-            #         requirements,
-            #         all(
-            #             req.hours - requirement_corrections[req] > 0
-            #             for req in requirements
-            #         ),
-            #     )
+
             if all(
                 req.hours - requirement_corrections[req] > 0 for req in requirements
             ) or (
                 block_reqset[requirements].max_number > 0
                 and return_blocks[requirements] < block_reqset[requirements].max_number
             ):
-                if "II_BG" in [r.group.name for r in requirements]:
-                    print(requirements, "xxxx")
-                # print(block_reqset[requirements].max_number)
-                # print(block_reqset[requirements].max_number - return_blocks[requirements], requirements)
-                # if block_reqset[requirements].max_number:
-                # print(block_reqset[requirements])
-                # print(block_reqset[requirements].max_number - return_blocks[requirements], requirements)
+
                 for req in requirements:
                     requirement_corrections[req] += 1
                 return_blocks[requirements] += 1
-
-    # for k, v in return_blocks.items():
-    #     if len(k) > 1:
-    #         for req in k:
-    #             print(
-    #                 req.subject,
-    #                 req.group,
-    #                 req.teacher,
-    #                 requirement_corrections[req],
-    #                 end=" | ",
-    #             )
-    #         print()
 
     for req in requirements_querry:
         diff = req.hours - requirement_corrections[req]
@@ -502,47 +469,20 @@ def evaluate_population(
     student_groups: list[StudentGroup],
     alphas=np.ones(3, dtype=np.float64),
 ) -> np.ndarray:
-    """
-    Evaluate the entire population at once.
-
-    Args:
-        block_list: List of requirement blocks.
-        req_set: The requirement set.
-        population: A 3D numpy array representing the population (shape: [n_population, 5, n_blocks]).
-        teachers: Preloaded list of Teacher objects.
-        student_groups: Preloaded list of StudentGroup objects.
-        alphas: Weights for the evaluation components.
-
-    Returns:
-        np.ndarray: A 1D array of evaluation scores for the population.
-    """
-    # Teacher day hours
     a1 = teacher_day_hours_population(block_list, req_set, population, teachers)
     zeros = np.where(a1 == 0)
-    # a1: np.ndarray = alphas[0] * (2 - np.abs(a1 - 7)) / len(teachers)
+
     a1: np.ndarray = alphas[0] * (-((7 - a1) ** 2) + 2) / len(teachers)
     a1[zeros] = 0.0
 
     a1_ = a1.sum(axis=2)
     a1 = a1.sum(axis=(1, 2))
 
-    # Group day lessons
     a2 = group_day_lessons_population(block_list, req_set, population, student_groups)
     a2: np.ndarray = alphas[1] * (-((7 - a2) ** 2) + 2) / len(student_groups)
 
     a2_ = a2.sum(axis=2)
     a2 = a2.sum(axis=(1, 2))
-
-    # print(a2_.shape)
-
-    # Border day lessons
-    # a3_ = border_day_lessons_population(block_list, req_set, population, student_groups)
-    # a3 = np.full(a3_.shape, -1, dtype=np.float64)
-
-    # a3[a3_ == 0] = 0
-    # a3[a3_ == 1] = 1
-    # a3[a3_ == 2] = 0.5
-    # a3 = alphas[2] * a3.sum(axis=(1, 2))
 
     return a2 + a1, a2_, a1_
 
@@ -612,7 +552,6 @@ def cross_breed(
     child2 = subject2.copy()
     child2[worst_day2, :] = subject1[best_day1, :]
 
-    # Adjust child1 to ensure no negative values and preserve column sums
     for ind, difference in enumerate(
         child1[best_day1, :] + child1[worst_day1, :] - block_val
     ):
@@ -621,7 +560,6 @@ def cross_breed(
             child1[best_day1, ind] -= correction[0]
             child1[worst_day1, ind] -= correction[1]
 
-        # Ensure no negative values
         negatives = child1[:, ind] < 0
         if np.any(negatives):
             total_negative = -child1[negatives, ind].sum()
@@ -635,19 +573,15 @@ def cross_breed(
                 )
                 child1[positives, ind] += redistribution
 
-        # Final adjustment to ensure column sum matches block_val
         current_sum = child1[:, ind].sum()
         if current_sum != block_val[ind]:
             difference = block_val[ind] - current_sum
-            redistribution = np.random.multinomial(
-                abs(difference), [1 / 5] * 5
-            )  # Distribute evenly across days
+            redistribution = np.random.multinomial(abs(difference), [1 / 5] * 5)
             if difference > 0:
                 child1[:, ind] += redistribution
             else:
                 child1[:, ind] -= redistribution
 
-    # Adjust child2 to ensure no negative values and preserve column sums
     for ind, difference in enumerate(
         child2[best_day2, :] + child2[worst_day2, :] - block_val
     ):
@@ -656,7 +590,6 @@ def cross_breed(
             child2[best_day2, ind] -= correction[0]
             child2[worst_day2, ind] -= correction[1]
 
-        # Ensure no negative values
         negatives = child2[:, ind] < 0
         if np.any(negatives):
             total_negative = -child2[negatives, ind].sum()
@@ -670,13 +603,10 @@ def cross_breed(
                 )
                 child2[positives, ind] += redistribution
 
-        # Final adjustment to ensure column sum matches block_val
         current_sum = child2[:, ind].sum()
         if current_sum != block_val[ind]:
             difference = block_val[ind] - current_sum
-            redistribution = np.random.multinomial(
-                abs(difference), [1 / 5] * 5
-            )  # Distribute evenly across days
+            redistribution = np.random.multinomial(abs(difference), [1 / 5] * 5)
             if difference > 0:
                 child2[:, ind] += redistribution
             else:
@@ -691,19 +621,6 @@ def mutate_population(
     availability: np.ndarray,
     mutation_rate: float = 0.1,
 ) -> np.ndarray:
-    """
-    Mutate a percentage of the population by redistributing values within columns (blocks),
-    respecting availability constraints.
-
-    Args:
-        population (np.ndarray): The population to mutate (shape: [n_population, 5, n_blocks]).
-        block_val (np.ndarray): The target column sums for each block.
-        availability (np.ndarray): Availability matrix (shape: [n_blocks, 5]).
-        mutation_rate (float): The percentage of the population to mutate (0.0 to 1.0).
-
-    Returns:
-        np.ndarray: The mutated population.
-    """
     n_population, n_days, n_blocks = population.shape
     n_to_mutate = int(n_population * mutation_rate)
     if n_to_mutate == 0:
@@ -760,7 +677,7 @@ def evolutionary_loop(
     population_size = population.shape[0]
 
     for generation in range(generations):
-        # Evaluate the population
+
         evaluations, group_evaluations, teacher_evaluations = evaluate_population(
             block_list, req_set, population, teachers, student_groups, alphas
         )
@@ -768,28 +685,23 @@ def evolutionary_loop(
         for specimen in population:
             assert is_array_valid(specimen, block_val)
 
-        # Sort population by evaluation scores (descending)
         sorted_indices = np.argsort(evaluations)[::-1]
         population = population[sorted_indices]
         evaluations = evaluations[sorted_indices]
         group_evaluations = group_evaluations[sorted_indices]
         teacher_evaluations = teacher_evaluations[sorted_indices]
 
-        # Print the best score of the current generation
         print(f"Generation {generation + 1}: Best Score = {evaluations[0]}")
 
-        # Keep the best specimen unchanged
         best_specimen = population[0]
 
-        # Select the top 50% of the population
         top_half = population[: population_size // 2]
         top_half_eval = evaluations[: population_size // 2]
         p = np.exp(top_half_eval) / sum(np.exp(top_half_eval))
 
-        # Breed the top 50% to create the next generation
-        new_population = []  # Start with the best specimen
+        new_population = []
         while len(new_population) < population_size - 1:
-            # Randomly select two parents from the top half
+
             parent_indices = np.random.choice(len(top_half), 2, replace=False, p=p)
 
             parent1, parent2 = top_half[parent_indices]
@@ -797,8 +709,6 @@ def evolutionary_loop(
             g_eval1, g_eval2 = group_evaluations[parent_indices]
             t_eval1, t_eval2 = teacher_evaluations[parent_indices]
 
-            # Crossbreed the parents to produce two children
-            # child1, child2 = cross_breed(parent1, parent2, eval1, eval2, block_val)
             child1 = cross_breed_student_groups(
                 parent1, parent2, g_eval1, g_eval2, group_block_indexes
             )
@@ -808,20 +718,12 @@ def evolutionary_loop(
             new_population.append(child1)
             new_population.append(child2)
 
-            # Add the children to the new population
-            # new_population.append(child1)
-            # if len(new_population) < population_size - 1:
-            #     new_population.append(child2)
-
-        # Convert the new population back to a NumPy array
         population = np.array(new_population)
         population = mutate_population(population, block_val, availability, 0.4)
-        # population = add_integer_noise_batch(population)
 
         population = np.concatenate(
             [population, best_specimen[np.newaxis, :, :]], axis=0
         )
 
-    # Return the best specimen after all generations
     np.save("specimen", best_specimen)
     return best_specimen

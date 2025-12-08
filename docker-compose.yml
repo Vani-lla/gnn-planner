@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: inzynierka-postgres
+    environment:
+      POSTGRES_DB: inzynierka
+      POSTGRES_USER: inzynierka_user
+      POSTGRES_PASSWORD: koper123
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web:
+    build:
+      context: ./website
+      dockerfile: Dockerfile
+    image: inzynierka-web:latest
+    container_name: inzynierka-web
+    depends_on:
+      - db
+    environment:
+      DJANGO_DEBUG: "True"
+      DJANGO_ALLOWED_HOSTS: "*"
+      DATABASE_HOST: db
+      DATABASE_NAME: inzynierka
+      DATABASE_USER: inzynierka_user
+      DATABASE_PASSWORD: koper123
+    ports:
+      - "8000:8000"
+    command: ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
+    working_dir: /app
+
+volumes:
+  pgdata:

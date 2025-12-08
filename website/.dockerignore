@@ -1,0 +1,19 @@
+# Exclude frontend sources from image
+frontend/
+
+# Exclude Django migrations from backend app
+# backend/migrations/
+
+# Python cache and local envs
+__pycache__/
+*.pyc
+env/
+venv/
+.venv/
+
+# Node modules if present
+node_modules/
+
+# Local static build artifacts
+staticfiles/
+.DS_Store

@@ -5,11 +5,13 @@ export default function Requirements() {
     const [teacherPools, setTeacherPools] = useState([]);
     const [subjectPools, setSubjectPools] = useState([]);
     const [groupPools, setGroupPools] = useState([]);
+    const [roomPools, setRoomPools] = useState([]);
     const [reqSets, setReqSets] = useState([]);
 
     const [selectedTeacherPool, setSelectedTeacherPool] = useState("");
     const [selectedSubjectPool, setSelectedSubjectPool] = useState("");
     const [selectedGroupPool, setSelectedGroupPool] = useState("");
+    const [selectedRoomPool, setSelectedRoomPool] = useState("");
     const [selectedReqSet, setSelectedReqSet] = useState("");
     const [newReqSetName, setNewReqSetName] = useState("");
 
@@ -23,16 +25,18 @@ export default function Requirements() {
     useEffect(() => {
         (async () => {
             try {
-                const [tp, sp, gp, rs] = await Promise.all([
+                const [tp, sp, gp, rp, rs] = await Promise.all([
                     fetch("/api/teacher-pools/"),
                     fetch("/api/subject-pools/"),
                     fetch("/api/student-group-pools/"),
+                    fetch("/api/room-pools/"),
                     fetch("/api/requirement-sets/"),
                 ]);
-                const [tpd, spd, gpd, rsd] = await Promise.all([tp.json(), sp.json(), gp.json(), rs.json()]);
+                const [tpd, spd, gpd, rpd, rsd] = await Promise.all([tp.json(), sp.json(), gp.json(), rp.json(), rs.json()]);
                 if (tp.ok) setTeacherPools(tpd);
                 if (sp.ok) setSubjectPools(spd);
                 if (gp.ok) setGroupPools(gpd);
+                if (rp.ok) setRoomPools(rpd);
                 if (rs.ok) setReqSets(rsd);
             } catch { /* noop */ }
         })();
@@ -59,6 +63,7 @@ export default function Requirements() {
                     setSelectedTeacherPool(String(data.teacher_pool || ""));
                     setSelectedSubjectPool(String(data.subject_pool || ""));
                     setSelectedGroupPool(String(data.group_pool || ""));
+                    setSelectedRoomPool(String(data.room_pool || ""));
 
                     // Fetch grid for this req_set
                     const gRes = await fetch(`/api/requirements/grid/?req_set_id=${id}`);
@@ -82,8 +87,8 @@ export default function Requirements() {
     // Create a new Requirement Set using selected pools
     const handleCreateReqSet = async () => {
         if (!newReqSetName.trim()) return alert("Enter requirement set name");
-        if (!selectedTeacherPool || !selectedSubjectPool || !selectedGroupPool) {
-            return alert("Select Teacher, Subject and Group pools first");
+        if (!selectedTeacherPool || !selectedSubjectPool || !selectedGroupPool || !selectedRoomPool) {
+            return alert("Select Teacher, Subject, Group and Room pools first");
         }
         try {
             setLoading(true);
@@ -96,7 +101,7 @@ export default function Requirements() {
                     teacher_pool: Number(selectedTeacherPool),
                     subject_pool: Number(selectedSubjectPool),
                     group_pool: Number(selectedGroupPool),
-                    room_pool: null,
+                    room_pool: Number(selectedRoomPool),
                 }),
             });
             const data = await res.json();
@@ -301,6 +306,16 @@ export default function Requirements() {
                 >
                     <option value="">Student Group Pool</option>
                     {groupPools.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+                </select>
+
+                <select
+                    className={styles.requirementsSelect}
+                    value={selectedRoomPool}
+                    onChange={(e) => setSelectedRoomPool(e.target.value)}
+                    disabled={poolsDisabled}
+                >
+                    <option value="">Room Pool</option>
+                    {roomPools.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
                 </select>
 
                 <div className={styles.inlineFlex}>

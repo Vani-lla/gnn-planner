@@ -62,10 +62,10 @@
 - &check; Przykładowy wynik etap 3ci
 - &check; Słownictwo backend/frontend/endpoint/widoki
 
-- Poprawienie diagramu dekompozycji
-- Citations
-- Layout
-- Wzory
+- &check; Poprawienie diagramu dekompozycji
+- &check; Citations
+- &check; Layout
+- &check; Wzory
 
 ### Wszelkie inne poprawki :|
 95.43159103393555

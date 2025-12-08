@@ -42,38 +42,39 @@ def run_evolutionary_process(generations: int, req_set_id: int):
         ]
     )
 
-    # population = initialize_population(1000, BLOCK_VAL, TEACHER_AVAILABILITY)
+    population = initialize_population(1000, BLOCK_VAL, TEACHER_AVAILABILITY)
+    print(population)
 
-    best_specimen = np.load("specimen.npy")
-    print("Loaded best specimen")
-    print(best_specimen)
+    # best_specimen = np.load("specimen.npy")
+    # print("Loaded best specimen")
+    # print(best_specimen)
 
-    # start = time()
-    # best_specimen = evolutionary_loop(
-    #     block_list=BLOCK_LIST,
-    #     req_set=REQ_SET,
-    #     population=population,
-    #     teachers=TEACHERS,
-    #     student_groups=STUDENT_GROUPS,
-    #     block_val=BLOCK_VAL,
-    #     availability=TEACHER_AVAILABILITY,
-    #     generations=generations,
-    #     alphas=np.array([1.0, 2.0, 1.0]),
-    # )
-    # print(time() - start)
+    start = time()
+    best_specimen = evolutionary_loop(
+        block_list=BLOCK_LIST,
+        req_set=REQ_SET,
+        population=population,
+        teachers=TEACHERS,
+        student_groups=STUDENT_GROUPS,
+        block_val=BLOCK_VAL,
+        availability=TEACHER_AVAILABILITY,
+        generations=generations,
+        alphas=np.array([1.0, 2.0, 1.0]),
+    )
+    print(time() - start)
 
-    ll = []
-    for k, v in teacher_day_hours(BLOCK_LIST, REQ_SET, best_specimen).items():
-        # print(sum(v))
-        # ll.append(sum(v))
-        zeros = np.where(v == 0)
-        v = np.array(v, dtype=np.int64)
-        # a1: np.ndarray = alphas[0] * (2 - np.abs(a1 - 7)) / len(teachers)
-        a1 = (-((7 - v) ** 2) + 2)
-        print(a1, v)
-        a1[zeros] = 0.0
-        if sum(v) > 0:
-            ll.append(a1.sum())
+    # ll = []
+    # for k, v in teacher_day_hours(BLOCK_LIST, REQ_SET, best_specimen).items():
+    #     # print(sum(v))
+    #     # ll.append(sum(v))
+    #     zeros = np.where(v == 0)
+    #     v = np.array(v, dtype=np.int64)
+    #     # a1: np.ndarray = alphas[0] * (2 - np.abs(a1 - 7)) / len(teachers)
+    #     a1 = (-((7 - v) ** 2) + 2)
+    #     print(a1, v)
+    #     a1[zeros] = 0.0
+    #     if sum(v) > 0:
+    #         ll.append(a1.sum())
     # print(list(int(x) for x in ll))
     # return
     # l = np.array(list(teacher_day_hours(BLOCK_LIST, REQ_SET, best_specimen).values())).flatten()
@@ -83,34 +84,33 @@ def run_evolutionary_process(generations: int, req_set_id: int):
     # for x in range(max(ll) + 1):
     #     print(f"({x}, {ll.count(x)})")
         
-    print("------ xd")
-    l = []
-    ll = []
-    for k, v in group_day_lessons(BLOCK_LIST, REQ_SET, best_specimen).items():
-        # print(sum(v))
-        # ll.append(sum(v))
-        v = np.array(v, dtype=np.int64)
-        # a1: np.ndarray = alphas[0] * (2 - np.abs(a1 - 7)) / len(teachers)
-        a1 = (-((7 - v) ** 2) + 2)
-        print(a1, v)
-        if sum(v) > 0:
-            ll.append(a1.sum())
-    print(list(int(x) for x in ll))
-    print(ll)
+    # print("------")
+    # l = []
+    # ll = []
+    # for k, v in group_day_lessons(BLOCK_LIST, REQ_SET, best_specimen).items():
+    #     # print(sum(v))
+    #     # ll.append(sum(v))
+    #     v = np.array(v, dtype=np.int64)
+    #     # a1: np.ndarray = alphas[0] * (2 - np.abs(a1 - 7)) / len(teachers)
+    #     a1 = (-((7 - v) ** 2) + 2)
+    #     print(a1, v)
+    #     if sum(v) > 0:
+    #         ll.append(a1.sum())
+    # print(list(int(x) for x in ll))
+    # print(ll)
+        
+    # # print("--")
+    # # for x in range(max(ll)):
+    # #     print(f"({x}, {ll.count(x)})")
         
     # print("--")
-    # for x in range(max(ll)):
-    #     print(f"({x}, {ll.count(x)})")
-        
-    print("--")
-    l = np.array(l)
-    # l = np.array(list(group_day_lessons(BLOCK_LIST, REQ_SET, best_specimen).values())).flatten()
-    # print(np.unique(l))
-    for x in range(0, 14):
-        print(x, np.sum(l==x))
+    # l = np.array(l)
+    # # l = np.array(list(group_day_lessons(BLOCK_LIST, REQ_SET, best_specimen).values())).flatten()
+    # # print(np.unique(l))
+    # for x in range(0, 14):
+    #     print(x, np.sum(l==x))
 
     start = time()
-    return
     plan = solve_schedule(REQ_SET, BLOCK_LIST, best_specimen)
     print(time() - start)
 

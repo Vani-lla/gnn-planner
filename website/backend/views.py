@@ -19,9 +19,6 @@ from .serializers import RequirementSerializer
 
 @api_view(["GET"])
 def get_lessons_for_plan(request, plan_id):
-    """
-    Fetch all lessons for a given plan.
-    """
     try:
         plan = Plan.objects.get(id=plan_id)
         lessons = Lesson.objects.filter(plan=plan).select_related(
@@ -51,14 +48,10 @@ def get_lessons_for_plan(request, plan_id):
 
 @api_view(["GET"])
 def get_plan_details(request, plan_id):
-    """
-    Fetch details of a plan, including its RequirementSet, teachers, and student groups.
-    """
     try:
         plan = Plan.objects.get(id=plan_id)
         req_set = plan.req_set
 
-        # Fetch teachers and student groups based on the RequirementSet pools
         teachers = Teacher.objects.filter(pool=req_set.teacher_pool)
         student_groups = StudentGroup.objects.filter(pool=req_set.group_pool)
 
@@ -109,7 +102,6 @@ def import_requirements_csv(request):
     ):
         return Response({"error": "Invalid pool id(s)"}, status=404)
 
-    # RequirementSet resolve/create
     if req_set_id:
         try:
             req_set = RequirementSet.objects.get(id=req_set_id)
@@ -140,19 +132,17 @@ def import_requirements_csv(request):
             {"error": "CSV must contain at least two header rows"}, status=400
         )
 
-    # Build combined group names (skip first empty header cell)
     raw_first = first_row[1:]
     raw_second = second_row[1:]
     combined_names = [f"{a}_{b}" for a, b in zip(raw_first, raw_second)]
     print(combined_names)
 
-    # Existing groups in pool (dict by name)
     existing_groups = {g.name: g for g in StudentGroup.objects.filter(pool=group_pool)}
-    # Keep only group objects that exist
+
     ordered_groups = [
         existing_groups[name] for name in combined_names if name in existing_groups
     ]
-    
+
     print(list(existing_groups.keys()))
 
     subjects_cache = {s.name: s for s in Subject.objects.filter(pool=subject_pool)}
@@ -170,21 +160,18 @@ def import_requirements_csv(request):
             continue
         label = (row[0] or "").strip()
         if not label or is_numeric(label):
-            continue  # skip numeric/empty first cell
+            continue
 
-        # Subject row
         if label in subjects_cache:
             current_subject = subjects_cache[label]
             processed_rows += 1
             continue
 
-        # Teacher row (must match existing teacher and have current_subject)
         if label in teachers_cache and current_subject:
             teacher = teachers_cache[label]
-            # Iterate hours aligned with filtered existing groups
-            # Need original hours cells corresponding to combined_names indexes
+
             hours_cells = row[1:]
-            # Map group objects to their column index
+
             for idx, g in enumerate(ordered_groups):
                 if idx >= len(hours_cells):
                     break
@@ -216,7 +203,6 @@ def import_requirements_csv(request):
                     )
                 upserted += 1
             processed_rows += 1
-        # Anything else ignored (no creation)
 
     return Response(
         {
@@ -244,10 +230,9 @@ def run_evolutionary_process_endpoint(request):
             status=400,
         )
 
-    # Run the evolutionary process
     plan = run_evolutionary_process(generations, req_set_id)
     plan_object = Plan.objects.create(
-        name=f"Plan generated using {RequirementSet.objects.get(id=req_set_id).name} on {datetime.now().strftime("%d/%m,%Y, %H:%M")}",
+        name=f"Plan generated using {RequirementSet.objects.get(id=req_set_id).name} on {datetime.now().strftime('%d/%m,%Y, %H:%M')}",
         req_set=RequirementSet.objects.get(id=req_set_id),
     )
 
@@ -318,7 +303,7 @@ class SubjectBlockViewSet(ModelViewSet):
             power_block = block.get("power_block", False)
             max_number = block.get("max_number", 0)
 
-            subjects = list(numbers.keys())  # derive subjects from numbers map
+            subjects = list(numbers.keys())
 
             block_data = {
                 "req_set": req_set_id,
@@ -352,10 +337,6 @@ class TeacherAvailabilityViewSet(ModelViewSet):
         return qs
 
     def create(self, request, *args, **kwargs):
-        """
-        Bulk replace availability for a req_set.
-        Body: { req_set_id: int, availability: { "<teacherId>": { "0": true, ... "4": false }, ... } }
-        """
         req_set_id = request.data.get("req_set_id")
         availability_data = request.data.get("availability")
         if not req_set_id or not availability_data:
@@ -365,7 +346,7 @@ class TeacherAvailabilityViewSet(ModelViewSet):
             )
         try:
             req_set = RequirementSet.objects.get(id=req_set_id)
-            # Replace all for this req_set
+
             TeacherAvailability.objects.filter(req_set=req_set).delete()
             bulk = []
             for teacher_id, avail in availability_data.items():
@@ -396,9 +377,6 @@ class RequirementSetViewSet(ModelViewSet):
     serializer_class = RequirementSetSerializer
 
     def list(self, request, *args, **kwargs):
-        """
-        Endpoint to fetch all Requirement Sets.
-        """
         try:
             queryset = self.get_queryset()
             serializer = self.get_serializer(queryset, many=True)
@@ -431,17 +409,6 @@ class TeacherViewSet(ModelViewSet):
         return qs
 
     def create(self, request, *args, **kwargs):
-        """
-        Bulk create teachers.
-        Expected JSON:
-        {
-          "pool_id": <int>,
-          "teachers": [
-            { "name": "Alice", "subjects": [1,2,3] },
-            ...
-          ]
-        }
-        """
         data = request.data
         pool_id = data.get("pool_id")
         teachers = data.get("teachers", [])
@@ -457,7 +424,7 @@ class TeacherViewSet(ModelViewSet):
             payload.append(
                 {
                     "name": name,
-                    "teached_subjects": subjects,  # IDs only
+                    "teached_subjects": subjects,
                     "pool": [int(pool_id)],
                 }
             )
@@ -468,10 +435,6 @@ class TeacherViewSet(ModelViewSet):
         return Response(serializer.data, status=201)
 
     def update(self, request, *args, **kwargs):
-        """
-        Update single teacher.
-        Accepts: { "name": "...", "subjects": [ids], "pool": [pool_id] }
-        """
         partial = kwargs.get("partial", False)
         instance = self.get_object()
         data = request.data.copy()
@@ -498,15 +461,10 @@ class SubjectViewSet(ModelViewSet):
     serializer_class = SubjectSerializer
 
     def get_queryset(self):
-        """
-        Override the default queryset to allow filtering by pool_id.
-        """
         queryset = super().get_queryset()
         pool_id = self.request.query_params.get("pool_id")
         if pool_id:
-            queryset = queryset.filter(
-                pool__id=pool_id
-            )  # Filter subjects where the pool contains the given pool_id
+            queryset = queryset.filter(pool__id=pool_id)
         return queryset
 
     def create(self, request, *args, **kwargs):
@@ -564,17 +522,14 @@ class RoomViewSet(ModelViewSet):
                 room_name = room_data[0]
                 subject_names = room_data[1:]
 
-                # Match subjects by name
                 matched_subjects = subjects.filter(name__in=subject_names)
 
-                # Create or update the room
                 room, _ = Room.objects.update_or_create(
                     name=room_name,
                     pool=room_pool,
                     defaults={"pool": room_pool},
                 )
 
-                # Add subjects to the room
                 room.compatible_subjects.set(matched_subjects)
                 created_rooms.append(room)
 
@@ -690,22 +645,21 @@ class RequirementViewSet(ModelViewSet):
             group = item.get("group")
             hours = item.get("hours")
 
-            # Check if a requirement with the same parameters exists
             existing_requirement = Requirement.objects.filter(
                 req_set=req_set, subject=subject, teacher=teacher, group=group
             ).first()
 
             if existing_requirement:
                 if hours == 0:
-                    # Delete the requirement if hours are 0
+
                     existing_requirement.delete()
                 else:
-                    # Update the existing requirement's hours
+
                     existing_requirement.hours = hours
                     existing_requirement.save()
             else:
                 if hours != 0:
-                    # Create a new requirement only if hours are not 0
+
                     serializer = self.get_serializer(data=item)
                     serializer.is_valid(raise_exception=True)
                     self.perform_create(serializer)

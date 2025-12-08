@@ -41,9 +41,8 @@ def solve_schedule(req_set: RequirementSet, block_list, specimen):
         task_ends = {}
         task_duration = {}
 
-        # Room assignment variables
-        room_assignments = defaultdict(list)  # interval -> list of room assignment vars
-        room_intervals = defaultdict(list)  # room_id -> list of optional intervals
+        room_assignments = defaultdict(list)
+        room_intervals = defaultdict(list)
 
         for block, duration in zip(block_list, day):
             if duration == 0:
@@ -94,7 +93,6 @@ def solve_schedule(req_set: RequirementSet, block_list, specimen):
                 task_intervals.append(interval_var)
                 all_intervals.append(interval_var)
 
-        # Add no-overlap constraints for rooms
         for room_id, intervals in room_intervals.items():
             if intervals:
                 model.AddNoOverlap(intervals)
@@ -133,12 +131,12 @@ def solve_schedule(req_set: RequirementSet, block_list, specimen):
             )
 
         # --- Optimization target ---
-        # model.Minimize(sum(minimization_vars))
+        model.Minimize(sum(minimization_vars))
 
         # --- Solve ---
         solver = cp_model.CpSolver()
-        # solver.parameters.log_search_progress = True
-        solver.parameters.relative_gap_limit = 1.0
+        solver.parameters.log_search_progress = True
+        solver.parameters.relative_gap_limit = 0.3
         status = solver.Solve(model)
 
         if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
@@ -169,23 +167,3 @@ def solve_schedule(req_set: RequirementSet, block_list, specimen):
             return
 
     return return_plan
-
-
-# Print the sorted plan for each day
-# for day_index, intervals in daily_plans.items():
-#     print(f"Day {day_index + 1}:")
-#     # Group intervals by student group
-#     group_plans = defaultdict(list)
-#     for group_index, name, start, end in intervals:
-#         group_plans[group_index].append((name, start, end))
-
-#     # Sort and print intervals for each group
-#     for group_index, group_intervals in sorted(group_plans.items()):
-#         if group_index == 0:
-#             print(f"  Student Group {group_index}:")
-#             sorted_intervals = sorted(
-#                 group_intervals, key=lambda x: x[1]
-#             )  # Sort by start time
-#             for name, start, end in sorted_intervals:
-#                 print(f"    Interval: {name} | Start: {start}, End: {end}")
-#             print()
