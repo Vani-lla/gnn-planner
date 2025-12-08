@@ -9,13 +9,13 @@
         Uproszczony jest również mechanizm przypisywania sal.
         Obecnie wykorzystuje on tzw. białe listy obsługiwanych przedmiotów, co jest rozwiązaniem poprawnym, ale mało elastycznym.
         W wielu sytuacjach potrzebne jest rozróżnienie między salą ,,dozwoloną'' a ,,preferowaną''.
-        Przykładowo nic nie stoi na przeszkodzie, aby w sytuacji w której brakuje sal zajęcia języka polskiego odbyły się w sali do matematyki; natomiast zajęcia wychowania fizycznego mogą odbyć się tylko i wyłącznie w dedykowanych salach.
+        Przykładowo w sytuacji, w której brakuje sal do języka polskiego, nic nie stoi na przeszkodzie by zajęcia te odbyły się w sali do lekcji matematyki.
 
         Kolejne ograniczenie dotyczy dostępności nauczycieli, które są definiowane w skali dnia.
-        W rzeczywistości dostępności powinny być opisane per slot czasowy.
+        W rzeczywistości dostępności powinny być opisane w skali slotów czasowych.
 
         Ograniczenia dotyczą również samego procesu generowania planów. 
-        Algorytm ewolucyjny stosowany do alokacji bloków lekcyjnych pomiędzy dniami działa poprawnie, jednak jego natura heurystyczna powoduje, że nie gwarantuje optymalności.
+        Algorytm ewolucyjny, stosowany do alokacji bloków lekcyjnych pomiędzy dniami działa poprawnie, jednak jego heurystyczna natura powoduje, że nie gwarantuje optymalności.
 
         Ponadto generowanie planów lekcji jest realizowane lokalnie (niezależnie dla każdego dnia) co redukuje złożoność obliczeniową, ale może prowadzić do utraty globalnej (tygodniowej) optymalności.
     
@@ -29,7 +29,8 @@
         Warto również rozszerzyć model sal lekcyjnych poprzez wprowadzenie funkcji kar i nagród. Pozwoliłoby to nie tylko uwzględniać twarde ograniczenia, ale też modelować preferencje.
         Przykładowo ograniczyć korzystanie z nieoptymalnych pomieszczeń lub promować nowoczesne sale.
 
-        Kolejnym istotnym elementem jest zmiana sposobu reprezentacji dostępności nauczycieli. Zamiast ograniczeń na poziomie dni, powinny być one definiowane w skali slotów czasowych.
+        Kolejnym istotnym elementem jest zmiana sposobu reprezentacji dostępności nauczycieli. 
+        Zamiast ograniczeń na poziomie dni, powinny być one definiowane w skali slotów czasowych.
         Integracja takich informacji w ostatnim etapie algorytmu umożliwi bardziej realistyczne planowanie.
 
         Wartym analizy kierunkiem rozwoju jest również dodanie czwartego etapu generowania planu lekcji.
@@ -47,9 +48,9 @@
 
     \section{Wnioski}
         Praca zawiera propozycję wieloetapowej dekompozycji problemu, co okazało się trafnym kierunkiem działań.
-        Pokazałem, że takie połączenie umożliwia uzyskanie poprawnych rozwiązań mimo złożonych zależności między zajęciami.
+        Pokazałem, że takie połączenie umożliwia uzyskanie poprawnych rozwiązań, mimo złożonych zależności między zajęciami.
 
-        Tworzenie bloków lekcyjnych w istotny sposób zmniejszyło liczbę ogrniczeń w problemie harmonogramowania --- zastosowany algorytm zachłanny do generowania bloków lekcyjnych okazał się trafnym wyborem.
+        Tworzenie bloków lekcyjnych w istotny sposób zmniejszyło liczbę ograniczeń w problemie harmonogramowania --- zastosowany algorytm zachłanny do generowania bloków lekcyjnych okazał się trafnym wyborem.
         Jego prostota znacząco ułatwia konstrukcję ograniczeń i eliminuje potrzebę stosowania bardziej złożonych metod.
         Eksperymenty wykazały, że dzięki temu proces tworzenia planu jest bardziej przejrzysty i obliczeniowo efektywny.
         
@@ -58,6 +59,6 @@
         Co ważne, uzyskane w ten sposób dzienne harmonogramy stanowią doskonały punkt wyjścia dla potencjalnej, globalnej optymalizacji w skali całego tygodnia, co stanowi obiecujący kierunek dalszych badań.
 
         Finalny rezultat pracy --- aplikacja webowa wraz z algorytmem generującym plany --- potwierdza zasadność przyjętej metodologii.
-        Wygenerowane plany są na tyle poprawne, że stanowią realną podstawę do ewentualnych, drobnych ręcznych korekt.
-        Uzyskany plan lekcji, choć wymagałby pewnych ręcznych korekt, jest wystarczająco bliski rozwiązaniu praktycznemu.
+        % Wygenerowane plany są na tyle poprawne, że stanowią realną podstawę do ewentualnych, drobnych ręcznych korekt.
+        Wygenerowane wyniki, chociaż mogą wymagać drobnych, ręcznych korekt, mogą stanowić podstawę do ułożenia planu.
         Elastyczność zaproponowanego rozwiązania, opartego na podziale problemu na podproblemy, stanowi solidny fundament, który z powodzeniem może być rozwijany i adaptowany w przyszłych projektach.

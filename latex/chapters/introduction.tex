@@ -4,10 +4,10 @@
     Problem można podzielić na dwa zasadnicze etapy:
 
     \begin{itemize}
-        \item \textbf{Tworzenie przydziału godzinowego} czyli określenie, ile godzin tygodniowo każdy nauczyciel ma prowadzić z daną klasą i w ramach jakiego przedmiotu.
-        Jest to zadanie strategiczne, wykonywane na podstawie szacunków liczby uczniów w danym roczniku, które wyznacza szkielet całego planu.
+        \item \textbf{Tworzenie przydziału godzinowego} czyli określenie ile godzin tygodniowo każdy nauczyciel ma prowadzić z daną klasą i w ramach jakiego przedmiotu.
+        Jest to zadanie, wykonywane na podstawie szacowanej liczby uczniów w danym roczniku, które wyznacza szkielet całego planu.
         \item \textbf{Harmonogramowanie} jest drugim i bardziej złożonym etapem. 
-        Polega na przypisanie każdej z zaplanowanych lekcji konkretnego dnia, godziny rozpoczęcia i sali, przy ścisłym respektowaniu wszystkich fizycznych, prawnych i jakościowych ograniczeń.
+        Polega na przypisaniu każdej z zaplanowanych lekcji konkretnego dnia, godziny rozpoczęcia i sali, przy ścisłym respektowaniu wszystkich fizycznych, prawnych i jakościowych ograniczeń.
         To właśnie ten etap, realizowany tradycyjnie metodami ręcznymi, jest niezwykle czasochłonny i stanowi największą trudność w organizacji roku szkolnego.
     \end{itemize}
 
@@ -18,13 +18,13 @@
         Głównym celem pracy jest zaprojektowanie i implementacja kompleksowego systemu wspomagającego automatyczne układanie szkolnego planu lekcji.
         System ten obejmuje funkcjonalną aplikację webową służącą do definiowania wszystkich danych wejściowych i zarządzania procesem, oraz algorytm optymalizacyjny generujący finalne plany.
 
-        Kluczową innowacją jest dekompozycja złożonego problemu harmonogramowania i zastosowanie hybrydowego podejścia, łączącego trzy techniki:
+        Kluczową innowacją jest dekompozycja złożonego problemu harmonogramowania i zastosowanie hybrydowego podejścia łączącego trzy techniki:
         \begin{itemize}
             \item algorytm zachłanny do tworzenia struktury bloków lekcyjnych,
-            \item algorytm ewolucyjny do optymalizacji rozkładu godzinowego na przestrzeni tygodnia oraz
+            \item algorytm ewolucyjny do optymalizacji rozkładu godzinowego na przestrzeni tygodnia,
             \item programowania z ograniczeniami do szczegółowego harmonogramowania.
         \end{itemize}
-        Takie połączenie ma na celu znalezienie praktycznego kompromisu między wysoką jakością rozwiązania a akceptowalnym czasem obliczeń.
+        Takie połączenie ma na celu znalezienie praktycznego kompromisu między wysoką jakością rozwiązania, a akceptowalnym czasem obliczeń.
 
         \newpage
         Aplikacja wraz z algorytmem ma umożliwiać generowanie poprawnych i użytecznych planów lekcji, które spełniają następujące kategorie ograniczeń:
@@ -39,7 +39,7 @@
             \item zaprojektowanie i implementacja relacyjnej bazy danych do przechowywania wszystkich zasobów (nauczyciele, klasy, sale, przedmioty), ograniczeń, definicji bloków oraz wyników generowania planów,
             \item zaprojektowanie i implementacja interfejsu użytkownika umożliwiającego intuicyjne wprowadzanie danych, konfigurację parametrów algorytmu oraz wizualizację wygenerowanych planów z perspektywy nauczyciela i klasy,
             \item opracowanie i implementacja wieloetapowego algorytmu generowania planu,
-            \item integracja modułu algorytmicznego z aplikacją webową i zapewnienie pełnej funkcjonalności poprzez odpowiedn interfejs programowania aplikacji,
+            \item integracja modułu algorytmicznego z aplikacją webową i zapewnienie pełnej funkcjonalności poprzez odpowiedni interfejs programowania aplikacji,
             \item przeprowadzenie testów i walidacji systemu na rzeczywistych danych szkolnych w celu potwierdzenia jego poprawności, wydajności i praktycznej użyteczności.
         \end{itemize}
 
@@ -60,18 +60,19 @@
         Podejście systemowe jest konieczne, aby stworzyć spójne, skalowalne i odpowiadające rzeczywistym potrzebom szkoły narzędzie.
 
 \section{Układ pracy}
-    Praca dzieli się na sześć zasadniczych rozdziałów, które kolejno wprowadzają w tematykę, przedstawiają stan wiedzy, prezentują autorskie rozwiązanie, opisują jego praktyczną implementację, weryfikują jej skuteczność oraz podsumowują uzyskane rezultaty i wskazują kierunki dalszego rozwoju.
+    Praca dzieli się na sześć zasadniczych rozdziałów, które kolejno przedstawiają stan wiedzy, prezentują autorskie rozwiązanie, opisują jego praktyczną implementację, weryfikują jej skuteczność oraz podsumowują uzyskane rezultaty i wskazują kierunki dalszego rozwoju.
 
     Rozdział~\ref{chapter:related} poświęcony jest przeglądowi powiązanych prac i stanowi teoretyczne zaplecze dla dalszych rozważań.
     W jego ramach dokonałem analizy istniejących podejść naukowych i komercyjnych.
-    Szczególnie dokładnie omówiłem podejście iteracyjne programowania mieszanego całkowitoliczbowego, które było inspiracją dla architektury aplikacji.
+    Dokładnie omówiłem podejście iteracyjne programowania mieszanego całkowitoliczbowego, które było inspiracją dla architektury aplikacji.
     Następnie przedstawiłem klasyczny problem harmonogramowania zadań typu job-shop oraz pokazałem, jak mój problem jest jego odmianą.
     Na koniec, w celu zrozumienia rzeczywistych wymagań i wyzwań, dokonałem szczegółowego przeglądu wiodącego na rynku polskim systemu komercyjnego.
 
     Centralną i kluczową częścią pracy jest rozdział~\ref{chapter:algorytm}, który w całości dotyczy problemu układania planu lekcji i proponowanego algorytmu jego rozwiązania.
     Rozdział zaczyna się od formalnego sformułowania problemu optymalizacyjnego, włączając w to definicję terminologii, danych wejściowych, szukanych, ograniczeń i funkcji celu.
     Następnie, w oparciu o doświadczenia z wcześniejszych prób rozwiązania, zaprezentowałem kluczową innowację pracy: hierarchiczną dekompozycję oryginalnego, złożonego problemu na trzy mniejsze etapy.
-    Dla każdego z tych etapów opisałem dobór i zasadę działania techniki adekwatnej do danego podproblemu oraz przykładowe wyniki na rzeczywistych danych, co pozwoli na prześledzenie logiki całego procesu generowania planu.
+    Dla każdego z tych etapów opisałem dobór i zasadę działania techniki adekwatnej do danego podproblemu oraz przykładowe wyniki na rzeczywistych danych.
+    Pozwoli to na prześledzenie logiki całego procesu generowania planu.
 
     Rozdział~\ref{chapter:website} koncentruje się na praktycznym aspekcie pracy, czyli projekcie oraz implementacji aplikacji webowej.
     Zaczyna się on od specyfikacji wymagań, przypadków użycia oraz diagramów sekwencji.

@@ -1,8 +1,8 @@
 \Chapter{Weryfikacja i walidacja rozwiązania}\label{chapter:tests}
     Rozdział stanowi krytyczną ocenę wdrożonego systemu, podzieloną na dwie kluczowe perspektywy:
     \begin{itemize}
-        \item testowanie funkcjonalności --- weryfikacja, czy aplikacja działa zgodnie z założeniami projektowymi. Zawiera formalne scenariusze testowe oraz ich praktyczną realizację,
-        \item analiza jakości wyniku --- walidacja, czy wygenerowane plany lekcji są użyteczne i poprawne jakościowo. Obejmuje porównanie z planem ręcznym, analizę krytycznych przypadków oraz ewaluację kluczowego wskaźnika efektywności, liczby okienek nauczycieli.
+        \item \textbf{Testowanie funkcjonalności} --- weryfikacja, czy aplikacja działa zgodnie z założeniami projektowymi. Zawiera formalne scenariusze testowe oraz ich praktyczną realizację,
+        \item \textbf{Analiza jakości wyniku} --- walidacja, czy wygenerowane plany lekcji są użyteczne i poprawne jakościowo. Obejmuje porównanie z planem ręcznym, analizę krytycznych przypadków oraz ewaluację kluczowego wskaźnika efektywności, liczby okienek nauczycieli.
     \end{itemize}
 
 \section{Scenariusze testowe}
@@ -234,8 +234,9 @@
         Plan omówiony poniżej został wygenerowany używając osobnika przedstawionego w punkcie~\ref{subsection:przykladowy_ewolucyjny}.
 
         Ocenianie jakości wyników należy zacząć od analizy obciążeń dydaktycznych.
-        Na rysunku~\ref{fig:dydaktyczne_nauczyciele_tygodniowo} przedstawiłem histogram wymaganej tygodniowej liczby godzin lekcyjnych do przeprowadzenia przez nauczycieli.
-        Analogicznie, na rysunku~\ref{fig:dydaktyczne_klasy_tygodniowo} zaprezentowano histogram liczby obowiązkowych godzin lekcyjnych dla klas.
+        Na rysunku~\ref{fig:dydaktyczne_nauczyciele_tygodniowo} przedstawiłem histogram wymaganej ygodniowej liczby godzin lekcyjnych do przeprowadzenia przez wszystkich nauczycieli $t\in\mathcal{T}$.
+        Jest to wynik pierwszego etapu działania algorytmu.
+        Analogicznie, na rysunku~\ref{fig:dydaktyczne_klasy_tygodniowo} zaprezentowałem histogram liczby obowiązkowych godzin lekcyjnych dla wszystkich klas $c\in\mathcal{C}$.
 
         \begin{figure}[H]
             \centering
@@ -243,19 +244,19 @@
                 \begin{axis}[
                     ybar,
                     bar width=1.5em,
-                    xlabel={Obciążenie dydaktyczne (godziny)},
-                    x label style = {yshift=-0.6em},
-                    ylabel={Liczba wystąpień},
-                    width=0.8\textwidth,
-                    height=0.48\textwidth,
+                    xlabel={Obciążenie dydaktyczne $\boldsymbol{\beta}_t$},
+                    x label style = {yshift=-1em},
+                    ylabel={Liczba nauczycieli},
+                    width=0.9\textwidth,
+                    height=0.45\textwidth,
                     xtick=data,
                     ymin=0,
-                    xticklabels={0-2, 3-5, 6-8, 9-11, 12-14, 15-17, 18-20, 21-23, 24-26, 27-29, 30-32, 33-35},
+                    xticklabels={{[0,2]}, {[3,5]}, {[6,8]}, {[9,11]}, {[12,14]}, {[15,17]}, {[18,20]}, {[21,23]}, {[24,26]}, {[27,29]}, {[30,32]}, {[33,35]}},
                     xtick={0,1,2,3,4,5,6,7,8,9,10,11},
-                    x tick label style={rotate=30, anchor=center, yshift=-0.6em, xshift=-0.3em}
+                    x tick label style={rotate=30, anchor=center, yshift=-0.9em, xshift=-0.45em}
                 ]
                 \addplot coordinates {
-                    (0, 14+0+4)  % 0-2
+                    (0, 0+4)     % 1-2
                     (1, 3+1+4)   % 3-5
                     (2, 0+4+3)   % 6-8
                     (3, 1+2+3)   % 9-11
@@ -270,7 +271,7 @@
                 };
                 \end{axis}
             \end{tikzpicture}
-            \caption{Histogram obciążeń dydaktycznych nauczycieli tygodniowo}\label{fig:dydaktyczne_nauczyciele_tygodniowo}
+            \caption{Histogram łącznych obciążeń dydaktycznych nauczycieli tygodniowo}\label{fig:dydaktyczne_nauczyciele_tygodniowo}
         \end{figure}
 
         \begin{figure}[H]
@@ -279,12 +280,13 @@
                 \begin{axis}[
                     ybar,
                     bar width=1.5em,
-                    xlabel={Obciążenie dydaktyczne (godziny)},
-                    ylabel={Liczba wystąpień},
-                    width=0.8\textwidth,
-                    height=0.48\textwidth,
+                    xlabel={Obciążenie dydaktyczne $\boldsymbol{\beta}_c$},
+                    ylabel={Liczba klas},
+                    width=0.9\textwidth,
+                    height=0.45\textwidth,
                     xtick=data,
                     ymin=0,
+                    ytick={0, 1, 2, 3},
                 ]
                 \addplot coordinates {
                     (22, 1)
@@ -305,21 +307,53 @@
                 };
                 \end{axis}
             \end{tikzpicture}
-            \caption{Histogram obciążeń dydaktycznych uczniów tygodniowo}\label{fig:dydaktyczne_klasy_tygodniowo}
+            \caption{Histogram łącznych obciążeń dydaktycznych klas tygodniowo}\label{fig:dydaktyczne_klasy_tygodniowo}
         \end{figure}
 
-        Wielu nauczycielom przypisano tygodniowe obciążenie równe zero.
-        Wynika to z faktu, że szkoła dysponuje większą liczbą nauczycieli, niż jest w praktyce potrzebne do realizacji aktualnej liczby zajęć.
-        W rezultacie wiele nauczycieli nie zostaje przypisanych do prowadzenia lekcji.
-        Ponadto przez anonimowość nazwisk nauczycieli, niektórzy nauczyciele zostali w modelu sztucznie rozbici na dwie lub trzy osoby.
-        Powoduje to sztuczne zaniżenie wymaganej tygodniowo liczby godzin od poszczególnych nauczycieli.
+        Przez anonimowość nazwisk nauczycieli, niektórzy zostali w modelu sztucznie rozbici na dwie lub trzy osoby.
+        Powoduje to zaniżenie wymaganej tygodniowo liczby godzin od poszczególnych nauczycieli.
 
         Z kolei, ze względu na nieuwzględnienie części lekcji opisanych wcześniej, wymagana tygodniowa liczba godzin dla klas jest również sztucznie zaniżona.
         Mimo tego można zaobserwować, że niektóre klasy mają znacząco niższe obciążenia tygodniowe niż pozostałe.
         Wynika to przede wszystkim z faktu, że klasy maturalne realizują istotnie mniejszą liczbę zajęć niż, przykładowo, klasy pierwsze.
 
         Biorąc pod uwagę te obserwacje, możemy przejść do analizy dziennego obciążenia dydaktycznego.
-        Na rysunkach~\ref{fig:dydaktyczne_nauczyciele_dni} oraz~\ref{fig:dydaktyczne_nauczyciele_klasy} przedstawiłem odpowiednio histogram dziennych obciążeń nauczycieli i klas.
+        Na rysunkach~\ref{fig:dydaktyczne_nauczyciele_dni} oraz~\ref{fig:dydaktyczne_klasy_dni} przedstawiłem odpowiednio histogram dziennych obciążeń nauczycieli i klas,
+        a na rysunkach~\ref{fig:funkcja_skladowa_ft} oraz~\ref{fig:funkcja_skladowa_fc} wartości funkcji $F_t$ i $F_c$ przed ich normalizacją w końcowej funkcji przystosowania opisanej w punkcie~\ref{subsction:przystosowanie}.
+        
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                    ybar,
+                    bar width=1.5em,
+                    xlabel={Wartość funkcji $F_t$},
+                    x label style = {yshift=-1.2em},
+                    ylabel={Liczba nauczycieli},
+                    width=0.9\textwidth,
+                    height=0.4\textwidth,
+                    xtick={0,1,2,3,4,5,6,7,8,9,10},
+                    xticklabels={{[-110,-100]},{(-100,-90]},{(-90,-80]},{(-80,-70]},{(-70,-60]},{(-60,-50]},{(-50,-40]},{(-40,-30]},{(-30,-20]},{(-20,-10]},{(-10,0]}},
+                    x tick label style={rotate=30, anchor=center, yshift=-0.9em, xshift=-0.45em},
+                    ymin=0
+                ]
+                \addplot coordinates {
+                    (0, 1)
+                    (1, 3)
+                    (2, 1)
+                    (3, 1)
+                    (4, 9)
+                    (5, 6)
+                    (6, 13)
+                    (7, 12)
+                    (8, 9)
+                    (9, 1)
+                    (10, 3)
+                };
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Histogram wartości składowej funkcji przystosowania $F_t$}\label{fig:funkcja_skladowa_ft}
+        \end{figure}
 
         \begin{figure}[H]
             \centering
@@ -327,15 +361,44 @@
                 \begin{axis}[
                     ybar,
                     bar width=1.5em,
-                    xlabel={Obciążenie dydaktyczne per dzień (godziny)},
-                    ylabel={Liczba wystąpień},
-                    width=0.8\textwidth,
+                    xlabel={Wartość funkcji $F_c$},
+                    x label style = {yshift=-1.2em},
+                    ylabel={Liczba klas},
+                    width=0.9\textwidth,
                     height=0.4\textwidth,
+                    xtick={0,1,2,3,4,5,6},
+                    xticklabels={{[-25,-20]},{(-20,-15]},{(-15,-10]},{(-10,-5]},{(-5,0]},{(0,5]},{(5,10]}},
+                    x tick label style={rotate=30, anchor=center, yshift=-0.9em, xshift=-0.45em},
+                    ymin=0
+                ]
+                \addplot coordinates {
+                    (0, 2)
+                    (1, 0)
+                    (2, 2)
+                    (3, 1)
+                    (4, 3)
+                    (5, 3)
+                    (6, 11)
+                };
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Histogram wartości składowej funkcji przystosowania $F_c$}\label{fig:funkcja_skladowa_fc}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                    ybar,
+                    bar width=1.5em,
+                    xlabel={Dzienne obciążenie dydaktyczne},
+                    ylabel={Liczba dni o danym obciążeniu},
+                    width=0.9\textwidth,
+                    height=0.48\textwidth,
                     xtick=data,
                     ymin=0,
                 ]
                 \addplot coordinates {
-                    (0,130)
                     (1,18)
                     (2,44)
                     (3,45)
@@ -353,7 +416,7 @@
                 };
                 \end{axis}
             \end{tikzpicture}
-            \caption{Histogram obciążeń dydaktycznych nauczycieli}\label{fig:dydaktyczne_nauczyciele_dni}
+            \caption{Histogram dziennych obciążeń dydaktycznych nauczycieli}\label{fig:dydaktyczne_nauczyciele_dni}
         \end{figure}
 
         \begin{figure}[H]
@@ -362,10 +425,10 @@
                 \begin{axis}[
                     ybar,
                     bar width=1.5em,
-                    xlabel={Obciążenie dydaktyczne per dzień (godziny)},
-                    ylabel={Liczba wystąpień},
-                    width=0.8\textwidth,
-                    height=0.4\textwidth,
+                    xlabel={Dzienne obciążenie dydaktyczne},
+                    ylabel={Liczba dni o danym obciążeniu},
+                    width=0.9\textwidth,
+                    height=0.48\textwidth,
                     xtick=data,
                     ymin=0,
                 ]
@@ -378,17 +441,19 @@
                 };
                 \end{axis}
             \end{tikzpicture}
-            \caption{Histogram obciążeń dydaktycznych uczniów}\label{fig:dydaktyczne_nauczyciele_klasy}
+            \caption{Histogram dziennych obciążeń dydaktycznych klas}\label{fig:dydaktyczne_klasy_dni}
         \end{figure}
 
-        Z analizy wyników wynika, że nauczyciele mają liczne dni wolne.
-        Jest to zamierzony efekt, osiągnięty dzięki modyfikacji funkcji przystosowania w algorytmie ewolucyjnym.
-        Niestety, ze względu na zastosowane wagi $\theta_T = 1$ i $\theta_G = 2$, algorytm w większym stopniu optymalizował obciążenia klas niż nauczycieli.
-        W rezultacie pojawiły się dwa przypadki, w których nauczyciel ma zaplanowane 12 lub 14 godzin zajęć w jednym dniu.
+        W analizie nie biorę pod uwagę licznych dni wolnych od pracy nauczycieli, ponieważ jest to zamierzony efekt, osiągnięty dzięki modyfikacji funkcji przystosowania w algorytmie ewolucyjnym.
+        Na rysunku~\ref{fig:funkcja_skladowa_ft} widać, że ocena rozłożenia obciążeń dydaktycznych nauczycieli nigdy nie przyjmuje wartości dodatnich.
+        Wynika to z zastosowanych wag $\theta_T = 1$ i $\theta_G = 2$, które sprawiły, że algorytm w większym stopniu optymalizował obciążenia klas niż nauczycieli.
+        W rezultacie pojawiły się także dwa przypadki, w których nauczyciel ma zaplanowane 12 lub 14 godzin zajęć w jednym dniu.
+        Pomimo tego zdecydowana większość nauczycieli osiąga wyniki na poziomie około $F_t = -40$, co świadczy o poprawnej optymalizacji rozkładu ich obciążeń.
 
-        Zastosowane wagi spowodowały jednocześnie, że rozkład obciążeń uczniów jest bardzo korzystny.
+        Zastosowane wagi spowodowały jednocześnie, że rozkład obciążeń klas jest bardzo korzystny.
         Nie pojawiają się wartości skrajne ani nieakceptowalne.
-        Minimalne obciążenie, wynoszące 4 godziny, dotyczy klas maturalnych, które mają stosunkowo niską liczbę wymaganych godzin tygodniowo (22 lub 23).
+        Na rysunku~\ref{fig:funkcja_skladowa_fc} widać, że przeważająca większość osiąga pozytywny wynik funkcji $F_c$ w przedziale od 5 do 10.
+        Minimalne obciążenie widoczne na rysunku~\ref{fig:dydaktyczne_klasy_dni}, wynoszące 4 godziny, dotyczy klas maturalnych, które mają stosunkowo niską liczbę wymaganych godzin tygodniowo (22 lub 23).
         Wszystkie pozostałe wyniki mieszczą się w przedziale od 4 do 8 godzin dziennie, co umożliwia tworzenie praktycznych i realistycznych planów lekcji.
         
         Aby ocenić jakość wygenerowanych harmonogramów, przeanalizowałem także liczbę okienek nauczycieli w planie zoptymalizowanym pod kątem minimalizacji ich liczby oraz w planie, który jedynie spełnia wszystkie ograniczenia, lecz nie został poddany optymalizacji.

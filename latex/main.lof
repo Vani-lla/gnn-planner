@@ -12,9 +12,9 @@
 \contentsline {figure}{\numberline {2.8}{\ignorespaces Zrzut ekranu wprowadzania ,,trudnych'' lekcji do programu ,,Plan lekcji Optivum''~\cite {vulcanprzewodnik}}}{12}{figure.caption.13}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Zrzut ekranu z arkusza kalkulacyjnego przedstawiąjący przypisanie godzinowe nauczycieli dla każdej klasy.}}{14}{figure.caption.16}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Struktura algorytmu}}{22}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Dekompozycja algorytmu}}{22}{figure.caption.23}%
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Struktura algorytmu}}{22}{figure.caption.24}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Wizualizacja rozwiązania klasycznego problemu JSSP z wykorzystaniem zmiennych przedziałowych~\cite {googleortoolsjssp}}}{26}{figure.caption.31}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Wizualizacja rozwiązania JSSP z wykorzystaniem zmiennych przedziałowych~\cite {googleortoolsjssp}}}{26}{figure.caption.31}%
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Wykres funkcji użytej do ewaluacji rozkładu godzin nauczycieli i klas na przestrzeni tygodnia.}}{33}{figure.caption.35}%
 \contentsline {figure}{\numberline {3.6}{\ignorespaces Wykres wartości funkcji celu dla pięciu uruchomień algorytmu genetycznego}}{37}{figure.caption.39}%
 \addvspace {10\p@ }
@@ -47,11 +47,13 @@
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Zrzuty ekranów wykonanych kroków dla scenariusza przeglądania planów lekcji}}{79}{figure.caption.119}%
 \contentsline {figure}{\numberline {5.3}{\ignorespaces Zrzuty ekranów wykonanych kroków dla scenariusza importowania i edytowania wymagań głównych}}{80}{figure.caption.120}%
 \contentsline {figure}{\numberline {5.4}{\ignorespaces Zrzuty ekranów wykonanych kroków dla scenariusza edytowania dostępności nauczycieli}}{81}{figure.caption.121}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Histogram obciążeń dydaktycznych nauczycieli tygodniowo}}{82}{figure.caption.122}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Histogram obciążeń dydaktycznych uczniów tygodniowo}}{82}{figure.caption.123}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Histogram obciążeń dydaktycznych nauczycieli}}{83}{figure.caption.124}%
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Histogram obciążeń dydaktycznych uczniów}}{83}{figure.caption.125}%
-\contentsline {figure}{\numberline {5.9}{\ignorespaces Plan lekcji dla klasy IIAC stworzony przez szkołę}}{85}{figure.caption.127}%
-\contentsline {figure}{\numberline {5.10}{\ignorespaces Wygenerowany plan lekcji dla klasy IIAC}}{86}{figure.caption.128}%
-\contentsline {figure}{\numberline {5.11}{\ignorespaces Zestawienie środowych planów lekcji dla kolejno klas IIIA, IIIC, IIID, IIIF i IIIG}}{87}{figure.caption.129}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Histogram łącznych obciążeń dydaktycznych nauczycieli tygodniowo}}{82}{figure.caption.122}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Histogram łącznych obciążeń dydaktycznych klas tygodniowo}}{82}{figure.caption.123}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Histogram wartości składowej funkcji przystosowania $F_t$}}{83}{figure.caption.124}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Histogram wartości składowej funkcji przystosowania $F_c$}}{83}{figure.caption.125}%
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Histogram dziennych obciążeń dydaktycznych nauczycieli}}{84}{figure.caption.126}%
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Histogram dziennych obciążeń dydaktycznych klas}}{84}{figure.caption.127}%
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Plan lekcji dla klasy IIAC stworzony przez szkołę}}{86}{figure.caption.129}%
+\contentsline {figure}{\numberline {5.12}{\ignorespaces Wygenerowany plan lekcji dla klasy IIAC}}{87}{figure.caption.130}%
+\contentsline {figure}{\numberline {5.13}{\ignorespaces Zestawienie środowych planów lekcji dla kolejno klas IIIA, IIIC, IIID, IIIF i IIIG}}{88}{figure.caption.131}%
 \addvspace {10\p@ }
